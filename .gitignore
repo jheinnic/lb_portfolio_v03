@@ -1,0 +1,14 @@
+# Eclipse project
+.classpath
+.project
+.settings/
+
+# Webstorm project
+.idea
+
+# Node dependency management
+node_modules
+
+# vi temp files
+*~
+**/*~
