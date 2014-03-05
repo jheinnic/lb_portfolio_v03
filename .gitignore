@@ -8,7 +8,33 @@
 
 # Node dependency management
 node_modules
+npm-debug.log
+
+# Bower dependency management
+bower_modules
 
 # vi temp files
 *~
-**/*~
+.*.swp
+
+# Compiled JavaScript
+public/javascripts/*.js
+public/javascripts/*.map
+
+# Compiled Less
+public/stylesheets/*.css
+
+# Compiled Jade
+views/**/*.html
+
+# Angular 1.2.6 minified files and locales.  We'll use a CDN for these when ready.
+public/javascripts/angular-1.2.6/*.min.js.map
+public/javascripts/angular-1.2.6/*.min.js
+public/javascripts/angular-1.2.6/i18n
+
+# Angular 1.1.15
+public/javascripts/angular-1.1.5
+
+# A kitchen sink for project-associated files that are local notes not to be 
+# committed to Git.
+junk
