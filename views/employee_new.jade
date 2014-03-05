@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    h1= title
+    div.newEmployee
+        form( method="post")
+            div
+                div
+                    span.label Title :
+                    input(type="text", name="title", id="editEmployeeTitle")
+                div
+                    span.label Name :
+                    input(type="text", name="name", id="editEmployeeName")
+                div
+                    span#just.label Just Because :
+                    input#editEmployeeCause(type="text", name="cause")
+                div#editEmployeeSubmit
+                    input(type="submit", value="Save")
+        a(href="/")!= "Back to Employee List"

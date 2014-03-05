@@ -1,0 +1,23 @@
+{
+  "name": "express_sandbox",
+  "version": "0.0.2",
+  "authors": [
+    "John Heinnickel <jheinnic@hotmail.com>"
+  ],
+  "description": "Portfolio sandbox",
+  "main": "server.js",
+  "keywords": [
+    "portfolio",
+    "jheinnic"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.jchein.info/portfolio/",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

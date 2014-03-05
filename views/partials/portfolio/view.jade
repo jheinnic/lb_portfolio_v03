@@ -1,0 +1,7 @@
+extends /layouts/partials
+
+block content
+  div( ng-init="somevar='today'" )
+    h2= 'Blank content hooray'
+    h2 Even more blank content, hooray again!
+    h2( ng-bind="somevar" )
