@@ -1,66 +1,9 @@
 window.ModXW = angular.module('crosswords', []);
 
 ModXW.controller 'CrosswordsCtrl', ['$scope', ($scope) ->
-  $scope.reportModel = 
-    foundWords: ['SUBSCRIBE', 'ANY', 'HUM', 'HYDROGEN', 'RUT', 'MOMENT', 'LEFT', 'ITEM', 'ODD', 'TAPE', 'EPIC', 'MARKET', 'PATH', 'RIVER', 'SYNDROME', 'MOCK', 'POWER', 'DIM', 'KETTLE', 'FRANK', 'BOUQUET' ]
-    prizeTiers: [
-      id: 1
-      value: 'Ticket'
-      potential: 1000,
-      id: 2
-      value: '$4'
-      potential: 1000,
-      id: 3
-      value: '$5'
-      potential: 1000,
-      id: 4
-      value: '$10'
-      potential: 1000,
-      id: 5
-      value: '$12'
-      potential: 1000,
-      id: 6
-      value: '$15'
-      potential: 1000,
-      id: 7
-      value: '$20'
-      potential: 1000,
-      id: 8
-      value: '$30'
-      potential: 1000,
-      id: 9
-      value: '$50'
-      potential: 1000,
-      id: 10
-      value: '$60'
-      potential: 1000,
-      id: 11
-      value: '$100'
-      potential: 1000,
-      id: 12
-      value: '$150'
-      potential: 1000,
-      id: 13
-      value: '$300'
-      potential: 1000,
-      id: 14
-      value: '$1,000'
-      potential: 10,
-      id: 15
-      value: '$3,000'
-      potential: 10,
-      id: 16
-      value: '$20,000'
-      potential: 5,
-      id: 17
-      value: 'No Prize'
-      potential: 60000,
-      id: 18
-      value: 'Invalid'
-      potential: 20000,
-    ]
-    triple_count: 0
-  
+  $scope.reportModel =
+    new PrizeAnalysis()
+
   $scope.postModel =
     board: '_________________________________________________________________________________________________________________________'
     revealed: '__________________'

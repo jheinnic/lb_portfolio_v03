@@ -33,22 +33,41 @@ app.configure( function() {
 
     // What do these do?
     app.use(express.favicon());
-    app.use(express.logger('dev'));
+    if( 'development' == app.get('env')) {
+        app.use(express.logger('dev'));
+    } else if( 'production' == app.get('env')) {
+        app.use(express.logger('prd'));
+    } else {
+        app.use(express.logger(app.get('env')));
+    }
     app.use(express.json());
     app.use(express.urlencoded());
 
     // "Boilerplate you should already have"?
-    app.use(express.bodyParser());
+    app.use(express.bodyParser({keepExtensions: true, uploadDir: '/my/files'}));
     app.use(express.methodOverride());
     app.use(app.router);
 
     // Compile .less and .coffee files, then map resources under /public to static files relative to __dirname/public.
-    app.use('/public', lessMiddleware({src:relPath('public'), paths:[path.join(__dirname, 'components', 'bootstrap', 'less')], prefix:'/public', force:true, debug:true}));
-    app.use('/public', coffeeMiddleware({src:relPath('public'), prefix:'/public', force:true, debug:true}));
+    app.use('/public', lessMiddleware({
+        src:relPath('public'),
+        paths:[
+            path.join(__dirname, 'components', 'bootstrap', 'less'),
+            path.join(__dirname, 'public', 'stylesheets')
+        ],
+        prefix:'/public',
+        force:true,
+        debug:true
+    }));
+    app.use('/public', coffeeMiddleware({
+        src:relPath('public'),
+        prefix:'/public',
+        force:true,
+        debug:true
+    }));
     app.use('/public', express.static(relPath('public')));
 
     // Establish a static path root for bower component dependencies.
-    // app.use('/components', lessMiddleware({src:relPath('components'), prefix:'/components', force:true, debug:true}));
     app.use('/components', express.static(relPath('/components')));
 
     // Map URIs that begin with /img to Bootstrap's img directory.

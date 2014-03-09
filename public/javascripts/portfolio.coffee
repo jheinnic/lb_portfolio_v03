@@ -1,20 +1,23 @@
-window.App = angular.module 'jch-portfolio', ['ngResource', 'ngRoute', 'ngCookies', 'ui.bootstrap', 'mgcrea.ngStrap']
+window.App = angular.module 'jch-portfolio', ['ngResource', 'ngRoute', 'ngCookies', 'ui.bootstrap', 'mgcrea.ngStrap.helpers.dimensions', 'mgcrea.ngStrap']
 
 appModule = window.App
 
-appModule.controller 'NavBarCtrl', ['$scope', '$location', ($scope, $location) ->
-    $scope.section = 'home';
-  
-    paths =
-      home : '/'
-      crosswords : '/crosswords',
-      poker : '/poker',
-      video : '/video'
-  
-    $scope.changeSection = (newSection) ->
-      $scope.section = newSection
-      $location.path paths[newSection] 
+appModule.config ['$routeProvider', ($routeProvider) ->
+  $routeProvider.when '/',
+    templateUrl: 'public/partials/portfolio/view.html',
+    controller: 'HomeCtrl'
+  $routeProvider.when '/crosswords',
+    templateUrl: 'public/partials/crosswords/view.html'
+    controller: 'CrosswordsCtrl'
 ]
+
+appModule.constant(
+  'xwIndices',
+  wordGridIndices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  bonusWordIndices: [0, 1, 2, 3, 4]
+  letterRowIndices: [0, 1, 2],
+  letterColIndices: [0, 1, 2, 3, 4, 5]
+)
 
 appModule.controller 'HomeCtrl', [
   '$scope',
@@ -22,20 +25,24 @@ appModule.controller 'HomeCtrl', [
     $scope.message = 'Hello world!'
 ]
 
-appModule.config ['$routeProvider', ($routeProvider) ->
-  $routeProvider.when '/', 
-    templateUrl: 'public/partials/portfolio/view.html',
-    controller: 'HomeCtrl'
-  $routeProvider.when '/crosswords', 
-    templateUrl: 'public/partials/crosswords/view.html'
-    controller: 'CrosswordsCtrl'
+appModule.controller 'CrosswordsCtrl', [
+  '$scope', 'xwIndices'
+  ($scope, xwIndices) ->
+    $scope.message = 'Hello world!'
+    $scope.tm =
+      rpts: [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+      ]
+    $scope.xwFixed = xwIndices
 ]
-appModule.directive 'navBarPlacement', [
+
+appModule.directive 'navBar', [
   'navBarDataSvc',
   (jchNbSvc) ->
     restrict: 'E',
+    replace: true,
     templateUrl: 'public/partials/portfolio/navBar.html',
-    link: (scope, element, attrs) ->
+    link: (scope) ->
       updateModel = () ->
         scope.nbDataModel = jchNbSvc.getDataModel();
         scope.nbDataModel.refreshPromise.then( updateModel )
@@ -49,19 +56,34 @@ appModule.factory 'navBarDataSvc', [
     nbDataModel =
       brandName: 'John Heinnickel',
       tabModels: [
-        {matchRoute: '/'
+        { matchRoute: '/$'
         clickRoute: '/'
         displayLabel: 'Home' }
-        { clickRoute: '/crosswords'
+        { matchRoute: '/crosswords'
+        clickRoute: '/crosswords'
         displayLabel: 'Crosswords' }
         { matchRoute: '/videos'
-        clickRoute: '/nowhere'
+        clickRoute: '/videos'
         displayLabel: 'Videos' }
-        { matchRoute: '/poker'
-        clickRoute: '/.*'
+        { matchRoute: '/pokerodds'
+        clickRoute: '/pokerodds'
         displayLabel: 'Poker' }
-      ],
+      ]
       refreshPromise: updateHandle.promise
 
     return { getDataModel: () -> return nbDataModel }
 ]
+
+appModule.directive 'dynatest', {
+  restrict: 'E'
+  replace: true
+  link: (scope, elem, attr) ->
+    scope.children = [
+      { type: 'bold', value: 'one' }
+      { type: 'link', value: 'two', dest: '#' }
+      { type: 'h1', value: 'three' }
+      { type: 'bold', value: 'four' }
+    ]
+  template: (elem, attr) ->
+
+}
