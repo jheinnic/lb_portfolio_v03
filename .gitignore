@@ -38,3 +38,10 @@ public/javascripts/angular-1.1.5
 # A kitchen sink for project-associated files that are local notes not to be 
 # committed to Git.
 junk
+
+Thumbs.db
+components/
+
+public/images/bootstrap
+public/images/jwplayer
+
