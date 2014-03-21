@@ -3,7 +3,7 @@
         <a class="navbar-brand" href="#">{{nbDataModel.brandName}}</a>
     </div>
     <ul class="nav navbar-nav navbar-left" role="navigation" bs-navbar>
-        <li ng-repeat="tabModel in nbDataModel.tabModels" data-match-route="{{(tabModel.routeMatch <= '' || ! angular.isString(tabModel.matchRoute)) ? tabModel.clickRoute : tabModel.matchRoute}}">
+        <li ng-repeat="tabModel in nbDataModel.tabModels" data-match-route="{{(angular.isString(tabModel.matchRoute) && tabModel.matchRoute > '') ? tabModel.matchRoute : tabModel.clickRoute }}">
             <a href="#{{tabModel.clickRoute}}">{{tabModel.displayLabel}}</a>
         </li>
     </ul>

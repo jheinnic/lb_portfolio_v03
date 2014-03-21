@@ -1,23 +1,9 @@
 doctype 5
-html(ng-app="jch-portfolio")
+html
   head
     title= title
     link(rel='stylesheet', href='/public/stylesheets/style.css')
     link(rel='stylesheet', href='/components/angular/angular-csp.css')
-    script(type='text/javascript', src='/components/angular-loader/angular-loader.js')
-    script(type='text/javascript', src='/components/angular-cookies/angular-cookies.js')
-    script(type='text/javascript', src='/components/angular-resource/angular-resource.js')
-    script(type='text/javascript', src='/components/angular-route/angular-route.js')
-    script(type='text/javascript', src='/components/angular-bootstrap/ui-bootstrap-tpls.js')
-    script(type='text/javascript', src='/components/angular-animate/angular-animate.js')
-    script(type='text/javascript', src='/components/angular-strap/dist/angular-strap.js')
-    script(type='text/javascript', src='/components/angular-strap/dist/angular-strap.tpl.js')
-    script(type='text/javascript', src='/components/angular-strap/dist/modules/alert.js')
-    script(type='text/javascript', src='/components/angular-strap/dist/modules/button.js')
-    script(type='text/javascript', src='/components/angular-strap/dist/modules/navbar.js')
-    script(type='text/javascript', src='/components/angular/angular.js')
-    script(type='text/javascript', src='/components/angular-i18n/angular-locale_en-us.js')
-    script(type='text/javascript', src='/public/javascripts/portfolio.js')
   body
     div(class="container")
       nav-bar
@@ -27,3 +13,4 @@ html(ng-app="jch-portfolio")
           footer()
             div(ng-include="viewNavBar.html")
             p("&copy; John Heinnickel, 2012")
+    script(type='text/javascript', data-main='public/javascripts/main', src='/components/requirejs/require.js')

@@ -1,23 +1,24 @@
 body {
   background-color: #fff;
   color: #333;
-  padding: 60px;
+//  padding: 60px;
 }
 
 footer {
   margin-top: 10px;
-  padding: 20px 0px 0px 0px;
+  padding-top: 20px;
+  // padding: 20px 0px 0px 0px;
   text-align: center;
 }
 
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
-}
+//.field_with_errors {
+//  padding: 2px;
+//  background-color: red;
+//  display: table;
+//}
 
 div.tikList-header {
-  background: #fff;
+  background: #a8ee8a;
   p {
     text-align:center
   }
@@ -33,10 +34,10 @@ div.tikList-body {
   margin-top: 139px;
   height: 600px;
   overflow-y: scroll;
-  ::-webkit-scrollbar {
-    width: 16px;
-    height: 16px;
-  }
+//  ::-webkit-scrollbar {
+//    width: 16px;
+//    height: 16px;
+//  }
 }
 
 // border-collapse and border-spacing already set by Bootstrap for all tables.
@@ -71,14 +72,14 @@ div.xw-layered {
       position: absolute;
       &.xw-fill {
         z-index: 12;
-        visibility: hidden;
+        // visibility: hidden;
       }
       &.xw-grid, &xw-value {
         z-index: 14;
       }
       &.xw-border {
         z-index: 16;
-        visibility: hidden;
+        // visibility: hidden;
       }
     }
   }
@@ -126,86 +127,86 @@ div#letterGrid {
   width: 308px;
   height: 308px;
   background-color: #19D919;
-  &.xw-horizontal div.xw-cell {
-    &.xw-wordhead img.xw-border.xw-htop, &.xw-midword img.xw-border.xw-hmid, &.xw-wordtail img.xw-border.xw-hend {
-      visibility: visible;
-    }
-  }
-  &.xw-vertical div.xw-cell.xw-wordhead img.xw-border {
-    &.xw-wordhead img.xw-border.xw-vtop, &.xw-midword img.xw-border.xw-vmid, &.xw-wordtail img.xw-border.xw-vend {
-      visibility: visible;
-    }
-  }
-  div.xw-cell {
-    &.xw-open img.xw-fill.xw-selected {
-      visibility: visible;
-    }
-    &.xw-triple img.xw-fill.xw-triple {
-      visibility: visible;
-    }
-    &.xw-short img.xw-fill.xw-tooshort {
-      visibility: visible;
-    }
-    &.xw-tripshort img.xw-fill.xw-tripshort {
-      visibility: visible;
-    }
-    &.xw-blocked img.xw-fill.xw-blocked {
-      visibility: visible;
-    }
-    &.xw-matched img.xw-fill.xw-revealed {
-      visibility: visible;
-    }
-    &.xw-covered img.xw-fill.xw-baseline {
-      visibility: visible;
-    }
-  }
+//  &.xw-horizontal div.xw-cell {
+//    &.xw-wordhead img.xw-border.xw-htop, &.xw-midword img.xw-border.xw-hmid, &.xw-wordtail img.xw-border.xw-hend {
+//      visibility: visible;
+//    }
+//  }
+//  &.xw-vertical div.xw-cell.xw-wordhead img.xw-border {
+//    &.xw-wordhead img.xw-border.xw-vtop, &.xw-midword img.xw-border.xw-vmid, &.xw-wordtail img.xw-border.xw-vend {
+//      visibility: visible;
+//    }
+//  }
+//  div.xw-cell {
+//    &.xw-open img.xw-fill.xw-selected {
+//      visibility: visible;
+//    }
+//    &.xw-triple img.xw-fill.xw-triple {
+//      visibility: visible;
+//    }
+//    &.xw-short img.xw-fill.xw-tooshort {
+//      visibility: visible;
+//    }
+//    &.xw-tripshort img.xw-fill.xw-tripshort {
+//      visibility: visible;
+//    }
+//    &.xw-blocked img.xw-fill.xw-blocked {
+//      visibility: visible;
+//    }
+//    &.xw-matched img.xw-fill.xw-revealed {
+//      visibility: visible;
+//    }
+//    &.xw-covered img.xw-fill.xw-baseline {
+//      visibility: visible;
+//    }
+//  }
 }
 
-div#bonusWord {
+div#bonusWordGrid {
   height: 28px;
   width: 140px;
-  &.xw-inactive div.xw-cell {
-    &.xw-covered img.xw-fill.xw-baseline {
-      visibility: visible;
-    }
-    &.xw-matched img.xw-fill.xw-revealed {
-      visibility: visible;
-    }
-  }
-  &.xw-active div.xw-cell {
-    img.xw-fill.xw-selected {
-      visibility: visible;
-    }
-    img.xw-border {
-      visibility: visible;
-    }
-  }
+//  &.xw-inactive div.xw-cell {
+//    &.xw-covered img.xw-fill.xw-baseline {
+//      visibility: visible;
+//    }
+//    &.xw-matched img.xw-fill.xw-revealed {
+//      visibility: visible;
+//    }
+//  }
+//  &.xw-active div.xw-cell {
+//    img.xw-fill.xw-selected {
+//      visibility: visible;
+//    }
+//    img.xw-border {
+//      visibility: visible;
+//    }
+//  }
 }
 
-div#yourLetters {
+div#yourLettersGrid {
   height: 84px;
   width: 168px;
-  &.xw-inactive div.xw-cell {
-    &.xw-covered img.xw-fill.xw-baseline {
-      visibility: visible;
-    }
-    &.xw-scratched img.xw-fill.xw-revealed {
-      visibility: visible;
-    }
-  }
-  &.xw-active {
-    &.xw-covered img.xw-fill.xw-baseline {
-      visibility: visible;
-    }
-    &.xw-scratched img.xw-fill.xw-revealed {
-      visibility: visible;
-    }
-    &.xw-open {
-      img.xw-fill.xw-selected, img.xw-border {
-        visibility: visible;
-      }
-    }
-  }
+//  &.xw-inactive div.xw-cell {
+//    &.xw-covered img.xw-fill.xw-baseline {
+//      visibility: visible;
+//    }
+//    &.xw-scratched img.xw-fill.xw-revealed {
+//      visibility: visible;
+//    }
+//  }
+//  &.xw-active {
+//    &.xw-covered img.xw-fill.xw-baseline {
+//      visibility: visible;
+//    }
+//    &.xw-scratched img.xw-fill.xw-revealed {
+//      visibility: visible;
+//    }
+//    &.xw-open {
+//      img.xw-fill.xw-selected, img.xw-border {
+//        visibility: visible;
+//      }
+//    }
+//  }
 }
 
 div#bonusValue {

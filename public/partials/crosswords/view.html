@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" >
     <div class="col-md-3 col-xs-12">
         <div id="xwButtons" class="bs-sidebar hidden-print" role="complementary" data-offset-top="80" bs-affix>
             <button type="button" class="btn btn-lg btm-info" ng-click="alert('TBD: Reset form');">New</button>
@@ -8,196 +8,15 @@
         </div>
     </div>
     <div class="col-md-6 col-xs-12">
-        <div id="ticketView" role="complementary" style="position: relative">
-            <img alt="card_00" class="ticketView" src="/public/images/card/card_00.jpg" style="top: 0px; left: 0px;">
-            <img alt="card_01" class="ticketView" src="/public/images/card/card_01.jpg" style="top: 178px; left: 0px;">
-            <div id="yourLetters" data-active="0" class="xw-layered xw-inactive" data-validx="-1" style="top: 178px; left: 52px;">
-                <div ng-repeat="ii in xwFixed.letterRowIndices">
-                    <div ng-repeat="jj in xwFixed.letterColIndices">
-                        <div data-content="" class="xw-cell xw-covered" data-rowid="{{ii}}" data-colid="{{jj}}" style="top: {{ii*28}}px; left: {{jj*28}}px;">
-                            <img alt="alt" class="xw-value" src="/public/images/val/blank.png">
-                            <img alt="alt" class="xw-border" src="/public/images/border/htop.png">
-                            <img alt="alt" class="xw-border" src="/public/images/border/hend.png">
-                            <img alt="alt" class="xw-fill xw-baseline" src="/public/images/fill/SilverCover.png">
-                            <img alt="alt" class="xw-fill xw-revealed" src="/public/images/fill/scratched.png">
-                            <img alt="alt" class="xw-fill xw-selected" src="/public/images/fill/selected1.png">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <img alt="card_03" class="ticketView" src="/public/images/card/card_03.jpg" style="top: 178px; left: 220px;">
-            <div id="bonusValue" class="" style="position: absolute; top: 178px; left: 276px;">
-                <img alt="alt" class="xw-fill xw-baseline" src="/public/images/fill/SilverCover.png" style="position: absolute; top: 0px; left: 0px;">
-                <img alt="alt" class="xw-fill xw-baseline" src="/public/images/fill/SilverCover.png" style="position: absolute; top: 0px; left: 28px;">
-                <img alt="alt" class="xw-fill xw-baseline" src="/public/images/fill/SilverCover.png" style="position: absolute; top: 0px; left: 56px;">
-            </div>
-            <img alt="card_05" class="ticketView" src="/public/images/card/card_05.jpg" style="top: 178px; left: 360px;">
-            <img alt="card_06" class="ticketView" src="/public/images/card/card_06.jpg" style="top: 206px; left: 276px;">
-            <img alt="card_07" class="ticketView" src="/public/images/card/card_07.jpg" style="top: 234px; left: 220px;">
-            <div id="bonusWord" class="xw-layered xw-inactive" data-active="0" style="top: 234px; left: 248px;">
-                <div class="xw-cell xw-covered" data-content="" style="top: 0px; left: 0px;">
-                    <img alt="alt" class="xw-value" src="/public/images/val/blank.png">
-                    <img alt="alt" class="xw-grid" src="/public/images/border/grid.png">
-                    <img alt="alt" class="xw-border" src="/public/images/border/htop.png">
-                    <img alt="alt" class="xw-fill xw-baseline" src="/public/images/fill/pink2.png">
-                    <img alt="alt" class="xw-fill xw-revealed" src="/public/images/fill/scratched.png">
-                    <img alt="alt" class="xw-fill xw-selected" src="/public/images/fill/selected1.png">
-                </div>
-                <div class="xw-cell xw-covered" data-content="" style="top: 0px; left: 28px;">
-                    <img alt="alt" class="xw-value" src="/public/images/val/blank.png">
-                    <img alt="alt" class="xw-grid" src="/public/images/border/grid.png">
-                    <img alt="alt" class="xw-border" src="/public/images/border/hmid.png">
-                    <img alt="alt" class="xw-fill xw-baseline" src="/public/images/fill/pink2.png">
-                    <img alt="alt" class="xw-fill xw-revealed" src="/public/images/fill/scratched.png">
-                    <img alt="alt" class="xw-fill xw-selected" src="/public/images/fill/selected1.png">
-                </div>
-                <div class="xw-cell xw-covered" data-content="" style="top: 0px; left: 56px;">
-                    <img alt="alt" class="xw-value" src="/public/images/val/blank.png">
-                    <img alt="alt" class="xw-grid" src="/public/images/border/grid.png">
-                    <img alt="alt" class="xw-border" src="/public/images/border/hmid.png">
-                    <img alt="alt" class="xw-fill xw-baseline" src="/public/images/fill/pink2.png">
-                    <img alt="alt" class="xw-fill xw-revealed" src="/public/images/fill/scratched.png">
-                    <img alt="alt" class="xw-fill xw-selected" src="/public/images/fill/selected1.png">
-                </div>
-                <div class="xw-cell xw-covered" data-content="" style="top: 0px; left: 84px;">
-                    <img alt="alt" class="xw-value" src="/public/images/val/blank.png">
-                    <img alt="alt" class="xw-grid" src="/public/images/border/grid.png">
-                    <img alt="alt" class="xw-border" src="/public/images/border/hmid.png">
-                    <img alt="alt" class="xw-fill xw-baseline" src="/public/images/fill/pink2.png">
-                    <img alt="alt" class="xw-fill xw-revealed" src="/public/images/fill/scratched.png">
-                    <img alt="alt" class="xw-fill xw-selected" src="/public/images/fill/selected1.png">
-                </div>
-                <div class="xw-cell xw-covered" data-content="" style="top: 0px; left: 112px;">
-                    <img alt="alt" class="xw-value" src="/public/images/val/blank.png">
-                    <img alt="alt" class="xw-grid" src="/public/images/border/grid.png">
-                    <img alt="alt" class="xw-border" src="/public/images/border/hend.png">
-                    <img alt="alt" class="xw-fill xw-baseline" src="/public/images/fill/pink2.png">
-                    <img alt="alt" class="xw-fill xw-selected" src="/public/images/fill/selected1.png">
-                    <img alt="alt" class="xw-fill xw-revealed" src="/public/images/fill/brite1.png">
-               </div>
-            </div>
-            <img alt="card_09" class="ticketView" src="/public/images/card/card_09.jpg" style="top: 234px; left: 388px;">
-            <img alt="card_10" class="ticketView" src="/public/images/card/card_10.jpg" style="top: 262px; left: 52px;">
-            <img alt="card_11" class="ticketView" src="/public/images/card/card_11.jpg" style="top: 262px; left: 248px;">
-            <img alt="card_12" class="ticketView" src="/public/images/card/card_12.jpg" style="top: 308px; left: 52px;">
-            <div id="letterGrid" class="xw-layered xw-horizontal xw-inactive" style="top: 308px; left: 108px;">
-                <div ng-repeat="ii in xwFixed.wordGridIndices">
-                    <div data-rowid="{{ii}}" data-colid="{{jj}}" data-content="" data-triple="-1"
-                         class="xw-cell xw-covered" ng-repeat="jj in xwFixed.wordGridIndices"
-                         style="top: {{ii*28}}px; left: {{jj*28}}px;">
-                        <img alt="alt" class="xw-value" src="/public/images/val/blank.png">
-                        <img alt="alt" class="xw-grid" src="/public/images/border/grid.png">
-                        <img alt="alt" class="xw-border xw-htop" src="/public/images/border/htop.png">
-                        <img alt="alt" class="xw-border xw-hmid" src="/public/images/border/hmid.png">
-                        <img alt="alt" class="xw-border xw-hend" src="/public/images/border/hend.png">
-                        <img alt="alt" class="xw-border xw-vtop" src="/public/images/border/vtop.png">
-                        <img alt="alt" class="xw-border xw-vmid" src="/public/images/border/vmid.png">
-                        <img alt="alt" class="xw-border xw-vend" src="/public/images/border/vend.png">
-                        <img alt="alt" class="xw-fill xw-revealed" src="/public/images/fill/brite1.png">
-                        <img alt="alt" class="xw-fill xw-selected" src="/public/images/fill/selected1.png">
-                        <img alt="alt" class="xw-fill xw-triple" src="/public/images/fill/imageSrc.png">
-                        <img alt="alt" class="xw-fill xw-blocked" src="/public/images/fill/locked.png">
-                        <img alt="alt" class="xw-fill xw-tooshort" src="/public/images/fill/altPath.png">
-                        <img alt="alt" class="xw-fill xw-tripshort" src="/public/images/fill/golden.png">
-                        <img alt="alt" class="xw-fill xw-dualtrip" src="/public/images/fill/cornsilk.png">
-                        <img alt="alt" class="xw-fill xw-dualtripshort" src="/public/images/fill/briteblue.png">
-                        <img alt="alt" class="xw-fill xw-baseline" src="/public/images/fill/pink2.png">
-                    </div>
-                </div>
-            </div>
-            <img alt="card_14" class="ticketView" src="/public/images/card/card_14.jpg" style="top: 308px; left: 416px;">
-            <img alt="card_15" class="ticketView" src="/public/images/card/card_15.jpg" style="top: 616px; left: 108px;">
-        </div>
-        <br>
+        <xw-ticket ticket-document="documentModel" payout-model="payoutModel" progress-model="progressModel"></xw-ticket>
     </div>
     <div class="col-md-3 col-xs-6">
         <div id="error_explanation"></div>
         <div id="debug_messages"></div>
-        <table id="wordSummary" class="table table-condensed">
-            <tr ng-repeat="ii in xwFixed.wordGridIndices">
-                <td><span class="badge badge-info">&nbsp;</span></td>
-                <td><span class="badge badge-info">&nbsp;</span></td>
-            </tr>
-        </table>
+        <xw-progress-report progress-model="progressModel"></xw-progress-report>
     </div>
     <div class="col-md-offset-9 col-md-3 col-xs-6">
-        <table id="payoutSummary" class="table table-condensed">
-            <tr>
-                <td><span class="label label-info">Free Ticket</span></td>
-                <td><span data-prizeid="1" class="badge badge-info">0</span></td>
-                <td><span class="label label-success">$60</span></td>
-                <td><span data-prizeid="10" class="badge badge-info">0</span></td>
-            </tr>
-            <tr>
-                <td><span class="label label-info">$4</span></td>
-                <td><span data-prizeid="2" class="badge badge-info">0</span></td>
-                <td><span class="label label-success">$100</span></td>
-                <td><span data-prizeid="11" class="badge badge-info">0</span></td>
-            </tr>
-            <tr>
-                <td><span class="label label-info">$5</span></td>
-                <td><span data-prizeid="3" class="badge badge-info">0</span></td>
-                <td><span class="label label-success">$150</span></td>
-                <td><span data-prizeid="12" class="badge badge-info">0</span></td>
-            </tr>
-            <tr>
-                <td><span class="label label-info">$10</span></td>
-                <td><span data-prizeid="4" class="badge badge-info">0</span></td>
-                <td><span class="label label-success">$300</span></td>
-                <td><span data-prizeid="13" class="badge badge-info">0</span></td>
-            </tr>
-            <tr>
-                <td><span class="label label-info">$12</span></td>
-                <td><span data-prizeid="5" class="badge badge-info">0</span></td>
-                <td><span class="label label-success">$1,000</span></td>
-                <td><span data-prizeid="14" class="badge badge-info">0</span></td>
-            </tr>
-            <tr>
-                <td><span class="label label-info">$15</span></td>
-                <td><span data-prizeid="6" class="badge badge-info">0</span></td>
-                <td><span class="label label-success">$3,000</span></td>
-                <td><span data-prizeid="15" class="badge badge-info">0</span></td>
-            </tr>
-            <tr>
-                <td><span class="label label-success">$20</span></td>
-                <td><span data-prizeid="7" class="badge badge-info">0</span></td>
-                <td><span class="label label-success">$20,000</span></td>
-                <td><span data-prizeid="16" class="badge badge-info">0</span></td>
-            </tr>
-            <tr>
-                <td><span class="label label-success">$30</span></td>
-                <td><span data-prizeid="8" class="badge badge-info">0</span></td>
-                <td><span class="label label-important">No Prize</span></td>
-                <td><span data-prizeid="0" class="badge badge-info">0</span></td>
-            </tr>
-            <tr>
-                <td><span class="label label-success">$50</span></td>
-                <td><span data-prizeid="9" class="badge badge-info">0</span></td>
-                <td><span class="label label-inverse">Invalid</span></td>
-                <td><span data-prizeid="17" class="badge badge-info">0</span></td>
-            </tr>
-        </table>
-    </div>
-</div>
-<div id="bonusModal" class="modal hide fade" data-keyboard="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Bonus Prize Value</h3>
-    </div>
-    <div class="modal-body">
-        <p>How much cash does your ticket offer as a prize if you complete the bonus word? Please find and
-            click its corresponding button below.</p>
-
-        <div id="bonusRadio" class="btn-group" data-toggle="buttons-radio">
-            <button type="button" class="btn btn-primary">$4.00</button>
-            <button type="button" class="btn btn-primary">$5.00</button>
-            <button type="button" class="btn btn-primary">$10.00</button>
-            <button type="button" class="btn btn-primary">$30.00</button>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <a id="bonusModalCancel" href="#" class="btn">Cancel</a>
-        <a id="bonusModalSave" href="#" class="btn btn-primary">Save</a>
+        <xw-payout-report payout-model="payoutModel"></xw-payout-report>
     </div>
 </div>
 <script type="text/ng-template" id="modal/xwListMenu.html">
