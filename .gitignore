@@ -45,3 +45,6 @@ components/
 public/images/bootstrap
 public/images/jwplayer
 
+common/**/*.js
+common/**/*.map
+public/images/card/card.html
