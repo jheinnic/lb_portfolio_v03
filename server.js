@@ -11,7 +11,7 @@ var coffeeMiddleware = require('coffee-middleware');
 
 var routes = require('./routes');
 // var user = require('./routes/user');
-var EmployeeProvider = require('./lib/employeeprovider').EmployeeProvider;
+// var EmployeeProvider = require('./lib/employeeprovider').EmployeeProvider;
 
 var app = express();
 
@@ -66,52 +66,30 @@ app.configure( function() {
         debug:true
     }));
     app.use('/public', express.static(relPath('public')));
+    app.use('/public', coffeeMiddleware({
+        src:relPath('common'),
+        prefix:'/public',
+        force:true,
+        debug:true
+    }));
+    app.use('/public', express.static(relPath('common')));
+    app.use('/public', express.static(relPath('components')));
 
     // Establish a static path root for bower component dependencies.
-    app.use('/components', express.static(relPath('/components')));
+    app.use('/components', express.static(relPath('components')));
 
     // Map URIs that begin with /img to Bootstrap's img directory.
-    app.use('/img', express['static'](path.join(__dirname, 'components', 'bootstrap', 'img')));
+    app.use('/img', express.static(path.join(__dirname, 'components', 'bootstrap', 'img')));
 
     // development only
     if ('development' == app.get('env')) {
       app.use(express.errorHandler());
     }
 
-
-    var employeeDAO = new EmployeeProvider('localhost', 27017);
-
-    //Routes
-
-    app.get('/employees', function(req, res){
-      employeeDAO.findAll(function(error, emps){
-          res.render('index', {
-                title: 'Employees',
-                employees:emps
-            });
-      });
-    });
-
-    app.get('/employee/new', function(req, res) {
-        res.render('employee_new', {
-            title: 'New Employee',
-            cause: 'Just Be'
-        });
-    });
-
-    //save new employee
-    app.post('/employee/new', function(req, res){
-        employeeDAO.save({
-            title: req.param('title'),
-            name: req.param('name')
-        }, function( error, docs) {
-            res.redirect('/');
-        });
-    });
-
+    //
+    // Routes
+    //
     app.get('/', routes.index);
-    app.get('/partials/*', routes.partials);
-    // app.get('/users', user.list);
 });
 
 http.createServer(app).listen(app.get('port'), function(){
