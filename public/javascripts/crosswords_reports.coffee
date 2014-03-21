@@ -1,27 +1,7 @@
-define ['require', 'angular', 'angular-strap/button', 'cs!public/enum', 'cs!public/crosswords_dynamic'], (require) ->
+define ['require', 'angular', 'ui-bootstrap-tpls', 'cs!public/enum', 'cs!public/crosswords_dynamic'], (require) ->
   Enum = require('cs!public/enum').Enum
 
-  xwModule = angular.module('crosswords', ['mgcrea.ngStrap.button', 'xw-dynamic']);
-
-  xwModule.directive 'xwTicket', ['xwModelFactory', 'xwDirectiveFactory', 'valueImages', 'borderImages', 'fillImages', (valueImages, borderImages, fillImages) ->
-    restrict: 'E'
-    replace: true
-    scope:
-      ticketDocument: '='
-      onDescriptionUpdate: '&'
-      onDiscoveryUpdate: '&'
-    templateUrl: 'public/partials/crosswords/xwTicket.html',
-    controller: ($scope) ->
-      this.closeActiveCursor = (withCommit) ->
-        if (activeGridScope != null)
-          tempGridScope = activeGridScope
-          activeGridScope = null
-          $scope.ticketModel.activeGrid = null
-
-          tempGridScope.$broadcast('xw.gridEvent.closeCursor', withCommit)
-          if (withCommit)
-            this.updateReportingService()
-
+  xwModule = angular.module('crosswords-reports', ['mgcrea.ngStrap.button', 'xw-dynamic']);
 
   xwModule.directive 'xwTicket', ['xwModelFactory', 'xwDirectiveFactory', 'valueImages', 'borderImages', 'fillImages', (valueImages, borderImages, fillImages) ->
     restrict: 'E'
@@ -53,12 +33,9 @@ define ['require', 'angular', 'angular-strap/button', 'cs!public/enum', 'cs!publ
         closeActiveCursor(true)
         openActiveCursor(event.targetScope, gridModel, cellModel)
 
-      # This isn't being used yet and likelu won't be.  Rather than using pull-based polling to discover lifecycle
-      # changes, I've made up my mind to instead use push-based promises in an all() union
       this.isEditableAt = (gridType) ->
         return gridType.isEditableAt($scope.ticketModel.lifecycleStage)
 
-      # This is also likely to vanish in favor of $rootScope.$broadcast('updateNotice')
       this.purgeWordList = () ->
         $scope.dataReportingModel.purgeWordList()
 
@@ -68,6 +45,35 @@ define ['require', 'angular', 'angular-strap/button', 'cs!public/enum', 'cs!publ
 
       this.updateReportingService = () ->
 
+#      this.getGridModel = (gridType) ->
+#        retVal
+#        switch gridType
+#          when GridKind.CROSSWORD
+#            retVal = $scope.ticketModel.crosswordGrid
+#          when GridKind.YOUR_LETTERS
+#            retVal = $scope.ticketModel.yourLettersGrid
+#          when GridKind.BONUS_WORD
+#            retVal = $scope.ticketModel.bonusWordGrid
+#          else
+#            retVal = null
+#        return retVal
+       this.getGridModel = (gridTypeName) ->
+         retVal =
+#      this.getCellModel = (gridType, rowId, colId) ->
+#        retVal
+#        switch gridType
+#          when GridKind.CROSSWORD
+#            retVal = $scope.ticketModel.crosswordGrid.cells[rowId][colId]
+#          when GridKind.YOUR_LETTERS
+#            retVal = $scope.ticketModel.yourLettersGrid.cells[rowId][colId]
+#          when GridKind.BONUS_WORD
+#            retVal = $scope.ticketModel.bonusWordGrid.cells[rowId][colId]
+#          else
+#            retVal = null
+#        return retVal
+
+      return this
+  ]
 
   xwModule.directive 'xwBonusValueCell', () ->
     restrict: 'E'
@@ -137,7 +143,7 @@ define ['require', 'angular', 'angular-strap/button', 'cs!public/enum', 'cs!publ
     scope: true
     templateUrl: '/public/partials/crosswords/bonusWordCell.html'
     link: ($scope, $elem, $attrs, ticketCtrl) ->
-      $scope.cellModel = ticketCtrl.getCellModel 'bonusWord', parseInt($attrs.rowid), parseInt($attrs.colid)
+      $scope.cellModel = ticketCtrl.getCellModel GridKind.BONUS_WORD, parseInt($attrs.rowid), parseInt($attrs.colid)
       $scope.onCellClick = () ->
         cellModel = $scope.cellModel
         $scope.$emit 'xw.gridEvent.cellClicked', GridKind.BONUS_WORD, cellModel.parentGrid, cellModel
