@@ -2,11 +2,11 @@ define ['angular'], () ->
   xwModule = angular.module('xw-dynamic', []);
 
   xwModule.factory 'xwDirectiveFactory', () ->
-    templateDirPath = '/xw-ticket/partials/'
+    templateDirPath = '/app/xw-ticket/partials/'
 
     return {
-      gridDirective: gridDirective (forGridKind) ->
-        discriminator = forGridKind.getGridTypeName()
+      gridDirective: (forGridKind) ->
+        discriminator = forGridKind + 'Grid'
 
         return {
           restrict: 'E'
@@ -15,7 +15,7 @@ define ['angular'], () ->
           scope: true
           templateUrl: templateDirPath + discriminator + '.html'
           link: ($scope, $elem, $attrs, ticketCtrl) ->
-            $scope.gridModel = $scope.ticketModel[discriminator+'Grid']
+            $scope.gridModel = $scope.ticketModel[discriminator]
             $scope.$on 'xw.gridEvent.cellClicked', ($event, gridKind, gridModel, cellModel) ->
               if (! ticketCtrl.isEditableAt gridKind)
                 $event.cancel();
@@ -30,8 +30,8 @@ define ['angular'], () ->
         }
 
       # TODO: Set the top/left/position styles and onClick handler programatically to make the template lighter
-      cellDirective: cellDirective (forGridKind) ->
-        discriminator = forGridKind.getCellTypeName()
+      cellDirective: (forGridKind) ->
+        discriminator = forGridKind + 'Cell'
 
         return {
           restrict: 'E'
@@ -40,7 +40,7 @@ define ['angular'], () ->
           scope: true
           templateUrl: templateDirPath + discriminator + '.html'
           link: ($scope, $elem, $attrs, ticketCtrl) ->
-            $scope.cellModel = ticketCtrl.getCellModel forGridKind, parseInt($attrs.rowid), parseInt($attrs.colid)
+            # $scope.cellModel = ticketCtrl.getCellModel forGridKind, parseInt($attrs.rowid), parseInt($attrs.colid)
             $scope.onCellClick = () ->
               cellModel = $scope.cellModel
               $scope.$emit 'xw.gridEvent.cellClicked', forGridKind, cellModel.parentGrid, cellModel
@@ -52,7 +52,7 @@ define ['angular'], () ->
             return
         }
       # TODO: Make 'xwTicket' less involved by using scope: true and using xwDataSvc in a link function.
-      reportDirective: reportDirective (reportTypeName) ->
+      reportDirective: (reportTypeName) ->
         scopeObj = {}
         scopeObj[reportTypeName + 'Model'] = '='
 
@@ -60,6 +60,28 @@ define ['angular'], () ->
           restrict: 'E'
           replace: true
           scope: scopeObj
-          templateUrl: templateDirPath + 'reporting/' + reportTypeName + 'Report.html'
+          templateUrl: '/app/xw-report/partials/' + reportTypeName + 'Report.html'
         }
     }
+
+  xwModule.directive('xwProtoCell', ['$compile', ($compile) ->
+    return {
+      restrict: 'CA'
+      replace: false
+      scope: false
+      priority: 1200
+      terminal: true
+      compile: ($element, $attr) ->
+        clone = $element.clone()
+        clone.attr('ng-repeat', "cellModel in gridModel.cells track by cellModel.coordinates")
+        clone.attr('jch-xy-pos', "(cellModel.rowId,cellModel.colId) at 28 by 28")
+        clone.attr('ng-click', "onCellClick(cellModel)")
+        clone.removeClass('xw-proto-cell')
+        clone.addClass('xw-cell')
+        cloneLinkFn = $compile(clone)
+        return ($scope, $element, $attr) ->
+          cloneLinkFn($scope, (linkedClone) ->
+            $element.replaceWith(linkedClone)
+          )
+    }
+  ])

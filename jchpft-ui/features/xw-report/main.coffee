@@ -1,62 +1,80 @@
-define ['require', 'angular', 'ui-bootstrap-tpls', 'cs!xw-dynamic'], (require) ->
+define ['angular', 'ui-bootstrap-tpls', 'xw-dynamic/main'], () ->
   xwModule = angular.module('xw-report', ['xw-dynamic']);
 
   xwModule.directive 'xwProgressReport', ['xwDirectiveFactory', (xwDirectiveFactory) ->
-    return xwDirectiveFactory.registerReport('progress')
+    return xwDirectiveFactory.reportDirective('progress')
   ]
 
   xwModule.directive 'xwPayoutReport', ['xwDirectiveFactory', (xwDirectiveFactory) ->
-    return xwDirectiveFactory.registerReport('payout')
+    return xwDirectiveFactory.reportDirective('payout')
   ]
 
   class XwReportService
     constructor: ($q) ->
       @$q = $q
       @progressReportDeferal = $q.defer()
-      @progressReportObject = new ProgressReportModel( null, null, @progressReportDeferal.promise )
+      @progressReportObject = new ProgressReportModel(null, @progressReportDeferal.promise)
       @payoutReportDeferal = $q.defer()
-      @payoutReportObject = new PayoutReportModel( null, null, @payoutReportDeferal.promise )
+      @payoutReportObject = new PayoutReportModel(null, null, @payoutReportDeferal.promise)
+      return @
 
     getProgressReport: () ->
       return @progressReportObject
 
-    updateProgressReport: (ticketHref, detail) ->
+    updateProgressReport: (analysisModel) ->
       tempDeferal = @progressReportDeferal
       @progressReportDeferal = $q.defer()
-      @progressReportObject = new ProgressReportModel( ticketHref, detail, @progressReportDeferal.promise )
+      @progressReportObject = new ProgressReportModel(analysisModel, @progressReportDeferal.promise)
       tempDeferal.resolve(@progressReportObject)
+      return
 
     getPayoutReport: () ->
       return @payoutReportObject
 
-    updatePayoutReport: (ticketHref, detail) ->
+    updatePayoutReport: (analysisModel) ->
       tempDeferal = @payoutReportDeferal
       @payoutReportDeferal = $q.defer()
-      @payoutReportObject = new PayoutReportModel( ticketHref, detail, @payoutReportDeferal.promise )
+      @payoutReportObject = new PayoutReportModel(analysisModel, @payoutReportDeferal.promise)
       tempDeferal.resolve(@payoutReportObject)
+      return
+
+  class XwAnalysisFactory
+    constructor: () -> return @
+
+    createProgressAnalysisModel: (ticketId) ->
+      return new ProgressAnalysisModel(ticketId)
 
   xwModule.service 'xwReportSvc', ['$q', XwReportService]
+
+  xwModule.service 'xwAnalysisFactory', ['$q', XwAnalysisFactory]
 
 
   ##
   ## Model Classes
   ##
 
+  ##
+  ## Ticket Anaylsis Models
+  ##
+
   class ProgressAnalysisModel
-    constructor: (@ticketHref) ->
+    constructor: (@ticketId) ->
       @purgeWordLists()
       @purgeLettersHash()
+      return @
 
     purgeWordLists: () =>
       @purgedWordLists = true
       @bonusWord       = null
       @allWords        = new Array()
       @purgeAnalysis()
+      return
 
     purgeLettersHash: () =>
       @purgedLettersHash    = true
       @revealedLettersHash = {}
       @purgeAnalysis()
+      return
 
     purgeAnalysis: () =>
       @allWords.forEach( (wordAnalysis) -> wordAnalysis.reset() )
@@ -64,35 +82,39 @@ define ['require', 'angular', 'ui-bootstrap-tpls', 'cs!xw-dynamic'], (require) -
       @incompleteBasicWords  = null
       @completeTripleWords   = null
       @completeBasicWords    = null
-      @incompleteWords    = null
-      @completeWords      = null
-      @tripleWords        = null
-      @basicWords         = null
+      @incompleteWords       = null
+      @completeWords         = null
+      @tripleWords           = null
+      @basicWords            = null
+      return
 
     setBonusWord: (rawWordStr) =>
       if (@purgedWordLists == false)
-        throw "IllegalStateException"
+        throw 'IllegalStateException'
       else if (@bonusWord?)
-        throw "IllegalStateException"
+        throw 'IllegalStateException'
 
       @bonusWord = new WordAnalysis(rawWordStr,true)
       @allWords.push(@bonusWord)
+      return
 
     addWord: (rawWordStr) =>
       if (@purgedWordLists == false)
-        throw "IllegalStateException"
+        throw 'IllegalStateException'
 
       @allWords.push(new WordAnalysis(rawWordStr,false))
+      return
 
     addRevealedLetter: (revealedLetter) =>
       if (@purgedLettersHash == false)
-        throw "IllegalStateException"
+        throw 'IllegalStateException'
 
       @revealedLettersHash[revealedLetter] = 1
+      return
 
     refreshAnalysis: () =>
       if (@purgedLettersHash == true && @purgedWordLists == true)
-        throw "IllegalStateException"
+        throw 'IllegalStateException'
 
       @incompleteTripleWords = new Array()
       @incompleteBasicWords  = new Array()
@@ -112,15 +134,17 @@ define ['require', 'angular', 'ui-bootstrap-tpls', 'cs!xw-dynamic'], (require) -
 
       @purgedLettersHash = false
       @purgedWordLists = false
+      return
 
-    @hasTripleBonus: () =>
+    hasTripleBonus: () =>
       if (@purgedLettersHash == false || @purgedWordLists == false)
-        throw "IllegalStateException"
+        throw 'IllegalStateException'
       return @completeTripleWords.length > 0
 
   class WordAnalysis
     constructor: (@rawWordStr, @isBonus) ->
       @reset()
+      return @
 
     reset: () =>
       @isTriple = null
@@ -129,6 +153,7 @@ define ['require', 'angular', 'ui-bootstrap-tpls', 'cs!xw-dynamic'], (require) -
       @missingLetterHash = {}
       @missingLetterString = null
       @missingLetterArray = new Array()
+      return
 
     doAnalysis: (revealedLetters, incompleteBasicWords, completeBasicWords, incompleteTripleWords, completeTripleWords, bonusWords) =>
       @isTriple = false
@@ -173,11 +198,14 @@ define ['require', 'angular', 'ui-bootstrap-tpls', 'cs!xw-dynamic'], (require) -
           incompleteTripleWords.push(@)
         else
           incompleteBasicWords.push(@)
+      return
 
 
   class ProgressReportModel
-    constructor: (@ticketHref, analysisModel, @updatePromise) ->
+    constructor: (analysisModel, @updatePromise) ->
       if (analysisModel?)
+        @ticketId = analysisModel.ticketId
+
         tempWordMap = {}
         buildWordMapFn = (wordAnalysis) -> tempWordMap[wordAnalysis.rawWordStr] = new WordReport(wordAnalysis)
         analysisModel.allWords.forEach buildWordMapFn
@@ -188,6 +216,7 @@ define ['require', 'angular', 'ui-bootstrap-tpls', 'cs!xw-dynamic'], (require) -
         @allCompleteTripleWords = analysisModel.allCompleteTripleWords.map(deRefWordMapFn)
         @allIncompleteBasicWords = analysisModel.allIncompleteBasicWords.map(deRefWordMapFn)
         @allIncompleteTripleWords = analysisModel.allIncompleteTripleWords.map(deRefWordMapFn)
+      return @
 
   class WordReport
     constructor: (wordAnalysis) ->
@@ -195,3 +224,7 @@ define ['require', 'angular', 'ui-bootstrap-tpls', 'cs!xw-dynamic'], (require) -
       @displayStr = wordAnalysis.displayWordStr
       @missingLetterHash = wordAnalysis.missingLetterHash
       @missingLetterArray = wordAnalysis.missingLetterArray
+      return @
+
+  class PayoutReportModel
+    constructor: (@ticketId, @prizeCounts, @updatePromise) -> return @

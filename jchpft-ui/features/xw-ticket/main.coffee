@@ -1,16 +1,16 @@
 define [
   'angular'
   'angular-strap/button'
-  'cs!jch-ui-blocks'
-  'cs!xw-model'
-  'cs!xw-dynamic'
-  'cs!xw-report'
+  'jch-ui-blocks/main'
+  'xw-dynamic/main'
+  'xw-model/main'
+  'xw-report/main'
 ], () ->
-  xwModule = angular.module('xw-ticket', ['mgcrea.ngStrap.button', 'jch-ui-blocks', 'xw-dynamic', 'xw-model', 'xw-report']);
+  xwModule = angular.module('xw-ticket', ['ng', 'mgcrea.ngStrap.button', 'jch-ui-blocks', 'xw-dynamic', 'xw-model', 'xw-report']);
 
   xwModule.config ['$routeProvider', ($routeProvider) ->
     $routeProvider.when '/crosswords',
-      templateUrl: 'xw-ticket/partials/view.html'
+      templateUrl: '/app/xw-ticket/partials/view.html'
       controller: 'CrosswordCtrl'
   ]
 
@@ -24,7 +24,7 @@ define [
 #        onDiscovery: '&'
 #        onComplete: '&'
 
-      templateUrl: 'xw-ticket/partials/xwTicket.html',
+      templateUrl: '/app/xw-ticket/partials/xwTicket.html',
       controller: ($scope) ->
   #      this.closeActiveCursor = (withCommit) ->
   #        if (activeGridScope != null)
@@ -63,7 +63,7 @@ define [
 
         this.updateReportingService = () ->
       link: ($scope, $elem, $attr) ->
-        $scope.ticketModel = xwModelFactory.createTicketModel $scope.ticketDocument
+        $scope.ticketModel = xwModelFactory.createModelFromDocument $scope.ticketDocument
         $scope.imageModel =
           fillImages: fillImages
           valueImages: valueImages
@@ -76,16 +76,16 @@ define [
     replace: true
     require: '^xwTicket'
     scope: false
-    templateUrl: 'xw-ticket/partials/bonusValueCell.html'
+    templateUrl: '/app/xw-ticket/partials/bonusValueCell.html'
 
   xwModule.directive 'xwYourLettersGrid', () ->
     restrict: 'E'
     replace: true
     require: '^xwTicket'
     scope: true
-    templateUrl: 'xw-ticket/partials/yourLettersGrid.html'
+    templateUrl: '/app/xw-ticket/partials/yourLettersGrid.html'
     link: ($scope, $elem, $attrs, ticketCtrl) ->
-      $scope.gridModel = $scope.ticketModel.
+      $scope.gridModel = $scope.ticketModel.yourLettersGrid
       $scope.$on 'xw.gridEvent.closeCursor', ($event, withCommit) ->
         $scope.gridModel.closeCursor
 
@@ -99,13 +99,13 @@ define [
     restrict: 'E'
     replace: true
     require: '^xwTicket'
-    scope: true
-    templateUrl: '/xw-ticket/partials/yourLettersCell.html'
+    scope: false
+    templateUrl: '/app/xw-ticket/partials/yourLettersCell.html'
     link: ($scope, $elem, $attrs, ticketCtrl) ->
-      $scope.cellModel = ticketCtrl.getCellModel GridKind.YOUR_LETTERS, parseInt($attrs.rowid), parseInt($attrs.colid)
+      # $scope.cellModel = ticketCtrl.getCellModel GridKind.YOUR_LETTERS, parseInt($attrs.rowid), parseInt($attrs.colid)
       $scope.onCellClick = () ->
         cellModel = $scope.cellModel
-        $scope.$emit 'xw.gridEvent.cellClicked', GridKind.YOUR_LETTERS, cellModel.parentGrid, cellModel
+        $scope.$emit 'xw.gridEvent.cellClicked', 'yourLetters', cellModel.parentGrid, cellModel
       $scope.$on 'xw.gridEvent.closeCursor', (event, withCommit) ->
         $scope.cellModel.onCloseCursor(withCommit)
       $scope.$on 'xw.gridEvent.openCursor', (event, cursorCell) ->
@@ -123,9 +123,9 @@ define [
     replace: true
     require: '^xwTicket'
     scope: true
-    templateUrl: 'xw-ticket/partials/bonusWordGrid.html'
+    templateUrl: '/app/xw-ticket/partials/bonusWordGrid.html'
     link: ($scope, $elem, $attrs, ticketCtrl) ->
-      $scope.gridModel = ticketCtrl.getGridModel(GridKind.BONUS_WORD)
+      $scope.gridModel = $scope.ticketModel.bonusWordGrid
       $scope.$on 'xw.gridEvent.closeCursor', ($event, withCommit) ->
         $scope.gridModel.closeCursor(withCommit)
       $scope.$on 'xw.gridEvent.openCursor', ($event, cursorCell) ->
@@ -136,10 +136,10 @@ define [
     restrict: 'E'
     replace: true
     require: '^xwTicket'
-    scope: true
-    templateUrl: '/xw-ticket/partials/bonusWordCell.html'
+    scope: false
+    templateUrl: '/app/xw-ticket/partials/bonusWordCell.html'
     link: ($scope, $elem, $attrs, ticketCtrl) ->
-      $scope.cellModel = ticketCtrl.getCellModel 'bonusWord', parseInt($attrs.rowid), parseInt($attrs.colid)
+      # $scope.cellModel = ticketCtrl.getCellModel 'bonusWord', parseInt($attrs.rowid), parseInt($attrs.colid)
       $scope.onCellClick = () ->
         cellModel = $scope.cellModel
         $scope.$emit 'xw.gridEvent.cellClicked', GridKind.BONUS_WORD, cellModel.parentGrid, cellModel
@@ -152,11 +152,11 @@ define [
 
 
   xwModule.directive 'xwCrosswordGrid', ['xwDirectiveFactory', (xwDirectiveFactory) ->
-    return xwDirectiveFactory.registerGrid('crossword')
+    return xwDirectiveFactory.gridDirective('crossword')
   ]
 
   xwModule.directive 'xwCrosswordCell', ['xwDirectiveFactory', (xwDirectiveFactory) ->
-    return xwDirectiveFactory.registerCell('crossword')
+    return xwDirectiveFactory.cellDirective('crossword')
   ]
 
   xwModule.directive 'xwBonusValue', () ->
@@ -164,95 +164,96 @@ define [
     replace: true
     require: '^xwTicket'
     scope: false
-    templateUrl: 'xw-ticket/partials/bonusValue.html'
+    templateUrl: '/app/xw-ticket/partials/bonusValue.html'
 
   xwModule.directive 'cellImg', () ->
     restrict: 'E'
     replace: true
     template: (tElem, tAttr) ->
-      return '<img ng-src="' + tAttr.map + '[' + tAttr.key + ']">'
+      return '<img ng-src="{{' + tAttr.map + '[' + tAttr.key + ']}}">'
 
   xwModule.value 'valueImages', () ->
-    a: 'xw-ticket/images/val/A.png'
-    b: 'xw-ticket/images/val/B.png'
-    c: 'xw-ticket/images/val/C.png'
-    d: 'xw-ticket/images/val/D.png'
-    e: 'xw-ticket/images/val/E.png'
-    f: 'xw-ticket/images/val/F.png'
-    g: 'xw-ticket/images/val/G.png'
-    h: 'xw-ticket/images/val/H.png'
-    i: 'xw-ticket/images/val/I.png'
-    j: 'xw-ticket/images/val/J.png'
-    k: 'xw-ticket/images/val/K.png'
-    l: 'xw-ticket/images/val/L.png'
-    m: 'xw-ticket/images/val/M.png'
-    n: 'xw-ticket/images/val/N.png'
-    o: 'xw-ticket/images/val/O.png'
-    p: 'xw-ticket/images/val/P.png'
-    w: 'xw-ticket/images/val/Q.png'
-    r: 'xw-ticket/images/val/R.png'
-    s: 'xw-ticket/images/val/S.png'
-    t: 'xw-ticket/images/val/T.png'
-    u: 'xw-ticket/images/val/U.png'
-    v: 'xw-ticket/images/val/V.png'
-    w: 'xw-ticket/images/val/W.png'
-    x: 'xw-ticket/images/val/X.png'
-    y: 'xw-ticket/images/val/Y.png'
-    z: 'xw-ticket/images/val/Z.png'
-    A: 'xw-ticket/images/gval/A.png'
-    B: 'xw-ticket/images/gval/B.png'
-    C: 'xw-ticket/images/gval/C.png'
-    D: 'xw-ticket/images/gval/D.png'
-    E: 'xw-ticket/images/gval/E.png'
-    F: 'xw-ticket/images/gval/F.png'
-    G: 'xw-ticket/images/gval/G.png'
-    H: 'xw-ticket/images/gval/H.png'
-    I: 'xw-ticket/images/gval/I.png'
-    J: 'xw-ticket/images/gval/J.png'
-    K: 'xw-ticket/images/gval/K.png'
-    L: 'xw-ticket/images/gval/L.png'
-    M: 'xw-ticket/images/gval/M.png'
-    N: 'xw-ticket/images/gval/N.png'
-    O: 'xw-ticket/images/gval/O.png'
-    P: 'xw-ticket/images/gval/P.png'
-    Q: 'xw-ticket/images/gval/Q.png'
-    R: 'xw-ticket/images/gval/R.png'
-    S: 'xw-ticket/images/gval/S.png'
-    T: 'xw-ticket/images/gval/T.png'
-    U: 'xw-ticket/images/gval/U.png'
-    V: 'xw-ticket/images/gval/V.png'
-    W: 'xw-ticket/images/gval/W.png'
-    X: 'xw-ticket/images/gval/X.png'
-    Y: 'xw-ticket/images/gval/Y.png'
-    Z: 'xw-ticket/images/gval/Z.png'
-    _: 'xw-ticket/images/val/blank.png'
-    '-': 'xw-ticket/images/gval/qm.png'
-    '?': 'xw-ticket/images/val/qm.png'
-    undefined: "/xw-ticket/images/val/blank.png"
+    a: '/app/xw-ticket/images/val/A.png'
+    b: '/app/xw-ticket/images/val/B.png'
+    c: '/app/xw-ticket/images/val/C.png'
+    d: '/app/xw-ticket/images/val/D.png'
+    e: '/app/xw-ticket/images/val/E.png'
+    f: '/app/xw-ticket/images/val/F.png'
+    g: '/app/xw-ticket/images/val/G.png'
+    h: '/app/xw-ticket/images/val/H.png'
+    i: '/app/xw-ticket/images/val/I.png'
+    j: '/app/xw-ticket/images/val/J.png'
+    k: '/app/xw-ticket/images/val/K.png'
+    l: '/app/xw-ticket/images/val/L.png'
+    m: '/app/xw-ticket/images/val/M.png'
+    n: '/app/xw-ticket/images/val/N.png'
+    o: '/app/xw-ticket/images/val/O.png'
+    p: '/app/xw-ticket/images/val/P.png'
+    w: '/app/xw-ticket/images/val/Q.png'
+    r: '/app/xw-ticket/images/val/R.png'
+    s: '/app/xw-ticket/images/val/S.png'
+    t: '/app/xw-ticket/images/val/T.png'
+    u: '/app/xw-ticket/images/val/U.png'
+    v: '/app/xw-ticket/images/val/V.png'
+    w: '/app/xw-ticket/images/val/W.png'
+    x: '/app/xw-ticket/images/val/X.png'
+    y: '/app/xw-ticket/images/val/Y.png'
+    z: '/app/xw-ticket/images/val/Z.png'
+    A: '/app/xw-ticket/images/gval/A.png'
+    B: '/app/xw-ticket/images/gval/B.png'
+    C: '/app/xw-ticket/images/gval/C.png'
+    D: '/app/xw-ticket/images/gval/D.png'
+    E: '/app/xw-ticket/images/gval/E.png'
+    F: '/app/xw-ticket/images/gval/F.png'
+    G: '/app/xw-ticket/images/gval/G.png'
+    H: '/app/xw-ticket/images/gval/H.png'
+    I: '/app/xw-ticket/images/gval/I.png'
+    J: '/app/xw-ticket/images/gval/J.png'
+    K: '/app/xw-ticket/images/gval/K.png'
+    L: '/app/xw-ticket/images/gval/L.png'
+    M: '/app/xw-ticket/images/gval/M.png'
+    N: '/app/xw-ticket/images/gval/N.png'
+    O: '/app/xw-ticket/images/gval/O.png'
+    P: '/app/xw-ticket/images/gval/P.png'
+    Q: '/app/xw-ticket/images/gval/Q.png'
+    R: '/app/xw-ticket/images/gval/R.png'
+    S: '/app/xw-ticket/images/gval/S.png'
+    T: '/app/xw-ticket/images/gval/T.png'
+    U: '/app/xw-ticket/images/gval/U.png'
+    V: '/app/xw-ticket/images/gval/V.png'
+    W: '/app/xw-ticket/images/gval/W.png'
+    X: '/app/xw-ticket/images/gval/X.png'
+    Y: '/app/xw-ticket/images/gval/Y.png'
+    Z: '/app/xw-ticket/images/gval/Z.png'
+    _: '/app/xw-ticket/images/val/blank.png'
+    '?': '/app/xw-ticket/images/val/qm.png'
+    blank: '/app/xw-ticket/images/val/blank.png'
+    undefined: '/app/xw-ticket/images/val/blank.png'
 
   xwModule.value 'borderImages', () =>
-    htop: "/xw-ticket/images/border/htop.png"
-    hmid: "/xw-ticket/images/border/hmid.png"
-    hend: "/xw-ticket/images/border/hend.png"
-    vtop: "/xw-ticket/images/border/vtop.png"
-    vmid: "/xw-ticket/images/border/vmid.png"
-    vend: "/xw-ticket/images/border/vend.png"
-    undefined: "/xw-ticket/images/val/blank.png"
+    htop: "/app/xw-ticket/images/border/htop.png"
+    hmid: "/app/xw-ticket/images/border/hmid.png"
+    hend: "/app/xw-ticket/images/border/hend.png"
+    vtop: "/app/xw-ticket/images/border/vtop.png"
+    vmid: "/app/xw-ticket/images/border/vmid.png"
+    vend: "/app/xw-ticket/images/border/vend.png"
+    blank: "/app/xw-ticket/images/val/blank.png"
+    undefined: "/app/xw-ticket/images/val/blank.png"
 
   xwModule.value 'fillImages', () =>
-    revealed: "/xw-ticket/images/fill/brite1.png"
-    selected: "/xw-ticket/images/fill/selected1.png"
-    triple: "/xw-ticket/images/fill/imageSrc.png"
-    blocked: "/xw-ticket/images/fill/locked.png"
-    tooshort: "/xw-ticket/images/fill/altPath.png"
-    tripshort: "/xw-ticket/images/fill/golden.png"
-    dualtrip: "/xw-ticket/images/fill/cornsilk.png"
-    dualtripshort: "/xw-ticket/images/fill/briteblue.png"
-    baseline: "/xw-ticket/images/fill/pink2.png"
-    undefined: "/xw-ticket/images/fill/pink2.png"
+    revealed: "/app/xw-ticket/images/fill/brite1.png"
+    selected: "/app/xw-ticket/images/fill/selected1.png"
+    triple: "/app/xw-ticket/images/fill/imageSrc.png"
+    blocked: "/app/xw-ticket/images/fill/locked.png"
+    tooshort: "/app/xw-ticket/images/fill/altPath.png"
+    tripshort: "/app/xw-ticket/images/fill/golden.png"
+    dualtrip: "/app/xw-ticket/images/fill/cornsilk.png"
+    dualtripshort: "/app/xw-ticket/images/fill/briteblue.png"
+    baseline: "/app/xw-ticket/images/fill/pink2.png"
+    undefined: "/app/xw-ticket/images/fill/pink2.png"
 
-  xwModule.controller 'CrosswordCtrl', ['$scope', 'xwReportSvc', ($scope, xwReportSvc) ->
-    $scope.documentModel = new TicketDocument()
+  xwModule.controller 'CrosswordCtrl', ['$scope', 'xwDocumentFactory', 'xwReportSvc', ($scope, xwDocumentFactory, xwReportSvc) ->
+    $scope.documentModel = xwDocumentFactory.newTripleNoTwentyTicketDocument('858:323842-049', 'tripleNoTwenty')
 
     updateProgressReportFn = (nextReportModel) ->
       $scope.progressModel = nextReportModel
@@ -267,433 +268,249 @@ define [
     updatePayoutModelFn xwReportSvc.getPayoutReport()
   ]
 
-  # TODO: Add boundary pointers and fill state
-  # TODO: Figure out how content changes, on commit, will update the post model and trigger validation.
-  #       -- Likely involves prototypical inheritance for crosswordGrid to invoke ticketModel.updateCrosswordCells() ?
+  class XwModelFactory
+    # Given a TicketDocument, produce a TicketModel equivalent suitable for the editor directive at the heart of this
+    # module.
+    createModelFromDocument: (ticketDocument) ->
+      # Populate the cells for each grid model--an 11x11 square
+      ii = 0
+      kk = 0
+      nextCell = null
+      firstRowCell = null
+      cells = new Array(121)
+      while ii < 11
+        lastCellAbove = firstRowCell
+        lastCellLeft  = null
+        jj            = 0
+        while jj < 11
+          nextCell = new FixedCell(kk, ii, jj, ticketDocument.content.charAt(kk))
+          cells[kk] = nextCell
 
-  class XwReportService
-    constructor: (@$q) ->
-      @progressReportDeferal = $q.defer()
-      @progressReportObject = new ProgressReportModel( null, null, @progressReportDeferal.promise )
-      @payoutReportDeferal = $q.defer()
-      @payoutReportObject = new PayoutReportModel( null, null, @payoutReportDeferal.promise )
+          if(lastCellLeft == null)
+            # Remember the start of the present row so we can use it to set above/below links
+            # when we start the next row.
+            firstRowCell  = nextCell
+          else
+            # Use the previous allocation reference to set left/right links.
+            nextCell.aligned.toLeft       = lastCellLeft
+            lastCellLeft.aligned.toRight  = nextCell
+            nextCell.rotated.toAbove      = lastCellLeft
+            lastCellLeft.rotated.toBelow  = nextCell
 
-    getProgressReport: () ->
-      return @progressReportObject
+          if(lastCellAbove != null)
+            # Use a walk of the previous row to set above/below links
+            nextCell.rotated.toLeft       = lastCellAbove
+            lastCellAbove.rotated.toRight = nextCell
+            nextCell.aligned.toAbove      = lastCellAbove
+            lastCellAbove.aligned.toBelow = nextCell
 
-    updateProgressReport: (ticketHref, detail) ->
-      tempDeferal = @progressReportDeferal
-      @progressReportDeferal = $q.defer()
-      @progressReportObject = new ProgressReportModel( ticketHref, detail, @progressReportDeferal.promise )
-      tempDeferal.resolve(@progressReportObject)
+          # Keep this cell as the previous allocation of the current row.  Use the left/right
+          # navigability built when processing the previous row to advance the lastRow pointer
+          # one cell to the right.  This prepares us for linking the left/up navigation for the
+          # upcoming next allocation.  Advance the column and flattened index counters.
+          lastCellLeft = nextCell
+          lastCellAbove = lastCellAbove?.toRight || null
+          jj = jj + 1
+          kk = kk + 1
+        # Advance the row counter.
+        ii = ii + 1
 
-    getPayoutReport: () ->
-      return @payoutReportObject
+      crosswordGrid = new CrosswordGrid(cells)
 
-    updatePayoutReport: (ticketHref, detail) ->
-      tempDeferal = @payoutReportDeferal
-      @payoutReportDeferal = $q.defer()
-      @payoutReportObject = new PayoutReportModel( ticketHref, detail, @payoutReportDeferal.promise )
-      tempDeferal.resolve(@payoutReportObject)
+      #
+      # Your Letters Grid
+      #
+      ii = 0
+      kk = 0
+      nextCell = null
+      cells = new Array(18)
+      while ii < 3
+        lastCellLeft  = null
+        jj            = 0
+        while jj < 6
+          nextCell = new YourLettersCell(kk, ii, jj, ticketDocument.yourLetters.charAt(kk))
+          cells[kk] = nextCell
 
-  xwModule.service 'xwReportSvc', ['$q', XwReportService]
+          if (lastCellLeft == null)
+            if (ii==0)
+              firstRowCell = nextCell
+          else
+            lastCellLeft.next = nextCell
+            nextCell.prev = lastCellLeft
 
+          lastCellLeft = nextCell
+          jj = jj + 1
+          kk = kk + 1
+        ii = ii + 1
+
+      # Establish circular navigation.  Link last.next to first.  Link first.prev to last.
+      firstRowCell.prev = nextCell
+      nextCell.next = firstRowCell
+
+      yourLettersGrid = new YourLettersGrid(cells)
+
+      #
+      # Bonus Word Grid
+      #
+      ii = 0
+      nextCell = null
+      lastCellLeft = null
+      cells = new Array(5)
+      while ii < 5
+        nextCell = new BonusWordCell(ii, ticketDocument.variantData.bonusWord?.charAt(ii) || '_')
+        cells[ii] = nextCell
+
+        if lastCellLeft == null
+          firstRowCell = nextCell
+        else
+          lastCellLeft.next = nextCell
+          nextCell.prev = lastCellLeft
+        lastCellLeft = nextCell
+        ii = ii + 1
+
+      # Establish circular navigation.  Link last.next to first.  Link first.prev to last.
+      firstRowCell.prev = nextCell
+      nextCell.next = firstRowCell
+
+      bonusWordGrid = new BonusWordGrid(cells)
+      return new TicketModel(ticketDocument.ticketId, crosswordGrid, yourLettersGrid, bonusWordGrid)
+
+  xwModule.service('xwModelFactory', [XwModelFactory])
 
   ##
-  ## Model Classes
+  ## Ticket Model Classes
   ##
 
-  class ProgressAnalysisModel
-    constructor: (@ticketHref) ->
-      @purgeWordLists()
-      @purgeLettersHash()
-
-    purgeWordLists: () =>
-      @purgedWordLists = true
-      @bonusWord       = null
-      @allWords        = new Array()
-      @purgeAnalysis()
-
-    purgeLettersHash: () =>
-      @purgedLettersHash    = true
-      @revealedLettersHash = {}
-      @purgeAnalysis()
-
-    purgeAnalysis: () =>
-      @allWords.forEach( (wordAnalysis) -> wordAnalysis.reset() )
-      @incompleteTripleWords = null
-      @incompleteBasicWords  = null
-      @completeTripleWords   = null
-      @completeBasicWords    = null
-      @incompleteWords    = null
-      @completeWords      = null
-      @tripleWords        = null
-      @basicWords         = null
-
-    setBonusWord: (rawWordStr) =>
-      if (@purgedWordLists == false)
-        throw "IllegalStateException"
-      else if (@bonusWord?)
-        throw "IllegalStateException"
-
-      @bonusWord = new WordAnalysis(rawWordStr,true)
-      @allWords.push(@bonusWord)
-
-    addWord: (rawWordStr) =>
-      if (@purgedWordLists == false)
-        throw "IllegalStateException"
-
-      @allWords.push(new WordAnalysis(rawWordStr,false))
-
-    addRevealedLetter: (revealedLetter) =>
-      if (@purgedLettersHash == false)
-        throw "IllegalStateException"
-
-      @revealedLettersHash[revealedLetter] = 1
-
-    refreshAnalysis: () =>
-      if (@purgedLettersHash == true && @purgedWordLists == true)
-        throw "IllegalStateException"
-
-      @incompleteTripleWords = new Array()
-      @incompleteBasicWords  = new Array()
-      @completeTripleWords   = new Array()
-      @completeBasicWords    = new Array()
-      bonusWords             = new Array()
-
-      @allWords.forEach( (wordReport) ->
-        wordReport.doAnalysis(@revealedLettersHash, @incompleteBasicWords, @completeBasicWords, @incompleteTripleWords, @completeTripleWords, bonusWords)
-      )
-
-      @bonusWord = bonusWords[0]
-      @completeWords   = @completeBasicWords.concat(@completeTripleWords)
-      @basicWords      = @incompleteBasicWords.concat(@completeBasicWords)
-      @incompleteWords = @incompleteBasicWords.concat(@incompleteTripleWords)
-      @tripleWords     = @incompleteTripleWords.concat(@completeTripleWords)
-
-      @purgedLettersHash = false
-      @purgedWordLists = false
-
-    @hasTripleBonus: () =>
-      if (@purgedLettersHash == false || @purgedWordLists == false)
-        throw "IllegalStateException"
-      return @completeTripleWords.length > 0
-
-  class WordAnalysis
-    constructor: (@rawWordStr, @isBonus) ->
-      @reset()
-
-    reset: () =>
-      @isTriple = null
-      @isComplete = null
-      @displayWordStr = null
-      @missingLetterHash = {}
-      @missingLetterString = null
-      @missingLetterArray = new Array()
-
-    doAnalysis: (revealedLetters, incompleteBasicWords, completeBasicWords, incompleteTripleWords, completeTripleWords, bonusWords) =>
-      @isTriple = false
-      @isComplete = true
-
-      @displayWordStr =
-        @rawWordStr.split('').map(
-          (nextChar) ->
-            retVal = nextChar
-            lowerChar = nextChar.toLowerCase()
-
-            if (revealedLetters[lowerChar] == 1)
-              if (nextChar != lowerChar)
-                retVal = '#'
-                @isTriple = true
-              else
-                retVal = '*'
-            else
-              @isComplete = false
-              if (@missingLetterHash[lowerChar] != 1)
-                @missingLetterHash[lowerChar] = 1
-                @missingLetterArray.push(lowerChar);
-
-              if (nextChar != lowerChar)
-                @isTriple = true
-
-            return retVal
-        ).join('')
-
-      @missingLetterArray = @missingLetterArray.sort()
-      @missingLetterString = @missingLetterArray.join('')
-
-      if(@isBonus)
-        bonusWords.push(@)
-      else if (@isComplete)
-        if (@isTriple)
-          completeTripleWords.push(@)
-        else
-          completeBasicWords.push(@)
-      else
-        if (@isTriple)
-          incompleteTripleWords.push(@)
-        else
-          incompleteBasicWords.push(@)
+  class OrientationKind
+    @ALIGNED =
+      labels: ['htop', 'hmid', 'hend']
+      opposite: OrientationKind.ROTATED
+    @ROTATED =
+      labels: ['vtop', 'vmid', 'vend']
+      opposite: OrientationKind.ALIGNED
 
 
-  class ProgressReportModel
-    constructor: (@ticketHref, analysisModel, @updatePromise) ->
-      if (analysisModel?)
-        tempWordMap = {}
-        buildWordMapFn = (wordAnalysis) -> tempWordMap[wordAnalysis.rawWordStr] = new WordReport(wordAnalysis)
-        analysisModel.allWords.forEach buildWordMapFn
+  class LifecycleStage
+    constructor: (@canEditDescription, @canEditDiscoveries) ->
+      return @
 
-        # TODO: This line makes NO SENSE WHATSOEVER
-        @bonusWord = tempWordMap
-        
-        deRefWordMapFn = (wordAnalysis) -> return tempWordMap[wordAnalysis.rawWordStr]
-        @allCompleteBasicWords = analysisModel.allCompleteBasicWords.map(deRefWordMapFn)
-        @allCompleteTripleWords = analysisModel.allCompleteTripleWords.map(deRefWordMapFn)
-        @allIncompleteBasicWords = analysisModel.allIncompleteBasicWords.map(deRefWordMapFn)
-        @allIncompleteTripleWords = analysisModel.allIncompleteTripleWords.map(deRefWordMapFn)
+    @DESCRIBING = new LifecycleStage(true, false)
+    @PLAYING =  new LifecycleStage(false, true)
+    @PUBLISHED = new LifecycleStage(false, false)
 
-  class WordReport
-    constructor: (wordAnalysis) ->
-      @rawStr = wordAnalysis.rawWordStr
-      @displayStr = wordAnalysis.displayWordStr
-      @missingLetterHash = wordAnalysis.missingLetterHash
-      @missingLetterArray = wordAnalysis.missingLetterArray
+    isCrosswordGridEditable:       () => return @canEditDescription
+    isBonusWordGridEditable:       () => return @canEditDescription
+    isTwentySpotAvailableEditable: () => return @canEditDescription
+    isBonusWordValueEditable:      () => return @canEditDiscoveries
+    isTwentySpotHitEditable:       () => return @canEditDiscoveries
+    isYourLetterGridEditable:      () => return @canEditDiscoveries
+    areReportsUpdatable:           () => return @canEditDiscoveries
 
 
-  class TicketDocument
-    constructor: () ->
-      @foo = 2
+  class CellStateKind
+    # The next four states are used for the cells of a grid that is not reachable by a currently open edit cursor.
+    #
+    # The BonusWord grid uses @COVERED for all cells whose value has not yet been discovered in YourLetters and
+    # @MATCHED for those whose value has.  BonusWord does not use @BLOCKED or @REVEALED.
+    #
+    # The YourLetters grid uses @COVERED for all cells with no value assigned and @REVEALED for all cells whose
+    # letter value has been discovered.
+    #
+    # The CrosswordGrid uses @COVERED and @MATCHED
+    @COVERED          = new CellStateKind('baseline')
+    @MATCHED          = new CellStateKind('revealed')
+    @BLOCKED          = new CellStateKind('blocked')
+    @REVEALED         = new CellStateKind('revealed')
 
-  class PayoutReportModel
-    prizeCounts: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+    # @REACHABLE and @SELECTED define the location of cursors on an actively open grid.
+    #
+    # For BonusWord and YourLetters, all cells become @REACHABLE when the grid is active.
+    #
+    # For Crossword, any cell where cursor can be moved without being unable to leave the grid in a valid state
+    # is reachable.  Any edit in the reachable space has a potential to leave short 1-letter or 2-letter words that
+    # are not legal.  Cell border highlighting is used instead of fill colors to convey the location and completion
+    # requirements of words in the current cursor's reach.  See {TODO} for a more complete discussion on the designed
+    # use of cell boundary highlighting.
+    @REACHABLE        = new CellStateKind('selected')
+    @SELECTED         = new CellStateKind('active')
 
-  class OrientationKind extends Enum
-    @_size: 0
-    @_VALUES: {@ALIGNED, @ROTATED}
+    @ERROR            = new CellStateKind('tooshort')
 
-    @ALIGNED = new OrientationKind('htop', 'hmid', 'hend')
-    @ROTATED = new OrientationKind('vtop', 'vmid', 'vend')
+    constructor: (@fillImageKey) -> return @
 
-    constructor: (@headBorder, @midBorder, @tailBorder) ->
-      super
-
-    getHeadBorder: () =>
-      return @headBorder
-
-    getMidBorder: () =>
-      return @midBorder
-
-    getTailBorder: () =>
-      return @tailBorder
-
-    getOpposite: () =>
-      switch @
-        when @ALIGNED
-          return @ROTATED
-        when @ROTATED
-          return @ALIGNED
-        else
-      return null
-
-
-  class LifecycleStage extends Enum
-    @_size: 0
-    @_VALUES: {@IDENTIFYING, @DESCRIBING, @PLAYING, @PLAYING_CALCULATING, @CALCULATING, @VERIFYING, @PUBLISHED}
-
-    @IDENTIFYING: new LifecycleStage()
-    @DESCRIBING: new LifecycleStage()
-    @PLAYING: new LifecycleStage()
-    @PLAYING_CALCULATING: new LifecycleStage()
-    @CALCULATING: new LifecycleStage()
-    @VERIFYING: new LifecycleStage()
-    @PUBLISHED: new LifecycleStage()
-
-    isTicketIdEditable: () =>
-      return @ == @IDENTIFYING
-
-    isCrosswordGridEditable: () =>
-      return @ == @DESCRIBING
-
-    isBonusWordGridEditable: () =>
-      return @ == @DESCRIBING
-
-    isTwentySpotAvailableEditable: () =>
-      return @ == @DESCRIBING
-
-    isBonusWordValueEditable: () =>
-      return @ == @PLAYING || @ == @PLAYING_CALCULATING || @ == @VERIFYING
-
-    isTwentySpotHitEditable: () =>
-      return @ == @PLAYING || @ == @PLAYING_CALCULATING || @ == @VERIFYING
-
-    isYourLetterGridEditable: () =>
-      return @ == @PLAYING || @ == @PLAYING_CALCULATING || @ == @VERIFYING
-
-    isPayoutEditable: () =>
-      return @ == @PLAYING_CALCULATING || @ == @CALCULATING
-
-    arePredictionsEditable: () =>
-      return @ == @PLAYING_CALCULATING || @ == @CALCULATING
-
-  class GridKind extends Enum
-    @_size: 0
-    @_VALUES: {@YOUR_LETTERS, @BONUS_WORD, @CROSSWORD}
-
-    @YOUR_LETTERS = new GridKind([LifecycleStage.PLAYING, LifecycleStage.PLAYING_CALCULATING, LifecycleStage.VERIFYING], 'yourLetters')
-    @BONUS_WORD = new GridKind([LifecycleStage.DESCRIBING], 'bonusWord')
-    @CROSSWORD =  new GridKind([LifecycleStage.DESCRIBING], 'crossword')
-
-    constructor: (@whenEditable, @discriminatorString) ->
-      super
-
-    isEditableAt: (lifeCycleStage) ->
-      return @whenEditable.contains(lifeCycleStage)
-
-    getGridTypeName: () ->
-      return @discriminatorString + 'Grid'
-
-    getCellTypeName: () ->
-      return @discriminatorString + 'Cell'
-
-
-  class CellStateKind extends Enum
-    @_size: 0
-    @_VALUES: {@COVERED, @MATCHED, @TRIPLE_COVERED, @TRIPLE_MATCHED, @REVEALED, @BLOCKED, @SELECTED, @INVALID}
-
-    @COVERED = new CellStateKind('baseline')
-    @MATCHED = new CellStateKind('revealed')
-    @TRIPLE_COVERED = new CellStateKind('triple')
-    @TRIPLE_MATCHED = new CellStateKind('revealed')
-    @REVEALED = new CellStateKind('revealed')
-    @BLOCKED = new CellStateKind('blocked')
-    @SELECTED = new CellStateKind('selected')
-    @INVALID = new CellStateKind('tooshort')
-
-    constructor: (@fillImageKey) ->
-      super
-
-
-  class CellErrorKind extends Enum
-    @_size: 0
-    @_VALUES: {@ISOLATED_LETTER, @SHORT_WORD, @FULL_QUAD, @TRIPLE_INTERSECTION, @TOO_MANY_TRIPLES, @SHORT_BONUS_WORD, @REPEAT_BONUS_LETTER}
-
-    @ISOLATED_LETTER = new CellErrorKind('Isolated letter tiles are not allowed.  Letters tiles must be adjacent to enough other letters tiles to create at least one three letter word.')
-    @SHORT_WORD = new CellErrorKind('Two letter words are not allowed.  Adjacent letter tiles define words, but all words must have at least three letters in length.')
+  class CellErrorKind
+    @ONE_LETTER_WORD = new CellErrorKind('Isolated letter tiles are not allowed.  Letters tiles must be adjacent to enough other letters tiles to create at least one three letter word.')
+    @TWO_LETTER_WORD = new CellErrorKind('Two letter words are not allowed.  Adjacent letter tiles define words, but all words must have at least three letters in length.')
+    @WORD_TOO_LONG = new CellErrorKind('The maximum legal word length is 9 letters.  This cell is part of a word that has 10 or 11 letters.')
     @FULL_QUAD = new CellErrorKind('No more than 3 of the 4 tiles from any 2x2 subunit may validly contain a letter')
-    @TRIPLE_INTERSECTION = new CellErrorKind('Triple bonus modifiers may not appear in any shared intersection of two distinct words.')
+    @AMBIGUOUS_TRIPLE = new CellErrorKind('Triple bonus modifiers may not placed at the shared intersection between two distinct words.')
     @TOO_MANY_TRIPLES = new CellErrorKind('Exactly four cells are required to contain triple modifiers, but too many are in use.  Reduce the number to four.')
-    @SHORT_BONUS_WORD = new CellErrorKind('The bonus word must contain exactly five letters, but fewer than five have been given.')
-    @REPEAT_BONUS_LETTER = new CellErrorKind('No two letters of the bonus word can be the same.  All five letters must be unique.')
+    @MISSING_BONUS_LETTER = new CellErrorKind('The bonus word must contain exactly five letters, but fewer than five have been given.')
+    @REUSED_BONUS_LETTER = new CellErrorKind('No two letters of the bonus word can be the same.  All five letters must be unique.')
 
-    constructor: (@toolTipMessage) ->
-      super
+    constructor: (@toolTipMessage) -> return @
 
-
-  class TicketErrorKind extends Enum
-    @_size: 0
-    @_VALUES: {@MISSING_IDENTITY, @INVALID_IDENTITY, @TOO_MANY_WORDS, @NOT_ENOUGH_WORDS, @NOT_ENOUGH_TRIPLES, @BONUS_WORD_UNDEFINED, @UNKNOWN_BONUS_VALUE, @BONUS_VALUE_UNDEFINED, @TWENTY_SPOT_UNDEFINED, @NO_VALID_OUTCOME}
-
+  class TicketErrorKind
     @MISSING_IDENTITY = new TicketErrorKind('The ticket\'s identifier has not been set.  Identifiers require a three digit gameId, a colon ( =), a 6 or 7 digit spoolId, a dash (-), then a three digit ticketId.')
     @INVALID_IDENTITY = new TicketErrorKind('The ticket\'s identifier is malformed.  Identifiers require a three digit gameId, a colon ( =), a 6 or 7 digit spoolId, a dash (-), then a three digit ticketId.')
     @TOO_MANY_WORDS = new TicketErrorKind('The crossword grid must contain exactly 22 words, 11 horizontal and 11 vertical.  There are too many words right now for this ticket to be played.')
     @NOT_ENOUGH_WORDS = new TicketErrorKind('The crossword grid must contain exactly 22 words, 11 horizontal and 11 vertical.  There aren\'t enough words yet for this ticket to be played.')
     @NOT_ENOUGH_TRIPLES = new TicketErrorKind('The crossword grid must contain exactly four tripling modifiers, each of which must be in a cell that is part of only one word.  More triple modifiers are required before this ticket can be played.')
-    @BONUS_WORD_UNDEFINED = new TicketErrorKind('The bonus word content is still undefined and is required before this ticket can be played.');
-    @UNKNOWN_BONUS_VALUE = new TicketErrorKind('The bonus word\'s prize value is not recognized and cannot be used.  Try re-assigning the bonus prize value to correct the problem.');
-    @BONUS_VALUE_UNDEFINED = new TicketErrorKind('The bonus word\'s prize value is required before this ticket can be marked as complete.')
+    @NO_BONUS_WORD = new TicketErrorKind('The bonus word content is still undefined and is required before this ticket can be played.');
+    @NO_BONUS_VALUE = new TicketErrorKind('The bonus word\'s prize value is required before this ticket can be marked as complete.')
+    @BAD_BONUS_VALUE = new TicketErrorKind('The bonus word\'s prize value is set to unusable value and must be changed.');
     @TWENTY_SPOT_UNDEFINED = new TicketErrorKind('The presence or omission of a "fast twenty" spot must be clarified before this ticket can be played.')
     @NO_VALID_OUTCOME = new TicketErrorKind('There is no permutation of available letters left that yields either a non-winner or valid payout result.')
 
-    constructor: (@toolTipMessage) ->
-      super
-
+    constructor: (@toolTipMessage) -> return @
 
   class TicketModel
-    constructor: (@lifecycleStage, @yourLettersGrid, @bonusWordGrid, @crosswordGrid) ->
-      @ticketHref = null
-      @hasTwentySpot = null
-      @hitTwentySpot = null
-      @bonusValue = null
-      @payoutValue = null
-      @activeGrid = null
-      @ticketErrors = {}
+    hasTwentySpot: null
+    hitTwentySpot: null
+    bonusValue: null
+    payoutValue: null
+    activeGrid: null
+    cursorCell: null
+    ticketErrors: {}
 
-    mayChangeLifecycle = (toStage) =>
+    # @identityRegex = /\d{3}:\d{6,7}\-\d{3}/
+
+    constructor: (@ticketId, @crosswordGrid, @yourLettersGrid, @bonusWordGrid) ->
+      # if (TicketModel.identityRegex.test(@ticketId) == false)
+      #   throw 'Invalid argument exception!'
+
+      crosswordGrid.parentTicket = @
+      yourLettersGrid.parentTicket = @
+      bonusWordGrid.parentTicket = @
+
+      # TODO: This needs to be more dynamic
+      @lifecycleStage = LifecycleStage.DESCRIBING
+      return @
+
+    isDescriptionComplete: () =>
+      return @crosswordGrid.isComplete() && @bonusWordGrid.isComplete() && @hasTwentySpot != null
+
+    isDiscoveryComplete: () =>
+      return @yourLettersGrid.isComplete() && @bonusValue != null && @hitTwentySpot != null && @payoutValue != null
+
+    mayChangeLifecycle: (toStage) =>
       switch @lifecycleStage
-        when LifecycleStage.IDENTIFYING
-          if(toStage == LifecycleStage.DESCRIBING)
-            return identity?
         when LifecycleStage.DESCRIBING
-          if (toStage == LifecycleStage.PLAYING)
-            return @crosswordGrid.isComplete() && @bonusWordGrid.isComplete() && @hasTwentySpot?
-          else if(toStage == LifecycleStage.CALCULATING)
-            return @crosswordGrid.isComplete() && @bonusWordGrid.isComplete() && @yourLettersGrid.isComplete() &&
-            @hasTwentySpot? && @bonusValue? && @hitTwentySpot?
-          else if(toStage == LifecycleStage.VERIFYING)
-            return @crosswordGrid.isComplete() && @bonusWordGrid.isComplete() && @yourLettersGrid.isComplete() &&
-            @hasTwentySpot? && @bonusValue? && @hitTwentySpot? && @payoutValue?
+          if (toStage == LifecycleStage.DESCRIBING)
+            return true
+          else if(toStage == LifecycleStage.PLAYING)
+            return isDescriptionComplete()
           else if(toStage == LifecycleStage.PUBLISHED)
-            return @crosswordGrid.isComplete() && @bonusWordGrid.isComplete() && @yourLettersGrid.isComplete() &&
-            @hasTwentySpot? && @bonusValue? && @hitTwentySpot? && @payoutValue?
+            return isDescriptionComplete() && isDiscoveryComplete()
         when LifecycleStage.PLAYING
-          if (toStage == LifecycleStage.PLAYING)
+          if (toStage == LifecycleStage.DESCRIBING)
             return true
-          else if (toStage == LifecycleStage.PLAYING_CALCULATING)
+          else if (toStage == LifecycleStage.PLAYING)
             return true
-          else if (toStage == LifecycleStage.DESCRIBING)
-            return true
-          else if (toStage == LifecycleStage.VERIFYING)
-            return @yourLettersGrid.isComplete() && @bonusValue? && @hitTwentySpot? && @payoutValue?
           else if (toStage == LifecycleStage.PUBLISHED)
-            return @yourLettersGrid.isComplete() && @bonusValue? && @hitTwentySpot? && @payoutValue?
-        when LifecycleStage.PLAYING_CALCULATING
-          if (toStage == LifecycleStage.PLAYING)
-            return true
-          else if(toStage == LifecycleStage.PLAYING_CALCULATING)
-            return true;
-          else if(toStage == LifecycleStage.DESCRIBING)
-            return true;
-          else if (toStage == LifecycleStage.CALCULATING)
-            return @yourLettersGrid.isComplete() && @bonusValue? && @hitTwentySpot?
-          else if (toStage == LifecycleStage.VERIFYING)
-            return @yourLettersGrid.isComplete() && @bonusValue? && @hitTwentySpot? && @payoutValue?
-          else if (toStage == LifecycleStage.PUBLISHED)
-            return @yourLettersGrid.isComplete() && @bonusValue? && @hitTwentySpot? && @payoutValue?
-        when LifecycleStage.CALCULATING
-          if (toStage == LifecycleStage.PLAYING)
-            return true
-          else if (toStage == LifecycleStage.PLAYING_CALCULATING)
-            return true
-          else if(toStage == LifecycleStage.CALCULATING)
-            return true;
-          else if(toStage == LifecycleStage.DESCRIBING)
-            return true;
-          else if(toStage == LifecycleStage.VERIFYING)
-            return @payoutValue?
-          else if(toStage == LifecycleStage.PUBLISHED)
-            return @payoutValue?
-        when LifecycleStage.VERIFYING
-          if (toStage == LifecycleStage.PLAYING)
-            return true
-          else if (toStage == LifecycleStage.PLAYING_CALCULATING)
-            return true
-          else if(toStage == LifecycleStage.DESCRIBING)
-            return true;
-          else if(toStage == LifecycleStage.VERIFYING)
-            return true;
-          else if(toStage == LifecycleStage.PUBLISHED)
-            return true;
+            return isDiscoveryComplete()
         when LifecycleStage.PUBLISHED
-          if (toStage == LifecycleStage.PLAYING)
-            return true;
-          else if (toStage == LifecycleStage.PLAYING_CALCULATING)
-            return true
-          else if (toStage == LifecycleStage.DESCRIBING)
-            return true;
-          else if (toStage == LifecycleStage.VERIFYING)
-            return true
-          else if (toStage == LifecycleStage.PUBLISHED)
-            return true;
+          return true
         else
 
       return false
@@ -706,209 +523,186 @@ define [
         retVal = @lifecycleStage
       return retVal
 
-    @::identityRegex = /\d{3}:\d{6,7}\-\d{3}/
-
-    setIdentity: (newIdentity) =>
-      if !@lifecycleStage.isTicketIdEditable()
-        throw "IllegalState"
-      if !@::identityRegex.test(newIdentity)
-        throw "IllegalArgument"
-
-      @identity = newIdentity
-
     setHasTwentySpot: (hasSpot) =>
       if !@lifecycleStage.isTwentySpotAvailableEditable()
-        throw "IllegalState"
-      if (typeof hasSpot) != "boolean"
-        throw "IllegalArgument"
+        throw 'IllegalState'
+      if (typeof hasSpot) != 'boolean'
+        throw 'IllegalArgument'
 
       @hasTwentySpot = hasSpot
 
     setHitTwentySpot: (hitSpot) =>
       if !@lifecycleStage.isTwentySpotHitEditable()
-        throw "IllegalState"
-      if (typeof hitSpot) != "boolean"
-        throw "IllegalArgument"
+        throw 'IllegalState'
+      if (typeof hitSpot) != 'boolean'
+        throw 'IllegalArgument'
 
       @hitTwentySpot = hitSpot
 
     setBonusValue: (newValue) =>
       if !@lifecycleStage.isBonusValueEditable()
-        throw "IllegalState"
-      if ((typeof newValue) != "number") || newValue < 0 || newValue > 3
-        throw "IllegalArgument"
+        throw 'IllegalState'
+      if ((typeof newValue) != 'number') || newValue < 0 || newValue > 3
+        throw 'IllegalArgument'
 
       @bonusValue = newValue
 
     # TODO: Confirm the min/max valid values
     setPayoutValue: (newValue) =>
-      if !@lifecycleStage.isPayoutValueEditable()
-        throw "IllegalState"
-      if ((typeof newValue) != "number") || newValue < 0 || newValue > 18
-        throw "IllegalArgument"
+      if (!@lifecycleStage.isPayoutValueEditable())
+        throw 'IllegalState'
+      if (((typeof newValue) != 'number') || newValue < 0 || newValue > 17)
+        throw 'IllegalArgument'
 
-      @bonusValue = newValue
+      @setPayoutValue = newValue
 
 
-  class AbstractGrid
-    ticketModel: null
+  VALUE_CHARS_ARRAY = [
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+  ]
+  VALID_CHARS_ARRAY = VALUE_CHARS_ARRAY.concat('_')
+
+  class AbstractGridModel
     dirtyCells: new Array()
     cursor: null
 
-    constructor: (@cells, @numRows, @numCols) -> return
+    constructor: (@gridKind, @numRows, @numCols, @cells) ->
+      @numCells   = numRows*numCols
+      if (cells.length != @numCells)
+        throw "IllegalArgument: cells.length = " + cells.length + ', @numCells = ' + @numCells
 
-    isActive: () -> return @cursor?
+      # A hash from character to an array of cells whose content is set to that character.
+      contentMap = {}
+      VALID_CHARS_ARRAY.forEach( (nextChar) -> contentMap[nextChar] = [] )
+      cells.forEach( (cellModel) ->
+        value = cellModel.content
+        if (value != '_')
+          value = value.toLowerCase()
 
-    lookupCell: (rowId, colId) ->
-      if (rowId < 0 || rowId >= @numRows || colId < 0 || colId >= @numCols)
-        throw "IllegalArgument"
-      cellId = colId + (rowId * @numRows)
-      return @cells[cellId]
+        contentMap[value].push(cellModel)
+        cellModel.parentGrid = @
+      )
+      @contentMap = contentMap
+      return @
 
-    markDirty: (dirtyCell = @cursor) ->
-      if (dirtyCell == null)
-        throw "IllegalArgument"
-      if (! dirtyCell.dirty)
-        @dirtyCells.push(dirtyCell)
-        dirtyCell.dirty = true
+    # TODO: These are here because YourLetters and BonusWord can benefit from sharing them, but these
+    #       more accurately belong in a configurable subclass--they aren't sufficiently general for a
+    #       cross-application base class to own them.
+    #
+    # Base class regular expressions for classifying content.
+    @isLegalValueRegex: /^[a-z_]$/
 
-    # The caller is responsible for confirming that cursorCell is a valid cell for opening a cursor
-    openCursor: (cursorCell) =>
-      if (cursorCell == null)
-        throw "IllegalArgument"
-      if (@cursor? || @ticketModel.hasOpenCursor())
-        throw "IllegalState"
+    ##
+    ## Cell registration and retrieval
 
-      @cursor = cursorCell
+    getCellByCoordinates: (rowId, colId) ->
+      if (rowId < 0 || rowId >= @numRows)
+        throw 'IllegalArgument: rowId = ' + rowId
+      if (colId < 0 || colId >= @numCols)
+        throw 'IllegalArgument: colId = ' + colId
 
-    closeCursor: (withCommit = true) =>
-      if (@cursor == null)
-        throw "IllegalState"
+      return @cells[colId + (rowId*@numRows)]
 
-      if (withCommit)
-        dirtyFn = (dirtyCell) ->
-          dirtyCell.commit()
-          dirtyCell.dirty = false
-      else
-        dirtyFn = (dirtyCell) ->
-          dirtyCell.rollback()
-          dirtyCell.dirty = false
+    getCellsByContent: (value) ->
+      if (!@isLegalValue(value))
+        throw 'IllegalArgument: value = ' + value
 
-      @dirtyCells.forEach dirtyFn
-      @dirtyCells.length = 0
-      @cursor = null
+      return clone @contentMap[value]
 
-    # The caller is responsible for confirming that cursorCell is a valid cell for moving the open cursor to
-    moveCursor: (fromCell, toCell) =>
-      if (toCell == null)
-        throw "IllegalArgument"
-      if (@cursor != fromCell)
-        throw "IllegalState"
+    ##
+    ## Cursor based key stroke handlers
 
-      @cursor = toCell
+    # Default behavior without override: set content to the lowercase version of input and then advance cursor to
+    # next empty cell, if any.
+    onKeyPressEvent: (inputValue) =>
+      validatedInput = doBeforeHandleKeyPress(@cursorCell, inputValue)
+      if (validatedInput)
+        originalValue = @cursorCell.content
+        if (originalValue != validatedInput)
+          @contentMap[originalValue].filter((cellModel) -> return cellModel == @cursorCell)
+          @cursorCell.content = validatedInput
+          @contentMap[validatedInput].push(@cursorCell)
 
+        nextCell = doAfterHandleKeyInput(@cursorCell, originalValue)
+        if (nextCell? && nextCell != @cursorCell)
+          @ticketModel.moveCursor @cursorCell, nextCell, false
 
-    # Each subtype MAY override this.  Return false to reject a character.  Return the character as-is or its valid
-    # equivalent to accept.
-    getLegalValue: (value) -> return value.toLowerCase()
+    # This implementation is suitable for fixed-in-place grids, like YourLetters and BonusWord.  CrosswordCell may
+    # want a different implementation that moves the cursor.  Or perhaps not...
+    handleBackspace:  () =>
+      @cursorCell.content = '_'
+    handleLeftArrow:  () => @ticketModel.moveCursor @ , @getPreviousCell(), false
+    handleRightArrow: () => @ticketModel.moveCursor @, @getNextCell(), false
+
+    ##
+    ## Template methods for implementing subclass variants
+    isComplete: () =>
+      @cells.every((cellModel) ->
+        return cellModel.hasValue() && @contentMap[cellModel.content.toLowerCase()].length == 1
+      )
+
+    # TODO: Crossword cell will likely want to override this!
+    isLegalValue: (value) -> return AbstractGridModel.isLegalValueRegex.test(value)
+
+    # Each subtype MAY override this.  Return false to reject a character.  Return the character as-is or its
+    # canonicalized equivalent to accept.  Default impl returns lower case version of input.  Its suitable for
+    # YourLetters and BonusGrid where <Shift> is not used to indicate a modifier, no character can be used in
+    # more than one cell, and all characters in the persisted form are expected to be lower case.  It is not
+    # suitable for Crossword, where <Shift> applies the triple prize modifier and capitalization is used to
+    # store the presence of a triple prize cell modifier.
+    doBeforeHandleKeyInput: (targetCell, inputValue) =>
+      validatedValue = inputValue.toLowerCase()
+      if (targetCell?.content != validatedValue)
+        matchedCells = @parentGrid.getCellsByContent(validatedValue)
+        if (matchedCells.length > 0)
+          validatedValue = false
+
+      return validatedValue
+
+    doAfterHandleKeyInput: (targetCell, originalValue) =>
+      return targetCell.getNextCell()
 
     # TODO: MAY override this if lifecycle state advancement does not depend on a grid having a value in
     #       every cell (ok rule for bonusWord and yourLetters, but not main crossword grid).
     isComplete: () -> return @cells.every (value) -> return value.hasContent()
 
     # TODO: MAY ovveride this in each subclass to encapsulate click-based cursor movement semantics
-    testForMoveCursor: (targetCell) -> return targetCell;
+    testForMoveCursor: (targetCell) -> return targetCell
 
-    # TODO: Must override this in each subclass to encapsulate click-based cursor creation semantics
-    testForOpenCursor: (targetCell) -> return targetCell;
+    # TODO: MUST override this in each subclass to encapsulate click-based cursor creation semantics
+    testForOpenCursor: (targetCell) -> return targetCell
 
-
-  class AbstractCell
+  class AbstractCellModel
     dirty: false
 
-    constructor: (parentGrid, rowId, colId, content, state) ->
-      @parentGrid = parentGrid
-      @rowId = rowId
-      @colId = colId
-      @content = content
-      @state = state
+    constructor: (@indexId, @rowId, @colId, @content) ->
+      @coordinates = rowId + ',' + colId
+      return @
 
     isBlank: () -> return @content == '_'
     hasContent: () -> return @content != '_'
 
-    # Default behavior without override: set content to the lowercase version of input and then advance cursor to
-    # next empty cell, if any.
-    handleInput: (value) =>
-      legalValue = @parentGrid.getLegalValue value
-      if (legalValue? && (legalValue instanceof 'string'))
-        @content = legalValue
-
-      nextCell = @getNextCell
-      while ((nextCell != @) && (nextCell.hasContent()))
-        nextCell = nextCell.getNextCell
-      @parentGrid.moveCursor @, nextCell, false
-
-    # This implementation is suitable for fixed-in-place grids, like YourLetters and BonusWord.  CrosswordCell will
-    # want a different implementation.
-    handleBackspace: () =>
-      @content = '_'
-
-    handleLeftArrow: () =>
-      @parentGrid.moveCursor @, @getPreviousCell(), false
-
-    handleRightArrow: () =>
-      @parentGrid.moveCursor @, @getNextCell(), false
-
-    # Each subtype SHOULD override these to define forward navigation and limit
-    getNextCell: () => return this
-
-    # Each subtype SHOULD override these to define backward navigation and limit
+    # Each subtype SHOULD override these to define forward/backward navigation and boundaries
+    getNextCell:     () => return this
     getPreviousCell: () => return this
-
-  #
-  # Reusable lambdas
-  #
-  uniqueAndComplete = (nextContent, nextIndex, sortedArray) ->
-    retVal = false
-    if( nextContent == '_' )
-    else if( nextIndex == 0 )
-      retVal = true;
-    else
-      retVal = nextContent != sortedArray[nextIndex - 1];
-
-    return retVal
-
-  notInOtherCell = (ignoreCell, value) ->
-    return (nextContent) ->
-      retVal = false
-      if( nextContent == ignoreCell )
-        retVal = true
-      else if( nextContent.content != value )
-        retVal = true
-
-      return retVal
 
 
   #
   # Bonus Word Grid and Cell
   #
-  class BonusWordGrid extends AbstractGrid
-    isComplete: () =>
-      @cells.map((cell) -> cell.content).sort().every(uniqueAndComplete)
+  class BonusWordGrid extends AbstractGridModel
+    constructor: (cells) ->
+      super 'bonusWord', 1, 5, cells
+      return @
 
-    noOtherCellMatches: (ignoreCell, value) =>
-      return
-
-    getLegalValue: (value) =>
-      value = value.toLowerCase()
-      return @cells.every((value) -> return notInOtherCell(@cursor, value)) ? value: false
-
-  class BonusWordCell extends AbstractCell
+  class BonusWordCell extends AbstractCellModel
     next: null
     previous: null
 
-    constructor: (parentGrid, yAbs, content, state) ->
-      super(parentGrid, 0, yAbs, content, state)
+    constructor: (yAbs, content) ->
+      super yAbs, 0, yAbs, content
+      return @
 
     getNextCell: () => return @next
     getPreviousCell: () => return @previous
@@ -917,20 +711,12 @@ define [
   #
   # Your Letters Grid and Cell
   #
-  class YourLettersGrid extends AbstractGrid
-    # TODO: Remove this once @cells is a flat array again
-    allCells: () =>
-      @cells[0].concat(@cells[1].concat(@cells[2]))
+  class YourLettersGrid extends AbstractGridModel
+    constructor: (cells) ->
+      super 'yourLetters', 3, 6, cells
+      return @
 
-    # TODO: Remove this once @cells is a flat array again
-    isComplete: () =>
-      @allCells().map((cell) -> cell.content).sort().every(uniqueAndComplete)
-
-    getLegalValue: (value) =>
-      value = value.toLowerCase()
-      return @allCells().every((value) -> notInOtherCell(@cursor, value)) ? value: false
-
-  class YourLettersCell extends AbstractCell
+  class YourLettersCell extends AbstractCellModel
     next: null
     previous: null
 
@@ -941,40 +727,44 @@ define [
   #
   # Main Crossword Grid and Cell
   #
-  class CrosswordGrid extends AbstractGrid
-    constructor: (rows, cols, fixed) ->
-      super(rows)
-      @fixed = fixed
-      @aligned = rows
-      @rotated = cols
-      @wordLeft = null
-      @wordRight = null
-      @cursorLeft = null
-      @cursorRight = null
+  class CrosswordGrid extends AbstractGridModel
+    constructor: (cells) ->
+      super 'crossword', 11, 11, cells
       @orientation = OrientationKind.ALIGNED
+      @wordLeft    = null
+      @wordRight   = null
+      @cursorLeft  = null
+      @cursorRight = null
+      return @
 
     toggleOrientation: () =>
-      @wordLeft = null
-      @wordRight = null
-      @cursorLeft = null
-      @cursorRight = null
       @orientation = @orientation.getOpposite()
+      @wordLeft    = null
+      @wordRight   = null
+      @cursorLeft  = null
+      @cursorRight = null
 
     cellBorder: (forCellModel) =>
-      if (forCellModel == @wordLeft)
-        return @orientation.getHeadBorder()
-      else if (forCellModel == @wordRight)
-        return @orientation.getTailBorder()
-      else if (
-        (@wordLeft?) && (@wordRight?) &&
-        (forCellModel.getRelRowId() == @wordLeft.getRelRowId()) &&
-        (forCellModel.getRelColId() > @wordLeft.getRelColId()) &&
-        (forCellModel.getRelRowId() == @wordRight.getRelRowId()) &&
-        (forCellModel.getRelColId() < @wordRight.getRelColId())
-      )
-        return @orientation.getMidBorder()
+      retVal = 'blank'
+      if (forCellModel?)
+        if (forCellModel == @wordLeft)
+          retVal = @orientation.getHeadBorder()
+        else if (forCellModel == @wordRight)
+          retVal = @orientation.getTailBorder()
+        else if (
+          (forCellModel.parentGrid == @wordLeft?.parentGrid) &&
+          (forCellModel.parentGrid == @wordRight?.parentGrid) &&
+          (forCellModel.getRelRowId() == @wordLeft.getRelRowId()) &&
+          (forCellModel.getRelRowId() == @wordRight.getRelRowId()) &&
+          (forCellModel.getRelColId() > @wordLeft.getRelColId()) &&
+          (forCellModel.getRelColId() < @wordRight.getRelColId())
+        )
+          # The complex-looking test above passes if forCellModel, wordLeft, and wordRight
+          # all belong to the same orientation-aware row of the same grid and forCellModel's
+          # orientation-aware column is both to wordLeft's right and to wordRight's left.
+          retVal = @orientation.getMidBorder()
 
-      return 'blank'
+      return retVal
 
     cellState: (forCellModel) =>
       if ((forCellModel == @cursorLeft) || (forCellModel == @cursorRight))
@@ -994,23 +784,23 @@ define [
     isComplete = () => return true
 
   # TODO: Enforce constraint that boardModel must be a CrosswordGrid
-  class FixedCell extends AbstractCell
+  class FixedCell extends AbstractCellModel
     isTriple: null
     alignedWordCell: null
     rotatedWordCell: null
 
-    constructor: (gridModel, rowId, colId, content, state) ->
-      super(gridModel, rowId, colId, content, state)
+    constructor: (gridModel, rowId, colId, content) ->
+      super gridModel, rowId, colId, content
       @isTriple = false
       @aligned = new RelativeCell(rowId, colId, @)
       @rotated = new RelativeCell(colId, rowId, @)
+      return @
 
     getRel: () =>
       if (@parentGrid.orientation == OrientationKind.ROTATED)
         return @rotated
       else
         return @aligned
-
 
     getToAbove: () => return getRel().toAbove
     getToBelow: () => return getRel().toBelow
@@ -1046,7 +836,7 @@ define [
       #       has content
       return value
 
-    # Being overriden as makes sense, but overriding AbstractCell.handleValue() eliminates their only caller
+    # Being overriden as makes sense, but overriding AbstractCellModel.handleValue() eliminates their only caller
     getNextCell: () -> @getToRight()
     getPreviousCell: () -> @getToLeft()
 
@@ -1058,7 +848,7 @@ define [
 
     searchLeft: (startCell, requireContent) =>
       if startCell == null
-        throw "IllegalArgument"
+        throw 'IllegalArgument'
 
       if requireContent
         lastCell = startCell
@@ -1119,5 +909,7 @@ define [
     toRight: null
 
     constructor: (@rowId, @colId, @fixedCell) ->
+      return @
+
 
   return xwModule

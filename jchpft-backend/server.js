@@ -26,9 +26,9 @@ function relPath(subPath) {
 app.configure(function () {
     // all environments
     app.set('port', process.env.PORT || 3000);
-    app.set('views', relPath('features'));
+    app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'jade');
-    app.locals.basedir = relPath('features');
+    app.locals.basedir = path.join(__dirname, 'views');
 
     // What do these do?
     app.use(express.favicon());
@@ -48,12 +48,13 @@ app.configure(function () {
     app.use(app.router);
 
     // Compile .less and .coffee files, then map resources under /public to static files relative to __dirname/public.
+    app.use('/app', express.static(relPath('features')));
     app.use('/app', lessMiddleware({
         prefix: '/app',
         src: relPath('features'),
         paths: [
-            relPath('vendor', 'bootstrap', 'less'),
-            relPath('features')  // Isn't this redundant now??
+            relPath(path.join('vendor', 'bootstrap', 'less')),
+            relPath('features')
         ],
         force: true,
         debug: true
@@ -72,12 +73,12 @@ app.configure(function () {
         debug: true
     }));
     app.use('/app', express.static(relPath('vendor')));
-    app.use('/app', express.static(_path.join(:__dirname, 'jchpft-common',.'common')));
+    app.use('/app', express.static(path.join(__dirname, 'jchpft-common', 'components')));
 
     // Establish a static path root for bower component dependencies.
     // Map URIs that begin with /img to Bootstrap's img directory.
     app.use('/vendor', express.static(relPath('vendor')));
-    app.use('/img', express.static(relPath('vendor', 'bootstrap', 'img')));
+    app.use('/img', express.static(relPath(path.join('vendor', 'bootstrap', 'img'))));
 
     // development only
     if ('development' == app.get('env')) {

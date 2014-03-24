@@ -1,7 +1,7 @@
 define [
   'angular'
   'domReady'
-  'cs!portfolio'
+  'portfolio'
 ], (angular, domReady) ->
   domReady (document) ->
     angular.bootstrap document, 'jch-portfolio'

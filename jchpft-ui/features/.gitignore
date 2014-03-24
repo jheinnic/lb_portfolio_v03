@@ -2,5 +2,6 @@
 *.map
 *.js
 
-# CSS files except those at root are compiled Less output
+# CSS files except for one at root are compiled Less output
 **/*.css
+style.css

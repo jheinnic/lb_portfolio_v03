@@ -3,19 +3,19 @@ define [
   'angular-route'
   'angular-cookies'
   'ui-bootstrap-tpls'
+  'ui-bootstrap'
   'angular-strap/aside'
-  'angular-strap/button'
   'angular-strap/navbar'
-  'cs!xw-ticket'
+  'xw-ticket/main'
 ], () ->
   appModule = angular.module(
     'jch-portfolio'
-    ['ng', 'ngRoute', 'ngCookies', 'ui.router', 'ui.bootstrap', 'mgcrea.ngStrap.aside', 'mgcrea.ngStrap.navbar', 'xw-ticket']
+    ['ng', 'ngRoute', 'ngCookies', 'ui.bootstrap', 'mgcrea.ngStrap.aside', 'mgcrea.ngStrap.navbar', 'xw-ticket']
   )
 
   appModule.config ['$routeProvider', ($routeProvider) ->
     $routeProvider.when '/',
-      templateUrl: 'portfolio/partials/view.html',
+      templateUrl: '/app/portfolio/partials/view.html',
       controller: 'HomeCtrl'
   ]
 

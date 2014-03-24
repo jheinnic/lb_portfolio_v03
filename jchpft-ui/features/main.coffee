@@ -1,10 +1,11 @@
 requirejs.config(
-  baseUrl: '/',
+  baseUrl: '/app',
   paths:
     angular: 'angular/angular'
     'angular-animate': 'angular-animate/angular-animate'
     'angular-cookies': 'angular-cookies/angular-cookies'
     'angular-locale_en-us': 'angular-i18n/angular-locale_en-us'
+    'angular-loader': 'angular-loader/angular-loader'
     'angular-resource': 'angular-resource/angular-resource'
     'angular-route': 'angular-route/angular-route'
     domReady: 'requirejs-domready/domReady'
@@ -13,39 +14,49 @@ requirejs.config(
     'ui-bootstrap-tpls': 'angular-bootstrap/ui-bootstrap-tpls'
     'angular-strap.tpl': 'angular-strap/dist/angular-strap.tpl'
 
-  pkgs: [
+  packages: [
     {
-      path: 'cs'
-      dist: 'require-cs'
+      name: 'cs'
+      location: 'require-cs'
       main: 'cs'
     }
     {
-      path: 'angular-strap'
-      dist: 'angular-strap/dist/modules'
+      name: 'angular-strap'
+      location: 'angular-strap/dist/modules'
       main: '../angular-strap'
     }
   ]
 
   shim:
     angular:
-      deps: 'angular-locale_en-us'
+      deps: ['angular-locale_en-us']
       exports: 'angular'
-    'angular-locale_en-us': []
+    'angular-loader':
+      deps: []
+      exports: 'angular'
+    'angular-locale_en-us': ['angular-loader']
     'angular-animate': ['angular']
     'angular-cookies': ['angular']
     'angular-resource': ['angular']
     'angular-route': ['angular']
-    'angular-strap.tpl': ['angular']
-    'angular-strap/affix': ['angular-strap/dimension', 'angular-strap.tpl']
-    'angular-strap/aside': ['angular-strap/modal', 'angular-strap.tpl']
-    'angular-strap/button': ['angular-animate', 'angular-strap.tpl']
-    'angular-strap/modal': ['angular-strap/dimension', 'angular-strap.tpl']
-    'angular-strap/navbar': ['angular-strap.tpl']
-    'angular-strap/tooltip': ['angular-animate', 'angular-strap/dimension', 'angular-strap.tpl']
-    'angular-strap': ['angular-strap.tpl']
-    'ui-bootstrap': ['angular']
-    'ui-bootstrap-tpl': ['angular']
+    'angular-strap.tpl': ['angular', 'angular-strap']
+    'angular-strap/affix': ['angular', 'angular-strap/dimensions', 'angular-strap.tpl']
+    'angular-strap/aside': ['angular', 'angular-strap/modal', 'angular-strap.tpl']
+    'angular-strap/button': ['angular', 'angular-animate', 'angular-strap.tpl']
+    'angular-strap/modal': ['angular', 'angular-strap/dimensions', 'angular-strap.tpl']
+    'angular-strap/navbar': ['angular', 'angular-strap.tpl']
+    'angular-strap/tooltip': ['angular', 'angular-animate', 'angular-strap/dimensions', 'angular-strap.tpl']
+    'angular-strap': ['angular']
+    'ui-bootstrap': ['angular-loader']
+    'ui-bootstrap-tpl': ['angular-loader']
     'underscore': []
 
-  deps: 'cs!app'
+  # deps: 'bootstrap'
 )
+require [
+  'angular'
+  'domReady'
+  'portfolio/main'
+], (angular, domReady) ->
+  domReady (document) ->
+    angular.bootstrap document, ['jch-portfolio']
