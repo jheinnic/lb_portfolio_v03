@@ -18,17 +18,17 @@ vendor
 .*.swp
 
 # Compiled JavaScript
-jchpft-ui/features/*.js
-jchpft-ui/features/*.map
-jchpft-ui/features/**/*.js
-jchpft-ui/features/**/*.map
+#jchpft-ui/features/*.js
+#jchpft-ui/features/*.map
+#jchpft-ui/features/**/*.js
+#jchpft-ui/features/**/*.map
 jchpft-ui/components/**/*.js
 jchpft-ui/components/**/*.map
 jchpft-common/components/**/*.js
 jchpft-common/components/**/*.map
 
 # Compiled Less
-jchpft-ui/features/**/*.css
+# jchpft-ui/features/**/*.css
 jchpft-ui/components/**/*.css
 jchpft-common/components/**/*.css
 
