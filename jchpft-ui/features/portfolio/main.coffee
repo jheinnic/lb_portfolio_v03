@@ -1,59 +1,28 @@
-define ['angular', 'angular-route', 'angular-cookies', 'ui-bootstrap-tpls', 'angular-strap/aside', 'angular-strap/button', 'angular-strap/navbar', 'cs!public/crosswords_angular'], ->
-  appModule =  angular.module 'jch-portfolio', ['ng', 'ngRoute', 'ngCookies', 'ui.router', 'ui.bootstrap', 'mgcrea.ngStrap.aside', 'mgcrea.ngStrap.navbar', 'crosswords']
+define [
+  'angular'
+  'angular-route'
+  'angular-cookies'
+  'ui-bootstrap-tpls'
+  'angular-strap/aside'
+  'angular-strap/button'
+  'angular-strap/navbar'
+  'cs!xw-ticket'
+], () ->
+  appModule = angular.module(
+    'jch-portfolio'
+    ['ng', 'ngRoute', 'ngCookies', 'ui.router', 'ui.bootstrap', 'mgcrea.ngStrap.aside', 'mgcrea.ngStrap.navbar', 'xw-ticket']
+  )
 
   appModule.config ['$routeProvider', ($routeProvider) ->
     $routeProvider.when '/',
-      templateUrl: 'public/partials/portfolio/view.html',
+      templateUrl: 'portfolio/partials/view.html',
       controller: 'HomeCtrl'
-    $routeProvider.when '/crosswords',
-      templateUrl: 'public/partials/crosswords/view.html'
-      controller: 'CrosswordCtrl'
   ]
 
   appModule.controller 'HomeCtrl', [
     '$scope',
     ($scope) ->
       $scope.message = 'Hello world!'
-  ]
-
-  appModule.directive 'navBar', [
-    'jchNbDataSvc',
-    (jchNbDataSvc) ->
-      restrict: 'E',
-      replace: true,
-      templateUrl: 'public/partials/portfolio/navBar.html',
-      link: (scope) ->
-        updateModel = () ->
-          scope.nbDataModel = jchNbDataSvc.getDataModel();
-          scope.nbDataModel.refreshPromise.then( updateModel )
-        updateModel()
-  ]
-
-  appModule.factory 'jchNbDataSvc', [
-    '$q',
-    ($q) ->
-      updateHandle = $q.defer()
-      nbDataModel =
-        brandName: 'John Heinnickel',
-        tabModels: [
-          { matchRoute: '/$'
-          clickRoute: '/'
-          displayLabel: 'Home' }
-          { matchRoute: '/crosswords$'
-          clickRoute: '/crosswords'
-          displayLabel: 'Crosswords' }
-          { matchRoute: '/videos$'
-          clickRoute: '/videos'
-          displayLabel: 'Videos' }
-          { matchRoute: '/pokerodds$'
-          clickRoute: '/pokerodds'
-          displayLabel: 'Poker' }
-        ]
-        refreshPromise: updateHandle.promise
-
-      return {
-        getDataModel: () -> return nbDataModel
-      }
   ]
 
   appModule.directive 'dynatest', {
