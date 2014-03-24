@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -21,21 +20,21 @@ var app = express();
  * @returns {*|string}
  */
 function relPath(subPath) {
-    return path.join(__dirname, subPath);
+    return path.join(__dirname, '..', 'jchpft-ui', subPath);
 }
 
-app.configure( function() {
+app.configure(function () {
     // all environments
     app.set('port', process.env.PORT || 3000);
-    app.set('views', relPath('views'));
+    app.set('views', relPath('features'));
     app.set('view engine', 'jade');
-    app.locals.basedir = relPath('views');
+    app.locals.basedir = relPath('features');
 
     // What do these do?
     app.use(express.favicon());
-    if( 'development' == app.get('env')) {
+    if ('development' == app.get('env')) {
         app.use(express.logger('dev'));
-    } else if( 'production' == app.get('env')) {
+    } else if ('production' == app.get('env')) {
         app.use(express.logger('prd'));
     } else {
         app.use(express.logger(app.get('env')));
@@ -43,47 +42,46 @@ app.configure( function() {
     app.use(express.json());
     app.use(express.urlencoded());
 
-    // "Boilerplate you should already have"?
-    app.use(express.bodyParser({keepExtensions: true, uploadDir: '/my/files'}));
+    // "Boilerplate you should already have", but I didn't...
+    app.use(express.bodyParser({keepExtensions: true, uploadDir: '/w/e/my/files'}));
     app.use(express.methodOverride());
     app.use(app.router);
 
     // Compile .less and .coffee files, then map resources under /public to static files relative to __dirname/public.
-    app.use('/public', lessMiddleware({
-        src:relPath('public'),
-        paths:[
-            path.join(__dirname, 'components', 'bootstrap', 'less'),
-            path.join(__dirname, 'public', 'stylesheets')
+    app.use('/app', lessMiddleware({
+        prefix: '/app',
+        src: relPath('features'),
+        paths: [
+            relPath('vendor', 'bootstrap', 'less'),
+            relPath('features')  // Isn't this redundant now??
         ],
-        prefix:'/public',
-        force:true,
-        debug:true
+        force: true,
+        debug: true
     }));
-    app.use('/public', coffeeMiddleware({
-        src:relPath('public'),
-        prefix:'/public',
-        force:true,
-        debug:true
+    app.use('/app', coffeeMiddleware({
+        prefix: '/app',
+        src: relPath('features'),
+        force: true,
+        debug: true
     }));
-    app.use('/public', express.static(relPath('public')));
-    app.use('/public', coffeeMiddleware({
-        src:relPath('common'),
-        prefix:'/public',
-        force:true,
-        debug:true
+    app.use('/app', express.static(relPath('components')));
+    app.use('/app', coffeeMiddleware({
+        prefix: '/app',
+        src: relPath('components'),
+        force: true,
+        debug: true
     }));
-    app.use('/public', express.static(relPath('common')));
-    app.use('/public', express.static(relPath('components')));
+    app.use('/app', express.static(relPath('vendor')));
+    app.use('/app', express.static(_path.join(:__dirname, 'jchpft-common',.'common')));
 
     // Establish a static path root for bower component dependencies.
-    app.use('/components', express.static(relPath('components')));
-
     // Map URIs that begin with /img to Bootstrap's img directory.
-    app.use('/img', express.static(path.join(__dirname, 'components', 'bootstrap', 'img')));
+    app.use('/vendor', express.static(relPath('vendor')));
+    app.use('/img', express.static(relPath('vendor', 'bootstrap', 'img')));
 
     // development only
     if ('development' == app.get('env')) {
-      app.use(express.errorHandler());
+        app.use(express.errorHandler());
     }
 
     //
@@ -92,6 +90,6 @@ app.configure( function() {
     app.get('/', routes.index);
 });
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+http.createServer(app).listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
 });
