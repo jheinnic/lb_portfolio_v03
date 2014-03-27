@@ -1,20 +1,8 @@
-define ['angular', 'ui-bootstrap-tpls', 'angular-strap/aside', 'angular-strap/button', 'angular-strap/navbar', 'cs!xw-ticket'], ->
-  appModule =  angular.module 'jch-portfolio', ['ng', 'ngRoute', 'ngCookies', 'ui.router', 'ui.bootstrap', 'mgcrea.ngStrap.aside', 'mgcrea.ngStrap.navbar', 'crosswords']
-
-  appModule.config ['$routeProvider', ($routeProvider) ->
-    $routeProvider.when '/',
-      templateUrl: 'public/partials/portfolio/view.html',
-      controller: 'HomeCtrl'
-    $routeProvider.when '/crosswords',
-      templateUrl: 'public/partials/crosswords/view.html'
-      controller: 'CrosswordCtrl'
-  ]
-
-  appModule.controller 'HomeCtrl', [
-    '$scope',
-    ($scope) ->
-      $scope.message = 'Hello world!'
-  ]
+define [
+  'angular'
+  'angular-strap/navbar'
+], ->
+  appModule =  angular.module 'jch-navbar', ['ng', 'mgcrea.ngStrap.navbar']
 
   appModule.directive 'jchNavBar', [
     'jchNbDataSvc',
@@ -22,12 +10,14 @@ define ['angular', 'ui-bootstrap-tpls', 'angular-strap/aside', 'angular-strap/bu
       restrict: 'E'
       replace: true
       scope: true
-      templateUrl: 'jch-navbar/partials/jchNavBar.html'
+      templateUrl: '/app/jch-navbar/partials/jchNavbar.html'
       link: ($scope) ->
-        updateModel = () ->
-          $scope.nbDataModel = jchNbDataSvc.getDataModel()
-          $scope.nbDataModel.refreshPromise.then(updateModel)
-        updateModel()
+        updateModel = (data) ->
+          refreshPromise = data.refreshPromise
+          delete data.refreshPromise
+          $scope.nbDataModel = data
+          refreshPromise.then(updateModel)
+        updateModel(jchNbDataSvc.getDataModel())
   ]
 
   appModule.factory 'jchNbDataSvc', [
@@ -37,27 +27,30 @@ define ['angular', 'ui-bootstrap-tpls', 'angular-strap/aside', 'angular-strap/bu
       nbDataModel =
         brandName: 'John Heinnickel',
         tabModels: [
-          { matchRoute: '/$'
-            clickRoute: '/'
-            displayLabel: 'Home' }
-          { matchRoute: '/crosswords$'
-            clickRoute: '/crosswords'
-            displayLabel: 'Crosswords' }
-          { matchRoute: '/videos$'
-            clickRoute: '/videos'
-            displayLabel: 'Videos' }
-          { matchRoute: '/pokerodds$'
-            clickRoute: '/pokerodds'
-            displayLabel: 'Poker' }
+          new TabModel('Home', '/$', '/')
+          new TabModel('Crosswords', '/crosswords$', '/crosswords')
+          new TabModel('Poker', '/poker/odds$', '/poker/odds')
+          new TabModel('Videos', '/videos$', '/videos')
         ]
         refreshPromise: updateHandle.promise
 
-      getMatchRoute = () ->
-        return (angular.isString(this.matchRoute) && this.matchRoute > '') ? this.matchRoute : this.clickRoute
-      nbDataModel.tabModels.forEach (tabInst) -> tabInst.getMatchRoute = angular.bind(tabInst, getMatchRoute)
-
       return {
-        getDataModel: () -> return nbDataModel
+        getDataModel: () -> return angular.copy nbDataModel
       }
   ]
 
+  class TabModel
+    @::matchRoute = '^/$'
+    @::clickRoute = '/'
+    @::displayLabel = 'Index'
+
+    constructor: (@displayLabel, @matchRoute, @clickRoute) -> return
+
+    getMatchRoute: () ->
+      if (angular.isString(@matchRoute) && @matchRoute > '')
+        retVal = @matchRoute
+      else
+        retVal = @clickRoute + '$'
+      return retVal
+
+  return appModule

@@ -1,36 +1,91 @@
 define ['angular'], ->
   xwModule = angular.module('jch-ui-blocks', ['ng']);
 
-  xwModule.directive 'jchXyPos', ['$interpolate', ($interpolate) ->
+  xwModule.directive 'jchXyPos', ['$parse', ($parse) ->
     attrRegEx = /^\s*(?:\(\s*([\S]+)\s*,\s*([\S]+)\s*\)\s+at\s+)?([\d]+)\s+by\s+([\d]+)\s*$/
 
     return {
-      restrict: 'A'
-      replace: false
-      scope: false
-      link: ($scope, $elem, $attr) ->
-        expression = $attr.jchXyPos
+    restrict: 'A'
+    replace: false
+    scope: false
+    link: ($scope, $elem, $attr) ->
+      rowIdExpr =     'cellModel.rowId'
+      cellHeight =    null
+      colIdExpr =     'cellModel.colId'
+      cellWidth =     null
+
+      watchTopFn =    null
+      watchLeftFn =   null
+      watchWidthFn =  null
+      watchHeightFn = null
+
+      handleLeftFn = () ->
+        if watchLeftFn? then watchLeftFn()
+        leftFn = $parse colIdExpr + ' * ' + cellWidth + ' + "px"'
+        if( !leftFn.constant )
+          watchLeftFn = $scope.$watch leftFn, (value) -> $elem.css 'left', value
+        else
+          watchLeftFn = null
+          $elem.css 'left', leftFn($scope)
+        return
+
+      handleWidthFn = () ->
+        if watchWidthFn? then watchWidthFn()
+        widthFn = $parse cellWidth + ' + "px"'
+        if( !widthFn.constant )
+          watchWidthFn = $scope.$watch widthFn, (value) -> $elem.css 'width', value
+        else
+          watchWidthFn = null
+          $elem.css 'width', widthFn($scope)
+        handleLeftFn()
+        return
+
+      handleTopFn = () ->
+        if watchTopFn? then watchTopFn()
+        topFn = $parse rowIdExpr + ' * ' + cellHeight + ' + "px"'
+        if( !topFn.constant )
+          watchTopFn = $scope.$watch topFn, (value) -> $elem.css 'top', value
+        else
+          watchTopFn = null
+          $elem.css 'top', topFn($scope)
+        return
+
+      handleHeightFn = () ->
+        if watchHeightFn? then watchHeightFn()
+        heightFn = $parse cellHeight + ' + "px"'
+        if( !heightFn.constant )
+          watchHeightFn = $scope.$watch heightFn, (value) -> $elem.css 'height', value
+        else
+          watchHeightFn = null
+          $elem.css 'height', heightFn($scope)
+        handleTopFn()
+        return
+
+      $attr.$observe 'jchXyPos', (expression) ->
         match = expression.match attrRegEx
-
         if (!match)
-          throw "Invalid argument: " + expression + " is not formatted correctly"
+          initState()
+        else
+          if angular.isUndefined(match[1]) then match[1] = 'cellModel.rowId'
+          if angular.isUndefined(match[2]) then match[2] = 'cellModel.colId'
 
-        rowIdExpr  = match[1] || 'cellModel.rowId'
-        colIdExpr  = match[2] || 'cellModel.colId'
-        cellWidth  = match[3]
-        cellHeight = match[4]
+          if cellWidth != match[3]
+            colIdExpr  = match[2]
+            cellWidth  = match[3]
+            handleWidthFn()
+          else if colIdExpr != match[2]
+            colIdExpr  = match[2]
+            handleLeftFn()
 
-        topFn    = $interpolate '{{' + rowIdExpr + ' * ' + cellHeight + '}}px'
-        leftFn   = $interpolate '{{' + colIdExpr + ' * ' + cellWidth + '}}px'
-        heightFn = $interpolate '{{' + cellHeight + '}}px'
-        widthFn  = $interpolate '{{' + cellWidth + '}}px'
-
-        $scope.$watch topFn,    (value) -> $elem.css 'top', value
-        $scope.$watch leftFn,   (value) -> $elem.css 'left', value
-        $scope.$watch heightFn, (value) -> $elem.css 'height', value
-        $scope.$watch widthFn,  (value) -> $elem.css 'width', value
-
-        return $elem
+          if cellHeight != match[4]
+            cellHeight = match[4]
+            rowIdExpr  = match[1]
+            handleHeightFn()
+          else if rowIdExpr != match[1]
+            rowIdExpr  = match[1]
+            handleTopFn()
+        return
+      return
     }
   ]
 

@@ -16,6 +16,11 @@ requirejs.config(
 
   packages: [
     {
+      name: 'coffee-script'
+      location: 'require-cs'
+      main: 'coffee-script'
+    }
+    {
       name: 'cs'
       location: 'require-cs'
       main: 'cs'
@@ -57,7 +62,7 @@ requirejs.config(
 require [
   'angular'
   'domReady'
-  'portfolio/main'
+  'cs!portfolio/main'
 ], (angular, domReady) ->
   domReady (document) ->
     angular.bootstrap document, ['jch-portfolio']

@@ -15,10 +15,10 @@ define ['angular'], () ->
           scope: true
           templateUrl: templateDirPath + discriminator + '.html'
           link: ($scope, $elem, $attrs, ticketCtrl) ->
-            # $scope.gridModel = $scope.ticketModel[discriminator]
-            $scope.$watch( 'ticketModel.' + discriminator, (gridModelValue) ->
-              $scope.gridModel = gridModelValue
-            )
+            $scope.gridModel = $scope.ticketModel[discriminator]
+#            $scope.$watch( 'ticketModel.' + discriminator, (gridModelValue) ->
+#              $scope.gridModel = gridModelValue
+#            )
 #            $scope.$on 'xw.gridEvent.cellClicked', ($event, gridKind, gridModel, cellModel) ->
 #              if (! ticketCtrl.isEditableAt gridKind)
 #                $event.cancel();
@@ -76,7 +76,7 @@ define ['angular'], () ->
 #        cloneLinkFn = $compile(clone)
         clone = angular.element('<div></div>').append(clone)
         retVal = clone.html()
-        console.log(retVal)
+        # console.log(retVal)
         return retVal
 #        return ($scope, $element, $attr) ->
 #          cloneLinkFn($scope, (linkedClone) ->

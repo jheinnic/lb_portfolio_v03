@@ -28,7 +28,7 @@ define ['angular'], ->
         #       copy of the grid and cell models during openCursor() and restore or discard same during
         #       calls to closeCursor().
         this.markDirty = (dirtyCell) ->
-          if (! AbstractGridModel.isLegalValueRegex.test(dirtyCell?.content))
+          if (! AbstractGridModel.isStorableRegex.test(dirtyCell?.content))
             throw 'IllegalArgument: dirtyCell?.content = ' + dirtyCell?.content
           if (! dirtyCell.dirty)
             # TODO: Save a memory for rollback

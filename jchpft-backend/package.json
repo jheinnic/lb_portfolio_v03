@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "badstart": "export NODE_PATH=./controllers; export NODE_ENV=development; ./node_modules/.bin/nodemon server.js",
+    "badstart": "export NODE_PATH=./controllers;\nexport NODE_ENV=development;\n./node_modules/.bin/nodemon server.js",
     "start": "node_modules\\.bin\\nodemon server.js",
     "test": "echo 'TBD for running tests'",
-    "install": "bower install"
+    "install": "node_modules\\.bin\\bower install"
   },
   "dependencies": {
     "mongodb": ">= 1.3.20",
@@ -14,12 +14,10 @@
     "jade": "0.35.0",
     "cookie": "~0.1.1",
     "less-middleware": "~0.1.15",
-    "coffee-middleware": "~0.2.1",
-    "coffeescript-module": "0.0.2"
+    "coffee-middleware": "~0.2.1"
   },
   "devDependencies": {
-    "bower": "~1.2.7",
-    "less": "~1.5.1",
+    "bower": "~1.3.1",
     "nodemon": "latest",
     "requirejs": "~2.1.11"
   }

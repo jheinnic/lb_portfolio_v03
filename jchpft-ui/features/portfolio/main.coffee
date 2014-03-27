@@ -5,12 +5,13 @@ define [
   'ui-bootstrap-tpls'
   'ui-bootstrap'
   'angular-strap/aside'
-  'angular-strap/navbar'
-  'xw-ticket/main'
+  'cs!jch-navbar/main'
+  'cs!xw-ticket/main'
+  'cs!poker/main'
 ], () ->
   appModule = angular.module(
     'jch-portfolio'
-    ['ng', 'ngRoute', 'ngCookies', 'ui.bootstrap', 'mgcrea.ngStrap.aside', 'mgcrea.ngStrap.navbar', 'xw-ticket']
+    ['ng', 'ngRoute', 'ngCookies', 'ui.bootstrap', 'mgcrea.ngStrap.aside', 'jch-navbar', 'xw-ticket']
   )
 
   appModule.config ['$routeProvider', ($routeProvider) ->

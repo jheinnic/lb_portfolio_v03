@@ -1,4 +1,8 @@
-define ['angular', 'ui-bootstrap-tpls', 'xw-dynamic/main'], () ->
+define [
+  'angular'
+  'ui-bootstrap-tpls'
+  'cs!xw-dynamic/main'
+], () ->
   xwModule = angular.module('xw-report', ['xw-dynamic']);
 
   xwModule.directive 'xwProgressReport', ['xwDirectiveFactory', (xwDirectiveFactory) ->

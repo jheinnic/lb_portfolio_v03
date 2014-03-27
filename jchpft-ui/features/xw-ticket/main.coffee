@@ -1,10 +1,10 @@
 define [
   'angular'
   'angular-strap/button'
-  'jch-ui-blocks/main'
-  'xw-dynamic/main'
-  'xw-model/main'
-  'xw-report/main'
+  'cs!jch-ui-blocks/main'
+  'cs!xw-dynamic/main'
+  'cs!xw-model/main'
+  'cs!xw-report/main'
 ], () ->
   xwModule = angular.module('xw-ticket', ['ng', 'mgcrea.ngStrap.button', 'jch-ui-blocks', 'xw-dynamic', 'xw-model', 'xw-report']);
 
@@ -36,18 +36,21 @@ define [
           $scope.ticketModel.activeGrid = null
           $scope.ticketModel.cursorCell = null
           tempGrid.handleCloseCursor(withCommit, tempCell)
+          return
 
         openCursor = (targetCell) ->
           targetGrid = targetCell.parentGrid
           $scope.ticketModel.activeGrid = targetGrid
           $scope.ticketModel.cursorCell = targetCell
           targetGrid.handleOpenCursor(targetCell)
+          return
 
         moveCursor = (targetCell) ->
           tempGrid = $scope.ticketModel.activeGrid
           tempCell = $scope.ticketModel.cursorCell
           $scope.ticketModel.cursorCell = targetCell
           tempGrid.handleMoveCursor(tempCell, targetCell)
+          return
 
         # ** onCellClick() and onKeyPress() **
         # Validation of user input occurs in the
@@ -94,6 +97,8 @@ define [
           valueImages: valueImages
           borderImages: borderImages
         $scope.dataReportingModel = 'TBD'
+
+        return this
   ]
 
   xwModule.directive 'xwBonusValueCell', () ->
@@ -222,7 +227,7 @@ define [
 
     updateProgressReportFn = (nextReportModel) ->
       $scope.progressModel = nextReportModel
-      nextReportModel.updatePromise.then updateProgressReportFn
+      # nextReportModel.updatePromise.then updateProgressReportFn
       return nextReportModel
     updateProgressReportFn xwReportSvc.getProgressReport()
 
@@ -231,6 +236,8 @@ define [
       # nextReportModel.updatePromise.then updatePayoutModelFn
       return nextReportModel
     updatePayoutModelFn xwReportSvc.getPayoutReport()
+
+    $scope.alert = window.alert
   ]
 
   class XwModelFactory
@@ -274,7 +281,7 @@ define [
           # one cell to the right.  This prepares us for linking the left/up navigation for the
           # upcoming next allocation.  Advance the column and flattened index counters.
           lastCellLeft = nextCell
-          lastCellAbove = lastCellAbove?.toRight || null
+          lastCellAbove = lastCellAbove?.aligned.toRight || null
           jj = jj + 1
           kk = kk + 1
         # Advance the row counter.
@@ -338,7 +345,7 @@ define [
       nextCell.next = firstRowCell
 
       bonusWordGrid = new BonusWordGrid(cells)
-      return new TicketModel(ticketDocument.ticketId, crosswordGrid, yourLettersGrid, bonusWordGrid)
+      return new TripleNoTwentyTicketModel(ticketDocument.ticketId, ticketDocument.actualPayout, crosswordGrid, yourLettersGrid, bonusWordGrid)
 
   xwModule.service('xwModelFactory', [XwModelFactory])
 
@@ -365,10 +372,10 @@ define [
     constructor: (@labels, @oppositeFn) ->
       return @
 
-    getBorderHead: () => return @labels.head
-    getBorderMiddle: () => return @labels.mid
-    getBorderTail: () => return @labels.tail
-    changeOrientation: () => return @oppositeFn()
+    getBorderHead: () -> return @labels.head
+    getBorderMiddle: () -> return @labels.mid
+    getBorderTail: () -> return @labels.tail
+    changeOrientation: () -> return @oppositeFn()
 
   class LifecycleStage
     constructor: (@canEditDescription, @canEditDiscoveries) ->
@@ -378,13 +385,14 @@ define [
     @PLAYING =  new LifecycleStage(false, true)
     @PUBLISHED = new LifecycleStage(false, false)
 
-    isCrosswordGridEditable:       () => return @canEditDescription
-    isBonusWordGridEditable:       () => return @canEditDescription
-    isTwentySpotAvailableEditable: () => return @canEditDescription
-    isBonusWordValueEditable:      () => return @canEditDiscoveries
-    isTwentySpotHitEditable:       () => return @canEditDiscoveries
-    isYourLetterGridEditable:      () => return @canEditDiscoveries
-    areReportsUpdatable:           () => return @canEditDiscoveries
+    isCrosswordGridEditable:       () -> return @canEditDescription
+    isBonusWordGridEditable:       () -> return @canEditDescription
+    isBonusWordValueEditable:      () -> return @canEditDiscoveries
+    isMultiplierEditable:          () -> return @canEditDiscoveries
+    isTwentySpotEditable:          () -> return @canEditDiscoveries
+    isYourLetterGridEditable:      () -> return @canEditDiscoveries
+
+    areReportsUpdatable:           () -> return @canEditDiscoveries
 
   class CellStateKind
     constructor: (fillImageKey) ->
@@ -405,6 +413,8 @@ define [
     @BLOCKED          = new CellStateKind('blocked')
     @REVEALED         = new CellStateKind('revealed')
 
+    @ERROR            = new CellStateKind('tooshort')
+
     # @REACHABLE and @SELECTED define the location of cursors on an actively open grid.
     #
     # For BonusWord and YourLetters, all cells become @REACHABLE when the grid is active.
@@ -416,11 +426,9 @@ define [
     # use of cell boundary highlighting.
     @REACHABLE        = new CellStateKind('selected')
     @SELECTED         = new CellStateKind('active')
+    @DIRTY            = new CellStateKind('dirtyTBD')
 
-    @ERROR            = new CellStateKind('tooshort')
-
-    getImageKey: () => return @fillImageKey
-
+    getImageKey: () -> return @fillImageKey
 
   class CellErrorKind
     @ONE_LETTER_WORD = new CellErrorKind('Isolated letter tiles are not allowed.  Letters tiles must be adjacent to enough other letters tiles to create at least one three letter word.')
@@ -448,36 +456,65 @@ define [
 
     constructor: (@toolTipMessage) -> return @
 
-  class TicketModel
-    hasTwentySpot: null
-    hitTwentySpot: null
-    bonusValue: null
-    payoutValue: null
+  class AbstractTicketModel
     activeGrid: null
     cursorCell: null
     ticketErrors: {}
 
-    # @identityRegex = /\d{3}:\d{6,7}\-\d{3}/
-
-    constructor: (@ticketId, @crosswordGrid, @yourLettersGrid, @bonusWordGrid) ->
+    constructor: (@ticketId, @payoutValue, @crosswordGrid, @yourLettersGrid) ->
       # if (TicketModel.identityRegex.test(@ticketId) == false)
       #   throw 'Invalid argument exception!'
 
       crosswordGrid.parentTicket = @
       yourLettersGrid.parentTicket = @
-      bonusWordGrid.parentTicket = @
 
       # TODO: This needs to be more dynamic
+
       @lifecycleStage = LifecycleStage.DESCRIBING
       return @
 
-    isDescriptionComplete: () =>
-      return @crosswordGrid.isComplete() && @bonusWordGrid.isComplete() && @hasTwentySpot != null
+    ##
+    ## Event handlers
+    ##
 
-    isDiscoveryComplete: () =>
-      return @yourLettersGrid.isComplete() && @bonusValue != null && @hitTwentySpot != null && @payoutValue != null
+    handleKeyPressEvent: (cursorCell, inputValue) ->
+      return cursorCell.parentGrid.handleKeyPressEvent(cursorCell, inputValue)
+    handleBackspace: (cursorCell) ->
+      return cursorCell.parentGrid.handleBackspace(cursorCell)
+    handleLeftArrow: (cursorCell) ->
+      return cursorCell.parentGrid.handleLeftArrow(cursorCell)
+    handleRightArrow: (cursorCell) ->
+      return cursorCell.parentGrid.handleRightArrow(cursorCell)
+    handleUpArrow: (cursorCell) ->
+      return cursorCell.parentGrid.handleUpArrow(cursorCell)
+    handleDownArrow: (cursorCell) ->
+      return cursorCell.parentGrid.handleDownArrow(cursorCell)
+    handleEscape: (cursorCell) ->
+      return cursorCell.parentGrid.handleEscape(cursorCell)
+    handleEnter: (cursorCell) ->
+      return cursorCell.parentGrid.handleEnter(cursorCell)
+    handleTab: (cursorCell) ->
+      return cursorCell.parentGrid.handleTab(cursorCell)
+    handleOtherKeys: (cursorCell) ->
+      return cursorCell.parentGrid.handleOtherKeys(cursorCell)
 
-    mayChangeLifecycle: (toStage) =>
+    ##
+    ## Queries
+    ##
+
+    isCursorCell: (cellQuery) ->
+      return @cursorCell == cellQuery
+
+    isMatchedLetter: (letterQuery) ->
+      return @yourLettersGrid.isLetterUsed(letterQuery)
+
+    isDescriptionComplete: () ->
+      return @crosswordGrid.isComplete()
+
+    isDiscoveryComplete: () ->
+      return @yourLettersGrid.isComplete()
+
+    mayChangeLifecycle: (toStage) ->
       switch @lifecycleStage
         when LifecycleStage.DESCRIBING
           if (toStage == LifecycleStage.DESCRIBING)
@@ -499,46 +536,166 @@ define [
 
       return false
 
-    setLifecycleStage: (nextLifecycleStage) =>
+    ##
+    ## Mutators
+    ##
+
+    setLifecycleStage: (nextLifecycleStage) ->
       retVal = nextLifecycleStage
       if @mayAdvanceLifecycle(nextLifecycleStage)
         @lifecycleStage = nextLifecycleStage
       else
         retVal = @lifecycleStage
-      return retVal
-
-    setHasTwentySpot: (hasSpot) =>
-      if !@lifecycleStage.isTwentySpotAvailableEditable()
-        throw 'IllegalState'
-      if (typeof hasSpot) != 'boolean'
-        throw 'IllegalArgument'
-
-      @hasTwentySpot = hasSpot
-
-    setHitTwentySpot: (hitSpot) =>
-      if !@lifecycleStage.isTwentySpotHitEditable()
-        throw 'IllegalState'
-      if (typeof hitSpot) != 'boolean'
-        throw 'IllegalArgument'
-
-      @hitTwentySpot = hitSpot
-
-    setBonusValue: (newValue) =>
-      if !@lifecycleStage.isBonusValueEditable()
-        throw 'IllegalState'
-      if ((typeof newValue) != 'number') || newValue < 0 || newValue > 3
-        throw 'IllegalArgument'
-
-      @bonusValue = newValue
+      return @
 
     # TODO: Confirm the min/max valid values
-    setPayoutValue: (newValue) =>
+    setPayoutValue: (newValue) ->
       if (!@lifecycleStage.isPayoutValueEditable())
         throw 'IllegalState'
       if (((typeof newValue) != 'number') || newValue < 0 || newValue > 17)
         throw 'IllegalArgument'
 
       @setPayoutValue = newValue
+      return @
+
+  class TripleNoTwentyTicketModel extends AbstractTicketModel
+    constructor: (ticketId, payoutValue, crosswordGrid, yourLettersGrid, @bonusWordGrid, @bonusValue) ->
+      super(ticketId, payoutValue, crosswordGrid, yourLettersGrid)
+      bonusWordGrid.parentTicket = @
+      return @
+
+    ##
+    ## Queries
+    ##
+
+    isDescriptionComplete: () ->
+      return super() && @bonusWordGrid.isComplete()
+
+    isDiscoveryComplete: () ->
+      return super() && @bonusValue != null
+
+    isBonusLetter: (letterQuery) ->
+      return @bonusWordGrid.isLetterUsed(letterQuery)
+
+    ##
+    ## Mutators
+    ##
+
+    setBonusWordValue: (newValue) ->
+      if !@lifecycleStage.isBonusWordValueEditable()
+        throw 'IllegalState'
+      if ((typeof newValue) != 'number') || newValue < 0 || newValue > 3
+        throw 'IllegalArgument'
+
+      @bonusValue = newValue
+      return @
+
+  class TripleWithSpotTicketModel extends AbstractTicketModel
+    constructor: (ticketId, payoutValue, crosswordGrid, yourLettersGrid, @bonusWordGrid, @bonusValue, @spotValue) ->
+      super(ticketId, payoutValue, crosswordGrid, yourLettersGrid)
+      bonusWordGrid.parentTicket = @
+      return @
+
+    ##
+    ## Queries
+    ##
+
+    isDescriptionComplete: () ->
+      return super() && @bonusWordGrid.isComplete()
+
+    isDiscoveryComplete: () ->
+      return super() && @bonusValue != null && isTwentySpotRevealed()
+
+    isBonusLetter: (letterQuery) ->
+      return @bonusWordGrid.isLetterUsed(letterQuery)
+
+    isTwentySpotRevealed: () ->
+      return @spotValue > -1
+
+    isTwentySpotWon: () ->
+      if @spotValue == -1
+        retVal = undefined
+      else
+        retVal = @spotValue == 20
+
+      return retVal
+
+    ##
+    ## Mutators
+    ##
+
+    setBonusWordValue: (newValue) ->
+      if !@lifecycleStage.isBonusWordValueEditable()
+        throw 'IllegalState'
+      if ((typeof newValue) != 'number') || newValue < 0 || newValue > 3
+        throw 'IllegalArgument'
+
+      @bonusValue = newValue
+      return @
+
+    setSpotValue: (newValue) ->
+      if !@lifecycleStage.isTwentySpotEditable()
+        throw 'IllegalState'
+      if ((typeof newValue) != 'number') || newValue < 0 || newValue > 30
+        throw 'IllegalArgument'
+
+      @spotValue = newValue
+      return @
+
+  class FiveXTicketModel extends AbstractTicketModel
+    constructor: (ticketId, payoutValue, crosswordGrid, yourLettersGrid, @multiValue, @spotValue) ->
+      super(ticketId, payoutValue, crosswordGrid, yourLettersGrid)
+      return @
+
+    ##
+    ## Queries
+    ##
+
+    isDiscoveryComplete: () ->
+      return super() && isTwentySpotRevealed() && isMultiplierRevealed()
+
+    isMultiplierRevealed: () ->
+      return @multiValue != null
+
+    getMultiplier: () ->
+      if multiValue == null
+        retVal = undefined
+      else
+        retVal = @multiValue
+
+      return retVal
+
+    isTwentySpotWon: () ->
+      if @spotValue == null
+        retVal = undefined
+      else
+        retVal = @spotValue == 20
+
+      return retVal
+
+    ##
+    ## Mutators
+    ##
+
+    # Multiplier is 1x, 2x, 4x, or 5x.  TODO: Confirm
+    setMultplierValue: (newValue) ->
+      if !@lifecycleStage.isMultiplierEditable()
+        throw 'IllegalState'
+      if ((typeof newValue) != 'number') || newValue < 1 || newValue == 3 || newValue > 5
+        throw 'IllegalArgument'
+
+      @bonusValue = newValue
+      return @
+
+    setSpotValue: (newValue) ->
+      if !@lifecycleStage.isTwentySpotEditable()
+        throw 'IllegalState'
+      if ((typeof newValue) != 'number') || newValue < 0 || newValue > 30
+        throw 'IllegalArgument'
+
+      @spotValue = newValue
+      return @
+
 
   # Every handleX() method returns an array describing the caller's requested next
   # action.  The first element is a value from this array, which both defines the
@@ -551,25 +708,23 @@ define [
     @CLOSE_CURSOR = 'CloseCursor'
     @ROLLBACK = 'Rollback'
 
-
-  VALUE_CHARS_ARRAY = [
+  NOT_BLANK_CHARS = [
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
     'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
   ]
-  VALID_CHARS_ARRAY = VALUE_CHARS_ARRAY.concat('_')
+  STORABLE_CHARS = NOT_BLANK_CHARS.concat('_')
 
   class AbstractGridModel
     dirtyCells: new Array()
-    cursor: null
 
     constructor: (@gridKind, @numRows, @numCols, @cells) ->
       @numCells   = numRows*numCols
       if (cells.length != @numCells)
-        throw 'IllegalArgument: cells.length = ' + cells.length + ', @numRows = ' + @numRows + ', @numCols = ' + @numCols
+        throw 'IllegalArgument: cells.length = ' + cells.length + ', @numRows = ' + numRows + ', @numCols = ' + numCols
 
       # A hash from character to an array of cells whose content is set to that character.
       contentMap = {}
-      VALID_CHARS_ARRAY.forEach( (nextChar) -> contentMap[nextChar] = [] )
+      STORABLE_CHARS.forEach( (nextChar) -> contentMap[nextChar] = [] )
 
       parentGrid = @
       cells.forEach( (cellModel) ->
@@ -578,17 +733,15 @@ define [
           value = value.toLowerCase()
 
         contentMap[value].push(cellModel)
-        cellModel.parentGrid = parentGrid
+        cellModel.setParentGrid(parentGrid)
+        return
       )
       @contentMap = contentMap
       return @
 
-    # TODO: These are here because YourLetters and BonusWord can benefit from sharing them, but these
-    #       more accurately belong in a configurable subclass--they aren't sufficiently general for a
-    #       cross-application base class to own them.
-    #
-    # Base class regular expressions for classifying content.
-    @isLegalValueRegex: /^[a-z_]$/
+    # Regular expressions with the range of legally stored values for @content across all subtypes.
+    @isStorableRegex: /^[a-z_]$/
+    @notBlankRegex: /^[a-zA-Z]$/
 
     ##
     ## Cell retrieval
@@ -602,29 +755,33 @@ define [
       return @cells[colId + (rowId*@numRows)]
 
     getCellsByContent: (value) ->
-      if (!@isLegalValue(value))
+      if (!AbstractGridModel.isStorableRegex.test(value))
         throw 'IllegalArgument: value = ' + value
 
       return clone @contentMap[value]
+
+    isLetterUsed: (letterQuery) ->
+      if (!AbstractGridModel.isStorableRegex.test(letterQuery))
+        throw 'IllegalArgument: letterQuery = ' + letterQuery
+
+      return @getCellsByContent(letterQuery).length >= 1
 
     ##
     ## Cell clickability
 
     # TODO: Primitive (wrong) implementation: accept all clicks.
-    handleCellClick = (cellModel, clickEvent) =>
+    handleCellClick: (cellModel, clickEvent) ->
       return [OnHandleEventAction.OPEN_CURSOR, true, cellModel]
 
-    handleOpenCursor = (cursorCell) =>
+    handleOpenCursor: (cursorCell) ->
       cursorCell.temp = true
-      @temp = cursorCell
       return
 
-    handleCloseCursor = (withCommit, lastCursor) =>
-      @temp.temp = false
-      @temp = null
+    handleCloseCursor: (withCommit, lastCursor) ->
+      lastCursor.temp = false
       return
 
-    handleMoveCursor = (origCell, nextCell) =>
+    handleMoveCursor: (origCell, nextCell) ->
       return
 
     ##
@@ -632,76 +789,62 @@ define [
 
     # Default behavior without override: set content to the lowercase version of input and then advance cursor to
     # next empty cell, if any.
-    handleKeyPressEvent = (inputValue) =>
-      retVal = [OnHandleEventAction.NO_ACTION]
-      validatedInput = doBeforeHandleKeyPress(@cursorCell, inputValue)
-      if (validatedInput)
-        originalValue = @cursorCell.content
-        if (originalValue != validatedInput)
-          @contentMap[originalValue].filter((cellModel) -> return cellModel == @cursorCell)
-          @cursorCell.content = validatedInput
-          @contentMap[validatedInput].push(@cursorCell)
+    handleKeyPressEvent: (cursorCell, inputValue) ->
+      nextCell = cursorCell
+      if isInputValid(inputValue)
+        cursorCell.setContentValue(inputValue)
+        nextCell = cursorCell.getNextCell()
 
-        nextCell = doAfterHandleKeyInput(@cursorCell, originalValue)
-        if (nextCell? && nextCell != @cursorCell)
-          # @ticketModel.moveCursor @cursorCell, nextCell, false
-          retVal = [OnHandleEventAction.MOVE_CURSOR, nextCell]
+      if (nextCell != cursorCell)
+        retVal = [OnHandleEventAction.MOVE_CURSOR, nextCell]
+      else
+        retVal = [OnHandleEventAction.NO_ACTION]
+
       return retVal
+
     # This implementation is suitable for fixed-in-place grids that can rely exclusively on the arrow keys for
     # cursor movement.# , like YourLetters and BonusWord.  CrosswordCell may
     # want a different implementation that moves the cursor.  Or perhaps not...
-    handleBackspace =  () =>
-      @cursorCell.content = '_'
+    handleBackspace: (cursorCell) ->
+      cursorCell.setContentValue('_')
       return [OnHandleEventAction.NO_ACTION]
-    handleLeftArrow =  () => # @ticketModel.moveCursor @ , @getPreviousCell(), false
-      return [OnHandleEventAction.MOVE_CURSOR, @getPreviousCell()]
-    handleRightArrow = () => # @ticketModel.moveCursor @, @getNextCell(), false
-      return [OnHandleEventAction.MOVE_CURSOR, @getNextCell()]
-    handleEscape =     () =>
-      return [OnHandleEventAction.ROLLBACK]
-    handleEnter =      () =>
-      return [OnHandleEventAction.CLOSE]
-    handleTab =      () =>
-      return [OnHandleEventAction.OPEN, 'withCommit', ticketModel.getCursorCell()]
-    handleOthers =     () =>
+    handleLeftArrow: (cursorCell) ->
+      return [OnHandleEventAction.MOVE_CURSOR, cursorCell.getPreviousCell()]
+    handleRightArrow: (cursorCell) ->
+      return [OnHandleEventAction.MOVE_CURSOR, cursorCell.getNextCell()]
+    handleEscape: (cursorCell) ->
+      return [OnHandleEventAction.CLOSE, false]
+    handleEnter: (cursorCell) ->
+      return [OnHandleEventAction.CLOSE, true]
+    handleTab: (cursorCell) ->
+      # return [OnHandleEventAction.OPEN, true, @ticketModel.getCursorCell()]
+      return [OnHandleEventAction.NO_ACTION]
+    handleOtherKeys: (cursorCell) ->
       return [OnHandleEventAction.NO_ACTION]
 
     ##
     ## Template methods for implementing subclass variants
 
-    # TODO: Crossword cell will likely want to override this!
-    isLegalValue = (value) -> return AbstractGridModel.isLegalValueRegex.test(value)
-
-    # Each subtype MAY override this.  Return false to reject a character.  Return the character as-is or its
-    # canonicalized equivalent to accept.  Default impl returns lower case version of input.  Its suitable for
-    # YourLetters and BonusGrid where <Shift> is not used to indicate a modifier, no character can be used in
-    # more than one cell, and all characters in the persisted form are expected to be lower case.  It is not
-    # suitable for Crossword, where <Shift> applies the triple prize modifier and capitalization is used to
-    # store the presence of a triple prize cell modifier.
-    doBeforeHandleKeyInput = (targetCell, inputValue) =>
-      validatedValue = inputValue.toLowerCase()
-      if (targetCell?.content != validatedValue)
-        matchedCells = @parentGrid.getCellsByContent(validatedValue)
-        if (matchedCells.length > 0)
-          validatedValue = false
-
-      return validatedValue
-
-    doAfterHandleKeyInput = (targetCell, originalValue) =>
-      return targetCell.getNextCell()
-
     # TODO: MAY override this if lifecycle state advancement does not depend on a grid having a value in
     #       every cell (ok rule for bonusWord and yourLetters, but not main crossword grid).
-    isComplete = () =>
+    isComplete: () ->
       @cells.every((cellModel) ->
         return cellModel.hasValue() && @contentMap[cellModel.content.toLowerCase()].length == 1
       )
 
-    # TODO: MAY ovveride this in each subclass to encapsulate click-based cursor movement semantics
-    #testForMoveCursor = (targetCell) -> return targetCell
+    isInputValid: (cursorCell, inputValue) ->
+      retVal = true
+      if (AbstractGridModel.notBlankRegex.test(inputValue))
+        inputValue = inputValue.toLowerCase()
+        if (!cursorCell.isContentEqualTo(inputValue) && @isLetterUsed(inputValue))
+          # TODO: Signal transient error message
+          inputValue = false
+      else
+        # TODO: Signal transient error message
+        inputValue = false
 
-    # TODO: MUST override this in each subclass to encapsulate click-based cursor creation semantics
-    #testForOpenCursor = (targetCell) -> return targetCell
+      return retVal
+
 
   class AbstractCellModel
     dirty: false
@@ -710,10 +853,39 @@ define [
       @coordinates = rowId + ',' + colId
       return @
 
-    isBlank = () -> return @content == '_'
-    hasContent = () -> return @content != '_'
+    ##
+    ## Model bootstrapping
 
-    getContent = () ->
+    setParentGrid: (parentGrid) ->
+      @parentGrid = parentGrid
+      return
+
+    #
+    # Content access methods
+    #
+    isBlank: () -> return @content == '_'
+    hasContent: () -> return @content != '_'
+
+    # Internal use method for setting a cell's content AND triggering any side effects such as maintenance
+    # to the @contentMap.  Subtypes may override this method, but must call the base implementation to
+    # ensure inheritted book-keeping behaves as expected.  Override implementations should not set
+    # @content themselves (treat it as private) and should ensure any non-blank input is passed as lower-case.
+    setContent: (newValue) ->
+      # TODO
+      # @parentGrid.markDirty(@)
+
+      if (@content != newValue)
+        thisCell = @
+        @contentMap[@content] = @contentMap[@content].filter((cellModel) -> return cellModel == thisCell)
+        thisCell.content = newValue
+        @contentMap[newValue].push(thisCell)
+
+      return true
+
+    #
+    # Cell State -> Image Key translation methods
+    #
+    getContent: () ->
       retVal = '_'
       if (@parentGrid.parentTicket.cursorCell == this)
         retVal = 'cursor'
@@ -722,21 +894,23 @@ define [
 
       return retVal
 
+    getContentValue: () ->
+      return @content
+
     # Each subtype will want to override this method--they each have different business logic surrounding fill states
-    getFill = () =>
+    getFill: () ->
       if (@temp)
-        retVal = CellStateKind.MATCHED.fillImageKey
+        retVal = CellStateKind.MATCHED
       else
-        retVal = CellStateKind.COVERED.fillImageKey
-      return retVal
+        retVal = CellStateKind.COVERED
+      return retVal.fillImageKey
 
     # Each subtype will want to override this method--they each have different business logic surrounding borders
-    getBorder = () ->
-      return 'blank'
+    getBorder: () -> return 'blank'
 
     # Each subtype SHOULD override these to define forward/backward navigation and boundaries
-    getNextCell =     () => return this
-    getPreviousCell=  () => return this
+    getNextCell: () -> return @
+    getPreviousCell: () -> return @
 
 
   #
@@ -755,20 +929,20 @@ define [
       super yAbs, 0, yAbs, content
       return @
 
-    getNextCell: () => return @next
-    getPreviousCell: () => return @previous
+    getNextCell: () -> return @next
+    getPreviousCell: () -> return @previous
 
-    getFill = () =>
+    getFill: () ->
       if (@parentGrid.parentTicket.cursorCell == this)
         retVal = CellStateKind.SELECTED
-      else if(@hasContent() && @parentGrid.parentTicket.yourLettersGrid.getCellsByContent(@content).length >= 1)
+      else if(@hasContent() && @parentGrid.parentTicket.myLettersInclude(@content))
         retVal = CellStateKind.MATCHED
       else
         retVal = CellStateKind.COVERED
 
       return retVal.fillImageKey
 
-    getBorder: () =>
+    getBorder: () ->
       retVal = 'blank'
       if (@parentGrid.parentTicket.cursorCell == this)
         switch(@colId)
@@ -794,10 +968,10 @@ define [
     next: null
     previous: null
 
-    getNextCell: () => return @next
-    getPreviousCell: () => return @previous
+    getNextCell: () -> return @next
+    getPreviousCell: () -> return @previous
 
-    getFill = () =>
+    getFill: () ->
       if (@parentGrid.parentTicket.cursorCell == this)
         retVal = CellStateKind.SELECTED
       else if(@hasContent())
@@ -808,7 +982,7 @@ define [
       return retVal.fillImageKey
 
     # TODO: Need an image for unary borders
-    getBorder: () =>
+    getBorder: () ->
       return 'blank'
 
 
@@ -817,37 +991,111 @@ define [
   #
   class CrosswordGrid extends AbstractGridModel
     constructor: (cells) ->
-      super 'crossword', 11, 11, cells
       @orientation = OrientationKind.ALIGNED
+      super 'crossword', 11, 11, cells
 
       return @
 
-    toggleOrientation: () =>
+    toggleOrientation: () ->
       @orientation = @orientation.getOpposite()
 
-    cellBorder: (forCellModel) =>
+    # TODO: Provide a REAL implementation!
+    isComplete: () -> return true
+
+  # TODO: Enforce constraint that boardModel must be a CrosswordGrid
+  class FixedCell extends AbstractCellModel
+    isTriple: null
+
+    constructor: (gridModel, rowId, colId, content) ->
+      super gridModel, rowId, colId, content
+      @isTriple = false
+      @aligned = new RelativeCell(rowId, colId)
+      @rotated = new RelativeCell(colId, rowId)
+      return @
+
+    # Get the orientation-dependent object with links in all four directions plus diagonals.  If
+    # a specific orientation is requested by argument, then the corresponding RelativeCell is
+    # returned, otherwise the current orientation setting of the parent grid is used instead.
+    getRel: (orientation = @parentGrid.orientation) ->
+      if (orientation == OrientationKind.ROTATED)
+        return @rotated
+      else
+        return @aligned
+
+    getToAbove: (orientation) -> return @getRel(orientation).toAbove
+    getToBelow: (orientation) -> return @getRel(orientation).toBelow
+    getToLeft:  (orientation) -> return @getRel(orientation).toLeft
+    getToRight: (orientation) -> return @getRel(orientation).toRight
+
+    # Access the oreintation-dependent (x,y) coordinates.  @ALIGNED coordinates are identical to
+    # fixed, but @ROTATED are swapped and return as (y,x).
+    getRelRowId: (orientation) -> return @getRel(orientation).rowId
+    getRelColId: (orientation) -> return @getRel(orientation).colId
+
+    ##
+    ## Model bootstrapping
+    ##
+
+    setParentGrid: (parentGrid) ->
+      super(parentGrid)
+      @aligned.initDiagonals(OrientationKind.ALIGNED)
+      @rotated.initDiagonals(OrientationKind.ROTATED)
+      return
+
+    ##
+    ## Event handling
+    ##
+
+    handleKeyPress: (value) ->
+      legalValue = @getLegalValue value
+      if (legalValue?)
+        @content = legalValue.toLowerCase()
+        if (legalValue != @content)
+          @isTriple = true
+        else
+          @isTriple = false
+
+      nextCell = @getNextCell()
+      if (nextCell?)
+        @parentGrid.moveCursor @, nextCell, false
+
+    getNextCell: () -> return @getToRight()
+    getPreviousCell: () -> return @getToLeft()
+
+    # TODO: Blocked and error cases...
+    getFill: () ->
+      if (@parentGrid.parentTicket.isCursorCell(@) )
+        retVal = CellStateKind.SELECTED
+      else if(@hasContent() && @parentGrid.parentTicket.myLettersInclude(@content))
+        retVal = CellStateKind.MATCHED
+      else
+        retVal = CellStateKind.COVERED
+
+      return retVal.fillImageKey
+
+    getBorder: () ->
       retVal = 'blank'
-      if (forCellModel?)
-        if (forCellModel == @wordLeft)
-          retVal = @orientation.getHeadBorder()
-        else if (forCellModel == @wordRight)
-          retVal = @orientation.getTailBorder()
-        else if (
-          (forCellModel.parentGrid == @wordLeft?.parentGrid) &&
-          (forCellModel.parentGrid == @wordRight?.parentGrid) &&
-          (forCellModel.getRelRowId() == @wordLeft.getRelRowId()) &&
-          (forCellModel.getRelRowId() == @wordRight.getRelRowId()) &&
-          (forCellModel.getRelColId() > @wordLeft.getRelColId()) &&
-          (forCellModel.getRelColId() < @wordRight.getRelColId())
-        )
-          # The complex-looking test above passes if forCellModel, wordLeft, and wordRight
-          # all belong to the same orientation-aware row of the same grid and forCellModel's
-          # orientation-aware column is both to wordLeft's right and to wordRight's left.
-          retVal = @orientation.getMidBorder()
+      if (false)
+        retVal = @orientation.getHeadBorder()
+      else if (false)
+        retVal = @orientation.getTailBorder()
+      else if (
+        false &&
+        (forCellModel.parentGrid == @wordLeft?.parentGrid) &&
+        (forCellModel.parentGrid == @wordRight?.parentGrid) &&
+        (forCellModel.getRelRowId() == @wordLeft.getRelRowId()) &&
+        (forCellModel.getRelRowId() == @wordRight.getRelRowId()) &&
+        (forCellModel.getRelColId() > @wordLeft.getRelColId()) &&
+        (forCellModel.getRelColId() < @wordRight.getRelColId())
+      )
+        # The complex-looking test above passes if forCellModel, wordLeft, and wordRight
+        # all belong to the same orientation-aware row of the same grid and forCellModel's
+        # orientation-aware column is both to wordLeft's right and to wordRight's left.
+        retVal = @orientation.getMidBorder()
 
-      return retVal
+      return retVal.imageKey
 
-    cellState: (forCellModel) =>
+    cellState: (forCellModel) ->
       if ((forCellModel == @cursorLeft) || (forCellModel == @cursorRight))
         return CellStateKind.SELECTED
       else if (
@@ -861,99 +1109,13 @@ define [
 
       return forCellModel.state
 
-    # TODO: Provide a REAL implementation!
-    isComplete = () => return true
-
-  # TODO: Enforce constraint that boardModel must be a CrosswordGrid
-  class FixedCell extends AbstractCellModel
-    isTriple: null
-    alignedWordCell: null
-    rotatedWordCell: null
-
-    constructor: (gridModel, rowId, colId, content) ->
-      super gridModel, rowId, colId, content
-      @isTriple = false
-      @aligned = new RelativeCell(rowId, colId, @)
-      @rotated = new RelativeCell(colId, rowId, @)
-      return @
-
-    # Get the orientation-dependent object with links in all four directions plus diagonals.
-    getRel: () =>
-      if (@parentGrid.orientation == OrientationKind.ROTATED)
-        return @rotated
-      else
-        return @aligned
-
-    getToAbove: () => return getRel().toAbove
-    getToBelow: () => return getRel().toBelow
-    getToLeft: () => return getRel().toLeft
-    getToRight: () => return getRel().toRight
-
-    # Access the oreintation-dependent (x,y) coordinates.  @ALIGNED coordinates are identical to
-    # fixed, but @ROTATED are swapped and return as (y,x).
-    getRelRowId: () => return getRel().rowId
-    getRelColId: () => return getRel().colId
-
-    handleKeyPress = (value) =>
-      legalValue = @getLegalValue value
-      if (legalValue?)
-        @content = legalValue
-        if (legalValue == legalValue.toUpperCase())
-          @isTriple = null
-
-      nextCell = @getNextCell()
-      if (nextCell?)
-        @parentGrid.moveCursor @, nextCell, false
-
-    # This implementation is suitable for fixed-in-place grids, like YourLetters and BonusWord.  CrosswordCell will
-    # want a different implementation.
-    handleBackspace: () =>
-      @content = '_'
-
-    handleLeftArrow: () =>
-      @parentGrid.moveCursor @, @getPreviousCell(), false
-
-    handleRightArrow: () =>
-      @parentGrid.moveCursor @, @getNextCell(), false
-
-    getLegalValue: (value) =>
-      # TODO: If upper case, make sure there aren't already four trippling cells and that no cell above or below
-      #       has content
-      return value
-
-    # Being overriden as makes sense, but overriding AbstractCellModel.handleValue() eliminates their only caller
-    getNextCell: () -> @getToRight()
-    getPreviousCell: () -> @getToLeft()
-
-    # TODO: Blocked and error cases...
-    getFill = () =>
-      if (@parentGrid.parentTicket.cursorCell == this)
-        retVal = CellStateKind.SELECTED
-      else if(@hasContent() && @parentGrid.parentTicket.yourLettersGrid.getCellsByContent(@content.toLowerCase()).length >= 1)
-        retVal = CellStateKind.MATCHED
-      else
-        retVal = CellStateKind.COVERED
-
-      return retVal.fillImageKey
-
-    getBorder: () =>
-      retVal = 'blank'
-      if (@parentGrid.parentTicket.cursorCell == this)
-        switch(@colId)
-          when 0
-            retVal = OrientationKind.ALIGNED.getBorderHead()
-          when 4
-            retVal = OrientationKind.ALIGNED.getBorderTail()
-          else
-            retVal = OrientationKind.ALIGNED.getBorderMiddle()
-
-      return retVal
-
-    openCursor: () =>
+    openCursor: () ->
       @parentGrid.wordLeft = @searchLeft(this, true)
       @parentGrid.wordRight = @searchRight(this, true)
       @parentGrid.cursorLeft = @searchLeft(@parentGrid.wordLeft, false)
       @parentGrid.cursorRight = @searchRight(@parentGrid.wordRight, false)
+
+      return
 
   # Enumeration of single and multi-bit masks for rapid corner/edge/interior detection
   class CellRegionEnum
@@ -976,7 +1138,6 @@ define [
     # 7, 11, 13, 14 are not terribly useful trios of edges)
 
   class RelativeCell
-
     toAbove: null
     toBelow: null
     toLeft: null
@@ -987,7 +1148,7 @@ define [
     toBelowLeft: null
     toBelowRight: null
 
-    constructor: (@rowId, @colId, @fixedCell) ->
+    constructor: (@rowId, @colId) ->
       if (rowId == 0)
         if (colId == 0)
           # Top Left Corner
@@ -1017,7 +1178,6 @@ define [
       else
         # Interior
         @cellRegion = CellRegionEnum.INTERIOR
-
       return @
 
     # This routine is called twice for each fixed cell during model construction.  The orientation is toggled
@@ -1026,12 +1186,12 @@ define [
     # tests for fill viability, which involves checking the other three cells of either 1 (4 corners), 2 (36
     # non-corner edges) or 4 (81 interior cells) 2x2 quads.  To simplify, triplets for the appropriate quads
     # are derived and cached at this time as well.
-    initDiagonals: () ->
+    initDiagonals: (orientation) ->
       if (@cellRegion == CellRegionEnum.INTERIOR)
-        @toAboveLeft = @toAbove.getToLeft()
-        @toAboveRight = @toAbove.getToRight()
-        @toBelowLeft = @toBelow.getToLeft()
-        @toBelowRight = @toBelow.getToRight()
+        @toAboveLeft = @toAbove.getToLeft(orientation)
+        @toAboveRight = @toAbove.getToRight(orientation)
+        @toBelowLeft = @toBelow.getToLeft(orientation)
+        @toBelowRight = @toBelow.getToRight(orientation)
         @quads = [
           new Array(@toLeft,  @toAboveLeft,  @toAbove)
           new Array(@toRight, @toAboveRight, @toAbove)
@@ -1043,47 +1203,45 @@ define [
           # Its a corner
           if (@cellRegion & CellRegionEnum.TOP_EDGE)
             if (@cellRegion == CellRegionEnum.TOP_LEFT_CORNER)
-              @toBelowRight = @toBelow.getToRight()
+              @toBelowRight = @toBelow.getToRight(orientation)
               @quads = [new Array(@toRight, @toBelowRight, @toBelow)]
             else
-              @toBelowLeft = @toBelow.getToLeft()
+              @toBelowLeft = @toBelow.getToLeft(orientation)
               @quads = [new Array(@toLeft,  @toBelowLeft,  @toBelow)]
           else if (@cellRegion == CellRegionEnum.BOTTOM_LEFT_CORNER)
-            @toAboveRight = @toAbove.getToRight()
+            @toAboveRight = @toAbove.getToRight(orientation)
             @quads = [new Array(@toRight, @toAboveRight, @toAbove)]
           else
-            @toAboveLeft = @toAbove.getToLeft()
+            @toAboveLeft = @toAbove.getToLeft(orientation)
             @quads = [new Array(@toLeft,  @toAboveLeft,  @toAbove)]
         else if (@cellRegion == CellRegionEnum.TOP_EDGE)
-          @toBelowLeft = @toBelow.getToLeft()
-          @toBelowRight = @toBelow.getToRight()
+          @toBelowLeft = @toBelow.getToLeft(orientation)
+          @toBelowRight = @toBelow.getToRight(orientation)
           @quads = [
             new Array(@toLeft,  @toBelowLeft,  @toBelow)
             new Array(@toRight, @toBelowRight, @toBelow)
           ]
         else
-          @toAboveLeft = @toAbove.getToLeft()
-          @toAboveRight = @toAbove.getToRight()
+          @toAboveLeft = @toAbove.getToLeft(orientation)
+          @toAboveRight = @toAbove.getToRight(orientation)
           @quads = [
             new Array(@toLeft,  @toAboveLeft,  @toAbove)
             new Array(@toRight, @toAboveRight, @toAbove)
           ]
       else if (@cellRegion == CellRegionEnum.LEFT_EDGE)
-        @toAboveRight = @toAbove.getToRight()
-        @toBelowRight = @toBelow.getToRight()
+        @toAboveRight = @toAbove.getToRight(orientation)
+        @toBelowRight = @toBelow.getToRight(orientation)
         @quads = [
           new Array(@toRight, @toAboveRight, @toAbove)
           new Array(@toRight, @toBelowRight, @toBelow)
         ]
       else
-        @toAboveLeft = @toAbove.getToLeft()
-        @toBelowLeft = @toBelow.getToLeft()
+        @toAboveLeft = @toAbove.getToLeft(orientation)
+        @toBelowLeft = @toBelow.getToLeft(orientation)
         @quads = [
           new Array(@toLeft,  @toAboveLeft,  @toAbove)
           new Array(@toLeft,  @toBelowLeft,  @toBelow)
         ]
       return
-
-
 
   return xwModule

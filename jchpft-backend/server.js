@@ -3,8 +3,10 @@
  */
 
 var express = require('express');
+var jade = require('jade');
 var http = require('http');
 var path = require('path');
+var fs = require('fs');
 var lessMiddleware = require('less-middleware');
 var coffeeMiddleware = require('coffee-middleware');
 
@@ -28,6 +30,7 @@ app.configure(function () {
     app.set('port', process.env.PORT || 3000);
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'jade');
+    app.engine('html', jade.__express);
     app.locals.basedir = path.join(__dirname, 'views');
 
     // What do these do?
@@ -41,11 +44,11 @@ app.configure(function () {
     }
     app.use(express.json());
     app.use(express.urlencoded());
-
-    // "Boilerplate you should already have", but I didn't...
-    app.use(express.bodyParser({keepExtensions: true, uploadDir: '/w/e/my/files'}));
-    app.use(express.methodOverride());
     app.use(app.router);
+
+    // Boilerplate I read somewhere that "you should already have", but I do not yet want.
+    // app.use(express.bodyParser({keepExtensions: true, uploadDir: '/w/e/my/files'}));
+    // app.use(express.methodOverride());
 
     // Compile .less and .coffee files, then map resources under /public to static files relative to __dirname/public.
     app.use('/app', express.static(relPath('features')));
@@ -89,6 +92,9 @@ app.configure(function () {
     // Routes
     //
     app.get('/', routes.index);
+    app.get('/test', function(req, res){
+        res.render('index.jade', { title: 'Express' });
+    });
 });
 
 http.createServer(app).listen(app.get('port'), function () {
