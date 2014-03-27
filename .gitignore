@@ -6,6 +6,9 @@
 # Webstorm project
 .idea
 
+# Windows environment
+desktop.ini
+
 # Node dependency management
 node_modules
 npm-debug.log
