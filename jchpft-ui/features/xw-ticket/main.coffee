@@ -26,43 +26,68 @@ define [
 
       templateUrl: '/app/xw-ticket/partials/xwTicket.html',
       controller: ($scope) ->
-  #      this.closeActiveCursor = (withCommit) ->
-  #        if (activeGridScope != null)
-  #          tempGridScope = activeGridScope
-  #          activeGridScope = null
-  #          $scope.ticketModel.activeGrid = null
-  #
-  #          tempGridScope.$broadcast('xw.gridEvent.closeCursor', withCommit)
-  #          if (withCommit)
-  #            this.updateReportingService()
-  #
-  #      this.openActiveCursor = (gridScope, gridModel, cursorCell) ->
-  #        # TODO: Check whether atomicity protection is required for the next two instructions...
-  #        $scope.ticketModel.activeGrid = gridModel
-  #        activeGridScope = gridScope
-  #
-  #        activeGridScope.$broadcast('xw.gridEvent.openCursor', cursorCell)
-  #      # gridModel.openCursor cursorCell
-  #
-  #      $scope.$on 'xw.gridEvent.cellClicked', (event, gridType, gridModel, cellModel) ->
-  #        closeActiveCursor(true)
-  #        openActiveCursor(event.targetScope, gridModel, cellModel)
-  #
-  #      # This isn't being used yet and likelu won't be.  Rather than using pull-based polling to discover lifecycle
-  #      # changes, I've made up my mind to instead use push-based promises in an all() union
-  #      this.isEditableAt = (gridType) ->
-  #        return gridType.isEditableAt($scope.ticketModel.lifecycleStage)
+        # ** closeCursor(), openCursor(), and moveCursor() **
+        # Private cursor management functions that carry out a cursor state change requested by the underlying model
+        # (hence presumed to be correct and formed with valid arguments--no "are you sure" or null input verification
+        # by-design.
+        closeCursor = (withCommit) ->
+          tempGrid = $scope.ticketModel.activeGrid
+          tempCell = $scope.ticketModel.cursorCell
+          $scope.ticketModel.activeGrid = null
+          $scope.ticketModel.cursorCell = null
+          tempGrid.handleCloseCursor(withCommit, tempCell)
+
+        openCursor = (targetCell) ->
+          targetGrid = targetCell.parentGrid
+          $scope.ticketModel.activeGrid = targetGrid
+          $scope.ticketModel.cursorCell = targetCell
+          targetGrid.handleOpenCursor(targetCell)
+
+        moveCursor = (targetCell) ->
+          tempGrid = $scope.ticketModel.activeGrid
+          tempCell = $scope.ticketModel.cursorCell
+          $scope.ticketModel.cursorCell = targetCell
+          tempGrid.handleMoveCursor(tempCell, targetCell)
+
+        # ** onCellClick() and onKeyPress() **
+        # Validation of user input occurs in the
+        # DOM event handlers that call these methods post-validation: 'onCellClick' and 'onKeyPress'.
+        $scope.onCellClick = (cellModel, $event) ->
+          responseAction = cellModel.parentGrid.handleCellClick(cellModel, $event)
+          if (responseAction? && responseAction instanceof Array && responseAction.length > 0)
+            switch (responseAction[0])
+              when OnHandleEventAction.NO_ACTION
+                angular.noop()
+              when OnHandleEventAction.MOVE_CURSOR
+                moveCursor responseAction[1]
+              when OnHandleEventAction.OPEN_CURSOR
+                if ($scope.ticketModel.activeGrid?)
+                  closeCursor responseAction[1]
+                openCursor responseAction[2]
+              when OnHandleEventAction.CLOSE_CURSOR
+                closeCursor responseAction[1]
+              else
+                suffixStr = ' returned by cell click event handler'
+                if (responseAction.length > 1)
+                  suffixStr = ', with additional arguments ' + responseAction.slice(1).toString() + suffixStr
+                throw 'IllegalStateException -- Unknown response action type ' + responseAction[0] + suffixStr
+          else
+            throw 'IllegalStateException: Non-array or empty-array ' + responseAction?.toString() + ' returned by cell click event handler'
+          return false
 
         # This is also likely to vanish in favor of $rootScope.$broadcast('updateNotice')
         this.purgeWordList = () ->
           $scope.dataReportingModel.purgeWordList()
+          return
 
         this.purgeLetterList = () ->
           $scope.dataReportingModel.revealedLetters = []
           $scope.dataReportingModel.purgedLetters = true
+          return
 
         this.updateReportingService = () ->
-      link: ($scope, $elem, $attr) ->
+          return
+
         $scope.ticketModel = xwModelFactory.createModelFromDocument $scope.ticketDocument
         $scope.imageModel =
           fillImages: fillImages
@@ -78,78 +103,21 @@ define [
     scope: false
     templateUrl: '/app/xw-ticket/partials/bonusValueCell.html'
 
-  xwModule.directive 'xwYourLettersGrid', () ->
-    restrict: 'E'
-    replace: true
-    require: '^xwTicket'
-    scope: true
-    templateUrl: '/app/xw-ticket/partials/yourLettersGrid.html'
-    link: ($scope, $elem, $attrs, ticketCtrl) ->
-      $scope.gridModel = $scope.ticketModel.yourLettersGrid
-      $scope.$on 'xw.gridEvent.closeCursor', ($event, withCommit) ->
-        $scope.gridModel.closeCursor
+  xwModule.directive 'xwYourLettersGrid', ['xwDirectiveFactory', (xwDirectiveFactory) ->
+    return xwDirectiveFactory.gridDirective('yourLetters')
+  ]
 
-      $scope.$on 'xw.gridEvent.openCursor', ($event, cursorCell) ->
-        console.log('Before open cursor call on your letters grid model')
-        $scope.gridModel.openCursor cursorCell
-        console.log('After open cursor call on your letters grid model')
-      return
+  xwModule.directive 'xwYourLettersCell', ['xwDirectiveFactory', (xwDirectiveFactory) ->
+    return xwDirectiveFactory.cellDirective('yourLetters')
+  ]
 
-  xwModule.directive 'xwYourLettersCell', () ->
-    restrict: 'E'
-    replace: true
-    require: '^xwTicket'
-    scope: false
-    templateUrl: '/app/xw-ticket/partials/yourLettersCell.html'
-    link: ($scope, $elem, $attrs, ticketCtrl) ->
-      # $scope.cellModel = ticketCtrl.getCellModel GridKind.YOUR_LETTERS, parseInt($attrs.rowid), parseInt($attrs.colid)
-      $scope.onCellClick = () ->
-        cellModel = $scope.cellModel
-        $scope.$emit 'xw.gridEvent.cellClicked', 'yourLetters', cellModel.parentGrid, cellModel
-      $scope.$on 'xw.gridEvent.closeCursor', (event, withCommit) ->
-        $scope.cellModel.onCloseCursor(withCommit)
-      $scope.$on 'xw.gridEvent.openCursor', (event, cursorCell) ->
-        console.log('Cell model receives open cursor event')
-        if ($scope.cellModel == cursorCell)
-          console.log('Before open cursor call on your letters cell model')
-          cursorCell.onOpenCursor()
-          console.log('After open cursor call on your letters grid model')
-        console.log('Before open cursor call on your letters grid model')
+  xwModule.directive 'xwBonusWordGrid', ['xwDirectiveFactory', (xwDirectiveFactory) ->
+    return xwDirectiveFactory.gridDirective('bonusWord')
+  ]
 
-      return
-
-  xwModule.directive 'xwBonusWordGrid', () ->
-    restrict: 'E'
-    replace: true
-    require: '^xwTicket'
-    scope: true
-    templateUrl: '/app/xw-ticket/partials/bonusWordGrid.html'
-    link: ($scope, $elem, $attrs, ticketCtrl) ->
-      $scope.gridModel = $scope.ticketModel.bonusWordGrid
-      $scope.$on 'xw.gridEvent.closeCursor', ($event, withCommit) ->
-        $scope.gridModel.closeCursor(withCommit)
-      $scope.$on 'xw.gridEvent.openCursor', ($event, cursorCell) ->
-        $scope.gridModel.openCursor cursorCell
-      return
-
-  xwModule.directive 'xwBonusWordCell', () ->
-    restrict: 'E'
-    replace: true
-    require: '^xwTicket'
-    scope: false
-    templateUrl: '/app/xw-ticket/partials/bonusWordCell.html'
-    link: ($scope, $elem, $attrs, ticketCtrl) ->
-      # $scope.cellModel = ticketCtrl.getCellModel 'bonusWord', parseInt($attrs.rowid), parseInt($attrs.colid)
-      $scope.onCellClick = () ->
-        cellModel = $scope.cellModel
-        $scope.$emit 'xw.gridEvent.cellClicked', GridKind.BONUS_WORD, cellModel.parentGrid, cellModel
-      $scope.$on 'xw.gridEvent.closeCursor', ($event, withCommit) ->
-        $scope.cellModel.onCloseCursor(withCommit)
-      $scope.$on 'xw.gridEvent.openCursor', ($event, cursorCell) ->
-        if ($scope.cellModel == cursorCell)
-          cursorCell.onOpenCursor()
-      return
-
+  xwModule.directive 'xwBonusWordCell', ['xwDirectiveFactory', (xwDirectiveFactory) ->
+    return xwDirectiveFactory.cellDirective('bonusWord')
+  ]
 
   xwModule.directive 'xwCrosswordGrid', ['xwDirectiveFactory', (xwDirectiveFactory) ->
     return xwDirectiveFactory.gridDirective('crossword')
@@ -166,13 +134,7 @@ define [
     scope: false
     templateUrl: '/app/xw-ticket/partials/bonusValue.html'
 
-  xwModule.directive 'cellImg', () ->
-    restrict: 'E'
-    replace: true
-    template: (tElem, tAttr) ->
-      return '<img ng-src="{{' + tAttr.map + '[' + tAttr.key + ']}}">'
-
-  xwModule.value 'valueImages', () ->
+  xwModule.value 'valueImages', {
     a: '/app/xw-ticket/images/val/A.png'
     b: '/app/xw-ticket/images/val/B.png'
     c: '/app/xw-ticket/images/val/C.png'
@@ -226,31 +188,34 @@ define [
     Y: '/app/xw-ticket/images/gval/Y.png'
     Z: '/app/xw-ticket/images/gval/Z.png'
     _: '/app/xw-ticket/images/val/blank.png'
-    '?': '/app/xw-ticket/images/val/qm.png'
+    cursor: '/app/xw-ticket/images/val/qm.png'
     blank: '/app/xw-ticket/images/val/blank.png'
     undefined: '/app/xw-ticket/images/val/blank.png'
+  }
 
-  xwModule.value 'borderImages', () =>
-    htop: "/app/xw-ticket/images/border/htop.png"
-    hmid: "/app/xw-ticket/images/border/hmid.png"
-    hend: "/app/xw-ticket/images/border/hend.png"
-    vtop: "/app/xw-ticket/images/border/vtop.png"
-    vmid: "/app/xw-ticket/images/border/vmid.png"
-    vend: "/app/xw-ticket/images/border/vend.png"
-    blank: "/app/xw-ticket/images/val/blank.png"
-    undefined: "/app/xw-ticket/images/val/blank.png"
+  xwModule.value 'borderImages', {
+    htop: '/app/xw-ticket/images/border/htop.png'
+    hmid: '/app/xw-ticket/images/border/hmid.png'
+    hend: '/app/xw-ticket/images/border/hend.png'
+    vtop: '/app/xw-ticket/images/border/vtop.png'
+    vmid: '/app/xw-ticket/images/border/vmid.png'
+    vend: '/app/xw-ticket/images/border/vend.png'
+    blank: '/app/xw-ticket/images/val/blank.png'
+    undefined: '/app/xw-ticket/images/val/blank.png'
+  }
 
-  xwModule.value 'fillImages', () =>
-    revealed: "/app/xw-ticket/images/fill/brite1.png"
-    selected: "/app/xw-ticket/images/fill/selected1.png"
-    triple: "/app/xw-ticket/images/fill/imageSrc.png"
-    blocked: "/app/xw-ticket/images/fill/locked.png"
-    tooshort: "/app/xw-ticket/images/fill/altPath.png"
-    tripshort: "/app/xw-ticket/images/fill/golden.png"
-    dualtrip: "/app/xw-ticket/images/fill/cornsilk.png"
-    dualtripshort: "/app/xw-ticket/images/fill/briteblue.png"
-    baseline: "/app/xw-ticket/images/fill/pink2.png"
-    undefined: "/app/xw-ticket/images/fill/pink2.png"
+  xwModule.value 'fillImages', {
+    revealed: '/app/xw-ticket/images/fill/brite1.png'
+    selected: '/app/xw-ticket/images/fill/selected1.png'
+    triple: '/app/xw-ticket/images/fill/imageSrc.png'
+    blocked: '/app/xw-ticket/images/fill/locked.png'
+    tooshort: '/app/xw-ticket/images/fill/altPath.png'
+    tripshort: '/app/xw-ticket/images/fill/golden.png'
+    dualtrip: '/app/xw-ticket/images/fill/cornsilk.png'
+    dualtripshort: '/app/xw-ticket/images/fill/briteblue.png'
+    baseline: '/app/xw-ticket/images/fill/pink2.png'
+    undefined: '/app/xw-ticket/images/fill/pink2.png'
+  }
 
   xwModule.controller 'CrosswordCtrl', ['$scope', 'xwDocumentFactory', 'xwReportSvc', ($scope, xwDocumentFactory, xwReportSvc) ->
     $scope.documentModel = xwDocumentFactory.newTripleNoTwentyTicketDocument('858:323842-049', 'tripleNoTwenty')
@@ -382,13 +347,28 @@ define [
   ##
 
   class OrientationKind
-    @ALIGNED =
-      labels: ['htop', 'hmid', 'hend']
-      opposite: OrientationKind.ROTATED
-    @ROTATED =
-      labels: ['vtop', 'vmid', 'vend']
-      opposite: OrientationKind.ALIGNED
+    @ALIGNED = new OrientationKind( {
+        head: 'htop',
+        mid:  'hmid',
+        tail: 'hend'
+      },
+      () -> return OrientationKind.ROTATED
+    )
+    @ROTATED = new OrientationKind( {
+        head: 'vtop',
+        mid:  'vmid',
+        tail: 'vend'
+      },
+      () -> return OrientationKind.ALIGNED
+    )
 
+    constructor: (@labels, @oppositeFn) ->
+      return @
+
+    getBorderHead: () => return @labels.head
+    getBorderMiddle: () => return @labels.mid
+    getBorderTail: () => return @labels.tail
+    changeOrientation: () => return @oppositeFn()
 
   class LifecycleStage
     constructor: (@canEditDescription, @canEditDiscoveries) ->
@@ -406,8 +386,11 @@ define [
     isYourLetterGridEditable:      () => return @canEditDiscoveries
     areReportsUpdatable:           () => return @canEditDiscoveries
 
-
   class CellStateKind
+    constructor: (fillImageKey) ->
+      @fillImageKey = fillImageKey
+      return @
+
     # The next four states are used for the cells of a grid that is not reachable by a currently open edit cursor.
     #
     # The BonusWord grid uses @COVERED for all cells whose value has not yet been discovered in YourLetters and
@@ -436,7 +419,8 @@ define [
 
     @ERROR            = new CellStateKind('tooshort')
 
-    constructor: (@fillImageKey) -> return @
+    getImageKey: () => return @fillImageKey
+
 
   class CellErrorKind
     @ONE_LETTER_WORD = new CellErrorKind('Isolated letter tiles are not allowed.  Letters tiles must be adjacent to enough other letters tiles to create at least one three letter word.')
@@ -556,6 +540,17 @@ define [
 
       @setPayoutValue = newValue
 
+  # Every handleX() method returns an array describing the caller's requested next
+  # action.  The first element is a value from this array, which both defines the
+  # next requested action and how the remaining array elements shape that request
+  # (e.g. the next element of a @MOVE_CURSOR reply identifies the target cell
+  class OnHandleEventAction
+    @NO_ACTION = 'NoAction'
+    @MOVE_CURSOR = 'MoveCursor'
+    @OPEN_CURSOR = 'OpenCursor'
+    @CLOSE_CURSOR = 'CloseCursor'
+    @ROLLBACK = 'Rollback'
+
 
   VALUE_CHARS_ARRAY = [
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
@@ -570,18 +565,20 @@ define [
     constructor: (@gridKind, @numRows, @numCols, @cells) ->
       @numCells   = numRows*numCols
       if (cells.length != @numCells)
-        throw "IllegalArgument: cells.length = " + cells.length + ', @numCells = ' + @numCells
+        throw 'IllegalArgument: cells.length = ' + cells.length + ', @numRows = ' + @numRows + ', @numCols = ' + @numCols
 
       # A hash from character to an array of cells whose content is set to that character.
       contentMap = {}
       VALID_CHARS_ARRAY.forEach( (nextChar) -> contentMap[nextChar] = [] )
+
+      parentGrid = @
       cells.forEach( (cellModel) ->
         value = cellModel.content
         if (value != '_')
           value = value.toLowerCase()
 
         contentMap[value].push(cellModel)
-        cellModel.parentGrid = @
+        cellModel.parentGrid = parentGrid
       )
       @contentMap = contentMap
       return @
@@ -594,7 +591,7 @@ define [
     @isLegalValueRegex: /^[a-z_]$/
 
     ##
-    ## Cell registration and retrieval
+    ## Cell retrieval
 
     getCellByCoordinates: (rowId, colId) ->
       if (rowId < 0 || rowId >= @numRows)
@@ -611,11 +608,32 @@ define [
       return clone @contentMap[value]
 
     ##
+    ## Cell clickability
+
+    # TODO: Primitive (wrong) implementation: accept all clicks.
+    handleCellClick = (cellModel, clickEvent) =>
+      return [OnHandleEventAction.OPEN_CURSOR, true, cellModel]
+
+    handleOpenCursor = (cursorCell) =>
+      cursorCell.temp = true
+      @temp = cursorCell
+      return
+
+    handleCloseCursor = (withCommit, lastCursor) =>
+      @temp.temp = false
+      @temp = null
+      return
+
+    handleMoveCursor = (origCell, nextCell) =>
+      return
+
+    ##
     ## Cursor based key stroke handlers
 
     # Default behavior without override: set content to the lowercase version of input and then advance cursor to
     # next empty cell, if any.
-    onKeyPressEvent: (inputValue) =>
+    handleKeyPressEvent = (inputValue) =>
+      retVal = [OnHandleEventAction.NO_ACTION]
       validatedInput = doBeforeHandleKeyPress(@cursorCell, inputValue)
       if (validatedInput)
         originalValue = @cursorCell.content
@@ -626,24 +644,33 @@ define [
 
         nextCell = doAfterHandleKeyInput(@cursorCell, originalValue)
         if (nextCell? && nextCell != @cursorCell)
-          @ticketModel.moveCursor @cursorCell, nextCell, false
-
-    # This implementation is suitable for fixed-in-place grids, like YourLetters and BonusWord.  CrosswordCell may
+          # @ticketModel.moveCursor @cursorCell, nextCell, false
+          retVal = [OnHandleEventAction.MOVE_CURSOR, nextCell]
+      return retVal
+    # This implementation is suitable for fixed-in-place grids that can rely exclusively on the arrow keys for
+    # cursor movement.# , like YourLetters and BonusWord.  CrosswordCell may
     # want a different implementation that moves the cursor.  Or perhaps not...
-    handleBackspace:  () =>
+    handleBackspace =  () =>
       @cursorCell.content = '_'
-    handleLeftArrow:  () => @ticketModel.moveCursor @ , @getPreviousCell(), false
-    handleRightArrow: () => @ticketModel.moveCursor @, @getNextCell(), false
+      return [OnHandleEventAction.NO_ACTION]
+    handleLeftArrow =  () => # @ticketModel.moveCursor @ , @getPreviousCell(), false
+      return [OnHandleEventAction.MOVE_CURSOR, @getPreviousCell()]
+    handleRightArrow = () => # @ticketModel.moveCursor @, @getNextCell(), false
+      return [OnHandleEventAction.MOVE_CURSOR, @getNextCell()]
+    handleEscape =     () =>
+      return [OnHandleEventAction.ROLLBACK]
+    handleEnter =      () =>
+      return [OnHandleEventAction.CLOSE]
+    handleTab =      () =>
+      return [OnHandleEventAction.OPEN, 'withCommit', ticketModel.getCursorCell()]
+    handleOthers =     () =>
+      return [OnHandleEventAction.NO_ACTION]
 
     ##
     ## Template methods for implementing subclass variants
-    isComplete: () =>
-      @cells.every((cellModel) ->
-        return cellModel.hasValue() && @contentMap[cellModel.content.toLowerCase()].length == 1
-      )
 
     # TODO: Crossword cell will likely want to override this!
-    isLegalValue: (value) -> return AbstractGridModel.isLegalValueRegex.test(value)
+    isLegalValue = (value) -> return AbstractGridModel.isLegalValueRegex.test(value)
 
     # Each subtype MAY override this.  Return false to reject a character.  Return the character as-is or its
     # canonicalized equivalent to accept.  Default impl returns lower case version of input.  Its suitable for
@@ -651,7 +678,7 @@ define [
     # more than one cell, and all characters in the persisted form are expected to be lower case.  It is not
     # suitable for Crossword, where <Shift> applies the triple prize modifier and capitalization is used to
     # store the presence of a triple prize cell modifier.
-    doBeforeHandleKeyInput: (targetCell, inputValue) =>
+    doBeforeHandleKeyInput = (targetCell, inputValue) =>
       validatedValue = inputValue.toLowerCase()
       if (targetCell?.content != validatedValue)
         matchedCells = @parentGrid.getCellsByContent(validatedValue)
@@ -660,18 +687,21 @@ define [
 
       return validatedValue
 
-    doAfterHandleKeyInput: (targetCell, originalValue) =>
+    doAfterHandleKeyInput = (targetCell, originalValue) =>
       return targetCell.getNextCell()
 
     # TODO: MAY override this if lifecycle state advancement does not depend on a grid having a value in
     #       every cell (ok rule for bonusWord and yourLetters, but not main crossword grid).
-    isComplete: () -> return @cells.every (value) -> return value.hasContent()
+    isComplete = () =>
+      @cells.every((cellModel) ->
+        return cellModel.hasValue() && @contentMap[cellModel.content.toLowerCase()].length == 1
+      )
 
     # TODO: MAY ovveride this in each subclass to encapsulate click-based cursor movement semantics
-    testForMoveCursor: (targetCell) -> return targetCell
+    #testForMoveCursor = (targetCell) -> return targetCell
 
     # TODO: MUST override this in each subclass to encapsulate click-based cursor creation semantics
-    testForOpenCursor: (targetCell) -> return targetCell
+    #testForOpenCursor = (targetCell) -> return targetCell
 
   class AbstractCellModel
     dirty: false
@@ -680,12 +710,33 @@ define [
       @coordinates = rowId + ',' + colId
       return @
 
-    isBlank: () -> return @content == '_'
-    hasContent: () -> return @content != '_'
+    isBlank = () -> return @content == '_'
+    hasContent = () -> return @content != '_'
+
+    getContent = () ->
+      retVal = '_'
+      if (@parentGrid.parentTicket.cursorCell == this)
+        retVal = 'cursor'
+      else if (@hasContent())
+        retVal = @content
+
+      return retVal
+
+    # Each subtype will want to override this method--they each have different business logic surrounding fill states
+    getFill = () =>
+      if (@temp)
+        retVal = CellStateKind.MATCHED.fillImageKey
+      else
+        retVal = CellStateKind.COVERED.fillImageKey
+      return retVal
+
+    # Each subtype will want to override this method--they each have different business logic surrounding borders
+    getBorder = () ->
+      return 'blank'
 
     # Each subtype SHOULD override these to define forward/backward navigation and boundaries
-    getNextCell:     () => return this
-    getPreviousCell: () => return this
+    getNextCell =     () => return this
+    getPreviousCell=  () => return this
 
 
   #
@@ -707,6 +758,29 @@ define [
     getNextCell: () => return @next
     getPreviousCell: () => return @previous
 
+    getFill = () =>
+      if (@parentGrid.parentTicket.cursorCell == this)
+        retVal = CellStateKind.SELECTED
+      else if(@hasContent() && @parentGrid.parentTicket.yourLettersGrid.getCellsByContent(@content).length >= 1)
+        retVal = CellStateKind.MATCHED
+      else
+        retVal = CellStateKind.COVERED
+
+      return retVal.fillImageKey
+
+    getBorder: () =>
+      retVal = 'blank'
+      if (@parentGrid.parentTicket.cursorCell == this)
+        switch(@colId)
+          when 0
+            retVal = OrientationKind.ALIGNED.getBorderHead()
+          when 4
+            retVal = OrientationKind.ALIGNED.getBorderTail()
+          else
+            retVal = OrientationKind.ALIGNED.getBorderMiddle()
+
+      return retVal
+
 
   #
   # Your Letters Grid and Cell
@@ -723,6 +797,20 @@ define [
     getNextCell: () => return @next
     getPreviousCell: () => return @previous
 
+    getFill = () =>
+      if (@parentGrid.parentTicket.cursorCell == this)
+        retVal = CellStateKind.SELECTED
+      else if(@hasContent())
+        retVal = CellStateKind.REVEALED
+      else
+        retVal = CellStateKind.COVERED
+
+      return retVal.fillImageKey
+
+    # TODO: Need an image for unary borders
+    getBorder: () =>
+      return 'blank'
+
 
   #
   # Main Crossword Grid and Cell
@@ -731,18 +819,11 @@ define [
     constructor: (cells) ->
       super 'crossword', 11, 11, cells
       @orientation = OrientationKind.ALIGNED
-      @wordLeft    = null
-      @wordRight   = null
-      @cursorLeft  = null
-      @cursorRight = null
+
       return @
 
     toggleOrientation: () =>
       @orientation = @orientation.getOpposite()
-      @wordLeft    = null
-      @wordRight   = null
-      @cursorLeft  = null
-      @cursorRight = null
 
     cellBorder: (forCellModel) =>
       retVal = 'blank'
@@ -796,6 +877,7 @@ define [
       @rotated = new RelativeCell(colId, rowId, @)
       return @
 
+    # Get the orientation-dependent object with links in all four directions plus diagonals.
     getRel: () =>
       if (@parentGrid.orientation == OrientationKind.ROTATED)
         return @rotated
@@ -806,10 +888,13 @@ define [
     getToBelow: () => return getRel().toBelow
     getToLeft: () => return getRel().toLeft
     getToRight: () => return getRel().toRight
+
+    # Access the oreintation-dependent (x,y) coordinates.  @ALIGNED coordinates are identical to
+    # fixed, but @ROTATED are swapped and return as (y,x).
     getRelRowId: () => return getRel().rowId
     getRelColId: () => return getRel().colId
 
-    handleInput = (value) =>
+    handleKeyPress = (value) =>
       legalValue = @getLegalValue value
       if (legalValue?)
         @content = legalValue
@@ -840,76 +925,165 @@ define [
     getNextCell: () -> @getToRight()
     getPreviousCell: () -> @getToLeft()
 
+    # TODO: Blocked and error cases...
+    getFill = () =>
+      if (@parentGrid.parentTicket.cursorCell == this)
+        retVal = CellStateKind.SELECTED
+      else if(@hasContent() && @parentGrid.parentTicket.yourLettersGrid.getCellsByContent(@content.toLowerCase()).length >= 1)
+        retVal = CellStateKind.MATCHED
+      else
+        retVal = CellStateKind.COVERED
+
+      return retVal.fillImageKey
+
+    getBorder: () =>
+      retVal = 'blank'
+      if (@parentGrid.parentTicket.cursorCell == this)
+        switch(@colId)
+          when 0
+            retVal = OrientationKind.ALIGNED.getBorderHead()
+          when 4
+            retVal = OrientationKind.ALIGNED.getBorderTail()
+          else
+            retVal = OrientationKind.ALIGNED.getBorderMiddle()
+
+      return retVal
+
     openCursor: () =>
       @parentGrid.wordLeft = @searchLeft(this, true)
       @parentGrid.wordRight = @searchRight(this, true)
       @parentGrid.cursorLeft = @searchLeft(@parentGrid.wordLeft, false)
       @parentGrid.cursorRight = @searchRight(@parentGrid.wordRight, false)
 
-    searchLeft: (startCell, requireContent) =>
-      if startCell == null
-        throw 'IllegalArgument'
+  # Enumeration of single and multi-bit masks for rapid corner/edge/interior detection
+  class CellRegionEnum
+    @INTERIOR = 0
 
-      if requireContent
-        lastCell = startCell
-        nextCell = startCell.getToLeft()
-        while (nextCell?.hasContent())
-          lastCell = nextCell
-          nextCell = lastCell.getToLeft()
-      else
-        nextCell        = startCell.getToLeft()
+    @TOP_EDGE = 1
+    @BOTTOM_EDGE = 2
+    @LEFT_EDGE = 4
+    @RIGHT_EDGE = 8
 
-        upOne           = nextCell?.getToAbove()
-        downOne         = nextCell?.getToBelow()
-        leftOne         = nextCell?.getToLeft()
-        rightOne        = startCell
-        upOneFull       = upOne?.hasContent()
-        downOneFull     = downOne?.hasContent()
-        leftOneFull     = leftOne?.hasContent()
-        rightOneFull    = startCell.hasContent()
+    @TOP_LEFT_CORNER = @TOP_EDGE | @LEFT_EDGE          # 5
+    @TOP_RIGHT_CORNER = @TOP_EDGE | @RIGHT_EDGE        # 9
+    @BOTTOM_LEFT_CORNER = @BOTTOM_EDGE | @LEFT_EDGE    # 6
+    @BOTTOM_RIGHT_CORNER = @BOTTOM_EDGE | @RIGHT_EDGE  # 10
 
-        topLeft         = upOne?.getToLeft()
-        topRight        = upOne?.getToRight()
-        bottomLeft      = downOne?.getToLeft()
-        bottomRight     = downOne?.getToRight()
-        topLeftFull     = topLeft?.hasContent()
-        topRightFull    = topRight?.hasContent()
-        bottomLeftFull  = bottomLeft?.hasContent()
-        bottomRightFull = bottomRight?.hasContent()
+    @HORIZONTAL_EDGE = @TOP_EDGE | @BOTTOM_EDGE        # 3
+    @VERTICAL_EDGE = @LEFT_EDGE | @RIGHT_EDGE          # 12
+    @ANY_EDGE = @HORIZONTAL_EDGE | @VERTICAL_EDGE      # 15
 
-        upTwo           = upOne?.getToAbove()
-        downTwo         = downOne?.getToBelow()
-        leftTwo         = leftOne?.getToLeft()
-        rightTwo        = rightOne?.getToRight()
-        upTwoFull       = upTwo?.hasContent()
-        downTwoFull     = downTwo?.hasContent()
-        leftTwoFull     = leftTwo?.hasContent()
-        rightTwoFull    = rightTwo?.hasContent()
-
-        while (nextCell != null && !(
-          (
-            (lastAbove != null) && (nextAbove != null) && (lastAbove.hasContent()) && (nextAbove.hasContent())
-          ) || (
-            (lastBelow != null) && (nextBelow != null) && (lastBelow.hasContent()) && (nextBelow.hasContent())
-          )
-        ))
-          lastCell  = nextCell
-          lastAbove = nextAbove
-          lastBelow = nextBelow
-          nextCell  = lastCell.getToLeft()
-          nextAbove = lastAbove.getToLeft()
-          nextBelow = lastBelow.getToLeft()
-
-      return lastCell
+    # 7, 11, 13, 14 are not terribly useful trios of edges)
 
   class RelativeCell
+
     toAbove: null
     toBelow: null
     toLeft: null
     toRight: null
 
+    toAboveLeft: null
+    toAboveRight: null
+    toBelowLeft: null
+    toBelowRight: null
+
     constructor: (@rowId, @colId, @fixedCell) ->
+      if (rowId == 0)
+        if (colId == 0)
+          # Top Left Corner
+          @cellRegion = CellRegionEnum.TOP_LEFT_CORNER
+        else if (colId == 10)
+          # Top Right Corner
+          @cellRegion = CellRegionEnum.TOP_RIGHT_CORNER
+        else
+          # Top Edge
+          @cellRegion = CellRegionEnum.TOP_EDGE
+      else if (rowId == 10)
+        if (colId == 0)
+          # Bottom Left Corner
+          @cellRegion = CellRegionEnum.BOTTOM_LEFT_CORNER
+        else if (colId == 10)
+          # Bottom Right Corner
+          @cellRegion = CellRegionEnum.BOTTOM_RIGHT_CORNER
+        else
+          # Bottom Edge
+          @cellRegion = CellRegionEnum.BOTTOM_EDGE
+      else if (colId == 0)
+        # Left Edge
+        @cellRegion = CellRegionEnum.LEFT_EDGE
+      else if (colId == 10)
+        # Right Edge
+        @cellRegion = CellRegionEnum.RIGHT_EDGE
+      else
+        # Interior
+        @cellRegion = CellRegionEnum.INTERIOR
+
       return @
+
+    # This routine is called twice for each fixed cell during model construction.  The orientation is toggled
+    # between the calls such that each RelativeCell handles its call at a time when the overall grid is in its
+    # assigned orientation.  This provides navigability in a total of eight different directions, simplifying
+    # tests for fill viability, which involves checking the other three cells of either 1 (4 corners), 2 (36
+    # non-corner edges) or 4 (81 interior cells) 2x2 quads.  To simplify, triplets for the appropriate quads
+    # are derived and cached at this time as well.
+    initDiagonals: () ->
+      if (@cellRegion == CellRegionEnum.INTERIOR)
+        @toAboveLeft = @toAbove.getToLeft()
+        @toAboveRight = @toAbove.getToRight()
+        @toBelowLeft = @toBelow.getToLeft()
+        @toBelowRight = @toBelow.getToRight()
+        @quads = [
+          new Array(@toLeft,  @toAboveLeft,  @toAbove)
+          new Array(@toRight, @toAboveRight, @toAbove)
+          new Array(@toLeft,  @toBelowLeft,  @toBelow)
+          new Array(@toRight, @toBelowRight, @toBelow)
+        ]
+      else if (@cellRegion & CellRegionEnum.HORIZONTAL_EDGE)
+        if (@cellRegion & CellRegionEnum.VERTICAL_EDGE)
+          # Its a corner
+          if (@cellRegion & CellRegionEnum.TOP_EDGE)
+            if (@cellRegion == CellRegionEnum.TOP_LEFT_CORNER)
+              @toBelowRight = @toBelow.getToRight()
+              @quads = [new Array(@toRight, @toBelowRight, @toBelow)]
+            else
+              @toBelowLeft = @toBelow.getToLeft()
+              @quads = [new Array(@toLeft,  @toBelowLeft,  @toBelow)]
+          else if (@cellRegion == CellRegionEnum.BOTTOM_LEFT_CORNER)
+            @toAboveRight = @toAbove.getToRight()
+            @quads = [new Array(@toRight, @toAboveRight, @toAbove)]
+          else
+            @toAboveLeft = @toAbove.getToLeft()
+            @quads = [new Array(@toLeft,  @toAboveLeft,  @toAbove)]
+        else if (@cellRegion == CellRegionEnum.TOP_EDGE)
+          @toBelowLeft = @toBelow.getToLeft()
+          @toBelowRight = @toBelow.getToRight()
+          @quads = [
+            new Array(@toLeft,  @toBelowLeft,  @toBelow)
+            new Array(@toRight, @toBelowRight, @toBelow)
+          ]
+        else
+          @toAboveLeft = @toAbove.getToLeft()
+          @toAboveRight = @toAbove.getToRight()
+          @quads = [
+            new Array(@toLeft,  @toAboveLeft,  @toAbove)
+            new Array(@toRight, @toAboveRight, @toAbove)
+          ]
+      else if (@cellRegion == CellRegionEnum.LEFT_EDGE)
+        @toAboveRight = @toAbove.getToRight()
+        @toBelowRight = @toBelow.getToRight()
+        @quads = [
+          new Array(@toRight, @toAboveRight, @toAbove)
+          new Array(@toRight, @toBelowRight, @toBelow)
+        ]
+      else
+        @toAboveLeft = @toAbove.getToLeft()
+        @toBelowLeft = @toBelow.getToLeft()
+        @quads = [
+          new Array(@toLeft,  @toAboveLeft,  @toAbove)
+          new Array(@toLeft,  @toBelowLeft,  @toBelow)
+        ]
+      return
+
 
 
   return xwModule

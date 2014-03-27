@@ -43,12 +43,13 @@ requirejs.config(
     'angular-strap/affix': ['angular', 'angular-strap/dimensions', 'angular-strap.tpl']
     'angular-strap/aside': ['angular', 'angular-strap/modal', 'angular-strap.tpl']
     'angular-strap/button': ['angular', 'angular-animate', 'angular-strap.tpl']
+    'angular-strap/dimensions': ['angular', 'angular-strap.tpl']
     'angular-strap/modal': ['angular', 'angular-strap/dimensions', 'angular-strap.tpl']
     'angular-strap/navbar': ['angular', 'angular-strap.tpl']
     'angular-strap/tooltip': ['angular', 'angular-animate', 'angular-strap/dimensions', 'angular-strap.tpl']
     'angular-strap': ['angular']
-    'ui-bootstrap': ['angular-loader']
-    'ui-bootstrap-tpl': ['angular-loader']
+    'ui-bootstrap': ['angular']
+    'ui-bootstrap-tpls': ['angular-loader']
     'underscore': []
 
   # deps: 'bootstrap'

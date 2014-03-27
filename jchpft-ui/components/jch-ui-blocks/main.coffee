@@ -20,14 +20,46 @@ define ['angular'], ->
         cellWidth  = match[3]
         cellHeight = match[4]
 
-        topFn  = $interpolate '{{' + rowIdExpr + ' * ' + cellHeight + '}}px'
-        leftFn = $interpolate '{{' + colIdExpr + ' * ' + cellWidth + '}}px'
+        topFn    = $interpolate '{{' + rowIdExpr + ' * ' + cellHeight + '}}px'
+        leftFn   = $interpolate '{{' + colIdExpr + ' * ' + cellWidth + '}}px'
+        heightFn = $interpolate '{{' + cellHeight + '}}px'
+        widthFn  = $interpolate '{{' + cellWidth + '}}px'
 
-        $scope.$watch topFn, (value) -> $elem.css 'top', value
-        $scope.$watch leftFn, (value) -> $elem.css 'left', value
+        $scope.$watch topFn,    (value) -> $elem.css 'top', value
+        $scope.$watch leftFn,   (value) -> $elem.css 'left', value
+        $scope.$watch heightFn, (value) -> $elem.css 'height', value
+        $scope.$watch widthFn,  (value) -> $elem.css 'width', value
 
         return $elem
     }
+  ]
+
+  # TODO: Verify how this behaves if map and/or key really are interpolated and dynamic!  Does the
+  #       template update, or, more likely, does it freeze with the value at the instant link() returns?
+  xwModule.directive 'jchImgMap', ['$interpolate', ($interpolate) ->
+    restrict: 'E'
+    replace: true,
+    scope: false,
+    template: (tElem, tAttr) ->
+      return '<img ng-src="' + tAttr.actualValue + '">'
+    link: ($scope, $elem, $attr) ->
+      actualMap  = $scope.$eval $attr.map
+      actualKey   = $scope.$eval $attr.key
+      if (angular.isDefined actualMap && angular.isDefined actualKey)
+        actualValue = actualMap[actualKey]
+        $attr.$set 'actualValue', actualValue
+
+      $attr.$observe 'map', (map) ->
+        actualMap  = $scope.$eval map
+        if (angular.isDefined actualMap && angular.isDefined actualKey)
+          actualValue = actualMap[actualKey]
+          $attr.$set 'actualValue', actualValue
+
+      $attr.$observe 'key', (key) ->
+        actualKey   = $scope.$eval(key)
+        if (angular.isDefined actualMap && angular.isDefined actualKey)
+          actualValue = actualMap[actualKey]
+          $attr.$set 'actualValue', actualValue
   ]
 
   return xwModule
