@@ -1,12 +1,13 @@
 define [
   'angular'
+  'ui-utils'
   'angular-strap/button'
   'cs!jch-ui-blocks/main'
   'cs!xw-dynamic/main'
   'cs!xw-model/main'
   'cs!xw-report/main'
 ], () ->
-  xwModule = angular.module('xw-ticket', ['ng', 'mgcrea.ngStrap.button', 'jch-ui-blocks', 'xw-dynamic', 'xw-model', 'xw-report']);
+  xwModule = angular.module('xw-ticket', ['ng', 'mgcrea.ngStrap.button', 'ui.keypress', 'jch-ui-blocks', 'xw-dynamic', 'xw-model', 'xw-report']);
 
   xwModule.config ['$routeProvider', ($routeProvider) ->
     $routeProvider.when '/crosswords',
@@ -14,8 +15,10 @@ define [
       controller: 'CrosswordCtrl'
   ]
 
+  keyHandlerNoop = ($event) -> return
+
   xwModule.directive 'xwTicket', [
-    'xwModelFactory', 'valueImages', 'borderImages', 'fillImages', (xwModelFactory, valueImages, borderImages, fillImages) ->
+    'xwModelFactory', 'keypressHelper', 'valueImages', 'borderImages', 'fillImages', (xwModelFactory, keypressHelper, valueImages, borderImages, fillImages) ->
       restrict: 'E'
       replace: true
       scope:
@@ -25,38 +28,143 @@ define [
 #        onComplete: '&'
 
       templateUrl: '/app/xw-ticket/partials/xwTicket.html',
-      controller: ($scope) ->
+      controller: ['$scope', '$element', ($scope, $element) ->
+        #$scope.cursorKeyHandler = keyHandlerNoop;
+
         # ** closeCursor(), openCursor(), and moveCursor() **
         # Private cursor management functions that carry out a cursor state change requested by the underlying model
         # (hence presumed to be correct and formed with valid arguments--no "are you sure" or null input verification
         # by-design.
+        activeCursorKeyPressHandlers = {
+          'a b c d e f g h i j k l m n o p q r s t u v w x y z': 'handleAlpha($event)'
+          'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z': 'handleAlpha($event)'
+          'enter': 'handleEnter($event)'
+        };
+        activeCursorKeyDownHandlers = {
+          '*': 'tempTest("Asterisk", $event)'
+          'up': 'handleUpArrow($event)'
+          'esc': 'handleEscape($event)'
+          'tab': 'handleTab($event)'
+          'left': 'handleLeftArrow($event)'
+          'down': 'handleDownArrow($event)'
+          'right': 'handleRightArrow($event)'
+          'alt-tab': 'tempTest("alt-tab", $event)'
+          'ctrl-tab': 'tempTest("ctrl-tab", $event)'
+          'home-end': 'tempTest("home-end", $event)'
+          'shift-tab': 'tempTest("shift-tab", $event)'
+          'alt-space': 'tempTest("alt-space", $event)'
+          'ctrl-space': 'tempTest("ctrl-space", $event)'
+          'ctrl-alt-esc': 'tempTest("ctrl-alt-esc", $event)'
+          'ctrl-alt-space': 'tempTest("ctrl-alt-space", $event)'
+          'alt-shift-space': 'tempTest("alt-shift-space", $event)'
+          'backspace delete': 'handleBackspace($event)'
+          'ctrl-shift-space': 'tempTest("ctrl-shift-space", $event)'
+          'ctrl-alt-shift-space': 'tempTest("ctrl-alt-shift-space", $event)'
+        };
+        activeKeyPressHandler = keypressHelper($scope, activeCursorKeyPressHandlers)
+        activeKeyDownHandler  = keypressHelper($scope, activeCursorKeyDownHandlers)
+
         closeCursor = (withCommit) ->
-          tempGrid = $scope.ticketModel.activeGrid
           tempCell = $scope.ticketModel.cursorCell
-          $scope.ticketModel.activeGrid = null
+          # $scope.cursorKeyHandler = keyHandlerNoop
           $scope.ticketModel.cursorCell = null
-          tempGrid.handleCloseCursor(withCommit, tempCell)
+          tempCell.handleCloseCursor(withCommit)
           return
 
         openCursor = (targetCell) ->
           targetGrid = targetCell.parentGrid
-          $scope.ticketModel.activeGrid = targetGrid
           $scope.ticketModel.cursorCell = targetCell
-          targetGrid.handleOpenCursor(targetCell)
+          targetCell.handleOpenCursor()
+          # $scope.cursorKeyHandler = activeKeyHandler
           return
 
         moveCursor = (targetCell) ->
-          tempGrid = $scope.ticketModel.activeGrid
           tempCell = $scope.ticketModel.cursorCell
+          tempCell.handleReleaseCursorTo targetCell
           $scope.ticketModel.cursorCell = targetCell
-          tempGrid.handleMoveCursor(tempCell, targetCell)
+          targetCell.handleReceiveCursorFrom tempCell
           return
 
         # ** onCellClick() and onKeyPress() **
         # Validation of user input occurs in the
         # DOM event handlers that call these methods post-validation: 'onCellClick' and 'onKeyPress'.
         $scope.onCellClick = (cellModel, $event) ->
-          responseAction = cellModel.parentGrid.handleCellClick(cellModel, $event)
+          handleResponseAction cellModel.handleCellClick()
+          $event.preventDefault()
+          return
+
+        getCursorCell = () -> return $scope.ticketModel.cursorCell
+
+        $scope.handleAlpha = ($event) ->
+          inputChar = String.fromCharCode($event.keyCode).toLowerCase()
+          console.log('Key Press: ' + inputChar)
+          cursorCell = getCursorCell()
+          cursorGrid = cursorCell.parentGrid
+          $event.preventDefault()
+          handleResponseAction cursorGrid.handleAlpha(cursorCell, inputChar)
+
+        $scope.handleBackspace = ($event) ->
+          console.log('Backspace Press')
+          $event.preventDefault()
+          cursorCell = getCursorCell()
+          cursorGrid = cursorCell.parentGrid
+          handleResponseAction cursorGrid.handleBackspace(cursorCell)
+
+        $scope.handleLeftArrow = ($event) ->
+          console.log('Left Arrow Press')
+          $event.preventDefault()
+          cursorCell = getCursorCell()
+          cursorGrid = cursorCell.parentGrid
+          handleResponseAction cursorGrid.handleLeftArrow(cursorCell)
+
+        $scope.handleRightArrow = ($event) ->
+          console.log('Right Arrow Press')
+          $event.preventDefault()
+          cursorCell = getCursorCell()
+          cursorGrid = cursorCell.parentGrid
+          handleResponseAction cursorGrid.handleRightArrow(cursorCell)
+
+        $scope.handleUpArrow = ($event) ->
+          console.log('Up Arrow Press')
+          $event.preventDefault()
+          cursorCell = getCursorCell()
+          cursorGrid = cursorCell.parentGrid
+          handleResponseAction cursorGrid.handleUpArrow(cursorCell)
+
+        $scope.handleDownArrow = ($event) ->
+          console.log('Down Arrow Press')
+          $event.preventDefault()
+          cursorCell = getCursorCell()
+          cursorGrid = cursorCell.parentGrid
+          handleResponseAction cursorGrid.handleDownArrow(cursorCell)
+
+        $scope.handleEscape = ($event) ->
+          console.log('Escape Press')
+          $event.preventDefault()
+          cursorCell = getCursorCell()
+          cursorGrid = cursorCell.parentGrid
+          handleResponseAction cursorGrid.handleEscape(cursorCell)
+
+        $scope.handleEnter = ($event) ->
+          console.log('Enter Press')
+          $event.preventDefault()
+          cursorCell = getCursorCell()
+          cursorGrid = cursorCell.parentGrid
+          handleResponseAction cursorGrid.handleEnter(cursorCell)
+
+        $scope.handleTab = ($event) ->
+          console.log('Tab Press')
+          $event.preventDefault()
+          cursorCell = getCursorCell()
+          cursorGrid = cursorCell.parentGrid
+          handleResponseAction cursorGrid.handleTab(cursorCell)
+
+        $scope.tempTest = (str, $event) ->
+          console.log 'Temporary test called with: ' + str
+          $event.preventDefault()
+          console.log $event
+
+        handleResponseAction = (responseAction) ->
           if (responseAction? && responseAction instanceof Array && responseAction.length > 0)
             switch (responseAction[0])
               when OnHandleEventAction.NO_ACTION
@@ -64,10 +172,10 @@ define [
               when OnHandleEventAction.MOVE_CURSOR
                 moveCursor responseAction[1]
               when OnHandleEventAction.OPEN_CURSOR
-                if ($scope.ticketModel.activeGrid?)
+                if ($scope.ticketModel.cursorCell?)
                   closeCursor responseAction[1]
                 openCursor responseAction[2]
-              when OnHandleEventAction.CLOSE_CURSOR
+              when OnHandleEventAction.CLOSE
                 closeCursor responseAction[1]
               else
                 suffixStr = ' returned by cell click event handler'
@@ -76,7 +184,6 @@ define [
                 throw 'IllegalStateException -- Unknown response action type ' + responseAction[0] + suffixStr
           else
             throw 'IllegalStateException: Non-array or empty-array ' + responseAction?.toString() + ' returned by cell click event handler'
-          return false
 
         # This is also likely to vanish in favor of $rootScope.$broadcast('updateNotice')
         this.purgeWordList = () ->
@@ -98,7 +205,15 @@ define [
           borderImages: borderImages
         $scope.dataReportingModel = 'TBD'
 
+        $element.on 'keypress', ($event) ->
+          activeKeyPressHandler($event)
+          return
+        $element.on 'keydown', ($event) ->
+          activeKeyDownHandler($event)
+          return
+
         return this
+      ]
   ]
 
   xwModule.directive 'xwBonusValueCell', () ->
@@ -318,7 +433,6 @@ define [
       # Establish circular navigation.  Link last.next to first.  Link first.prev to last.
       firstRowCell.prev = nextCell
       nextCell.next = firstRowCell
-
       yourLettersGrid = new YourLettersGrid(cells)
 
       #
@@ -343,8 +457,8 @@ define [
       # Establish circular navigation.  Link last.next to first.  Link first.prev to last.
       firstRowCell.prev = nextCell
       nextCell.next = firstRowCell
-
       bonusWordGrid = new BonusWordGrid(cells)
+
       return new TripleNoTwentyTicketModel(ticketDocument.ticketId, ticketDocument.actualPayout, crosswordGrid, yourLettersGrid, bonusWordGrid)
 
   xwModule.service('xwModelFactory', [XwModelFactory])
@@ -359,6 +473,9 @@ define [
         mid:  'hmid',
         tail: 'hend'
       },
+      ['toLeft', 'toRight']
+      'rowWord'
+      'colWord'
       () -> return OrientationKind.ROTATED
     )
     @ROTATED = new OrientationKind( {
@@ -366,16 +483,20 @@ define [
         mid:  'vmid',
         tail: 'vend'
       },
+      ['toAbove', 'toBelow']
+      'colWord'
+      'rowWord'
       () -> return OrientationKind.ALIGNED
     )
 
-    constructor: (@labels, @oppositeFn) ->
+    constructor: (@labels, @toNeighbors, @toDirectWord, @toAltWord, @oppositeFn) ->
       return @
 
     getBorderHead: () -> return @labels.head
     getBorderMiddle: () -> return @labels.mid
     getBorderTail: () -> return @labels.tail
     changeOrientation: () -> return @oppositeFn()
+    @getAll: () => return [@ALIGNED, @ROTATED]
 
   class LifecycleStage
     constructor: (@canEditDescription, @canEditDiscoveries) ->
@@ -457,7 +578,6 @@ define [
     constructor: (@toolTipMessage) -> return @
 
   class AbstractTicketModel
-    activeGrid: null
     cursorCell: null
     ticketErrors: {}
 
@@ -474,31 +594,6 @@ define [
       return @
 
     ##
-    ## Event handlers
-    ##
-
-    handleKeyPressEvent: (cursorCell, inputValue) ->
-      return cursorCell.parentGrid.handleKeyPressEvent(cursorCell, inputValue)
-    handleBackspace: (cursorCell) ->
-      return cursorCell.parentGrid.handleBackspace(cursorCell)
-    handleLeftArrow: (cursorCell) ->
-      return cursorCell.parentGrid.handleLeftArrow(cursorCell)
-    handleRightArrow: (cursorCell) ->
-      return cursorCell.parentGrid.handleRightArrow(cursorCell)
-    handleUpArrow: (cursorCell) ->
-      return cursorCell.parentGrid.handleUpArrow(cursorCell)
-    handleDownArrow: (cursorCell) ->
-      return cursorCell.parentGrid.handleDownArrow(cursorCell)
-    handleEscape: (cursorCell) ->
-      return cursorCell.parentGrid.handleEscape(cursorCell)
-    handleEnter: (cursorCell) ->
-      return cursorCell.parentGrid.handleEnter(cursorCell)
-    handleTab: (cursorCell) ->
-      return cursorCell.parentGrid.handleTab(cursorCell)
-    handleOtherKeys: (cursorCell) ->
-      return cursorCell.parentGrid.handleOtherKeys(cursorCell)
-
-    ##
     ## Queries
     ##
 
@@ -507,6 +602,8 @@ define [
 
     isMatchedLetter: (letterQuery) ->
       return @yourLettersGrid.isLetterUsed(letterQuery)
+
+    isTripleBonusUsed: () -> return undefined;
 
     isDescriptionComplete: () ->
       return @crosswordGrid.isComplete()
@@ -574,6 +671,8 @@ define [
     isDiscoveryComplete: () ->
       return super() && @bonusValue != null
 
+    isTripleBonusUsed: () -> return true;
+
     isBonusLetter: (letterQuery) ->
       return @bonusWordGrid.isLetterUsed(letterQuery)
 
@@ -605,6 +704,8 @@ define [
 
     isDiscoveryComplete: () ->
       return super() && @bonusValue != null && isTwentySpotRevealed()
+
+    isTripleBonusUsed: () -> return true;
 
     isBonusLetter: (letterQuery) ->
       return @bonusWordGrid.isLetterUsed(letterQuery)
@@ -653,6 +754,8 @@ define [
 
     isDiscoveryComplete: () ->
       return super() && isTwentySpotRevealed() && isMultiplierRevealed()
+
+    isTripleBonusUsed: () -> return false;
 
     isMultiplierRevealed: () ->
       return @multiValue != null
@@ -732,8 +835,8 @@ define [
         if (value != '_')
           value = value.toLowerCase()
 
-        contentMap[value].push(cellModel)
-        cellModel.setParentGrid(parentGrid)
+        contentMap[value].push cellModel
+        cellModel.setParentGrid parentGrid
         return
       )
       @contentMap = contentMap
@@ -745,7 +848,6 @@ define [
 
     ##
     ## Cell retrieval
-
     getCellByCoordinates: (rowId, colId) ->
       if (rowId < 0 || rowId >= @numRows)
         throw 'IllegalArgument: rowId = ' + rowId
@@ -765,65 +867,6 @@ define [
         throw 'IllegalArgument: letterQuery = ' + letterQuery
 
       return @getCellsByContent(letterQuery).length >= 1
-
-    ##
-    ## Cell clickability
-
-    # TODO: Primitive (wrong) implementation: accept all clicks.
-    handleCellClick: (cellModel, clickEvent) ->
-      return [OnHandleEventAction.OPEN_CURSOR, true, cellModel]
-
-    handleOpenCursor: (cursorCell) ->
-      cursorCell.temp = true
-      return
-
-    handleCloseCursor: (withCommit, lastCursor) ->
-      lastCursor.temp = false
-      return
-
-    handleMoveCursor: (origCell, nextCell) ->
-      return
-
-    ##
-    ## Cursor based key stroke handlers
-
-    # Default behavior without override: set content to the lowercase version of input and then advance cursor to
-    # next empty cell, if any.
-    handleKeyPressEvent: (cursorCell, inputValue) ->
-      nextCell = cursorCell
-      if isInputValid(inputValue)
-        cursorCell.setContentValue(inputValue)
-        nextCell = cursorCell.getNextCell()
-
-      if (nextCell != cursorCell)
-        retVal = [OnHandleEventAction.MOVE_CURSOR, nextCell]
-      else
-        retVal = [OnHandleEventAction.NO_ACTION]
-
-      return retVal
-
-    # This implementation is suitable for fixed-in-place grids that can rely exclusively on the arrow keys for
-    # cursor movement.# , like YourLetters and BonusWord.  CrosswordCell may
-    # want a different implementation that moves the cursor.  Or perhaps not...
-    handleBackspace: (cursorCell) ->
-      cursorCell.setContentValue('_')
-      return [OnHandleEventAction.NO_ACTION]
-    handleLeftArrow: (cursorCell) ->
-      return [OnHandleEventAction.MOVE_CURSOR, cursorCell.getPreviousCell()]
-    handleRightArrow: (cursorCell) ->
-      return [OnHandleEventAction.MOVE_CURSOR, cursorCell.getNextCell()]
-    handleEscape: (cursorCell) ->
-      return [OnHandleEventAction.CLOSE, false]
-    handleEnter: (cursorCell) ->
-      return [OnHandleEventAction.CLOSE, true]
-    handleTab: (cursorCell) ->
-      # return [OnHandleEventAction.OPEN, true, @ticketModel.getCursorCell()]
-      return [OnHandleEventAction.NO_ACTION]
-    handleOtherKeys: (cursorCell) ->
-      return [OnHandleEventAction.NO_ACTION]
-
-    ##
-    ## Template methods for implementing subclass variants
 
     # TODO: MAY override this if lifecycle state advancement does not depend on a grid having a value in
     #       every cell (ok rule for bonusWord and yourLetters, but not main crossword grid).
@@ -845,65 +888,130 @@ define [
 
       return retVal
 
+    ##
+    ## Mutator
+    setContentValue: (targetCell, newValue) ->
+      # TODO
+      # @parentGrid.markDirty(@)
+
+      if (targetCell.content != newValue)
+        @contentMap[targetCell.content] = @contentMap[targetCell.content].filter((cellModel) -> return cellModel == targetCell)
+        targetCell.content = newValue
+        @contentMap[newValue].push(targetCell)
+
+      return true
+
+    ##
+    ## Cursor based key stroke handlers
+    handleAlpha: (targetCell, inputValue) ->
+      nextCell = @
+      editAnalysis = isInputValid(@, inputValue)
+      if editAnalysis == false
+        retVal = [OnHandleEventAction.NO_ACTION]
+      else
+        @setContentValue(targetCell, inputValue)
+        nextCell = targetCell.getNextCell()
+        if (nextCell != @)
+          retVal = [OnHandleEventAction.MOVE_CURSOR, nextCell]
+        else
+          retVal = [OnHandleEventAction.NO_ACTION]
+      return retVal
+
+    handleBackspace: (targetCell) ->
+      @setContentValue(targetCell, '_')
+      return [OnHandleEventAction.NO_ACTION]
+
+    handleLeftArrow: (targetCell) ->
+      return [OnHandleEventAction.MOVE_CURSOR, targetCell.getPreviousCell()]
+    handleRightArrow: (targetCell) ->
+      return [OnHandleEventAction.MOVE_CURSOR, targetCell.getNextCell()]
+    handleUpArrow: (targetCell) ->
+      return [OnHandleEventAction.NO_ACTION]
+    handleDownArrow: (targetCell) ->
+      return [OnHandleEventAction.NO_ACTION]
+
+    handleEscape: (targetCell) ->
+      return [OnHandleEventAction.CLOSE, false]
+    handleEnter: (targetCell) ->
+      return [OnHandleEventAction.CLOSE, true]
+    handleTab: (targetCell) ->
+      return [OnHandleEventAction.NO_ACTION]
+
+
 
   class AbstractCellModel
     dirty: false
 
     constructor: (@indexId, @rowId, @colId, @content) ->
       @coordinates = rowId + ',' + colId
+      @setInactiveFillState()
+      @displayContent = @content
       return @
 
     ##
     ## Model bootstrapping
-
     setParentGrid: (parentGrid) ->
       @parentGrid = parentGrid
       return
 
-    #
-    # Content access methods
-    #
+    ##
+    ## Cell clickability
+    handleCellClick: () ->
+      # TODO: Primitive (wrong) implementation: accept all clicks and doesn't optimize moves.
+      return [OnHandleEventAction.OPEN_CURSOR, true, @]
+
+    ##
+    ## Cursor handling
+    handleOpenCursor: () ->
+      @fillState = CellStateKind.SELECTED.getImageKey()
+      @displayContent = 'cursor'
+      return
+
+    handleCloseCursor: (withCommit) ->
+      @setInactiveFillState()
+      @displayContent = @content
+      return
+
+    handleReceiveCursorFrom: (fromCell) ->
+      @fillState = CellStateKind.SELECTED.getImageKey()
+      @displayContent = 'cursor'
+      return
+
+    handleReleaseCursorTo: (toCell) ->
+      @setInactiveFillState()
+      @displayContent = @content
+      return
+
+    ##
+    ## Queries
     isBlank: () -> return @content == '_'
     hasContent: () -> return @content != '_'
+    isBlocked: () -> return false
+    hasError: () -> return false
+    hasMatchedContent: () -> return false
 
     # Internal use method for setting a cell's content AND triggering any side effects such as maintenance
     # to the @contentMap.  Subtypes may override this method, but must call the base implementation to
     # ensure inheritted book-keeping behaves as expected.  Override implementations should not set
     # @content themselves (treat it as private) and should ensure any non-blank input is passed as lower-case.
-    setContent: (newValue) ->
-      # TODO
-      # @parentGrid.markDirty(@)
 
-      if (@content != newValue)
-        thisCell = @
-        @contentMap[@content] = @contentMap[@content].filter((cellModel) -> return cellModel == thisCell)
-        thisCell.content = newValue
-        @contentMap[newValue].push(thisCell)
-
-      return true
-
-    #
-    # Cell State -> Image Key translation methods
-    #
-    getContent: () ->
-      retVal = '_'
-      if (@parentGrid.parentTicket.cursorCell == this)
-        retVal = 'cursor'
-      else if (@hasContent())
-        retVal = @content
-
-      return retVal
-
-    getContentValue: () ->
-      return @content
+    ##
+    ## Queries for UI
 
     # Each subtype will want to override this method--they each have different business logic surrounding fill states
-    getFill: () ->
-      if (@temp)
-        retVal = CellStateKind.MATCHED
+    setInactiveFillState: () ->
+      if @isBlank()
+        @fillState = CellStateKind.COVERED.getImageKey()
+      else if @isBlocked()
+        @fillState = CellStateKind.BLOCKED.getImageKey()
+      else if @hasError()
+        @fillState = CellStateKind.ERROR.getImageKey()
+      else if @hasMatchedContent()
+        @fillState = CellStateKind.MATCHED.getImageKey()
       else
-        retVal = CellStateKind.COVERED
-      return retVal.fillImageKey
+        @fillState = CellStateKind.COVERED.getImageKey()
+
+      return
 
     # Each subtype will want to override this method--they each have different business logic surrounding borders
     getBorder: () -> return 'blank'
@@ -932,16 +1040,6 @@ define [
     getNextCell: () -> return @next
     getPreviousCell: () -> return @previous
 
-    getFill: () ->
-      if (@parentGrid.parentTicket.cursorCell == this)
-        retVal = CellStateKind.SELECTED
-      else if(@hasContent() && @parentGrid.parentTicket.myLettersInclude(@content))
-        retVal = CellStateKind.MATCHED
-      else
-        retVal = CellStateKind.COVERED
-
-      return retVal.fillImageKey
-
     getBorder: () ->
       retVal = 'blank'
       if (@parentGrid.parentTicket.cursorCell == this)
@@ -968,18 +1066,15 @@ define [
     next: null
     previous: null
 
+    handleUpArrow: () ->
+      console.log("TODO: Add vertical navigation to YourLetters")
+      return [OnHandleEventAction.NO_ACTION]
+    handleDownArrow: () ->
+      console.log("TODO: Add vertical navigation to YourLetters")
+      return [OnHandleEventAction.NO_ACTION]
+
     getNextCell: () -> return @next
     getPreviousCell: () -> return @previous
-
-    getFill: () ->
-      if (@parentGrid.parentTicket.cursorCell == this)
-        retVal = CellStateKind.SELECTED
-      else if(@hasContent())
-        retVal = CellStateKind.REVEALED
-      else
-        retVal = CellStateKind.COVERED
-
-      return retVal.fillImageKey
 
     # TODO: Need an image for unary borders
     getBorder: () ->
@@ -990,6 +1085,10 @@ define [
   # Main Crossword Grid and Cell
   #
   class CrosswordGrid extends AbstractGridModel
+    rowWordHeads: []
+    colWordHeads: []
+    tripleWords:  []
+
     constructor: (cells) ->
       @orientation = OrientationKind.ALIGNED
       super 'crossword', 11, 11, cells
@@ -999,12 +1098,231 @@ define [
     toggleOrientation: () ->
       @orientation = @orientation.getOpposite()
 
+    ##
+    ## Cursor based key stroke handlers
+    handleAlpha: (targetCell, inputValue) ->
+      nextCell = @
+      editAnalysis = @isInputValid(targetCell, inputValue)
+      if editAnalysis == false
+        retVal = [OnHandleEventAction.NO_ACTION]
+      else
+        @setContentValue(targetCell, inputValue)
+        nextCell = targetCell.getNextCell()
+        if (nextCell != @)
+          retVal = [OnHandleEventAction.MOVE_CURSOR, nextCell]
+        else
+          retVal = [OnHandleEventAction.NO_ACTION]
+
+      return retVal
+
+    handleBackspace: (targetCell) ->
+      this.setContentValue(targetCell, '_')
+      return [OnHandleEventAction.NO_ACTION]
+
+    handleLeftArrow: (targetCell) ->
+      return [OnHandleEventAction.MOVE_CURSOR, targetCell.getPreviousCell()]
+    handleRightArrow: (targetCell) ->
+      return [OnHandleEventAction.MOVE_CURSOR, targetCell.getNextCell()]
+    handleUpArrow: (targetCell) ->
+      return [OnHandleEventAction.NO_ACTION]
+    handleDownArrow: (targetCell) ->
+      return [OnHandleEventAction.NO_ACTION]
+
+    handleEscape: (targetCell) ->
+      return [OnHandleEventAction.CLOSE, false]
+    handleEnter: (targetCell) ->
+      return [OnHandleEventAction.CLOSE, true]
+    handleTab: (targetCell) ->
+      return [OnHandleEventAction.NO_ACTION]
+
+    isInputValid: (targetCell, inputValue) ->
+      if inputValue == '_'
+        # Clearing values is always legal, but not through this code path.
+        return false
+
+      if targetCell.hasContent()
+        # Changing an existing value has no impact on word allocation, but it could still add or
+        # remove tripling modifiers.
+        joinAnalysis = [
+          {
+            result: 'valueChange'
+            numWordsDelta: 0
+          },
+          {
+            result: 'valueChange',
+            numWordsDelta: 0
+          }
+        ]
+      else
+        joinAnalysis = OrientationKind.getAll().map( (nextDir) ->
+          adjCells = [ targetCell[nextDir.toNeighbors[0]], targetCell[nextDir.toNeighbors[1]] ]
+          if adjCells[0]?.hasContent()
+            if adjCells[1]?.hasContent()
+              adjWords = [adjCells[0][nextDir.toDirectWord], adjCells[1][nextDir.toDirectWord]]
+              if adjWords[0]?
+                if adjWords[1]?
+                  return {
+                    result: 'mergeTwoWords',
+                    existingWords: adjWords,
+                    toWords: nextDir.toNeighbors
+                    wordCells: adjCells
+                    numWordsDelta: -1
+                  }
+                else
+                  return {
+                    result: 'extendByTwo'
+                    existingWord: adjWords[0]
+                    toWord: nextDir.toNeighbors[0]
+                    wordCell: adjCells[0]
+                    toLetterTwo: nextDir.toNeighbors[1]
+                    letterCell: adjCells[1]
+                    numWordsDelta: 0
+                  }
+              else if adjWords[1]?
+                return {
+                  result: 'extendByTwo'
+                  existingWord: adjWords[1]
+                  toWord: nextDir.toNeighbors[1]
+                  wordCell: adjCells[1]
+                  toLetterTwo: nextDir.toNeighbors[0]
+                  letterCell: adjCells[0]
+                  numWordsDelta: 0
+                }
+              else
+                return {
+                  result: 'joinTwoLetters'
+                  toLetters: nextDir.toNeighbors
+                  letterCells: adjCells
+                  numWordsDelta: 1
+                }
+            else
+              hasWord = adjCells[0][nextDir.toDirectWord]
+              if hasWord
+                return {
+                  result: 'extendByOne'
+                  existingWord: hasWord
+                  toWord: nextDir.toNeighbors[0]
+                  wordCell: adjCells[0]
+                  numWordsDelta: 0
+                }
+              else
+                return {
+                  result: 'joinOneLetter'
+                  toLetter: nextDir.toNeighbors[0]
+                  letterCell: adjCells[0]
+                  numWordsDelta: 1
+                }
+          else if adjCells[1]?.hasContent()
+            hasWord = adjCells[1][nextDir.toDirectWord]
+            if hasWord
+              return {
+                result: 'extendByOne'
+                existingWord: hasWord
+                toWord: nextDir.toNeighbors[1]
+                wordCell: adjCells[1]
+                numWordsDelta: 0
+              }
+            else
+              return {
+                result: 'joinOneLetter'
+                toLetter: nextDir.toNeighbors[0]
+                letterCell: adjCells[0]
+                numWordsDelta: 1
+              }
+          else if adjCells[0]?
+            if adjCells[1]?
+              return {
+                result: 'isolated'
+                type: 'mid'
+                toBlanks: nextDir.toNeighbors
+                blankCells: adjCells
+                numWordsDelta: 0
+              }
+            else
+              return {
+                result: 'isolated'
+                type: 'edge'
+                toBlank: nextDir.toNeighbors[0]
+                blankCell: adjCells[0]
+                numWordsDelta: 0
+              }
+          else
+            return {
+              result: 'isolated'
+              type: 'edge'
+              toBlank: nextDir.toNeighbors[1]
+              blankCell: adjCells[1]
+              numWordsDelta: 0
+            }
+        )
+
+      # Tripling modifier rules
+      if @parentTicket.isTripleBonusUsed()
+        if /^[A-Z]$/.test(inputValue) && !targetCell.hasTriple()
+          if @tripleWords.length >= 4
+            # Reject input: too many triples in play already
+            return false
+          if joinAnalysis[0].result != 'isolated' && joinAnalysis[1].result != 'isolated'
+            # Reject input: no triples at a cell union
+            return false
+          if joinAnalysis.some( (aJoin) ->
+            switch aJoin.result
+              when 'extendByOne'
+                retVal = aJoin.existingWord.hasTriple()
+              when 'extendByTwo'
+                retVal = aJoin.existingWord.hasTriple() || aJoin.letterCell.hasTriple()
+              when 'joinOneLetter'
+                retVal = aJoin.letterCell.hasTriple()
+              when 'joinTwoLetters'
+                retVal = aJoin.letterCells[0].hasTriple() || aJoin.letterCells[1].hasTriple()
+              when 'mergeTwoWords'
+                retVal = aJoin.existingWords[0].hasTriple() || aJoin.existingWords[1].hasTriple()
+              else
+                retVal = false
+            return retVal
+          )
+            # Reject input: Connects with pre-existing triples
+            return false
+
+      # Word count rules
+      totalWordDelta = joinAnalysis[0].numWordsDelta + joinAnalysis[1].numWordsDelta
+      currentWordCount = @rowWordHeads.length + @colWordHeads.length
+      if totalWordDelta > 0 && currentWordCount >= 22
+        # Reject input: Cannot create words when maxed out already
+        return false
+      else if totalWordDelta > 1 && currentWordCount == 21
+        # Reject input: Cannot create words when maxed out already
+        return false
+      else if @rowWordHeads.length >= 12 && joinAnalysis[0].numWordsDelta > 0
+        # At most 12 words in each orientation
+        return false
+      else if @colWordHeads.length >= 12 && joinAnalysis[1].numWordsDelta > 0
+        # At most 12 words in each orientation
+        return false
+
+      # TODO: Nascent word viability rules:
+      # 1) Don't allow two letters to join if they cannot acquire a third.
+      # 2) Don't allow an otherwise legal placement that would block a letter pair from
+      #    acquiring a third letter
+      # #1 requires a rather difficult test, #2 may be addressable by proactive cell blocking
+      # in part, but it may be necessary to consider gaps of length 2
+
+      # TODO: Illegal joins by length:
+      # A word merge cannot create a word with 10 or 11 letters.  This should be dealt with
+      # by proactively blocking the only cell between two words of sufficient length.
+
+      # Success!  The value change is legal and we have a description of how the board will
+      # change that we can return.
+      return joinAnalysis
+
     # TODO: Provide a REAL implementation!
     isComplete: () -> return true
 
   # TODO: Enforce constraint that boardModel must be a CrosswordGrid
   class FixedCell extends AbstractCellModel
     isTriple: null
+    alignedWordRegion: null
+    rotatedWordRegion: null
 
     constructor: (gridModel, rowId, colId, content) ->
       super gridModel, rowId, colId, content
@@ -1057,21 +1375,14 @@ define [
 
       nextCell = @getNextCell()
       if (nextCell?)
-        @parentGrid.moveCursor @, nextCell, false
+        retVal = [OnHandleEventAction.MOVE_CURSOR, nextCell]
+      else
+        retVal = [OnHandleEventAction.NO_ACTION]
+
+      return retVal
 
     getNextCell: () -> return @getToRight()
     getPreviousCell: () -> return @getToLeft()
-
-    # TODO: Blocked and error cases...
-    getFill: () ->
-      if (@parentGrid.parentTicket.isCursorCell(@) )
-        retVal = CellStateKind.SELECTED
-      else if(@hasContent() && @parentGrid.parentTicket.myLettersInclude(@content))
-        retVal = CellStateKind.MATCHED
-      else
-        retVal = CellStateKind.COVERED
-
-      return retVal.fillImageKey
 
     getBorder: () ->
       retVal = 'blank'
@@ -1243,5 +1554,8 @@ define [
           new Array(@toLeft,  @toBelowLeft,  @toBelow)
         ]
       return
+
+  class WordRegion
+    constructor: (@head, @tail, @orientation) -> return
 
   return xwModule

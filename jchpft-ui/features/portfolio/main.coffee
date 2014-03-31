@@ -11,7 +11,7 @@ define [
 ], () ->
   appModule = angular.module(
     'jch-portfolio'
-    ['ng', 'ngRoute', 'ngCookies', 'ui.bootstrap', 'mgcrea.ngStrap.aside', 'jch-navbar', 'xw-ticket']
+    ['ng', 'ngRoute', 'ngCookies', 'ui.bootstrap', 'mgcrea.ngStrap.aside', 'jch-navbar', 'xw-ticket', 'poker']
   )
 
   appModule.config ['$routeProvider', ($routeProvider) ->

@@ -10,6 +10,8 @@ requirejs.config(
     'angular-route': 'angular-route/angular-route'
     domReady: 'requirejs-domready/domReady'
     underscore: 'underscore/underscore'
+    'jch-ui-utils': 'jch-ui-utils/ui-utils'
+    'ui-utils': 'jch-ui-utils/ui-utils'
     'ui-bootstrap': 'angular-bootstrap/ui-bootstrap'
     'ui-bootstrap-tpls': 'angular-bootstrap/ui-bootstrap-tpls'
     'angular-strap.tpl': 'angular-strap/dist/angular-strap.tpl'
@@ -55,6 +57,7 @@ requirejs.config(
     'angular-strap': ['angular']
     'ui-bootstrap': ['angular']
     'ui-bootstrap-tpls': ['angular-loader']
+    'ui-utils': ['angular']
     'underscore': []
 
   # deps: 'bootstrap'

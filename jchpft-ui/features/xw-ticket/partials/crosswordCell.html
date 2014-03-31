@@ -1,6 +1,6 @@
 <div>
   <img class="xw-grid" src="/app/xw-ticket/images/border/grid.png">
-  <img class="xw-value" ng-src="{{imageModel.valueImages[cellModel.getContent()]}}">
+  <img class="xw-value" ng-src="{{imageModel.valueImages[cellModel.displayContent]}}">
   <img class="xw-border" ng-src="{{imageModel.borderImages[cellModel.getBorder()]}}">
-  <img class="xw-fill" ng-src="{{imageModel.fillImages[cellModel.getFill()]}}">
+  <img class="xw-fill" ng-src="{{imageModel.fillImages[cellModel.fillState]}}">
 </div>
