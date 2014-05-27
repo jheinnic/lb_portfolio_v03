@@ -83,6 +83,7 @@ define ['angular', 'ui-utils'], ->
               rowIdExpr  = match[1]
               handleTopFn()
           return
+
         return
     }
   ]
@@ -91,271 +92,337 @@ define ['angular', 'ui-utils'], ->
     return {
       restrict: 'A'
       replace: false
-      # require: '^jhCanvas'
-#      template: ($tElm) ->
-#        clone = $tElm.clone()
-#        clone.removeAttr('jhCanvas')
-#        clone.attr('ngKeyDown', 'jhCanvasKeyDown($event)')
-#        return angular.element('<div></div>').append(clone).html()
-      scope: false
-      controller: ($scope, $elm, $attr) ->
-        controlStates = {}
-        defaultControlState =
+      # scope: {
+      #   controlModel: '=jhCanvas'
+      # }
+      controller: ['$scope', '$element', '$attrs', '$parse', ($scope, $element, $attrs, $parse) ->
+        defaultKeyboardControlState =
+          stateName: 'default'
           onEnter: angular.noop
           onExit: angular.noop
-          onKeyDown: angular.noop
-          scope: $scope
-        currentControlState = defaultControlState
+          eventHandler: null
+        currentKeyboardControlState = defaultKeyboardControlState
 
-        this.addControlState = (stateKey, controlScope, keyBindings, onEnterFn, onExitFn) ->
-          if angular.isDefined(controlStates[stateKey])
-            throw 'IllegalArgument Exception: Key bindings are already registered for stateKey = ' + stateKey
-
-          controlState = {
-            onEnter: onEnterFn
-            onExit: onExitFn
-            onKeyDown: null
+        eventControlStates = {
+          keyboard: {
+            default: defaultKeyboardControlState
           }
-          controlStates[stateKey] = controlState
+          click: { }
+        }
+        eventControlers = {
+          keyboard: this
+        }
 
-          # Watch the enable/disable expr on the grid/cell scope
+        this.parseElementControlState = (controlElement, controlStateDef) ->
+          thisKeyboardControlState =
+            eventName: controlElement.id
+            onEnter: $parse(controlStateDef.onEnter)
+            onExit: $parse(controlStateDef.onExit)
+            eventHandler: null
+
+          thisElementScope = controlElement.scope()
+
+          # See discussion under updateControlState() regarding the following $watchCollection().
+          thisKeyBindingWatchRemove = thisElementScope.$watchCollection controlStateDef, (newKeyBindings, oldKeyBindings) ->
+            newKeyDownFn = keypressHelper thisElementScope, 'keydown', newKeyBindings
+            if currentKeyboardControlState.eventName == thisKeyboardControlState.eventName
+              controlElement.unbind 'keydown', thisKeyboardControlState.eventHandler
+              controlElement.on 'keydown', newKeyDownFn
+            thisKeyboardControlState.eventHandler = newKeyDownFn
+            # TODO: Handle enterExpr/exitExpr changes too
+
+          # Remove the watch handler we've created from the argument scope's watch list when it gets destroyed.
+          thisElementScope.$on '$destroy', thisKeyBindingWatchRemove
+
+          return thisKeyboardControlState
+
+        # This won't get a value unless and until the controlStateDef argument to parseElementControlState comes from
+        # an expression whose value may change over time.  As of now, its expected that a controller wiring its element
+        # for keyboard control is constructing an object directly, and mutating that object if necessary rather than
+        # providing an expression whose return value changes to express a change in control dynamics (e.g. an alternate
+        # keyboard binding or a relinquishment of the keyboard).
+        this.updateElementControlState = null
+
+        this.addKeyboardControlElement = (element, controlStateDef) ->
+          elementId = element.id
+          if angular.isDefined(eventControlStates[elementId])
+            throw 'IllegalArgument Exception: Key binding, onEnter, and onExit expressions are already registered for elementId = ' + elementId
+
+          thisCanvasStateData = eventControlers.keyboard.parseControlState(element, controlStateDef)
+          eventControlStates.keyboard[elementId] = thisCanvasStateData
+
+          # Watch the enable/disable expr on the grid/cell scope.
           # When enabled, connect eventCallbackFn to ngKeyPress/ngKeyDown/ngTextInput as appropriate, using the
           # prepared $keypressHelper methods as filters.
-          if angular.isDefined(keyBindings)
-             controlState.onKeyDown = keypressHelper(controlScope, 'keydown', keyBindings)
-#            branchOnKeyFn = keypressHelper(controlScope, 'keydown', keyBindings)
-#            controlState.onKeyDown = ($event) ->
-#              $event.preventDefault()
-#              branchOnKeyFn($event)
-#              return
+          # if angular.isObject keyBindings
+          #   thisCanvasStateData.eventHandler = keypressHelper(thisElementScope, 'keydown', keyBindings)
+          # else if angular.isString keyBindings
+            # If key binding is given as an expression itself, parse and watch it.
 
-        $scope.$watch $attr.jhCanvas, (newStateKey) ->
-          oldState = currentControlState
-          newState = controlStates[newStateKey] || defaultControlState
+        keyActiveWatch = $scope.$watch 'controlModel.activeCanvasElement', (newElementId) ->
+          oldStateData = currentKeyboardControlState
+          newStateData = eventControlStates[newElementId] || defaultKeyboardControlState
 
-          if oldState != newState
-            if oldState.onKeyDown?
-              $elm.unbind 'keydown', oldState.onKeyDown
-            oldState.onExit()
-            currentControlState = newState
-            newState.onEnter()
-            if newState.onKeyDown?
+          if newStateData == defaultKeyboardControlState
+            console.warning 'Active canvas element set to unregistered ID of ' + newElementId + '.  Reverting to initial state.'
+
+          if oldStateData != newStateData
+            if oldStateData.onKeyDown?
+              $element.unbind 'keydown', oldStateData.onKeyDown
+            oldStateData.onExit()
+            currentKeyboardControlState = newStateData
+            newStateData.onEnter()
+            if newStateData.onKeyDown?
               # TODO: What does jqLite do w.r.t. preventDefault() ?
-              $elm.on 'keydown', newState.onKeyDown
-
+              $element.on 'keydown', newStateData.onKeyDown
           return
+
+        this.activateKeyboardControl = (element) ->
+          # The watch handler will cause the change of control to take effect.
+          # Done this way intentionally to permit external control of canvas artifacts via the two-way data binding
+          # on controlModel.
+          $scope.controlModel.activeCanvasElement = element.id
+          return
+
+        this.watchEventControl = (element, eventType, handlerStates, eventCtrl) ->
+
+        $element.on '$destroy', () ->
+          if currentKeyboardControlState.onKeyDown?
+            $element.unbind 'keydown', currentKeyboardControlState.onKeyDown
+          return
+        $scope.$on '$destroy', keyActiveWatch
 
         return this
+      ]
     }
   ]
 
-  xwModule.directive 'jhGrid', [() ->
-    sizeAttrRegEx = /^\s*([\d]+)\s*x\s*([\d]+)\s*$/
-    gridCellOrgRegEx = /^\s*(?:(1D|2D)\s*,\s*(RowCol|ColRow))|(1D|2D)|(RowCol|ColRow)\s*$/
+  sizeAttrRegEx = /^\s*([\d]+)\s*x\s*([\d]+)\s*$/
+  gridCellOrgRegEx = /^\s*(?:(1D|2D)\s*,\s*(RowCol|ColRow))|(1D|2D)|(RowCol|ColRow)\s*$/
+
+  xwModule.directive 'jhGrid', ['parse', ($parse) ->
+    domElementGrid = null
+    clickHandlerStates = {}
+    currentClickHandler = null
+
+    numRows = -1
+    numCols = -1
+    canvasCtrl = null
 
     return {
-      restrict: 'A'
-      require: 'jhGrid'
+      restrict: 'E'
+      require: [ 'jhGrid', '^jhCanvas' ]
       replace: false
-      scope: false
-      controller: ['$scope', '$element', '$attrs', '$compile', ($scope, $element, $attrs, $compile) ->
-        zIndex = 1
-        rootElem   = angular.element '<div style="position: absolute;"></div>'
-        pseudoElem = angular.element '<div></div>'
-        pseudoElem.append rootElem
+      scope: {
+        sourceGridModel: '=gridModel'
+        clickStates: '@clickStates'
+        numRows: '@numRows'
+        numCols: '@numCols'
+        cellWidth: '@cellWidth'
+        cellHeight: '@cellHeight'
+        srcDimCount: '@srcDimCount'
+        srcDimOrder: '@srcDimOrder'
+      }
+      transclude: 'element'
+      controller: ['$scope', '$element', '$parse', ($scope, $element, $parse) ->
+        retVal = {}
 
-        this.addDynamicImageLayer = (layerName, cellImageFilter) ->
-          if !layerName?
-            throw "IllegalArgumentException: layerName argument is mandatory.  layerName = " + layerName
-          if !cellImageFilter?
-            throw "IllegalArgumentException: cellImageFilter argument is mandatory.  cellImageFilter = " + cellImageFilter
-          rootElem.append(
-            '<img class="' + layerName + '" ng-src="{{cellModel | ' + cellImageFilter + '}}" style="z-index=' + zIndex++ + ';">'
-          )
+        retVal.parseControlStates = (controlStatesDef) ->
+          eventHandlerStates = {}
+          Object.keys(controlStatesDef).forEach (stateName) ->
+            controlState =
+              stateName: stateName
+              onEnter: $parse controlStatesDef[stateName].onEnter || null
+              onExit: $parse controlStatesDef[stateName].onExit || null
 
-        this.addFixedImageLayer = (layerName, cellImageSource) ->
-          if !layerName?
-            throw "IllegalArgumentException: layerName argument is mandatory.  layerName = " + layerName
-          if !cellImageSource?
-            throw "IllegalArgumentException: cellImageSource argument is mandatory.  cellImageSource = " + cellImageSource
-          rootElem.append(
-            '<img class="' + layerName + '" src="' + cellImageSource + '" style="z-index=' + zIndex++ + ';">'
-          )
-
-
-        clickHandlerStates = {}
-        currentClickHandler = null
-
-        this.addClickHandler = (stateKey, clickHandlerFn) ->
-          if angular.isDefined clickHandlerStates[stateKey]
-            throw "IllegalArgumentException: stateKey has already been defined.  stateKey = " + stateKey
-          if !angular.isFunction(clickHandlerFn) && clickHandlerFn != null
-            throw "IllegalArgumentException: clickHandlerFn must either be null or a function.  clickHandlerFn = " + clickHandlerFn
-
-          if angular.isFunction clickHandlerFn
-            clickHandlerStates[stateKey] = ($event) ->
-              cellScope = angular.element(this).scope()
-              cellScope.$apply( () -> clickHandlerFn(cellScope, $event) )
-          else
-            clickHandlerStates[stateKey] = null
-
-        cellArray = []
-        gridRows = -1
-        gridCols = -1
-
-        this.populateGrid = (numRows, numCols, cellWidth, cellHeight, cellObjects, srcDimensions = '2D', srcCellOrder = 'RowMajor') ->
-          if srcDimensions != '2D' && srcDimensions != '1D'
-            throw 'IllegalArgumentException: srcDimensions must be "2D" or "1D".  srcDimensions = ' + srcDimensions
-          if srcCellOrder != 'RowMajor' && srcCellOrder != 'ColMajor'
-            throw 'IllegalArgumentException: srcCellOrder must be "RowMajor" or "ColMajor".  srcCellOrder = ' + srcCellOrder
-          if numRows < 1
-            throw 'IllegalArgumentException: numRows must be a positive value.  numRows = ' + numRows
-          if numCols < 1
-            throw 'IllegalArgumentException: numCols must be a positive value.  numCols = ' + numRows
-          if cellWidth < 1
-            throw 'IllegalArgumentException: cellWidth must be a positive value.  cellWidth = ' + cellWidth
-          if cellHeight < 1
-            throw 'IllegalArgumentException: cellHeight must be a positive value.  cellHeight = ' + cellHeight
-
-          numCells = numRows * numCols
-          gridRows = numRows
-          gridCols = numCols
-
-          if !cellObjects? || !angular.isArray(cellObjects)
-            throw 'IllegalArgumentException: cellObjects argument must be an array.  cellObjects == ' + cellObjects
-          if srcDimensions = '1D'
-            if cellObjects.length != numCells
-              throw 'IllegalArgumentException: cellObjects must have length = ' + numCells + ' but cellObjects.length = ' + cellObjects.length
-          else if srcCellOrder = 'RowMajor'
-            if cellObjects.length != numRows
-              throw 'IllegalArgumentException: cellObjects must have a first dimension length = ' + numRows + ' but cellObjects.length = ' + cellObjects.length
-            checkRow = (ii) ->
-              if cellObjects[ii].length != numCols
-                throw 'IllegalArgumentException: cellObjects must have a second dimension length = ' + numCols + ' but cellObjects[' + ii + '].length = ' + cellObjects[ii].length
-            checkRow(ii) for ii in [0...numRows]
-          else
-            if cellObjects.length != numCols
-              throw 'IllegalArgumentException: cellObjects must have a first dimension length = ' + numCols + ' but cellObjects.length = ' + cellObjects.length
-            checkCol = (ii) ->
-              if cellObjects[ii].length != numRows
-                throw 'IllegalArgumentException: cellObjects must have a second dimension length = ' + numRows + ' but cellObjects[' + ii + '].length = ' + cellObjects[ii].length
-            checkCol(ii) for ii in [0...numCols]
-
-          cellTemplateFn = $compile pseudoElem.html()
-          cellHeightStr = cellHeight + 'px'
-          cellWidthStr = cellWidth + 'px'
-          linkCellFn = (ii,jj,cellModel) ->
-            scope = $scope.$new(false)
-            scope.cellModel = cellModel
-            scope.rowId = ii
-            scope.colId = jj
-            retVal = null
-            cellTemplateFn(scope, (cloneCellElm) ->
-              $element.append(cloneCellElm)
-              cloneCellElm.on('$destroy', () -> scope.$destroy())
-              cloneCellElm.css( {
-                top: (ii * cellHeight) + 'px'
-                left: (jj * cellWidth) + 'px'
-                height: cellHeightStr
-                width: cellWidthStr
-              })
-              retVal = cloneCellElm
-            )
-            return retVal
-
-          if srcDimensions == '2D'
-            if srcCellOrder == 'RowMajor'
-              cellArray = (linkCellFn ii, jj, cellObjects[ii][jj] for jj in [0...numCols] for ii in [0...numRows])
+            if controlStatesDef[stateName].eventHandler?
+              parsedEventHandler = $parse controlStatesDef[stateName].eventHandler
+              controlState.eventHandler = ($event) ->
+                $scope.$apply () -> parsedEventHandler($scope, {'$event': $event})
             else
-              cellArray = (linkCellFn ii, jj, cellObjects[jj][ii] for jj in [0...numCols] for ii in [0...numRows])
-          else
-            if srcCellOrder == 'RowMajor'
-              # cellArray = (linkCellFn (kk-kk%numCols)/numRows, kk%numCols, cellObjects[kk] for kk in [0...numRows*numCols])
-              cellArray = (linkCellFn ii, jj, cellObjects[(ii*numCols)+jj] for jj in [0...numCols] for ii in [0...numRows])
-            else
-              # cellArray = (linkCellFn kk%numRows, (kk-kk%numRows)/numCols, cellObjects[kk] for kk in [0...numRows*numCols])
-              cellArray = (linkCellFn ii, jj, cellObjects[ii+(jj*numRows)] for jj in [0...numCols] for ii in [0...numRows])
+              controlState.eventHandler = null
 
-        $scope.$watch $attrs.jhGrid, (newKeyValue) ->
-          oldState = currentClickHandler
-          newState = clickHandlerStates[newKeyValue] || null
+            eventHandlerStates[stateName] = controlState
+          return eventHandlerStates
 
+        retVal.handleStateChange = (newState, oldState) ->
           if oldState != newState
             if oldState != null && newState == null
-              cellArray[ii][jj].unbind('click', oldState) && console.log('Ok1') for jj in [0...gridCols] for ii in [0...gridRows]
+              if oldState.onExit?
+                $scope.$apply oldState.onExit
+              domElementGrid[ii][jj].unbind('click', oldState) for jj in [0...numCols] for ii in [0...numRows]
             else if oldState == null && newState != null
-              cellArray[ii][jj].on('click', newState) && console.log('Ok2') for jj in [0...gridCols] for ii in [0...gridRows]
+              domElementGrid[ii][jj].on('click', newState) for jj in [0...numCols] for ii in [0...numRows]
+              if newState.onEnter?
+                $scope.$apply newState.onEnter
             else
-              cellArray[ii][jj].unbind('click', oldState) && cellArray[ii][jj].on('click', newState) && console.log('Ok3') for jj in [0...gridCols] for ii in [0...gridRows]
+              if oldState.onExit?
+                $scope.$apply oldState.onExit
+              domElementGrid[ii][jj].unbind('click', oldState) && domElementGrid[ii][jj].on('click', newState) for jj in [0...numCols] for ii in [0...numRows]
+              if newState.onEnter?
+                $scope.$apply newState.onEnter
 
-            currentClickHandler = newState
+        retVal.getScopeByCoordinates = (rowId, colId) ->
+          if domElementGrid == null
+            throw 'IllegalStateException: cannot retrieve cells by coordinates until after grid has been populated'
+          if rowId < 0 || rowId >= numRows
+            throw 'IllegalArgumentException: rowId must be a value between 0 and ' + (numRows-1) + '.  rowId = ' + rowId
+          if colId < 0 || colId >= numCols
+            throw 'IllegalArgumentException: rowId must be a value between 0 and ' + (numCols-1) + '.  colId = ' + colId
 
-          return
+          retElement = domElementGrid[rowId][colId]
+          return retElement.scope()
 
-        return @
+        retVal.setClickState = (nextStateName, rowId = -1. colId = -1) ->
+          canvasCtrl.setElementControlState($element, 'click', nextStateName)
+
+        retVal.moveCursorTo = (rowId, colId) ->
+          console.log('tbd')
+
+        return retVal
       ]
-      link: ($scope, $element) ->
-        $element.css('position', 'relative')
+
+      link: ($scope, $element, $attrs, ctrls, $transcludeFn) ->
+        if $scope.srcDimCount != '2D' && $scope.srcDimCount != '1D' && angular.isDefined $scope.srcDimCount
+          throw 'IllegalArgumentException: srcDims must be "2D" or "1D".  srcDimCount = ' + $scope.srcDimCount
+        if $scope.srcDimOrder != 'RowMajor' && $scope.srcDimOrder != 'ColMajor' && angular.isDefined $scope.srcDimOrder
+          throw 'IllegalArgumentException: srcDimOrder must be "RowMajor" or "ColMajor".  srcDimOrder = ' + srcDimOrder
+        if $scope.numRows < 1
+          throw 'IllegalArgumentException: numRows must be a positive value.  numRows = ' + $scope.numRows
+        if $scope.numCols < 1
+          throw 'IllegalArgumentException: numCols must be a positive value.  numCols = ' + $scope.numRows
+        if $scope.cellWidth < 1
+          throw 'IllegalArgumentException: cellWidth must be a positive value.  cellWidth = ' + $scope.cellWidth
+        if $scope.cellHeight < 1
+          throw 'IllegalArgumentException: cellHeight must be a positive value.  cellHeight = ' + $scope.cellHeight
+
+        sourceGridModel = $scope.sourceGridModel
+        numCells = $scope.numRows * $scope.numCols
+        srcDimCount = $scope.srcDimCount
+        srcDimOrder = $scope.srcDimOrder
+        cellHeight = $scope.cellHeight
+        cellWidth = $scope.cellWidth
+        numRows = $scope.numRows
+        numCols = $scope.numCols
+
+        if !sourceGridModel || !angular.isArray sourceGridModel
+          throw 'IllegalArgumentException: sourceGridModel argument must be an array.  sourceGridModel == ' + sourceGridModel
+        if srcDims = '1D'
+          if sourceGridModel.length != numCells
+            throw 'IllegalArgumentException: sourceGridModel must have length = ' + numCells + ' but sourceGridModel.length = ' + sourceGridModel.length
+        else if srcDimOrder = 'RowMajor'
+          if sourceGridModel.length != numRows
+            throw 'IllegalArgumentException: sourceGridModel must have a first dimension length = ' + numRows + ' but sourceGridModel.length = ' + sourceGridModel.length
+          checkRow = (ii) ->
+            if sourceGridModel[ii].length != numCols
+              throw 'IllegalArgumentException: sourceGridModel must have a second dimension length = ' + numCols + ' but sourceGridModel[' + ii + '].length = ' + sourceGridModel[ii].length
+          checkRow(ii) for ii in [0...numRows]
+        else
+          if sourceGridModel.length != numCols
+            throw 'IllegalArgumentException: sourceGridModel must have a first dimension length = ' + numCols + ' but sourceGridModel.length = ' + sourceGridModel.length
+          checkCol = (ii) ->
+            if sourceGridModel[ii].length != numRows
+              throw 'IllegalArgumentException: sourceGridModel must have a second dimension length = ' + numRows + ' but sourceGridModel[' + ii + '].length = ' + sourceGridModel[ii].length
+          checkCol(ii) for ii in [0...numCols]
+
+        # cellTemplateFn = $compile pseudoElem.html()
+        cellHeightStr = cellHeight + 'px'
+        cellWidthStr = cellWidth + 'px'
+        linkCellFn = (ii,jj,cellModel) ->
+          scope = $scope.$new false
+          scope.cellModel = cellModel
+          scope.rowId = ii
+          scope.colId = jj
+          return $transcludeFn scope, (cloneCellElm) ->
+            $element.append cloneCellElm
+
+            cloneCellElm.on '$destroy', () ->
+              if currentClickHandler != null
+                domElementGrid[ii][jj].unbind('click', currentClickHandler) for jj in [0...numCols] for ii in [0...numRows]
+              # Does DOM destruction ever happen without associated scope destruction?
+              # scope.$destroy()
+              return
+
+            cloneCellElm.css {
+              top: (ii * cellHeight) + 'px'
+              left: (jj * cellWidth) + 'px'
+              height: cellHeightStr
+              width: cellWidthStr
+            }
+
+            return cloneCellElm
+
+        if srcDims == '2D'
+          if srcDimOrder == 'RowMajor'
+            domElementGrid = (linkCellFn ii, jj, sourceGridModel[ii][jj] for jj in [0...numCols] for ii in [0...numRows])
+          else
+            domElementGrid = (linkCellFn ii, jj, sourceGridModel[jj][ii] for jj in [0...numCols] for ii in [0...numRows])
+        else
+          if srcDimOrder == 'RowMajor'
+            domElementGrid = (linkCellFn ii, jj, sourceGridModel[(ii*numCols)+jj] for jj in [0...numCols] for ii in [0...numRows])
+          else
+            domElementGrid = (linkCellFn ii, jj, sourceGridModel[ii+(jj*numRows)] for jj in [0...numCols] for ii in [0...numRows])
+          clickStatesFn = $parse($scope.clickStates)
+          if clickStatesFn.constant
+            clickHandlerStates = parseClickStates(clickStatesFn($scope), $scope)
+          else
+            $scope.$watchCollection clickStatesFn, (newClickHandlerStates) ->
+              oldClickHandlerStates = clickHandlerStates
+              clickHandlerStates = parseClickStates(newClickHandlerStates($scope), $scope)
+
+        gridCtrl = ctrls[0]
+        canvasCtrl = ctrls[1]
+        canvasCtrl.watchElementControl $element, 'click', clickHandlerStates, gridCtrl
     }
   ]
 
-#  xwModule.directive 'jhGridPanel', ['jchAliasDirective', (jchAliasDirective) ->
-#    return jchAliasDirective('jchImgMap', 'jchCellImg', 'E')
-#  ]
-#
-#  xwModule.directive 'jhGridCell', [() ->
-#    return {
-#    transclude: element
-#    require: 'jhGrid'
-#    }
-#  ]
-#
-#  xwModule.directive 'jhCellImg', ['jchAliasDirective', (jchAliasDirective) ->
-#    return jchAliasDirective('jchImgMap', 'jchCellImg', 'E')
-#  ]
-#
-#  # TODO: Verify how this behaves if map and/or key really are interpolated and dynamic!  Does the
-#  #       template update, or, more likely, does it freeze with the value at the instant link() returns?
-#  xwModule.directive 'jchImgMap', ['$interpolate', ($interpolate) ->
-#    restrict: 'E'
-#    replace: true,
-#    scope: false,
-#    template: (tElem, tAttr) ->
-#      return '<img ng-src="' + tAttr.actualValue + '">'
-#    link: ($scope, $elem, $attr) ->
-#      actualMap  = $scope.$eval $attr.map
-#      actualKey   = $scope.$eval $attr.key
-#      if (angular.isDefined actualMap && angular.isDefined actualKey)
-#        actualValue = actualMap[actualKey]
-#        $attr.$set 'actualValue', actualValue
-#
-#      $attr.$observe 'map', (map) ->
-#        actualMap  = $scope.$eval map
-#        if (angular.isDefined actualMap && angular.isDefined actualKey)
-#          actualValue = actualMap[actualKey]
-#          $attr.$set 'actualValue', actualValue
-#
-#      $attr.$observe 'key', (key) ->
-#        actualKey   = $scope.$eval(key)
-#        if (angular.isDefined actualMap && angular.isDefined actualKey)
-#          actualValue = actualMap[actualKey]
-#          $attr.$set 'actualValue', actualValue
-#  ]
-#
-#
-#  xwModule.directive 'jhCanvas', [ () ->
-#    # TODO!  The event model!
-#  ]
-#
-#  xwModule.directive 'jhCanvasEvents', [() ->
-#    match =
-#  ]
-#
-#  xwModule.directive 'jhCanvasTyped', ['keypressHelper', (keypressHelper) ->
-#  ]
-#
-#  xwModule.directive 'jhCanvasClicked', [() ->
-#  ]
+  xwModule.service 'jhDirtyTracker', [() ->
+    workspaceHash = { }
+
+    _markDirty = (workspace, dirtyObject) ->
+      if !dirtyObject[workspace.dirtyTagProp]
+        workspace.mementoHelper.storeMemento(dirtyObject)
+        dirtyObject[workspace.dirtyTagProp] = true
+        workspace.content.push(dirtyObject)
+      return
+
+    self = {
+      trackChanges: (workspaceId, dirtyTagProp, mementoHelper) ->
+        workspace = workspaceHash[workspaceId]
+        if workspace?
+          throw "IllegalArgumentException: Workspace already exists with workspaceId = " + workspaceId
+        workspaceHash[workspaceId] =
+          dirtyTagProp: dirtyTagProp,
+          mementoHelper: mementoHelper
+          content: []
+        return
+
+      markDirty: (workspaceId, dirtyObject) ->
+        workspace = workspaceHash[workspaceId]
+        if !workspace?
+          throw "IllegalArgumentException: No workspace found with workspaceId = " + workspaceId
+        if angular.isArray(dirtyObject)
+          dirtyObject.forEach( (v) -> _markDirty(workspace, v) )
+        else
+          _markDirty(workspace, dirtyObject)
+        return
+
+      clearDirtyList: (workspaceId, onPurgeFnName) ->
+        workspace = workspaceHash[workspaceId]
+        if !workspace?
+          throw "IllegalArgumentException: No workspace found with workspaceId = " + workspaceId
+        workspace.content.forEach( (v) ->
+          purgeFn = v[onPurgeFnName]
+          purgeFn.call(v)
+          Object.delete(v, workspace.dirtyTagProp)
+          return
+        )
+        Object.delete(workspaceHash, workspaceId)
+        return retVal
+    }
+
+    return self
+  ]
 
 
   return xwModule
