@@ -1,29 +1,36 @@
-// var employeeDAO = new EmployeeProvider('localhost', 27017);
+var DocumentFactory = require('../lib/xwprovider').DocumentFactory
 
-// exports.listEmployees
-app.get('/employees', function(req, res){
-    employeeDAO.findAll(function(error, employees){
-        res.render('index', {
-            title: 'Employees',
-            employees: employees
+var crosswordDAO = new CrosswordProvider('localhost', 27017);
+
+exports.listCrosswords =
+    function(req, res){
+        crosswordDAO.findAll(function(error, crosswords){
+    //        res.render('index', {
+    //            title: 'crosswords',
+    //            crosswords: crosswords
+    //        });
+            res.render(crosswords);
         });
-    });
-});
+    };
 
-// exports.newEmployeeForm
-app.get('/employee/new', function(req, res) {
-    res.render('employee_new', {
-        title: 'New Employee',
-        cause: 'Just Be'
-    });
-});
+//exports.newCrosswordForm =
+//    app.get('/crossword/new', function(req, res) {
+//        res.render('crossword_new', {
+//            title: 'New crossword',
+//            cause: 'Just Be'
+//        });
+//    });
 
-// exports.postNewEmployee
-app.post('/employee/new', function(req, res){
-    employeeDAO.save({
-        title: req.param('title'),
-        name: req.param('name')
-    }, function( error, docs) {
-        res.redirect('/');
-    });
-});
+exports.postNewCrossword =
+    function(req, res){
+        crosswordDAO.create(
+            DocumentFactory.newTripleNoTwentyTicketDocument('999:123456-001'),
+            function( error, docs) {
+                res.redirect('/');
+            }
+        );
+    };
+
+// TODO: Get Ticket by TicketID
+
+// TODO: Update Ticket by TicketID

@@ -10,9 +10,11 @@ var fs = require('fs');
 var lessMiddleware = require('less-middleware');
 var coffeeMiddleware = require('coffee-middleware');
 
+var CrosswordProvider = require('./lib/xwprovider').CrosswordProvider;
 var routes = require('./routes');
+
 // var user = require('./routes/user');
-// var EmployeeProvider = require('./lib/employeeprovider').EmployeeProvider;
+// var xwRoutes = require('./routes/xw');
 
 var app = express();
 
@@ -86,12 +88,23 @@ app.configure(function () {
     // development only
     if ('development' == app.get('env')) {
         app.use(express.errorHandler());
+    } else if (app.get('env') === 'production') {
+        // production only
+        // TODO
     }
 
     //
     // Routes
     //
     app.get('/', routes.index);
+    app.get('/hack001', routes.hack001);
+
+    // TODO: This should have a TicketID variable match in the path
+    // TODO: Express the game ID below as /crosswords/game/999/ticket/123456-001 and use the '999' portion of the path to
+    //       determine what type of ticket is being created.
+    app.get('/crosswords', routes.listCrosswords);
+    app.post('/crossword/new', routes.postNewCrossword);
+
     app.get('/test', function(req, res){
         res.render('index.jade', { title: 'Express' });
     });

