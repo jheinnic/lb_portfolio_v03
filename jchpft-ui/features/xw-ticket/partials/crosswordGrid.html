@@ -1,3 +1,8 @@
-<div id="letterGrid" class="xw-layered">
-    <xw-crossword-cell class="xw-proto-cell"></xw-crossword-cell>
+<div id="letterGrid" jh-grid="controlModel.clickCrossword">
+    <div>
+        <img class="xw-grid" src="/app/xw-ticket/images/border/grid.png">
+        <img class="xw-value" ng-src="{{cellModel|contentDisplay}}">
+        <img class="xw-border" ng-src="{{imageModel.borderImages[cellModel.getBorder()]}}">
+        <img class="xw-fill" ng-src="{{imageModel.fillImages[cellModel.fillState]}}">
+    </div>
 </div>
