@@ -20,9 +20,10 @@ define [
     replace: true
     scope:
       ticketDocument: '='
+      conditionModel: '='
     templateUrl: '/app/xw-ticket/partials/xwTicket.html',
     link: ($scope, $element, $attrs, canvasCtrl) ->
-      $scope.ticketModel  = xwModelFactory.createModelFromDocument $scope.ticketDocument
+      # $scope.ticketModel  = xwModelFactory.createModelFromDocument $scope.ticketDocument
       $scope.conditionModel =
         allHorizontalWords: []
         allVerticalWords: []
@@ -46,8 +47,8 @@ define [
           $scope.controlModel.clickBonusWord = 'open'
           $scope.controlModel.clickCrossword = if $scope.conditionModel.xwEditMode == 'letters' then 'open' else 'placeTriples'
 
-      $scope.$watchCollection 'ticketModel.crosswordArray', (newValue) ->
-        boardContent = newValue
+      $scope.$watch 'ticketDocument.content', (newValue) ->
+        boardContent = newValue.split('')
         rotatedContent = boardContent.map (value, index, board) ->
           colId = index % 11
           rowId = ((index-colId) / 11)
@@ -62,7 +63,7 @@ define [
         examineLine = (ii) ->
           jj = ii+10
           allHorizontalWords = $scope.conditionModel.allHorizontalWords.concat boardContent.slice(ii,jj).join('').split(/_+/).filter(isValidWord)
-          allVerticalWords = $scope.conditionModel.allVerticalWords.concat rotatedContent.slice(ii,jj).join('').split(/_+/).flter(isValidWord)
+          allVerticalWords = $scope.conditionModel.allVerticalWords.concat rotatedContent.slice(ii,jj).join('').split(/_+/).filter(isValidWord)
         examineLine(ii) for ii in [0...121] by 11
 
         allGridWords = allHorizontalWords.concat allVerticalWords
@@ -75,28 +76,34 @@ define [
         $scope.conditionModel.allBasicWords = allBasicWords
         $scope.conditionModel.allGridWords = allGridWords
 
-        $scope.ticketDocument.content = newValue.join('')
+        # TODO: Populate a progressModel alongside conditionModel and use the format more approriate for reporting
+        #       and for yourLetters watching to mutate as discovery progresses.  ('* and - used to indicate covered
+        #       letters with and without tripplied modifiers, respectively, and an associated array of uncovered
+        #       letters coupled with the display string.  Use only allTripling and allBasic words, initially
+        #       populated into uncovered variants.  Include empty "covered" collections.  The YourLetters watch
+        #       routine may move words from one collection to the other at the appropriate time.
+        # TODO: Switch the isolated scope data binding from conditionModel to progressModel.
+        $scope.progressModel.uncoveredTriplingWords =
+          allTriplingWords.map (word) ->
+            return analyzeTriplingWord(word, [])
+        $scope.progressModel.uncoveredBasicWords =
+          allBasicWords.map (word) ->
+            return analyzeBasicWord(word, [])
+        $scope.progressModel.coveredTriplingWords = []
+        $scope.progressModel.coveredBasicWords = []
 
-        # TODO: Produce a context-aware object hash and implement the service-side routine that uses it to branch
-        #       accordingly.
-#        xwReportService.updateTicketDescription({
-#          ticketId: $scope.ticketDocument.ticketId
-#          basicWords: allBasicWords
-#          tripleWords: allTriplingWords
-#          bonusWord: $scope.ticketDocument.bonusWord
-#        })
         return
 
-      $scope.$watchCollection 'ticketModel.yourLettersArray', (newValue) ->
-        $scope.ticketDocument.yourLetters = newValue.join('')
-
+      $scope.$watchCollection 'ticketDocument.yourLetters', (newValue) ->
+        yourLettersArray = newValue.split('')
         # TODO: Update reportService with a Discovery update.
 
       $scope.$watchCollection 'ticketModel.bonusWordArray', (newValue) ->
-        $scope.ticketDocument.bonusWord = newValue.join('')
+        $scope.conditionModel.bonusWord = newValue
 
-        # TODO: Produce a context-aware object hash and implement the service-side routine that uses it to branch
-        #       accordingly.
+# TODO: Update reportService with a Discovery update.
+
+# TODO: Use data binding to watch the conditionModel in a reporting component to update display stats.
 #        xwReportService.updateTicketDescription({
 #          ticketId: $scope.ticketDocument.ticketId
 #          basicWords: $scope.conditionModel.allBasicWords
@@ -126,6 +133,89 @@ define [
 
       return
   ]
+
+  analyzeBasicWord = (rawWordStr, revealedLetters) ->
+    missingLetterArray = new Array(rawWordStr.length)
+    missingLetterHash = {}
+    isComplete = true
+
+    displayWordStr =
+      rawWordStr.split('').map(
+        (nextChar) ->
+          if (revealedLetters[nextChar] > 0)
+            nextChar = '*'
+          else
+            isComplete = false
+            if missingLetterHash[nextChar] < 1
+              missingLetterHash[nextChar] = 1
+              missingLetterArray.push(nextChar)
+          return nextChar
+      ).join('')
+
+    return {
+      isComplete: isComplete
+      rawWordStr: rawWordStr
+      displayWordStr: displayWordStr
+      requiredLetters: missingLetterArray
+    }
+
+  analyzeTriplingWord = (rawWordStr, revealedLetters) ->
+    missingLetterArray = new Array(rawWordStr.length)
+    missingLetterHash = {}
+    isComplete = true
+
+    displayWordStr =
+      rawWordStr.split('').map(
+        (nextChar) ->
+          if (revealedLetters[nextChar] > 0)
+            nextChar = '*'
+          else
+            nextChar = nextChar.toLowerCase()
+            if(revealedLetters[nextChar] > 0)
+              nextChar = '#'
+            else
+              isComplete = false
+              if missingLetterHash[nextChar] < 1
+                missingLetterHash[nextChar] = 1
+                missingLetterArray.push(nextChar)
+          return nextChar
+      ).join('')
+
+    return {
+      isComplete: isComplete
+      rawWordStr: rawWordStr
+      displayWordStr: displayWordStr
+      requiredLetters: missingLetterArray
+    }
+
+  class BasicWordAnalysis extends AbstractWordAnalysis
+    constructor: (rawWordStr, revealedLetters) ->
+      super(rawWordStr, revealedLetters)
+      return
+
+  class TriplingWordAnalysis
+    constructor: (rawWordStr, revealedLetters) ->
+      super(rawWordStr, revealedLetters)
+      return
+
+    deriveDisplayWord: (missingLetterArray, revealedLetters) ->
+      @displayWordStr =
+        @rawWordStr.split('').map(
+          (nextChar) ->
+            if (revealedLetters[nextChar] > 0)
+              nextChar = '*'
+            else
+              nextChar = nextChar.toLowerCase()
+              if(revealedLetters[nextChar] > 0)
+                nextChar = '#'
+              else
+                @isComplete = false
+                if @missingLetterHash[nextChar] < 1
+                  @missingLetterHash[nextChar] = 1
+                  missingLetterArray.push(nextChar)
+              return nextChar
+        ).join('')
+
 
   baseMementoHelper = {
     storeMemento: (cellScope) ->
@@ -420,7 +510,7 @@ define [
 
       beginBwEdit = () ->
         workspaceId = $scope.getWorkspaceId()
-        jhDirtyTracker.trackChanges workspaceId, 'isADirtyProperta', bwMementoHelper
+        jhDirtyTracker.trackChanges workspaceId, 'isADirtyProperty', bwMementoHelper
         $scope.conditionModel.bwChangeIntent = 'commit'
         $scope.controlModel.clickBonusWord = 'move'
 

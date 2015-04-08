@@ -74,7 +74,6 @@ define ['angular', 'ui-utils'], ->
             else if colIdExpr != match[2]
               colIdExpr  = match[2]
               handleLeftFn()
-
             if cellHeight != match[4]
               cellHeight = match[4]
               rowIdExpr  = match[1]
@@ -211,7 +210,7 @@ define ['angular', 'ui-utils'], ->
 
     return {
       restrict: 'E'
-      require: [ 'jhGrid', '^jhCanvas' ]
+      require: [ 'jhGrid', 'ngModel' ]
       replace: false
       scope: {
         sourceGridModel: '=gridModel'
