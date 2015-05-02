@@ -1,4 +1,4 @@
 {
-  "cwd" : "jchpft-ui",
-  "directory" : "vendor"
+  "oldcwd" : "jchpft-ui",
+  "directory" : "client/vendor"
 }

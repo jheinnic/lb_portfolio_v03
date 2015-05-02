@@ -39,7 +39,7 @@ jchpft-common/components/**/*.css
 jchpft-backend/views/**/*.html
 jchpft-backend/views/*.html
 
-# A kitchen sink for project-associated files that are local notes not to be 
+# A kitchen sink for project-associated files that are local notes not to be
 # committed to Git.
 junk
 
@@ -49,3 +49,30 @@ Thumbs.db
 images/bootstrap
 images/jwplayer
 
+# Loopback additions
+*.csv
+*.dat
+*.gz
+*.log
+*.out
+*.pid
+*.seed
+.DS_Store
+.tmp
+build
+global.config.js
+bower_components
+client/dist
+ngapp/config/bundle.js
+html5/build
+lib-cov
+local.config.js
+logs
+pids
+public/bundle.js
+results
+
+
+# Typescript exploration
+tsd.json
+typings
