@@ -62,7 +62,8 @@
     "es5-shim": "~3.1.0",
     "json3": "~3.3.1",
     "rang": "*",
-    "coffee-script": "~1.9.2"
+    "coffee-script": "~1.9.2",
+    "coffeescript": "~1.9.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.3",
