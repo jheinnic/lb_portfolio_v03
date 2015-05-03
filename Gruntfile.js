@@ -50,7 +50,7 @@ module.exports = function (grunt) {
       js: {
         files: [
           '<%= yeoman.app %>/scripts/{,*/}*.js',
-          path.join( '.tmp', 'coffee', '{,*/}*.js' ) 
+          path.join( '.tmp', 'coffee', '{,*/}*.js' )
         ],
         tasks: ['newer:jshint:all'],
         options: {
@@ -67,7 +67,7 @@ module.exports = function (grunt) {
       jsTest: {
         files: [
           '<%= yeoman.app %>/test/spec/{,*/}*.js',
-          path.join( '.tmp', 'test', 'spec-coffee', '{,*/}*.js' ) 
+          path.join( '.tmp', 'test', 'spec-coffee', '{,*/}*.js' )
         ],
         tasks: ['newer:jshint:test', 'karma']
       },
@@ -213,7 +213,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // Compiles CoffeScript to JavaScript.
+    // Compiles CoffeeScript to JavaScript.
     coffee: {
       options: { },
       dist: {
@@ -221,14 +221,14 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/coffee/{,*/}*.coffee',
           '<%= yeoman.app %>/scripts/{,*}*.coffee'
         ],
-        dest: '.tmp/coffee' 
+        dest: '.tmp/coffee'
       },
       test: {
         src: [
           '<%= yeoman.app %>/test/spec-coffee/{,*/}*.coffee',
           '<%= yeoman.app %>/test/spec/{,*}*.coffee'
         ],
-        dest: '.tmp/test/spec-coffee' 
+        dest: '.tmp/test/spec-coffee'
       }
     },
 
@@ -269,7 +269,7 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/styles/{,*/}*.less',
           '<%= yeoman.app %>/less/{,*/}*.less'
         ],
-        dest: path.join('.tmp', 'styles', 'less.css') 
+        dest: path.join('.tmp', 'styles', 'less.css')
       }
     },
 
@@ -371,7 +371,7 @@ module.exports = function (grunt) {
     },
 
     // Performs rewrites based on filerev and the useminPrepare configuration
-    // 
+    //
     // Uncomming the css line below if you turn on css minification via the
     // 'cssmin' grunt plugin instead of inside 'usemin'.
     usemin: {
