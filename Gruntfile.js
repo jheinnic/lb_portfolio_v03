@@ -73,7 +73,6 @@ module.exports = function (grunt) {
       },
       less: {
         files: [
-          '<%= yeoman.app %>/less/{,*/}*.less',
           '<%= yeoman.app %>/styles/{,*/}*.less'
         ],
         // tasks: ['newer:copy:styles', 'newer:less', 'autoprefixer', 'useminPrepare', 'usemin', 'filerev']
@@ -553,7 +552,6 @@ module.exports = function (grunt) {
         src: ['server/test/**/*.js']
       }
     }
-
   });
 
   grunt.registerTask('build-lbclient', 'Build lbclient browser bundle', function() {
