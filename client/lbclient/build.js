@@ -5,7 +5,16 @@ var browserify = require('browserify');
 var boot = require('loopback-boot');
 
 module.exports = function buildBrowserBundle(env, callback) {
-  var b = browserify({ basedir: __dirname });
+  var isDevEnv = ~['debug', 'development', 'test'].indexOf(env);
+  var b = browserify(
+    { basedir: __dirname },
+    { // TODO(bajtos) debug should be always true, the sourcemaps should be
+      // saved to a standalone file when !isDev(env)
+      // NOTE(jheinnic) See https://github.com/thlorenz/exorcist#usage to
+      // accomplish the above TODO.
+      debug: isDevEnv
+    }
+  );
   b.require('./' + pkg.main, { expose: 'lbclient' });
 
   try {
@@ -19,13 +28,8 @@ module.exports = function buildBrowserBundle(env, callback) {
 
   var bundlePath = path.resolve(__dirname, 'browser.bundle.js');
   var out = fs.createWriteStream(bundlePath);
-  var isDevEnv = ~['debug', 'development', 'test'].indexOf(env);
 
-  b.bundle({
-    // TODO(bajtos) debug should be always true, the sourcemaps should be
-    // saved to a standalone file when !isDev(env)
-    debug: isDevEnv
-  })
+  b.bundle()
     .on('error', callback)
     .pipe(out);
 
