@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title>Todo App</title>
+    <title>John Heinnickel's Portfolio Website</title>
 
     <!--
     The base allows us to use relative links to resources even when
@@ -22,25 +22,23 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-  </head>
-  <body ng-app="loopbackExampleFullStackApp">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
-    <!-- Add your site or application content here -->
-
-    <h1>Welcome to the Todo App</h1>
-
-    <div class="header">
-      <ul class="navigation">
-        <li><a ng-href="/">Home</a></li>
-        <li><a ng-href="/login">Login</a></li>
-        <li><a ng-href="/register">Register</a></li>
-      </ul>
-    </div>
-
-    <div ng-view></div>
+    <link rel="stylesheet" href="style/jchptf/jchptf.css">
+    <link rel="stylesheet" href="style/angular/angular-csp.css">
+	</head>
+	<body>
+		<div class="container">
+			<nav-bar></nav-bar>
+			<div ng-view="/"></div>
+			<div class="row">
+				<div class="span12">
+					<footer>
+						<!--div ng-include="viewNavBar.html"></div-->
+						<p &copy; John C. Heinnickel, 2015></p>
+					</footer>
+				</div>
+			</div>
+		</div>
 
     <!--[if lt IE 9]>
     <script src="vendor/es5-shim/es5-shim.js"></script>
@@ -56,17 +54,16 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,ngapp,.}) scripts/scripts.js -->
-        <script src="lbclient/browser.bundle.js"></script>
-        <script src="config/bundle.js"></script>
-        <script src="scripts/app.js"></script>
-        <script src="scripts/services/lbclient.js"></script>
-        <script src="scripts/controllers/home.js"></script>
-        <script src="scripts/controllers/user.js"></script>
-        <script src="scripts/controllers/todo.js"></script>
-        <script src="scripts/controllers/login.js"></script>
-        <script src="scripts/controllers/register.js"></script>
-        <script src="scripts/controllers/change.js"></script>
-        <!-- endbuild -->
-</body>
+    <!-- build:js({.tmp,ngapp,.}) scripts/scripts.js -->
+    <script src="lbclient/browser.bundle.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/services/lbclient.js"></script>
+    <script src="scripts/controllers/home.js"></script>
+    <script src="scripts/controllers/user.js"></script>
+    <script src="scripts/controllers/todo.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/register.js"></script>
+    <script src="scripts/controllers/change.js"></script>
+    <!-- endbuild -->
+  </body>
 </html>
