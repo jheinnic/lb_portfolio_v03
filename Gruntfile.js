@@ -391,7 +391,7 @@ module.exports = function (grunt) {
     buildClientBundle(process.env.NODE_ENV || 'development', done);
   });
 
-  grunt.registerTask('build-config', 'Build confg.js from JSON files', function() {
+  grunt.registerTask('build-config', 'Build config.js from JSON files', function() {
     var ngapp = path.resolve(__dirname, appConfig.app);
     var configDir = path.join(ngapp, 'config');
     var config = {};

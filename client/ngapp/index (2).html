@@ -1,1 +1,69 @@
-<!DOCTYPE html><html><head><title></title><link rel="stylesheet" href="/public/stylesheets/style.css"><link rel="stylesheet" href="/components/angular/angular-csp.css"></head><body><div class="container"><nav-bar></nav-bar><div ng-view="/"></div><div class="row"><div class="span12"><footer><div ng-include="viewNavBar.html"></div><p &copy; John Heinnickel, 2012></p></footer></div></div></div><script type="text/javascript" data-main="public/javascripts/main" src="/components/requirejs/require.js"></script></body></html>
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>John Heinnickel's Portfolio Website</title>
+
+    <!--
+    The base allows us to use relative links to resources even when
+    this page was served from non-root URL, e.g. '/my/todos'
+    -->
+    <base href="/">
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+    <link rel="stylesheet" href="style/jchptf/jchptf.css">
+    <link rel="stylesheet" href="style/angular/angular-csp.css">
+	</head>
+	<body>
+		<div class="container">
+			<nav-bar></nav-bar>
+			<div ng-view="/"></div>
+			<div class="row">
+				<div class="span12">
+					<footer>
+						<!--div ng-include="viewNavBar.html"></div-->
+						<p &copy; John C. Heinnickel, 2015></p>
+					</footer>
+				</div>
+			</div>
+		</div>
+
+    <!--[if lt IE 9]>
+    <script src="vendor/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="vendor/es5-shim/es5-shim.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/json3/lib/json3.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,ngapp,.}) scripts/scripts.js -->
+    <script src="lbclient/browser.bundle.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/services/lbclient.js"></script>
+    <script src="scripts/controllers/home.js"></script>
+    <script src="scripts/controllers/user.js"></script>
+    <script src="scripts/controllers/todo.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/register.js"></script>
+    <script src="scripts/controllers/change.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>
