@@ -3,8 +3,11 @@
   "origName": "express_sandbox",
   "version": "0.0.3-SNAPSHOT",
   "main": "server/server.js",
-  "appPath": "client/ngApp",
+  "appPath": "client/ngapp",
+  "distPath": "client/dist",
+  "vendorPath": "client/ngApp/vendor",
   "testPath": "client/ngApp/test/spec",
+  "stagingPath": ".tmp",
   "authors": [
     "John Heinnickel <jheinnic@hotmail.com>"
   ],
