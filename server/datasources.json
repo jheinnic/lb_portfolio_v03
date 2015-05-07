@@ -1,5 +1,13 @@
 {
   "db": {
+    "connector": "mongodb",
+    "hostname": "localhost",
+    "port": 27017,
+    "user": "jchptf",
+    "password": "portfolio",
+    "database": "crosswords"
+  },
+  "memdb": {
     "connector": "memory",
     "defaultForType": "db"
   }
