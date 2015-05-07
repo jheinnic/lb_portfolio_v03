@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" ng-app="jchptf">
+<html class="no-js" ng-app="jchptf.app">
 <head>
     <meta charset="utf-8">
     <title>John Heinnickel's Portfolio Website</title>
@@ -14,22 +14,24 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- build:css(.) styles/vendor.css -->
+    <!-- build:css(client/ngapp) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="vendnvd3/build/nv.d3.css" />
-    <link rel="stylesheet" href="vendleaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="vendfont-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="vendangular-ui-grid/ui-grid.css" />
-    <link rel="stylesheet" href="vendbootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="vendor/nvd3/build/nv.d3.css" />
+    <link rel="stylesheet" href="vendor/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="vendor/angular-ui-grid/ui-grid.css" />
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/jchptf/app.css">
+    <link rel="stylesheet" href="styles/jchptf/crosswords/crosswords.css">
+    <link rel="stylesheet" href="styles/jchptf/home/home.css">
     <link rel="stylesheet" href="styles/vendor/angular-csp.css">
+    <link rel="stylesheet" href="styles/todo.css">
     <!-- endbuild -->
 
-    <link rel="stylesheet" href="styles/todo.css">
 </head>
 <body>
     <div class="container">
@@ -50,57 +52,47 @@
     <script src="vendor/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <!-- build:js(.) scripts/vendor.js -->
+    <!-- build:js(client/ngapp) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="vendes5-shim/es5-shim.js"></script>
-    <script src="vendjquery/dist/jquery.js"></script>
-    <script src="vendangular/angular.js"></script>
-    <script src="vendangular-cookies/angular-cookies.js"></script>
-    <script src="vendangular-resource/angular-resource.js"></script>
-    <script src="vendangular-sanitize/angular-sanitize.js"></script>
-    <script src="vendangular-animate/angular-animate.js"></script>
-    <script src="vendangular-touch/angular-touch.js"></script>
-    <script src="vendangular-http-auth/src/http-auth-interceptor.js"></script>
-    <script src="vendd3/d3.js"></script>
-    <script src="vendnvd3/build/nv.d3.js"></script>
-    <script src="vendangular-nvd3/dist/angular-nvd3.min.js"></script>
-    <script src="vendangular-underscore/angular-underscore.js"></script>
-    <script src="vendleaflet/dist/leaflet.js"></script>
-    <script src="vendleaflet/dist/leaflet-src.js"></script>
-    <script src="vendangular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
-    <script src="vendangular-ui-grid/ui-grid.js"></script>
-    <script src="vendangular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="vendangular-ui-router/release/angular-ui-router.js"></script>
-    <script src="vendangular-ui-utils/ui-utils.js"></script>
-    <script src="vendangular-strap/dist/angular-strap.js"></script>
-    <script src="vendangular-strap/dist/angular-strap.tpl.js"></script>
-    <script src="vendjquery-ui/jquery-ui.js"></script>
-    <script src="vendangular-dragdrop/src/angular-dragdrop.js"></script>
-    <script src="vendangular-jwt/dist/angular-jwt.js"></script>
-    <script src="vendgsap/src/uncompressed/TweenMax.js"></script>
-    <script src="vendngFx/dist/ngFx.js"></script>
-    <script src="vendasync/lib/async.js"></script>
-    <script src="vendbootstrap/dist/js/bootstrap.js"></script>
-    <script src="vendunderscore/underscore.js"></script>
-    <script src="vendcoffee-script/lib/coffee-script/coffee-script.js"></script>
-    <script src="vendsprintf.js/src/sprintf.js"></script>
-    <script src="vendjson3/lib/json3.js"></script>
+    <script src="vendor/jquery/dist/jquery.js"></script>
+    <script src="vendor/angular/angular.js"></script>
+    <script src="vendor/angular-cookies/angular-cookies.js"></script>
+    <script src="vendor/angular-resource/angular-resource.js"></script>
+    <script src="vendor/angular-sanitize/angular-sanitize.js"></script>
+    <script src="vendor/angular-animate/angular-animate.js"></script>
+    <script src="vendor/angular-touch/angular-touch.js"></script>
+    <script src="vendor/angular-http-auth/src/http-auth-interceptor.js"></script>
+    <script src="vendor/d3/d3.js"></script>
+    <script src="vendor/nvd3/build/nv.d3.js"></script>
+    <script src="vendor/angular-nvd3/dist/angular-nvd3.min.js"></script>
+    <script src="vendor/angular-underscore/angular-underscore.js"></script>
+    <script src="vendor/leaflet/dist/leaflet.js"></script>
+    <script src="vendor/leaflet/dist/leaflet-src.js"></script>
+    <script src="vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
+    <script src="vendor/angular-ui-grid/ui-grid.js"></script>
+    <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="vendor/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="vendor/angular-ui-utils/ui-utils.js"></script>
+    <script src="vendor/angular-strap/dist/angular-strap.js"></script>
+    <script src="vendor/angular-strap/dist/angular-strap.tpl.js"></script>
+    <script src="vendor/jquery-ui/jquery-ui.js"></script>
+    <script src="vendor/angular-dragdrop/src/angular-dragdrop.js"></script>
+    <script src="vendor/angular-jwt/dist/angular-jwt.js"></script>
+    <script src="vendor/gsap/src/uncompressed/TweenMax.js"></script>
+    <script src="vendor/ngFx/dist/ngFx.js"></script>
+    <script src="vendor/async/lib/async.js"></script>
+    <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="vendor/underscore/underscore.js"></script>
+    <script src="vendor/coffee-script/lib/coffee-script/coffee-script.js"></script>
+    <script src="vendor/sprintf.js/src/sprintf.js"></script>
+    <script src="vendor/json3/lib/json3.js"></script>
+    <script src="vendor/things-happened-util/dist/things-happened-util.js"></script>
+    <script src="vendor/things-happened-angular/dist/things-happened-angular.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js({.tmp,ngapp,.}) scripts/scripts.js -->
-    <script src="lbclient/browser.bundle.js"></script>
-    <script src="scripts/jchptf/authenticate/authenticate.js"></script>
-    <script src="scripts/jchptf/authenticate/authenticate.routes.js"></script>
-    <script src="scripts/jchptf/authenticate/LoginController.controller.js"></script>
-    <script src="scripts/jchptf/authenticate/loginKind.constant.js"></script>
-    <script src="scripts/jchptf/app.js"></script>
-    <script src="scripts/jchptf/app.configuration.js"></script>
-    <script src="scripts/jchptf/app.run.js"></script>
-    <script src="scripts/jchptf/context/context.js"></script>
-    <script src="scripts/jchptf/context/authTokenEventType.constant.js"></script>
-    <script src="scripts/jchptf/context/IdentityContext.service.js"></script>
-    <script src="scripts/jchptf/site/home/home.js"></script>
+    <!--
+    <script src="config/bundle.js"></script>
     <script src="scripts/services/lbclient.js"></script>
     <script src="scripts/controllers/home.js"></script>
     <script src="scripts/controllers/user.js"></script>
@@ -108,6 +100,33 @@
     <script src="scripts/controllers/login.js"></script>
     <script src="scripts/controllers/register.js"></script>
     <script src="scripts/controllers/change.js"></script>
+    -->
+
+    <!-- build:js(.tmp) scripts/scripts.js -->
+    <script src="lbclient/browser.bundle.js"></script>
+    <script src="scripts/enum.js"></script>
+    <script src="scripts/jchptf/authenticate/authenticate.js"></script>
+    <script src="scripts/jchptf/authenticate/authenticate.routes.js"></script>
+    <script src="scripts/jchptf/authenticate/AuthToken.service.js"></script>
+    <script src="scripts/jchptf/authenticate/LoginController.controller.js"></script>
+    <script src="scripts/jchptf/authenticate/ptfLoginModal.directive.js"></script>
+    <script src="scripts/jchptf/context/context.js"></script>
+    <script src="scripts/jchptf/context/AuthTokenEventKind.constant.js"></script>
+    <script src="scripts/jchptf/context/IdentityContext.service.js"></script>
+    <script src="scripts/jchptf/crosswords/crosswords.js"></script>
+    <script src="scripts/jchptf/crosswords/crosswords.routes.js"></script>
+    <script src="scripts/jchptf/crosswords/xwModel.js"></script>
+    <script src="scripts/jchptf/crosswords/tickets/tickets.js"></script>
+    <script src="scripts/jchptf/crosswords/tickets/dynamic.js"></script>
+    <script src="scripts/jchptf/crosswords/results/results.js"></script>
+    <script src="scripts/jchptf/crosswords/results/xwReport.js"></script>
+    <script src="scripts/jchptf/site/notification/notification.js"></script>
+    <script src="scripts/jchptf/site/navigation/navigation.js"></script>
+    <script src="scripts/jchptf/tools/keyboard/keyboard.js"></script>
+    <script src="scripts/jchptf/tools/keyboard/keyboard.directive.js"></script>
+    <script src="scripts/jchptf/app.configuration.js"></script>
+    <script src="scripts/jchptf/app.run.js"></script>
+    <script src="scripts/jchptf/app.js"></script>
     <!-- endbuild -->
 </body>
 </html>

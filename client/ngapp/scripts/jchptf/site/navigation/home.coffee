@@ -1,14 +1,3 @@
-define [
-  'angular'
-  'angular-route'
-  'angular-cookies'
-  'ui-bootstrap-tpls'
-  'ui-bootstrap'
-  'angular-strap/aside'
-  'cs!jch-navbar/main'
-  'cs!xw-ticket/main'
-  'cs!poker/main'
-], () ->
   appModule = angular.module(
     'jch-portfolio'
     ['ng', 'ngRoute', 'ngCookies', 'ui.bootstrap', 'mgcrea.ngStrap.aside', 'jch-navbar', 'xw-ticket', 'poker']

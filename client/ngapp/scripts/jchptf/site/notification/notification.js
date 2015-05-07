@@ -1,15 +1,14 @@
-(function(angular) {
+(function() {
     'use strict';
-    
+
     /**
      * @ngdoc overview
-     * @name jchpft.notify
+     * @name jchptf.site.notification
      * @description
      *
      * A directive for placing an area for asynchronous application messages
      * at a suitable location in a view and a service for accepting them
      * from places where events trigger.
      */
-    angular
-      .module('jchpft.notify', ['ui.bootstrap']);
-}(window.angular));
+    angular.module('jchptf.site.notification', ['ui.bootstrap']);
+}).call(window);

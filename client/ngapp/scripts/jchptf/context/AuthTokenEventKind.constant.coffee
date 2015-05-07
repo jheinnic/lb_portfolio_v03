@@ -1,0 +1,16 @@
+'use strict'
+
+this.angular.module('jchptf.context').constant('AUTH_TOKEN_EVENT_TYPE', AUTH_TOKEN_EVENT_TYPE)
+
+# require('coffee-script/registry')
+Enum = require('../../enum')
+
+class AUTH_TOKEN_EVENT_TYPE extends Enum
+new AUTH_TOKEN_EVENT_TYPE('NEW_TOKEN_IS_VALID');
+new AUTH_TOKEN_EVENT_TYPE('TOKEN_WAS_REFRESHED');
+new AUTH_TOKEN_EVENT_TYPE('TOKEN_MAY_EXPIRE');
+new AUTH_TOKEN_EVENT_TYPE('TOKEN_HAS_EXPIRED');
+new AUTH_TOKEN_EVENT_TYPE('TOKEN_WAS_REVOKED');
+new AUTH_TOKEN_EVENT_TYPE('TOKEN_LOGGED_OUT');
+new AUTH_TOKEN_EVENT_TYPE('INTERNAL_ERROR');
+AUTH_TOKEN_EVENT_TYPE.finalize();
