@@ -6,7 +6,7 @@ module.exports = function(app) {
   var serveDir = app.loopback.static;
 
   app.use(serveDir(projectPath('.tmp')));
-  app.use('/bower_components', serveDir(projectPath('bower_components')));
+  app.use('/vendor', serveDir(projectPath('client/ngapp/vendor')));
   app.use('/lbclient', serveDir(projectPath('client/lbclient')));
 };
 
