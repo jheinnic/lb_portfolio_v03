@@ -1,15 +1,18 @@
-(function(angular) {
-    'use strict';
-    
-    /**
-     * @ngdoc overview
-     * @name loopbackExampleFullStackApp
-     * @description
-     * # loopbackExampleFullStackApp
-     *
-     * Main module of the application.
-     */
-    angular.module('jchpft.xw', [
-        'ui.router', 'app.context', 'app.auth', 'app.notify', 'app.xw.define', 'app.xw.resolve'
-    ]):
-}(window.angular));
+(function () {
+  'use strict';
+
+  /**
+   * @ngdoc overview
+   * @name jchptf.crosswords
+   * @description
+   *
+   * Root module for the "Crosswords" feature set.
+   */
+  angular.module(
+    'jchptf.crosswords',
+    [
+      'ui.router', 'jchptf.context', 'jchptf.authenticate', 'jchptf.site.notification',
+      'jchptf.crosswords.tickets', 'jchptf.crosswords.results'
+    ]
+  );
+}).call(window);

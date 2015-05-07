@@ -1,13 +1,13 @@
-(function(angular) {
+(function() {
     'use strict';
 
-    angular.module('jchptf.authenticate').controller("LoginController", LoginController);
+    angular.module('jchptf.authenticate').controller('LoginController', LoginController);
 
     LoginController.$inject =
-        ['$state', 'IdentityContext', 'authTokenStatus', 'loginKind', 'LOGIN_KIND_ENUM', 'AUTH_TOKEN_EVENT_TYPE'];
+        ['$state', 'IdentityContext', 'authTokenStatus', 'loginKind', 'LoginResultKind', 'AuthTokenEventKind'];
 
     function LoginController(
-        IdentityContext, $state, authTokenStatus, loginKind, LOGIN_KIND_ENUM, AUTH_TOKEN_EVENT_TYPE
+        IdentityContext, $state, authTokenStatus, loginKind, LoginResultKind, AuthTokenEventKind
     ) {
         // First check for a reply from the identity context service.  If that
         // confirms that the user is not logged in, check to see if they came
@@ -18,9 +18,10 @@
         // form is the right place to be.  Those states only differ by the
         // kind of feedback the user is given.
 
-        if (angular.isUndefined(authTokenStatus)) {
+        var tokenEventType = authTokenStatus.eventType;
+        if (tokenEventType.isLoggedIn()) {
             $state.go('xw', {reload: false});
-        } else if (loginKind === LOGIN_KIND_ENUM.WITH_AUTH_TOKEN) {
+        } else if (tokenEventType !== AuthTokenEventKind.NO_TOKEN_AVAILABLE) {
             $state.go('^.attemptFailed', {reload: false});
         } else {
             // The remaining options stay on the login form and only differ
@@ -33,12 +34,13 @@
             // ** server error, try again later
             //    -OR-
             // your session has expired, please login to continue
+            futureWork();
         }
 
         // Form behavior itself is TBD!
         function futureWork() {
-            return IdentityContext.getAuthTokenStatus() == AUTH_TOKEN_EVENT_TYPE;
+            return IdentityContext.getAuthTokenStatus() === AuthTokenEventKind.NEW_TOKEN_IS_VALID;
         }
     }
-}(window.angular));
+}).call(window);
 

@@ -3,7 +3,7 @@ this.angular.module(
   ['ng', 'ui.bootstrap', 'ui.router']
 )
 
-// Foo.$inject = ['$state']
+# Foo.$inject = ['$state']
 
 class Foo extends ScopeBase
     @inject '$rootScope'

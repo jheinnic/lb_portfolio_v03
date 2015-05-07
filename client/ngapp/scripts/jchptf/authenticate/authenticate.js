@@ -1,4 +1,4 @@
-(function(angular) {
+(function() {
     'use strict';
 
     /**
@@ -9,4 +9,4 @@
      * Portfolio application's authentication module.
      */
     angular.module('jchptf.authenticate');
-}(window.angular))
+}).call(window);

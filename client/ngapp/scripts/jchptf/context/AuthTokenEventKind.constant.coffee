@@ -1,16 +1,23 @@
 'use strict'
 
-this.angular.module('jchptf.context').constant('AUTH_TOKEN_EVENT_TYPE', AUTH_TOKEN_EVENT_TYPE)
+angular.module('jchptf.context').constant('AuthTokenEventKind', AuthTokenEventKind)
 
 # require('coffee-script/registry')
 Enum = require('../../enum')
 
-class AUTH_TOKEN_EVENT_TYPE extends Enum
-new AUTH_TOKEN_EVENT_TYPE('NEW_TOKEN_IS_VALID');
-new AUTH_TOKEN_EVENT_TYPE('TOKEN_WAS_REFRESHED');
-new AUTH_TOKEN_EVENT_TYPE('TOKEN_MAY_EXPIRE');
-new AUTH_TOKEN_EVENT_TYPE('TOKEN_HAS_EXPIRED');
-new AUTH_TOKEN_EVENT_TYPE('TOKEN_WAS_REVOKED');
-new AUTH_TOKEN_EVENT_TYPE('TOKEN_LOGGED_OUT');
-new AUTH_TOKEN_EVENT_TYPE('INTERNAL_ERROR');
-AUTH_TOKEN_EVENT_TYPE.finalize();
+class AuthTokenEventKind extends Enum
+  constructor: (stateName, isActiveState) ->
+    super(stateName)
+    @isLoggedInState = isLoggedInState
+
+  isLoggedIn: () -> return @isLoggedInState
+
+new AuthTokenEventKind('NEW_TOKEN_IS_VALID', true);
+new AuthTokenEventKind('TOKEN_WAS_REFRESHED', true);
+new AuthTokenEventKind('TOKEN_MAY_EXPIRE', true);
+new AuthTokenEventKind('TOKEN_HAS_EXPIRED', false);
+new AuthTokenEventKind('TOKEN_WAS_REVOKED', false);
+new AuthTokenEventKind('TOKEN_IS_INVALID', false);
+new AuthTokenEventKind('NO_TOKEN_AVAILABLE', false);
+new AuthTokenEventKind('INTERNAL_ERROR', false);
+AuthTokenEventKind.finalize();

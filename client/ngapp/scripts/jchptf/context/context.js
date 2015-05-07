@@ -1,14 +1,10 @@
-'use strict';
+(function() {
+    'use strict';
 
-/**
- * @ngdoc overview
- * @name loopbackExampleFullStackApp
- * @description
- * # loopbackExampleFullStackApp
- *
- * Main module of the application.
- */
-angular
-  .module('jchpft.app', [
-    'ui.router', 'app.context', 'app.auth', 'app.notify', 'app.xw.describe', 'app.xw.resolve'
-  ]):
+    /**
+     * @ngdoc overview
+     * @name jchptf.context
+     * @description Context module that is responsible for tracking global state, such as current logged in user.
+     */
+    angular.module('jchptf.context', ['ui.router']);
+}).call(window);

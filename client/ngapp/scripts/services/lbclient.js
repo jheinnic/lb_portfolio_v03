@@ -8,7 +8,7 @@ var client = (function() {
 
 /**
  * @ngdoc service
- * @name loopbackExampleFullStackApp.lbclient
+ * @name jchptf.lbclient
  * @description
  * # lbclient
  * Value in the loopbackExampleFullStackApp.

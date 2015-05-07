@@ -1,4 +1,4 @@
-(function(angular/*, jchutils*/) {
+(function() {
     'use strict';
 
     /**
@@ -17,14 +17,22 @@
             'login',
             {
                 url: '/login/showForm',
-                templateUrl: '/views/authentication/login_form.view.html',
+                templateUrl: '/views/authentication/loginForm.view.html',
                 controller: 'LoginController',
                 controllerAs: 'login',
-                resolve: {},
+                resolve: {
+                    appContextStatus: null
+                },
                 abstract: false,
                 authenticate: false
             }
         );
+    }
+
+    checkAppContext.$inject = ['IdentityContext'];
+
+    function checkAppContext(IdentityContext) {
+        return IdentityContext.verifyAuthTokenStatus();
     }
     /*
             $stateProvider
@@ -66,8 +74,6 @@
         getWithAuthTokenLoginKind.$inject = ['LOGIN_KIND_ENUM'];
         getBadCredentialsLoginKind.$inject = ['LOGIN_KIND_ENUM'];
 
-        checkAppContext.$inject = ['IdentityContextService'];
-
         function getLoginRequestedLoginKind(LOGIN_KIND_ENUM) {
             return LOGIN_KIND_ENUM.LOGIN_REQUESTED;
         }
@@ -90,9 +96,5 @@
 
         function getExpiredTokenLoginKind(LOGIN_KIND_ENUM) {
             return LOGIN_KIND_ENUM.TOKEN_EXPIRED;
-
-        function checkAppContext(IdentityContextService) {
-            return IdentityContextService.verifyAuthTokenStatus();
-        }
-        */
-}(window.angular/*, window.jchutils*/))
+    */
+}).call(window);

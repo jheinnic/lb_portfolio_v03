@@ -13,16 +13,13 @@
      */
     angular.module('jchptf.main').run(portfolioAppLauncher);
 
-    portfolioAppLauncher.$inject=['IdentityContext', 'AUTH_TOKEN_EVENT_TYPE', '$state'];
+    portfolioAppLauncher.$inject=['IdentityContext', 'AuthTokenEventKind', '$state'];
 
-    function portfolioAppLauncher (IdentityContext, AUTH_TOKEN_EVENT_TYPE, $state) {
+    function portfolioAppLauncher (IdentityContext, AuthTokenEventKind, $state) {
         var latestEvent = IdentityContext.getAuthTokenStatus();
 
         var eventType = latestEvent.getEventType();
-        if (true
-            // (eventType == AUTH_TOKEN_EVENT_TYPE.NEW_VALID_LOGIN) ||
-            // (eventType == AUTH_TOKEN_EVENT_TYPE.TOKEN_WAS_REFRESHED)
-        ) {
+        if (eventType.isLoggedIn()) {
             $state.go('home', {reload: false});
         } else {
             // $state.go('loginForm.showForm', {reload: false});

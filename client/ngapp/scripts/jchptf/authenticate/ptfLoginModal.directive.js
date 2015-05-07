@@ -39,7 +39,7 @@
         'onModalInactive': '?&'
       },
       templateUrl: 'views/jchptf/authenticate/loginModal.html',
-      controller: pftLoginModalController
+      controller: PtfLoginModalController
     };
   }
 
