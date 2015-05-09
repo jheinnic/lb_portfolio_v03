@@ -1,139 +1,140 @@
-## TODO: Make this work!  Need to import 'amdefine'?
-## if (typeof define != 'function')
-##   define = require('amdefine')(module);
-
 ## TODO:  Eliminate replication of this code in jchpft-backend/lib/xwprovider.js
 
-define ['angular'], () ->
-  appModule = angular.module('xw-model', ['ng'])
+# Interim NodeJS/BrowserJS compatibility glue
+if !exports
+  require = (name) =>
+    @jchpftModels
+  if !@jchpftModels
+    exports = @jchpftModels = {}
+else
+  require('coffee-script/registry')
 
-  ##
-  ## Factory Service
-  ##
-  class DocumentFactory
-    constructor: () -> return @
+# appModule = angular.module('xw-model', ['ng'])
 
-    newTripleNoTwentyTicketDocument: (ticketId) ->
-      retVal = new V1TriplingTicketDocument(
-        ticketId
-        'DESCRIBE'
-        '_________________________________________________________________________________________________________________________'
-        '__________________'
-        -1
-        '_____'
-        -1
-      )
+##
+## Factory Service
+##
+class DocumentFactory
+  constructor: () ->
 
-      return retVal
+  newTripleNoTwentyTicketDocument: (ticketId) ->
+    new V1TriplingTicketDocument(
+      ticketId
+      'DESCRIBE'
+      '_________________________________________________________________________________________________________________________'
+      '__________________'
+      -1
+      '_____'
+      -1
+    )
 
-    newTripleWithSpotTicketDocument: (ticketId) ->
-      retVal = new V2TriplingTicketDocument(
-        ticketId
-        'DESCRIBE'
-        '_________________________________________________________________________________________________________________________'
-        '__________________'
-        -1
-        '_____'
-        -1
-        -1
-      )
+  newTripleWithSpotTicketDocument: (ticketId) ->
+    new V2TriplingTicketDocument(
+      ticketId
+      'DESCRIBE'
+      '_________________________________________________________________________________________________________________________'
+      '__________________'
+      -1
+      '_____'
+      -1
+      -1
+    )
 
-      return retVal
+  newFiveXTicketDocument: (ticketId) ->
+    new FiveXTicketDocument(
+      ticketId
+      'DESCRIBE'
+      '_________________________________________________________________________________________________________________________'
+      '__________________'
+      -1
+      -1
+      -1
+    )
 
-    newFiveXTicketDocument: (ticketId) ->
-      retVal = new FiveXTicketDocument(
-        ticketId
-        'DESCRIBE'
-        '_________________________________________________________________________________________________________________________'
-        '__________________'
-        -1
-        -1
-        -1
-      )
-
-      return retVal
-
-    loadTicketDocument: (obj) ->
-      if obj.hasOwnProperty('bonusWord')
-        if obj.hasOwnProperty('spotValue')
-          return loadTripleWithSpotTicketDocument(
-            obj.ticketId, obj.lifeStage, obj.content, obj.yourLetters, obj.payoutValue, obj.bonusWord, obj.bonusValue, obj.spotValue
-          )
-        else
-          return loadTripleNoTwentyTicketDocument(
-            obj.ticketId, obj.lifeStage, obj.content, obj.yourLetters, obj.payoutValue, obj.bonusWord, obj.bonusValue
-          )
-      else if obj.hasOwnProperty('multiplier')
-        return loadFiveXTicketDocument(
-          obj.ticketId, obj.lifeStage, obj.content, obj.yourLetters, obj.payoutValue, obj.multiplier, obj.spotValue
+  loadTicketDocument: (obj) ->
+    if obj.hasOwnProperty('bonusWord')
+      if obj.hasOwnProperty('spotValue')
+        return loadTripleWithSpotTicketDocument(
+          obj.ticketId, obj.lifeStage, obj.content, obj.yourLetters, obj.payoutValue, obj.bonusWord, obj.bonusValue, obj.spotValue
         )
-
-      return null
-
-
-    loadTripleNoTwentyTicketDocument: (ticketId, lifeStage, content, yourLetters, payoutValue, bonusWord, bonusValue) ->
-      return new V1TriplingTicketDocument(
-        ticketId, lifeStage, content, yourLetters, payoutValue, bonusWord, bonusValue
+      else
+        return loadTripleNoTwentyTicketDocument(
+          obj.ticketId, obj.lifeStage, obj.content, obj.yourLetters, obj.payoutValue, obj.bonusWord, obj.bonusValue
+        )
+    else if obj.hasOwnProperty('multiplier')
+      return loadFiveXTicketDocument(
+        obj.ticketId, obj.lifeStage, obj.content, obj.yourLetters, obj.payoutValue, obj.multiplier, obj.spotValue
       )
 
-    loadTripleWithSpotTicketDocument: (ticketId, lifeStage, content, yourLetters, payoutValue, bonusWord, bonusValue, spotValue) ->
-      return new V2TriplingTicketDocument(
-        ticketId, lifeStage, content, yourLetters, payoutValue, bonusWord, bonusValue, spotValue
-      )
+    return null
 
-    loadFiveXTicketDocument: (ticketId, lifeStage, content, yourLetters, payoutValue, multiplier, spotValue) ->
-      return new FiveXTicketDocument(
-        ticketId, lifeStage, content, yourLetters, payoutValue, multiplier, spotValue
-      )
 
-  appModule.service('xwDocumentFactory', [DocumentFactory])
+  loadTripleNoTwentyTicketDocument: (ticketId, lifeStage, content, yourLetters, payoutValue, bonusWord, bonusValue) ->
+    return new V1TriplingTicketDocument(
+      ticketId, lifeStage, content, yourLetters, payoutValue, bonusWord, bonusValue
+    )
 
-  ##
-  ## Ticket Document Model
-  ##
+  loadTripleWithSpotTicketDocument: (ticketId, lifeStage, content, yourLetters, payoutValue, bonusWord, bonusValue, spotValue) ->
+    return new V2TriplingTicketDocument(
+      ticketId, lifeStage, content, yourLetters, payoutValue, bonusWord, bonusValue, spotValue
+    )
 
-  ## Constructors must only throw exceptions for invariant violations.  Object states that are not usable but possible
-  ## to reach by editor use must be accepted and flagged in the UI as having correctable errors.
+  loadFiveXTicketDocument: (ticketId, lifeStage, content, yourLetters, payoutValue, multiplier, spotValue) ->
+    return new FiveXTicketDocument(
+      ticketId, lifeStage, content, yourLetters, payoutValue, multiplier, spotValue
+    )
 
-  class AbstractTicketDocument
-    @identityRegex: /\d{3,4}:\d{6,7}\-\d{3}/
+# appModule.service('xwDocumentFactory', [DocumentFactory])
 
-    constructor: (@ticketId, @lifeStage, @content, @yourLetters, @payoutValue) ->
-      if ! AbstractTicketDocument.identityRegex.test(ticketId)
-        throw 'InvalidArgumentException: ticketId = ' + ticketId + ' is malformed!'
-      if lifeStage != 'DESCRIBE' && lifeStage != 'PLAY' && lifeStage != 'FINAL'
-        throw 'InvalidArgumentException: lifeStage must be "DESCRIBE", "PLAY", or "FINAL".  lifeStage = ' + lifeStage
-      if lifeStage == 'FINAL' && yourLetters.search('_') > -1
-        throw 'InvalidArgumentException.  Cannot be Final with unresolved values in yourLetters.  yourLetters = ' + yourLetters
-      if lifeStage == 'DESCRIBE' && yourLetters.search(/[^_]/) > -1
-        throw 'InvalidArgumentException.  Cannot be have anything resolved in yourLetters while still describing ticket.  yourLetters = ' + yourLetters
+##
+## Ticket Document Model
+##
 
-      if lifeStage == 'FINAL' && payoutValue == -1
-        throw 'InvalidArgumentException.  Cannot be Final unresolved payoutValue.  payoutValue = ' + payoutValue
-      # TODO: Confirm max payout value (excluding INVALID)
-      if lifeStage == 'FINAL' && payoutValue > 16
-        throw 'InvalidArgumentException.  Final payoutValue cannot be out-of-bounds.  payoutValue = ' + payoutValue
-      if lifeStage != 'FINAL' && payoutValue != -1
-        throw 'InvalidArgumentException.  Final payoutValue cannot set until ticket is fully resolved.  payoutValue = ' + payoutValue
+## Constructors must only throw exceptions for invariant violations.  Object states that are not usable but possible
+## to reach by editor use must be accepted and flagged in the UI as having correctable errors.
 
-      # TODO: Regex validation of @content -- word count suitable for lifeStage
+class AbstractTicketDocument
+  @identityRegex: /\d{3,4}:\d{6,7}\-\d{3}/
 
-      return
+  constructor: (@ticketId, @lifeStage, @content, @yourLetters, @payoutValue) ->
+    if ! AbstractTicketDocument.identityRegex.test(ticketId)
+      throw new Error "ticketId = #{ticketId} is malformed!"
+    if lifeStage != 'DESCRIBE' && lifeStage != 'PLAY' && lifeStage != 'FINAL'
+      throw new Error "lifeStage must be \"DESCRIBE\", \"PLAY\", or \"FINAL\", but lifeStage = #{lifeStage}"
+    if lifeStage == 'FINAL' && yourLetters.search('_') > -1
+      throw new Error "lifeStage cannot be \"FINAL\" with unresolved values in yourLetters, but yourLetters = #{yourLetters}."
+    if lifeStage == 'DESCRIBE' && yourLetters.search(/[^_]/) > -1
+      throw new Error "Cannot have any resolved letters while still describing ticket, but yourLetters = #{yourLetters}."
 
-  class V1TriplingTicketDocument extends AbstractTicketDocument
-    constructor: (ticketId, lifeStage, content, yourLetters, payoutValue, @bonusWord, @bonusValue) ->
-      super(ticketId, lifeStage, content, yourLetters, payoutValue)
+    if lifeStage == 'FINAL' && payoutValue == -1
+      throw new Error "Lifestage cannot be \"FINAL\" with an unresolved payoutValue, but payoutValue = #{payoutValue}."
+    # TODO: Confirm max payout value (excluding INVALID)
+    if lifeStage != 'FINAL' && payoutValue != -1
+      throw new Error "Final payoutValue cannot set until ticket is fully revealed, but payoutValue = #{payoutValue}."
+    if payoutValue > 16
+      throw new Error "Final payoutValue cannot be out-of-bounds, but payoutValue = #{payoutValue}."
 
-      if lifeStage != 'DESCRIBE' && bonusWord.search(/[^_]/) > -1
-        throw 'InvalidArgumentException.  Cannot be have anything resolved in bonusWord after describing ticket.  bonusWord = ' + bonusWord
-      # TODO: Bonus word letter uniqueness
+    # TODO: Regex validation of @content -- word count suitable for lifeStage
 
-  class V2TriplingTicketDocument extends AbstractTicketDocument
-    constructor: (ticketId, lifeStage, content, yourLetters, payoutValue, @bonusWord, @bonusValue, @spotValue) ->
-      super(ticketId, lifeStage, content, yourLetters, payoutValue)
+    return
 
-  class FiveXTicketDocument extends AbstractTicketDocument
-    constructor: (ticketId, lifeStage, content, yourLetters, payoutValue, @mutiplier, @spotValue) ->
-      super(ticketId, lifeStage, content, yourLetters, payoutValue)
+class V1TriplingTicketDocument extends AbstractTicketDocument
+  constructor: (ticketId, lifeStage, content, yourLetters, payoutValue, @bonusWord, @bonusValue) ->
+    super(ticketId, lifeStage, content, yourLetters, payoutValue)
 
-  return appModule
+    if lifeStage != 'DESCRIBE' && bonusWord.search(/[^_]/) > -1
+      throw new Error "Cannot have anything resolved in bonusWord while still describing ticket, but bonusWord = #{bonusWord}"
+    # TODO: Bonus word letter uniqueness
+
+class V2TriplingTicketDocument extends AbstractTicketDocument
+  constructor: (ticketId, lifeStage, content, yourLetters, payoutValue, @bonusWord, @bonusValue, @spotValue) ->
+    super(ticketId, lifeStage, content, yourLetters, payoutValue)
+
+class FiveXTicketDocument extends AbstractTicketDocument
+  constructor: (ticketId, lifeStage, content, yourLetters, payoutValue, @mutiplier, @spotValue) ->
+    super(ticketId, lifeStage, content, yourLetters, payoutValue)
+
+exports.V1TriplingTicketDocument = V1TriplingTicketDocument
+exports.V2TriplingTicketDocument = V2TriplingTicketDocument
+exports.FiveXTicketDocument = FiveXTicketDocument
+exports.DocumentFactory = DocumentFactory

@@ -1,4 +1,4 @@
-xwModule = angular.module('jchptf.crosswords.tickets', []);
+xwModule = angular.module('jchptf.crosswords.tickets', [])
 
 xwModule.factory 'xwDirectiveFactory', () ->
   templateDirPath = '/app/xw-ticket/partials/'

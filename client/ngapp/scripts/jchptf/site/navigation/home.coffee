@@ -1,21 +1,32 @@
-  appModule = angular.module(
-    'jch-portfolio'
-    ['ng', 'ngRoute', 'ngCookies', 'ui.bootstrap', 'mgcrea.ngStrap.aside', 'jch-navbar', 'xw-ticket', 'poker']
-  )
+  appModule = angular.module 'jchptf.site.navigation'
+#     [
+#       'ng'
+#       'ngRoute'
+#       'ngCookies'
+#       'ui.bootstrap'
+#       'mgcrea.ngStrap.aside'
+#       'jch-navbar'
+#       'xw-ticket'
+#       'poker'
+#     ]
 
-  appModule.config ['$routeProvider', ($routeProvider) ->
-    $routeProvider.when '/',
-      templateUrl: '/app/portfolio/partials/view.html',
-      controller: 'HomeCtrl'
+  appModule.config [
+    '$stateProvider'
+    ($stateProvider) ->
+      $stateProvider.state 'home',
+        templateUrl: '/views/jchptf/site/navigation/home.view.html'
+        controller: 'HomeCtrl'
+        controllerAs: 'home'
+        abstract: false
+        authenticate: true
   ]
 
   appModule.controller 'HomeCtrl', [
-    '$scope',
-    ($scope) ->
-      $scope.message = 'Hello world!'
+    '$scope'
+    ($scope) -> $scope.message = 'Hello world!'
   ]
 
-  appModule.directive 'dynatest', {
+  appModule.directive 'dynatest',
     restrict: 'E'
     replace: true
     link: ($scope, $elem, $attr) ->
@@ -26,6 +37,3 @@
         { type: 'bold', value: 'four' }
       ]
     template: ($elem, $attr) -> ''
-  }
-
-  return appModule

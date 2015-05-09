@@ -1,19 +1,27 @@
-_ = require 'underscore'
+if require
+  _ = require 'underscore'
+else
+  _ = @_
+
+# Interim NodeJS/BrowserJS compatibility glue
+if !exports
+  require = (name) =>
+    @jchptfModels
+  if !@jchptfModels
+    exports = @jchptfModels = {}
+else
+  require('coffee-script/registry')
+
 
 class Enum
-  # @_size: 0
-  # @_VALUES: {}
-
   Object.defineProperty(
-      @,
-      'testing'
-      {
-          "configurable": false,
-          "editable": false,
-          "writable": false,
-          "value": { }
-      }
-  );
+    @,
+    'testing',
+      configurable: false,
+      enumerable: true,
+      editable: false,
+      value: { }
+  )
 
   _name: undefined
   _ordinal: undefined
@@ -52,7 +60,7 @@ class Enum
 
   # Call freeze after instantiating the last enum value to prevent
   # further modification of the enumerated value set.
-  @freeze: () ->
+  @finalize: () ->
     @_VALUES ?= {}
     @_VALUES = Object.freeze(@_VALUES)
     return Object.freeze(@)
@@ -65,4 +73,4 @@ class Enum
   getClass: () -> return this.constructor
   getSuperclass: () -> return @getClass().__super__.constructor
 
-module.exports = Enum
+exports.Enum = Enum

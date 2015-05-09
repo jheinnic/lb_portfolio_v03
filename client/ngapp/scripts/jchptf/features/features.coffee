@@ -6,10 +6,10 @@ this.angular.module(
 # Foo.$inject = ['$state']
 
 class Foo extends ScopeBase
-    @inject '$rootScope'
+  @inject '$rootScope'
 
-    f(n) -> return 5
+  f(n) -> return 5
 
-    g(n) -> this.$rootScope.fa
+  g(n) -> this.$rootScope.fa
 
 appModule.factory('Foo', Foo)

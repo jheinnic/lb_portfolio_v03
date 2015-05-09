@@ -8,5 +8,5 @@
      * @description
      * Portfolio application's authentication module.
      */
-    angular.module('jchptf.authenticate');
+    angular.module('jchptf.authenticate', ['ng']);
 }).call(window);

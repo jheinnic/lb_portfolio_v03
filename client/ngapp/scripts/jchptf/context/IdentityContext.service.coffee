@@ -1,32 +1,55 @@
-'use strict';
+'use strict'
 
-# /**
-#  * @ngdoc overview
-#  * @name jchpft.context
-#  * @description
-#  * Module for maintaining "global" application state that needs to be able
-#  * to survive UI view changes and remain available for the duration of a
-#  * user's interaction time with the application.
-#  *
-#  * There are two known contexts at this time:
-#  * <ol>
-#  * <li>A user's authenticated login state, credential token, and
-#  * the websocket session through which they receive pushed notifications
-#  * from the server and establish a presence in the cluster.</li>
-#  * <li>Project catalog and impact analysis metadata, synchronized with
-#  *  the backend to avoid the cost of redundant retrieval and also to
-#  *  inform users about unresolved change propagation requirements.</li>
-#  * </ol>
-#  */
-angular.module('jchptf.context')
-    .factory('IdentityContext', IdentityContext)
+# Interim NodeJS/BrowserJS compatibility glue
+if !exports
+  require = (name) =>
+    @jchptfModels
+  if !@jchptfModels
+    exports = @jchptfModels = {}
+else
+  require('coffee-script/registry')
 
-IdentityContext.$inject = ['$q', 'AuthTokenEventKind']
+
+###
+@ngdoc overview
+@name jchpft.context
+@description
+Module for maintaining "global" application state that needs to be able
+to survive UI view changes and remain available for the duration of a
+user's interaction time with the application.
+
+There are two known contexts at this time:
+<ol>
+<li>A user's authenticated login state, credential token, and
+the websocket session through which they receive pushed notifications
+from the server and establish a presence in the cluster.</li>
+<li>Project catalog and impact analysis metadata, synchronized with
+the backend to avoid the cost of redundant retrieval and also to
+inform users about unresolved change propagation requirements.</li>
+</ol>
+###
+angular.module('jchptf.context').factory('IdentityContext', IdentityContext)
 
 class IdentityContext
-  constructor: ($q, AuthTokenEventKind) ->
-    @identityContextInternal = new IdentityContextInternals($q, AuthTokenEventKind)
-    @tokenEventListeners = {}
+  @$inject = ['$q']
+
+  constructor: ($q) ->
+    Object.defineProperty(@, 'identityContextInternal',
+      configurable: false
+      enumerable: false
+      editable: false
+      value: new IdentityContextInternals($q)
+    )
+    Object.defineProperty(@, 'tokenEventListeners',
+      configurable: false
+      enumerable: false
+      editable: false
+      value: {}
+    )
+
+  isLoggedIn: () => @identityContextInternals.isLoggedIn()
+
+  logout: () => @identityContextInternals.logout()
 
   #/**
   # * @method
@@ -41,53 +64,44 @@ class IdentityContext
   # * state changes, which is because it is returning old state about the
   # * most recent known state change.
   # */
-  getLatestTokenEvent: () ->
-    return @identityContextInternals.latestTokenEvent;
+  getLatestTokenEvent: () => @identityContextInternals.latestTokenEvent
 
-  verifyAuthTokenStatus: () ->
-    return @identityContextInternals.verifyAuthTokenStatus();
+  verifyAuthTokenStatus: () => @identityContextInternals.verifyAuthTokenStatus()
 
-  getNextTokenEventPromise: () ->
-    return @identityContextInternals.nextEventDefer.promise
+  getNextTokenEvent: () => @identityContextInternals.nextEventDefer.promise
 
-  addTokenEventListener: (eventHandler) ->
+  addTokenEventListener: (eventHandler) =>
     if @tokenEventListeners[eventHandler]
       throw new Error 'Cannot register an event handler twice'
-    else
-      regControl =
-        isEnabled: true
-      wrappedListener = (event) ->
-        if regControl.isEnabled
-          try
-            eventHandler(event)
-          catch e
-            # TODO: Error handling
-            console.log(e)
 
-          eventType.nextPromise.then(wrappedListener)
-      @tokenEventListeners[eventHandler] = regControl
+    @tokenEventListeners[eventHandler] = eventHandler
+    wrappedListener(event) ->
+      if @tokenEventListeners[eventHandler]
+        event.nextPromise.then(wrappedListener)
+        try
+          eventHandler(event)
+        catch e
+          # TODO: Error handling
+          console.log(e)
+    wrappedListener(@identityContextInternals.latestTokenEvent)
 
-  dropTokenEventListener: (eventHandler) ->
-    regControl = @tokenEventListener[eventHandler]
-    if regControl
-      regControl.isEnabled = false
-      delete @tokenEventListener[eventHandler]
-    else
+  dropTokenEventListener: (eventHandler) =>
+    if ! delete @tokenEventListener[eventHandler]
       throw new Error 'Cannot de-register an unregistered event handler'
 
 class IdentityContextInternals
+  AuthTokenEventKind = require('./AuthTokenEventKind.enum').AuthTokenEventKind
 
-  constructor: ($q, _AuthTokenEventKind) ->
+  constructor: ($q) ->
     # TODO: Add JWT token handling utilities, and tools for accepting
     #       delegated authentication tokens (e.g. OAuth2)
-    @AuthTokenEventKind = _AuthTokenEventKind
     @promiseService = $q
     @nextEventDefer = $q.defer
     @latestTokenEvent = new AuthTokenEvent
-      eventType: _AuthTokenEventKind.NO_TOKEN_AVAILABLE
+      eventType: AuthTokenEventKind.NO_TOKEN_AVAILABLE
       nextPromise: @nextEventDefer.promise
 
-  decodeAuthToken: (authToken) ->
+  decodeAuthToken = (authToken) ->
     # TODO: Add JWT token decoder
     # TODO: Add a current timestamp to the token deltas and set timers
     return new AuthTokenEvent
@@ -97,12 +111,11 @@ class IdentityContextInternals
       tokenExpiration: 3600000  # one hour
       tokenTimeout: 600000      # 10 minutes
       authToken: authToken
-      eventType: @AuthTokenEventKind.NEW_TOKEN_IS_VALID
+      eventType: AuthTokenEventKind.NEW_TOKEN_IS_VALID
 
-  isUserLoggedIn: () ->
-    return @latestTokenEvent.eventType.isLoggedIn()
+  isLoggedIn: @latestTokenEvent.eventType.isLoggedIn
 
-  verifyAuthTokenStatus: () ->
+  verifyAuthTokenStatus: () =>
     retVal = @latestTokenEvent
 
     # TODO: Get a real token from the cookie environment
@@ -113,31 +126,29 @@ class IdentityContextInternals
         # TODO: Check validity of new token
         retVal = @decodeAuthToken authToken
 
-        if retVal.eventType == @AuthTokenEventKind.TOKEN_WAS_REFRESHED
+        if retVal.eventType == AuthTokenEventKind.TOKEN_WAS_REFRESHED
           @fireTokenEvent retVal
         else
           logoutTokenEvent = new AuthTokenEvent
-            eventType: _AuthTokenEventKind.NO_TOKEN_AVAILABLE
+            eventType: AuthTokenEventKind.NO_TOKEN_AVAILABLE
           @fireTokenEvent logoutTokenEvent
           @fireTokenEvent retVal
     else if authToken
       retVal = @decodeAuthToken authToken
       @fireTokenEvent retVal
 
-  fireTokenEvent: (latestEvent) ->
-    @latestTokenEvent = latestEvent
+  fireTokenEvent: (newEvent) =>
+    @latestTokenEvent = newEvent
+    previousPromise = @nextEventDefer.promise
 
-    promiseToFire = @nextEventDefer.promise
     @nextEventDefer = @promiseService.defer
+    newEvent.nextPromise = @nextEventDefer.nextPromise
 
-    latestEvent.nextPromise = @nextEventDefer.nextPromise
-    promiseToFire.resolve latestEvent
+    previousPromise.resolve newEvent
 
-  logout: () ->
-    if @isUserLoggedIn()
-      logoutTokenEvent = new AuthTokenEvent
-        eventType: _AuthTokenEventKind.NO_TOKEN_AVAILABLE
-      @fireTokenEvent logoutTokenEvent
+  logout: () =>
+    @fireTokenEvent new AuthTokenEvent
+      eventType: AuthTokenEventKind.NO_TOKEN_AVAILABLE
 
 
 # TODO: Try to do token attachment to requests by way of a before
@@ -147,6 +158,9 @@ class AuthTokenEvent
   constructor: (eventProps) ->
     {@eventType, @uuid, @displayName, @loginId, @tokenExpiration, @tokenTimeout, @authToken} = eventProps
 
-    Object.freeze(this);
+    Object.freeze(this)
 
-  isLoggedIn: () -> return @eventType.isLoggedIn()
+  isLoggedIn: () => @eventType.isLoggedIn()
+
+exports.IdentityContext = IdentityContext
+exports.AuthTokenEvent = AuthTokenEvent

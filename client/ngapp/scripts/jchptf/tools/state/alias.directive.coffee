@@ -38,6 +38,6 @@ define [
             clone.attr(srcDirName, attr[aliasDirName]).removeAttr(aliasDirName)
             return angular.element('<div></div>').append(clone).html()
       else
-        throw "Illegal Argument: Unsupported restrict property value of " + restrictProp
+        throw new Error "Unsupported restrict property value: #{restrictProp}"
 
       return retVal

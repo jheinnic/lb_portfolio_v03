@@ -1,46 +1,45 @@
-define [
-  'angular'
-  'angular-strap/button'
-  'cs!jch-ui-blocks/main'
-], () ->
-  xwModule = angular.module('poker', ['ng', 'mgcrea.ngStrap.button', 'jch-ui-blocks']);
+xwModule = angular.module 'poker', [
+  'ng'
+  'mgcrea.ngStrap.button'
+  'jch-ui-blocks'
+]
 
-  xwModule.config ['$routeProvider', ($routeProvider) ->
-    $routeProvider.when '/poker/odds',
-      templateUrl: '/app/poker/partials/view.html'
-      controller: 'PokerCtrl'
-  ]
+xwModule.config ['$routeProvider', ($routeProvider) ->
+  $routeProvider.when '/poker/odds',
+    templateUrl: '/app/poker/partials/view.html'
+    controller: 'PokerCtrl'
+]
 
-  xwModule.directive 'pokerCanvas', [ () ->
-    restrict: 'E'
-    replace: true
-    templateUrl: '/app/poker/partials/pokerCanvas.html'
-    scope:
-      tableParams: '@'
-      predictedOdds: '&'
-      playerInputs: '='
-    controler: ($scope, $elm, $attr) ->
-  ]
+xwModule.directive 'pokerCanvas', [ () ->
+  restrict: 'E'
+  replace: true
+  templateUrl: '/app/poker/partials/pokerCanvas.html'
+  scope:
+    tableParams: '@'
+    predictedOdds: '&'
+    playerInputs: '='
+  controler: ($scope, $elm, $attr) ->
+]
 
-  xwModule.directive 'testGridOne', [() ->
-    restrict: 'E'
-    replace: true
-    require: 'jhGrid'
-    scope: false
-    templateUrl: '/app/poker/partials/testGridOne.html'
-    link: ( $scope, $element, $attr, gridCtrl ) ->
-      changeContent = (clickScope, $event) ->
-        if clickScope.cellModel.content == 'x'
-          clickScope.controlModel.lifeStage = 'frozen'
-        clickScope.cellModel.content = 'x'
-        return
-
-      gridCtrl.addDynamicImageLayer 'pkr-content', 'contentImage'
-      gridCtrl.addClickHandler 'default', changeContent
-      gridCtrl.addClickHandler 'frozen', null
-      gridCtrl.populateGrid 2, 13, 28, 28, $scope.alphabetCells, '1D'
+xwModule.directive 'testGridOne', [() ->
+  restrict: 'E'
+  replace: true
+  require: 'jhGrid'
+  scope: false
+  templateUrl: 'view/jchpft/poker/testGridOne.html'
+  link: ( $scope, $element, $attr, gridCtrl ) ->
+    changeContent = (clickScope, $event) ->
+      if clickScope.cellModel.content == 'x'
+        clickScope.controlModel.lifeStage = 'frozen'
+      clickScope.cellModel.content = 'x'
       return
-  ]
+
+    gridCtrl.addDynamicImageLayer 'pkr-content', 'contentImage'
+    gridCtrl.addClickHandler 'default', changeContent
+    gridCtrl.addClickHandler 'frozen', null
+    gridCtrl.populateGrid 2, 13, 28, 28, $scope.alphabetCells, '1D'
+    return
+]
 
 #        this.beginEdit: (scope, inputOptions) ->
 #          return
@@ -53,20 +52,24 @@ define [
 #
 #        this.markDirty: (rollbackMemento) ->
 
-  xwModule.controller 'PokerCtrl', ['$scope', ($scope) ->
-    $scope.outerModel = [
-      {
-        name: 'First',
-        value: 1
-      },
-      {
-        name: 'Second',
-        value: 2
-      },
-      {
-        name: 'Third',
-        value: 3
-      }
+xwModule.controller(
+  'PokerCtrl',
+  [
+    '$scope'
+    ($scope) ->
+      $scope.outerModel = [
+        {
+          name: 'First',
+          value: 1
+        },
+        {
+          name: 'Second',
+          value: 2
+        },
+        {
+          name: 'Third',
+          value: 3
+        }
     ]
     $scope.controlModel = {
       lifeStage: 'default'
@@ -101,67 +104,72 @@ define [
     ]
 
     $scope.contentImage = {
-      a: '/app/xw-ticket/images/val/A.png'
-      b: '/app/xw-ticket/images/val/B.png'
-      c: '/app/xw-ticket/images/val/C.png'
-      d: '/app/xw-ticket/images/val/D.png'
-      e: '/app/xw-ticket/images/val/E.png'
-      f: '/app/xw-ticket/images/val/F.png'
-      g: '/app/xw-ticket/images/val/G.png'
-      h: '/app/xw-ticket/images/val/H.png'
-      i: '/app/xw-ticket/images/val/I.png'
-      j: '/app/xw-ticket/images/val/J.png'
-      k: '/app/xw-ticket/images/val/K.png'
-      l: '/app/xw-ticket/images/val/L.png'
-      m: '/app/xw-ticket/images/val/M.png'
-      n: '/app/xw-ticket/images/val/N.png'
-      o: '/app/xw-ticket/images/val/O.png'
-      p: '/app/xw-ticket/images/val/P.png'
-      w: '/app/xw-ticket/images/val/Q.png'
-      r: '/app/xw-ticket/images/val/R.png'
-      s: '/app/xw-ticket/images/val/S.png'
-      t: '/app/xw-ticket/images/val/T.png'
-      u: '/app/xw-ticket/images/val/U.png'
-      v: '/app/xw-ticket/images/val/V.png'
-      w: '/app/xw-ticket/images/val/W.png'
-      x: '/app/xw-ticket/images/val/X.png'
-      y: '/app/xw-ticket/images/val/Y.png'
-      z: '/app/xw-ticket/images/val/Z.png'
+      a: 'images/jchptf/crosswords/val/A.png'
+      b: 'images/jchptf/crosswords/val/B.png'
+      c: 'images/jchptf/crosswords/val/C.png'
+      d: 'images/jchptf/crosswords/val/D.png'
+      e: 'images/jchptf/crosswords/val/E.png'
+      f: 'images/jchptf/crosswords/val/F.png'
+      g: 'images/jchptf/crosswords/val/G.png'
+      h: 'images/jchptf/crosswords/val/H.png'
+      i: 'images/jchptf/crosswords/val/I.png'
+      j: 'images/jchptf/crosswords/val/J.png'
+      k: 'images/jchptf/crosswords/val/K.png'
+      l: 'images/jchptf/crosswords/val/L.png'
+      m: 'images/jchptf/crosswords/val/M.png'
+      n: 'images/jchptf/crosswords/val/N.png'
+      o: 'images/jchptf/crosswords/val/O.png'
+      p: 'images/jchptf/crosswords/val/P.png'
+      q: 'images/jchptf/crosswords/val/Q.png'
+      r: 'images/jchptf/crosswords/val/R.png'
+      s: 'images/jchptf/crosswords/val/S.png'
+      t: 'images/jchptf/crosswords/val/T.png'
+      u: 'images/jchptf/crosswords/val/U.png'
+      v: 'images/jchptf/crosswords/val/V.png'
+      w: 'images/jchptf/crosswords/val/W.png'
+      x: 'images/jchptf/crosswords/val/X.png'
+      y: 'images/jchptf/crosswords/val/Y.png'
+      z: 'images/jchptf/crosswords/val/Z.png'
     }
   ]
+)
 
-  xwModule.filter('contentImage', [() ->
-    contentImageHash = {
-      a: '/app/xw-ticket/images/val/A.png'
-      b: '/app/xw-ticket/images/val/B.png'
-      c: '/app/xw-ticket/images/val/C.png'
-      d: '/app/xw-ticket/images/val/D.png'
-      e: '/app/xw-ticket/images/val/E.png'
-      f: '/app/xw-ticket/images/val/F.png'
-      g: '/app/xw-ticket/images/val/G.png'
-      h: '/app/xw-ticket/images/val/H.png'
-      i: '/app/xw-ticket/images/val/I.png'
-      j: '/app/xw-ticket/images/val/J.png'
-      k: '/app/xw-ticket/images/val/K.png'
-      l: '/app/xw-ticket/images/val/L.png'
-      m: '/app/xw-ticket/images/val/M.png'
-      n: '/app/xw-ticket/images/val/N.png'
-      o: '/app/xw-ticket/images/val/O.png'
-      p: '/app/xw-ticket/images/val/P.png'
-      w: '/app/xw-ticket/images/val/Q.png'
-      r: '/app/xw-ticket/images/val/R.png'
-      s: '/app/xw-ticket/images/val/S.png'
-      t: '/app/xw-ticket/images/val/T.png'
-      u: '/app/xw-ticket/images/val/U.png'
-      v: '/app/xw-ticket/images/val/V.png'
-      w: '/app/xw-ticket/images/val/W.png'
-      x: '/app/xw-ticket/images/val/X.png'
-      y: '/app/xw-ticket/images/val/Y.png'
-      z: '/app/xw-ticket/images/val/Z.png'
-      _: '/app/xw-ticket/images/val/blank.png'
-    }
+xwModule.filter(
+  'contentImage',
+  [
+    () ->
+      contentImageHash = {
+        a: 'images/jchptf/crosswords/val/A.png'
+        b: 'images/jchptf/crosswords/val/B.png'
+        c: 'images/jchptf/crosswords/val/C.png'
+        d: 'images/jchptf/crosswords/val/D.png'
+        e: 'images/jchptf/crosswords/val/E.png'
+        f: 'images/jchptf/crosswords/val/F.png'
+        g: 'images/jchptf/crosswords/val/G.png'
+        h: 'images/jchptf/crosswords/val/H.png'
+        i: 'images/jchptf/crosswords/val/I.png'
+        j: 'images/jchptf/crosswords/val/J.png'
+        k: 'images/jchptf/crosswords/val/K.png'
+        l: 'images/jchptf/crosswords/val/L.png'
+        m: 'images/jchptf/crosswords/val/M.png'
+        n: 'images/jchptf/crosswords/val/N.png'
+        o: 'images/jchptf/crosswords/val/O.png'
+        p: 'images/jchptf/crosswords/val/P.png'
+        q: 'images/jchptf/crosswords/val/Q.png'
+        r: 'images/jchptf/crosswords/val/R.png'
+        s: 'images/jchptf/crosswords/val/S.png'
+        t: 'images/jchptf/crosswords/val/T.png'
+        u: 'images/jchptf/crosswords/val/U.png'
+        v: 'images/jchptf/crosswords/val/V.png'
+        w: 'images/jchptf/crosswords/val/W.png'
+        x: 'images/jchptf/crosswords/val/X.png'
+        y: 'images/jchptf/crosswords/val/Y.png'
+        z: 'images/jchptf/crosswords/val/Z.png'
+        _: 'images/jchptf/crosswords/val/blank.png'
+      }
 
-    return (cellModel) ->
-      contentKey = cellModel.content || '_'
-      return contentImageHash[contentKey] || contentImageHash._
-  ])
+      return (cellModel) ->
+        contentKey = cellModel.content || '_'
+        return contentImageHash[contentKey] || contentImageHash._
+  ]
+)

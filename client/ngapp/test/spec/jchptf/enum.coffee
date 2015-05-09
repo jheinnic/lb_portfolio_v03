@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 should = require('chai').should
 
@@ -7,7 +7,7 @@ describe('CoffeeScript Tool: Enum Class', () ->
 
   # Reacquire the Enum base class before each test.
   beforeEach( () ->
-      Enum = require '../../scripts/enum'
+    Enum = require '../../scripts/enum'
   )
 
   it('should not allow direct instantiation', () -> )

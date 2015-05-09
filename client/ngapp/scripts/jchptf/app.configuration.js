@@ -1,30 +1,31 @@
-(function(angular) {
-    'use strict';
+(function() {
+  'use strict';
 
-    /**
-     * @ngdoc overview
-     * @name jchpft.app
-     * @description
-     * # jchPortfolioApp
-     *
-     * Main module of the author's portfolio application.  Responsible for establishing global
-     * configuration and bootstrapping the application's entry point for its run() method, which
-     * Angular executes once after all modules loading has completed.
-     */
-    angular.module('jchptf.main').run(portfolioAppLauncher);
+  /**
+   * @ngdoc overview
+   * @name jchpft.app
+   * @description
+   * # jchPortfolioApp
+   *
+   * Main module of the author's portfolio application.  Responsible for establishing global
+   * configuration and bootstrapping the application's entry point for its run() method, which
+   * Angular executes once after all modules loading has completed.
+   */
+  angular.module('jchptf.app').config(portfolioGlobalConfig);
 
-    portfolioAppLauncher.$inject=['IdentityContext', 'AuthTokenEventKind', '$state'];
+  portfolioGlobalConfig.$inject=['$locationProvider'];
+  altPortfolioGlobalConfig.$inject=['$locationProvider', '$urlRouterProvider'];
 
-    function portfolioAppLauncher (IdentityContext, AuthTokenEventKind, $state) {
-        var latestEvent = IdentityContext.getAuthTokenStatus();
+  function portfolioGlobalConfig($locationProvider) {
+    $locationProvider.html5Mode(true);
+  }
 
-        var eventType = latestEvent.getEventType();
-        if (eventType.isLoggedIn()) {
-            $state.go('home', {reload: false});
-        } else {
-            // $state.go('loginForm.showForm', {reload: false});
-            $state.go('loginForm', {reload: false});
-        }
+  function altPortfolioGlobalConfig($locationProvider, $urlRouterProvider) {
+    $locationProvider.html5Mode(true);
 
-    }
-}(window, window.angular));
+    // Prevent $urlRouter from automatically intercepting URL changes;
+    // this allows you to configure custom behavior in between
+    // location changes and route synchronization:
+    $urlRouterProvider.deferIntercept();
+  }
+}).call(window);

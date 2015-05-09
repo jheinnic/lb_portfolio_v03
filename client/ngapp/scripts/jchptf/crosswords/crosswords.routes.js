@@ -1,13 +1,7 @@
-
 (function() {
   'use strict';
 
-  /**
-   * @ngdoc overview
-   * @name jchptf.app
-   * @description Module encapsulating portfolio site's "Crosswords" feature set.
-   */
-  angular.module('jchptf.crossword').config(crosswordRoutes);
+  angular.module('jchptf.crosswords').config(crosswordRoutes);
 
   crosswordRoutes.$inject=['$stateProvider'];
 
