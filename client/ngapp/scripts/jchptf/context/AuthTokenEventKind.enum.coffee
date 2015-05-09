@@ -1,9 +1,13 @@
 'use strict'
 
+if ! @jchptfModels
+  @jchptfModels = {}
+
 angular.module('jchptf.context').constant('AuthTokenEventKind', AuthTokenEventKind)
 
 # require('coffee-script/registry')
-Enum = require('../../enum')
+# Enum = require('../../enum')
+Enum = @jchptfModels.Enum
 
 class AuthTokenEventKind extends Enum
   constructor: (stateName, isActiveState) ->
@@ -21,3 +25,5 @@ new AuthTokenEventKind('TOKEN_IS_INVALID', false);
 new AuthTokenEventKind('NO_TOKEN_AVAILABLE', false);
 new AuthTokenEventKind('INTERNAL_ERROR', false);
 AuthTokenEventKind.finalize();
+
+exports.AuthTokenEventKind = @jchpftModels.AuthTokenEventKind = AuthTokenEventKind
