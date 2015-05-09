@@ -1,3 +1,8 @@
-/**
- * Created by John on 5/8/2015.
- */
+//document.write('<script src="http://'
+//+ window.location.hostname
+//+ ':35729/livereload.js?snipver=1" type="text/javascript"><\/script>');
+
+var scriptElem = document.createElement('script');
+scriptElem.src = 'http://' + window.location.hostname + ':35729/livereload.js?snipver=1';
+scriptElem.type = 'text/javascript';
+document.body.appendChild(scriptElem);

@@ -33,10 +33,11 @@ module.exports = function (grunt) {
       app: (bowerJson && bowerJson.appPath) ? bowerJson.appPath : path.join('client', 'ngapp'),
       vendor: (bowerRc && bowerRc.directory) ? bowerRc.directory : './bower_components',
       dist: 'client/dist',
-      tempfiles: '.tmp'
+      lbclient: 'client/lbclient',
+      staging: '.tmp'
   };
 
-  console.log(appConfig);
+  // console.log(appConfig);
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -45,16 +46,25 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
+      nodemon: {
+        files: ['.rebooted'],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        }
+      },
       bower: {
         // TODO: This cannot yet handle a change to the app directory in bower.json on yeoman!!!
         files: ['bower.json'],
-        tasks: ['wiredep']
+        tasks: ['wiredep'],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        }
       },
       coffee: {
         files: ['<%= yeoman.app %>/scripts/**/*.coffee'],
-        tasks: ['newer:coffeelint:dist', 'newer:coffee:dist'/*, 'newer:jshint:dist'*/],
+        tasks: ['coffeelint:dist', 'coffee:dist'],
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          livereload: '<%= connect.options.livereload %>',
         }
       },
       js: {
@@ -62,32 +72,37 @@ module.exports = function (grunt) {
         //       watch purposes, livereload should serve the true source files so debugging is done
         //       with the true source files.
         files: ['<%= yeoman.app %>/scripts/**/*.js'],
-        // tasks: ['newer:copy:scripts', 'newer:jshint:dist'],
-        tasks: ['newer:jshint:dist'],
+        tasks: ['newer:jshint:dist', 'newer:copy:scripts'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
       },
       coffeeTest: {
         files: ['<%= yeoman.app %>/test/spec/**/*.coffee'],
-         tasks: ['newer:coffeelint:test', 'newer:coffee:test', /*'newer:jshint:test',*/ 'karma']
+         tasks: ['coffeelint:test', 'coffee:test', 'karma']
       },
       jsTest: {
         // TODO: Can we skip the copy step?  Its needed for minification pipeline, but for debug
         //       purpose, the livereload watch should serve the true source files.
         files: ['<%= yeoman.app %>/test/spec/**/*.js'],
         // tasks: ['newer:copy:test', 'newer:jshint:test', 'karma']
-        tasks: ['newer:jshint:test', 'karma']
+        tasks: ['newer:jshint:test', 'newer:copy:staging', 'karma']
       },
       less: {
         files: [ '<%= yeoman.app %>/styles/**/*.less' ],
         // tasks: ['newer:copy:styles', 'newer:less', 'autoprefixer', 'useminPrepare', 'usemin', 'filerev']
-        tasks: ['newer:less', 'autoprefixer']
+        tasks: ['newer:less', 'autoprefixer'],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        }
       },
       styles: {
         files: ['<%= yeoman.app %>/styles/**/*.css'],
         // tasks: ['newer:copy:styles', 'newer:less', 'autoprefixer', 'useminPrepare', 'usemin', 'filerev']
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        tasks: ['newer:copy:styles', 'autoprefixer'],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        }
       },
       // images: {
       //   files: ['<%= yeoman.app %>/images/**/*.webp'],
@@ -100,32 +115,42 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/styles/fonts/**/*'
         ],
         // tasks: ['newer:copy:dist', 'autoprefixer', 'useminPrepare', 'usemin', 'filerev']
-        tasks: ['newer:copy:dist', 'autoprefixer']
+        tasks: ['newer:copy:staging'],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        }
+      },
+      index: {
+        files: ['<%= yeoman.app %>/index.html'],
+        tasks: ['newer:copy:staging', 'wiredep'],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        }
       },
       gruntfile: {
         files: ['Gruntfile.js']
       },
       livereload: {
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        },
         files: [
           '<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
           // TODO: Confirm that node doesn't require a restart to serve modified HTML due to caching.
-          // '<%= yeoman.app %>/{index,views/**/*}.html',
-	      '<%= yeoman.app %>/{fonts,styles/fonts}/**/*',
-          '<%= yeoman.tempfiles %>/styles/**/*.css',
+          '<%= yeoman.app %>/views/**/*.html',
+          //    '<%= yeoman.app %>/{fonts,styles/fonts}/**/*',
+          // '<%= yeoman.staging %>/styles/**/*.css',
           // TODO: Consider refining server file watch dependencies since they also cause a need to restart.
           '{common,server}/**/*'
-        ]
+        ],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        }
       },
       lbclient: {
         files: [
-          'lbclient/models/*',
-          'lbclient/app*',
-          'lbclient/datasources*',
-          'lbclient/models*',
-          'lbclient/build.js'
+          '<%= yeoman.lbclient %>/models/*',
+          '<%= yeoman.lbclient %>/app*',
+          '<%= yeoman.lbclient %>/datasources*',
+          '<%= yeoman.lbclient %>/models*',
+          '<%= yeoman.lbclient %>/build.js'
         ],
         tasks: ['build-lbclient'],
         options: {
@@ -154,13 +179,13 @@ module.exports = function (grunt) {
           port: 9001,
           middleware: function (connect) {
             return [
-              // connect.static('<%= yeoman.tempfiles %>'),
+              connect.static('<%= yeoman.staging %>'),
               // connect.static('test'),
               connect().use(
                 '/vendor', '<%= yeoman.vendor %>'
               ),
               connect().use(
-                '/lbclient', connect.static( 'client/lbclient' )
+                '/lbclient', connect.static( '<%= yeoman.lbclient %>' )
               ),
               connect.use(
                 '/views', connect.static( '<%= yeoman.app %>/views' )
@@ -170,31 +195,32 @@ module.exports = function (grunt) {
               ),
               connect().use(
                 '/config',
-                function() {
-                  connect.static('<%= yeoman.tempfiles %>/config');
-                  connect.static('<%= yeoman.app %>/config');
-                }
+                // function() {
+                  connect.static('<%= yeoman.staging %>/config')
+                  // connect.static('<%= yeoman.app %>/config');
+                // }
               ),
-              connect.configure(
+              connect.use(
                 '/scripts',
-                function() {
-                  connect.static( '<%= yeoman.app %>/scripts' );
-                  connect.static( '<%= yeoman.tempfiles %>/scripts' );
-                }
+                // function() {
+                //   connect.static( '<%= yeoman.app %>/scripts' );
+                  connect.static( '<%= yeoman.staging %>/scripts' )
+                // }
               ),
-              connect.configure(
+              connect.use(
                 '/styles',
-                function() {
+                // function() {
                   // connect.static( '<%= yeoman.app %>/styles' );
-                  connect.static( '<%= yeoman.tempfiles %>/styles' );
-                }
+                  connect.static( '<%= yeoman.staging %>/styles' )
+                // }
               ),
-              connect.configure(
+              connect.use(
                 '/fonts',
-                function() {
-                  connect.static( '<%= yeoman.tempfiles %>/fonts' );
-                  connect.static( '<%= yeoman.tempfiles %>/styles/fonts' );
-                }
+                connect.static( '<%= yeoman.staging %>/fonts' )
+              ),
+              connect.use(
+                '/styles/fonts',
+                connect.static( '<%= yeoman.staging %>/styles/fonts' )
               ),
               // To support refresh and bookmarks in Angular HTML5 mode, final
               // URL re-write rule must redirect all to index.html.  If all
@@ -202,7 +228,8 @@ module.exports = function (grunt) {
               // selectively redirect only those routes to index.html, allowing
               // errors to be generated for genuinely bad routes.
               connect.use(
-                '/', connect.static( '<%= yeoman.tempfiles %>/index.html' )
+                '/',
+                connect.static( '<%= yeoman.staging %>/index.html' )
               )
             ];
           }
@@ -216,10 +243,10 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '<%= yeoman.tempfiles %>',
+            '<%= yeoman.staging %>',
             '<%= yeoman.dist %>/**/*',
             '!<%= yeoman.dist %>/.git*',
-            'client/lbclient/browser.bundle.js',
+            '<%= yeoman.lbclient %>/browser.bundle.js',
             '<%= yeoman.app %>/config/bundle.js'
           ]
         }]
@@ -228,14 +255,14 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '<%= yeoman.tempfiles %>',
+            '<%= yeoman.staging %>',
             '<%= yeoman.dist %>/**/*',
             '!<%= yeoman.dist %>/.git*'
           ]
         }]
       },
-      server: '<%= yeoman.tempfiles %>',
-      lbclient: 'client/lbclient/browser.bundle.js',
+      server: '<%= yeoman.staging %>',
+      lbclient: '<%= yeoman.lbclient %>/browser.bundle.js',
       config: '<%= yeoman.app %>/config/bundle.js'
     },
 
@@ -248,9 +275,9 @@ module.exports = function (grunt) {
         ext: '.js',
         extDot: 'last',
         expand: true,
-        cwd: '<%= yeoman.app %>/scripts',
+        cwd: '<%= yeoman.staging %>/scripts',
         src: ['**/*.coffee'],
-        dest: '<%= yeoman.tempfiles %>/scripts/'
+        dest: '<%= yeoman.staging %>/scripts/'
       },
       test: {
         ext: '.js',
@@ -258,7 +285,7 @@ module.exports = function (grunt) {
         expand: true,
         cwd: '<%= yeoman.app %>/test/spec',
         src: ['**/*.coffee'],
-        dest: '<%= yeoman.tempfiles %>/test/spec/'
+        dest: '<%= yeoman.staging %>/test/spec/'
       }
     },
 
@@ -271,26 +298,29 @@ module.exports = function (grunt) {
       dist: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/**/*.js',
-          '<%= yeoman.tempfiles %>/scripts/**/*.js'
+          '<%= yeoman.app %>/scripts/**/*.js'
         ]
       },
-      test: { options: {
-          jshintrc: '<%= yeoman.app %>/test/.jshintrc'
+      test: {
+        options: {
+          jshintrc: '<%= yeoman.app %>/test/.jshintrc',
+          reporter: require('jshint-stylish')
         },
         src: [
-            '<%= yeoman.app %>/test/spec/**/*.js',
-            '<%= yeoman.tempfiles %>/test/spec/**/*.js'
+            '<%= yeoman.app %>/test/spec/**/*.js'
         ]
       }
     },
 
     coffeelint: {
       dist: {
-        src: ['<%= yeoman.app $>/scripts/**/*.coffee']
+        src: ['<%= yeoman.app %>/scripts/**/*.coffee']
       },
       test: {
-        src: ['<%= yeoman.app $>/test/spec/**/*.coffee']
+        src: ['<%= yeoman.app %>/test/spec/**/*.coffee']
+      },
+      options: {
+        configFile: 'coffeelint.json'
       }
     },
 
@@ -307,7 +337,7 @@ module.exports = function (grunt) {
         expand: true,
         cwd: '<%= yeoman.app %>/styles',
         src: ['**/*.less'],
-        dest: '<%= yeoman.tempfiles %>/less/'
+        dest: '<%= yeoman.staging %>/less/'
       }
     },
 
@@ -322,13 +352,13 @@ module.exports = function (grunt) {
             expand: true,
             cwd: '<%= yeoman.app %>/styles/',
             src: ['**/*.css'],
-            dest: '<%= yeoman.tempfiles %>/styles/'
+            dest: '<%= yeoman.staging %>/styles/'
           },
           {
             expand: true,
-            cwd: '<%= yeoman.tempfiles %>/less/',
+            cwd: '<%= yeoman.staging %>/less/',
             src: ['**/*.css'],
-            dest: '<%= yeoman.tempfiles %>/styles/'
+            dest: '<%= yeoman.staging %>/styles/'
           }
         ]
       }
@@ -340,9 +370,49 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>',
         bowerJson: require('./bower.json'),
         directory: '<%= yeoman.vendor %>'
+        //directory: '.tmp/vendor' // '<%= yeoman.vendor %>'
       },
       app: {
-        src: ['<%= yeoman.app %>/index.html']
+        cwd: '<%= yeoman.staging %>',
+        src: ['index.html'],
+        dest: '<%= yeoman.staging %>'
+      }
+    },
+
+    "html-build": {
+      staging: {
+        src: '<%= yeoman.staging %>/index.html',
+        dest: '<%= yeoman.staging %>/index.html',
+        options: {
+          baseDir: '<%= yeoman.staging %>/',
+          beautify: true,
+          relative: true,
+          replace: true,
+          tagName: 'html-stage-build',
+          parseTag: 'html-stage-build',
+          logOptions: true,
+          scripts: {
+            bundle: [
+              '<%= yeoman.staging %>/scripts/jchptf/**/*.js',
+              '!<%= yeoman.staging %>/scripts/livereload.js'
+            ]
+          },
+          styles: {
+            bundle: ['<%= yeoman.staging %>/styles/**/*.css']
+          }
+        }
+      },
+      dist: {
+        src: '<%= yeoman.staging %>/index.html',
+        dest: '<%= yeoman.dist %>/index.html',
+        options: {
+          beautify: false,
+          relative: false,
+          replace: false,
+          tagName: 'html-dist-build',
+          parseTag: 'html-dist-build',
+          logOptions: true
+        }
       }
     },
 
@@ -366,8 +436,8 @@ module.exports = function (grunt) {
     // additional tasks can operate on them.
     useminPrepare: {
       html: [
-        '<%= yeoman.app %>/index.html',
-        '<%= yeoman.app %>/views/**/*.html'
+        '<%= yeoman.app %>/index.html'
+        // '<%= yeoman.app %>/views/**/*.html'
   ],
   options: {
     root: '<%= yeoman.app %>/',
@@ -377,7 +447,7 @@ module.exports = function (grunt) {
       html: {
         steps: {
           js: ['concat', 'uglifyjs'],
-            css: ['concat', 'cssmin']
+          css: ['concat', 'cssmin']
         },
         post: {}
       }
@@ -396,19 +466,19 @@ module.exports = function (grunt) {
         '<%= yeoman.dist %>/index.html',
         '<%= yeoman.dist %>/views/**/*.html'
       ],
-      // css: ['<%= yeoman.tempFiles %>/styles/**/*.css'],
+      // css: ['<%= yeoman.staging %>/styles/**/*.css'],
       css: ['<%= yeoman.dist %>/styles/**/*.css'],
       js: [
         '<%= yeoman.dist %>/scripts/**/*.js',
-        // '<%= yeoman.tempFiles %>/scripts/**/*.js',
+        // '<%= yeoman.staging %>/scripts/**/*.js',
         // '<%= yeoman.vendor>/**/*.js'
       ],
       options: {
         assetsDirs: [
             '<%= yeoman.dist %>/styles/fonts/',
-            '<%= yeoman.dist %>/images/'
-            '<%= yeoman.dist %>/fonts/',
-            '<%= yeoman.dist %>/'
+            '<%= yeoman.dist %>/images/',
+            '<%= yeoman.dist %>/fonts/'
+            // '<%= yeoman.dist %>/'
         ],
         patterns: {
           js: [
@@ -429,7 +499,7 @@ module.exports = function (grunt) {
     //   dist: {
     //     files: {
     //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '<%= yeoman.tempfiles %>/styles/**/*.css'
+    //         '<%= yeoman.staging %>/styles/**/*.css'
     //       ]
     //     }
     //   }
@@ -440,7 +510,7 @@ module.exports = function (grunt) {
     //     files: {
     //       '<%= yeoman.dist %>/scripts/scripts.js': [
     //         '<%= yeoman.app %>/scripts/**/*.js',
-    //         '<%= yeoman.tempfiles %>/scripts/**/*.js'
+    //         '<%= yeoman.staging %>/scripts/**/*.js'
     //       ]
     //     }
     //   }
@@ -483,8 +553,8 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          // cwd: '<%= yeoman.dist %>',
-          cwd: '<%= yeoman.app %>/',
+          cwd: '<%= yeoman.dist %>',
+          // cwd: '<%= yeoman.app %>/',
           src: [
             'index.html',
             'views/**/*.html'
@@ -501,9 +571,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.tempfiles %>/concat/scripts',
+          cwd: '<%= yeoman.staging %>/concat/scripts',
           src: ['**/*.js'],
-          dest: '<%= yeoman.tempfiles %>/concat/scripts'
+          dest: '<%= yeoman.staging %>/concat/scripts'
         }]
       }
     },
@@ -512,11 +582,22 @@ module.exports = function (grunt) {
     cdnify: {
       dist: {
         html: ['<%= yeoman.dist %>/*.html']
+      },
+      staging: {
+        html: ['<%= yeoman.staging %>/*.html']
       }
     },
 
     // Copies all files that don't migrate to where they are expected
-    // through a pre-processing plugin.
+    // through a pre-processing plugin.  A given build should copy:dist
+    // or copy:staging, but unlikely both.  Use copy:staging for running
+    // a dev build, and copy:dist for running or packaging a production
+    // build.
+    //
+    // Difference is that only production builds need to copy generated
+    // images from staging since there are no downstream image preprocessors
+    // to pick the images up from there, whereas only dev builds need to
+    // stage the test scripts (in order to run them from there).
     copy: {
       dist: {
         files: [{
@@ -529,12 +610,11 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             'styles/fonts/**/*',
             'fonts/**/*',
-            'views/**/*.html',
-            'index.html'
+            'views/**/*.html'
           ]
         }, {
           expand: true,
-          cwd: '<%= yeoman.tempfiles %>/images/',
+          cwd: '<%= yeoman.staging %>/images/',
           src: [
             '**/*.webp',
             'generated/**/*'
@@ -542,72 +622,154 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>/images/'
         }]
       },
+      staging: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>/',
+          src: [
+              'test/**/*.{js,conf,json}',
+            'vendor/**/*',
+            '.htaccess',
+            '*.{ico,png,txt}',
+            'styles/fonts/**/*',
+            'fonts/**/*',
+            'views/**/*.html',
+            'index.html'
+            ],
+          dest: '<%= yeoman.staging %>/'
+        // }, {
+        //   // Coffee migrates all coffee-derived JS files, but hand-created ones
+        //   // don't reach the staging area via a pre-processor.
+        //   expand: true,
+        //   cwd: '<%= yeoman.app %>/test/spec/',
+        //   src: '**/*.js',
+        //   dest: '<%= yeoman.staging %>/test/spec/'
+        }]
+      },
       styles: {
         // less migrates all template-based CSS files, but hand-created
-        // .css files don't reach the tempfiles area via a pre-processor.
+        // .css files don't reach the staging area via a pre-processor.
         expand: true,
         cwd: '<%= yeoman.app %>/styles/',
         src: '**/*.css',
-        dest: '<%= yeoman.tempfiles %>/styles/'
+        dest: '<%= yeoman.staging %>/styles/'
       },
       scripts: {
         // coffee migrates all compiled coffeeScript files, but hand-created
-        // .js files don't reach the tempfiles area via a pre-processor.
+        // .js files don't reach the staging area via a pre-processor.
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>/scripts/',
-          src: '**/*.js',
-          dest: '<%= yeoman.tempfiles %>/scripts/'
+          src: '**/*.{js,coffee}',
+          dest: '<%= yeoman.staging %>/scripts/'
         }, {
           expand: true,
-          cwd: 'client/lbclient/',
+          cwd: '<%= yeoman.lbclient %>/',
           src: 'browser.bundle.js',
-          dest: '<%= yeoman.tempfiles %>/lbclient/'
-        }, {
-          expand: true,
-          cwd: '<%= yeoman.app %>/test/spec/',
-          src: '**/*.js',
-          dest: '<%= yeoman.tempfiles %>/test/spec/'
+          dest: '<%= yeoman.staging %>/lbclient/'
         }]
       },
       images: {
         // Image minification is not working well at present.
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images/',
-          src: '**/*.{jpg,jpeg,gif,png,webp,svg}',
-          dest: '<%= yeoman.dist %>/images/'
-        }, {
-          // less migrates all template-based CSS files, but hand-created .css files
-          // don't reach the tempfiles area via a pre-processor.
-          expand: true,
-          cwd: '<%= yeoman.app %>/test/spec/',
-          src: '**/*.js',
-          dest: '<%= yeoman.tempfiles %>/test/spec/'
-        }]
+        expand: true,
+        cwd: '<%= yeoman.app %>/images/',
+        src: '**/*.{jpg,jpeg,gif,png,webp,svg}',
+        dest: '<%= yeoman.dist %>/images/'
       }
     },
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
+        'copy:staging',
+        'copy:scripts',
         'copy:styles'
       ],
       test: [
+        // Need index.html and views?
+        // 'copy:staging',
+        'copy:scripts',
         'copy:styles'
       ],
-      dist: [
+      build: [
+        // Re-include this if run:development and run:dist both end up having
+        // some required preprocessors that source from staging.
+        'copy:staging',
+        'copy:dist',
+        // Should copy:dist drop HTML handling and defer that to htmlmin?
+        //'htmlmin',
+        'copy:scripts',
         'copy:styles',
-        'copy:images'
         //'imagemin'
         //'svgmin'
-      ]
+        'copy:images'
+      ],
+      runServer: {
+        tasks: ['nodemon', 'node-inspector', 'watch'],
+        options: {
+          logConcurrentOutput: true
+        }
+      }
     },
+
+  'node-inspector': {
+    dev: {}
+  },
+
+  nodemon: {
+    dev: {
+      script: 'server/server.js',
+      watch: ['common', 'server'],
+      options: {
+        nodeArgs: ['--debug'],
+        env: {
+          PORT: '3000'
+        },
+        // omit this property if you aren't serving HTML files and
+        // don't want to open a browser tab on start
+        callback: function (nodemon) {
+          nodemon.on('log', function (event) {
+            console.log(event.colour);
+          });
+
+          // opens browser on initial server start
+          nodemon.on('config:update', function () {
+            // Delay before server listens on port
+            setTimeout(function() {
+              require('open')('http://localhost:3000');
+            }, 1000);
+          });
+
+          // refreshes browser when server reboots
+          nodemon.on('restart', function () {
+            // Delay before server listens on port
+            setTimeout(function() {
+              require('fs').writeFileSync('.rebooted', 'rebooted');
+            }, 1000);
+          });
+
+          nodemon.on('error', function(err) {
+            if (err.code === 'EADDRINUSE') {
+              var connectConfig = grunt.config.get().connect.options;
+              grunt.fatal('Port ' + connectConfig.port +
+                ' is already in use by another process.');
+            } else {
+              grunt.fatal(err);
+            }
+          });
+        }
+      }
+    }
+  },
 
     // Test settings
     karma: {
       unit: {
-        configFile: '<%= yeoman.app %>/test/karma.conf.js',
+        // TODO: Can the config file exist in yeoman.app while all the scripts
+        //       being tested are tested from <%= yeoman.staging %> ?
+        // configFile: '<%= yeoman.app %>/test/karma.conf.js',
+        configFile: '<%= yeoman.staging %>/test/karma.conf.js',
         browsers: [ 'PhantomJS' ],
         singleRun: true
       }
@@ -676,6 +838,7 @@ module.exports = function (grunt) {
     process.env.NODE_ENV = this.args[0];
 
     var keepAlive = this.flags.keepalive || connectConfig.keepalive;
+    console.log('LIVE_RELOAD = ', process.env.LIVE_RELOAD, 'NODE_ENV = ', this.args[0], 'keepAlive = ', keepAlive );
 
     var server = require('./server');
     server.set('port', connectConfig.port);
@@ -696,23 +859,25 @@ module.exports = function (grunt) {
 
   grunt.registerTask('serve', 'Compile then start the app server', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'run:dist:keepalive']);
+      return grunt.task.run(['build', 'html-build:dist', 'run:dist:keepalive']);
     }
 
     grunt.task.run([
       'clean:server',
       'coffeelint',
       'jshint',
-      'coffee',
       'less',
       'build-lbclient',
       'build-config',
-      'copy:scripts',
-      'wiredep',
       'concurrent:server',
+      'cdnify:staging',
+      'coffee',
+      'wiredep',
+      'html-build:staging',
       'autoprefixer',
-      'run:development',
-      'watch'
+      // 'run:development',
+      // 'watch'
+      'concurrent:runServer'
     ]);
   });
 
@@ -725,12 +890,11 @@ module.exports = function (grunt) {
     'clean:server',
     'coffeelint',
     'jshint',
-    'coffee',
-    'copy:scripts',
     'less',
     'build-lbclient',
     'build-config',
     'concurrent:test',
+    'coffee',
     'autoprefixer',
     'connect:test',
     'karma'
@@ -754,36 +918,32 @@ module.exports = function (grunt) {
     'clean:dist',
     'coffeelint',
     'jshint',
-    'coffee',
     'less',
     'build-lbclient',
     'build-config',
-    'copy:scripts',
+    'concurrent:build',
+    // 'cdnify',
+    'coffee',
     'wiredep',
-    'concurrent:dist',
+    'html-build:staging',
+    'html-build:dist',
     'useminPrepare',
     'autoprefixer',
-    'ngAnnotate',
-    'copy:dist',
-    'cdnify',
     'concat:generated',
     'cssmin:generated',
     'uglify:generated',
     'filerev',
-    'usemin'
+    'usemin',
+    'ngAnnotate'
     // 'htmlmin'
   ]);
 
   grunt.registerTask('clean-all', [
-      'clean:all',
-      /*'clean:dist',
-      'clean:server',
-      'clean:config',
-      'clean:lbclient'*/
+      'clean:all'
   ]);
 
   grunt.registerTask('default', [
-    'newer:coffeelint',
+    'coffeelint',
     'newer:coffee',
     'newer:jshint',
     'test',

@@ -12,7 +12,7 @@
    * 'site' and 'user' modules, effectively triggering the bootstrap of application semantics.
    */
   angular
-    .module('jchptf.main', [
-      'ui.router', 'ptf.context', 'ptf.authentication', 'ptf.notifyUser', 'ptf.site.navigation', 'ptf.site.home'
+    .module('jchptf.app', [
+      'ui.router', 'jchptf.context', 'jchptf.authenticate', 'jchptf.site.notification', 'jchptf.site.navigation'
     ]);
 }(window.angular));
