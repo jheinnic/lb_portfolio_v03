@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="jchptf.app">
+
 <head>
   <meta charset="utf-8">
   <meta name="description" content="">
@@ -17,61 +18,46 @@
 
   <!-- build:css(client/dist) styles/vendor.css -->
   <!-- bower:css -->
-  <link rel="stylesheet" href="../../.tmp/vendor/nvd3/build/nv.d3.css" />
-  <link rel="stylesheet" href="../../.tmp/vendor/leaflet/dist/leaflet.css" />
-  <link rel="stylesheet" href="../../.tmp/vendor/font-awesome/css/font-awesome.css" />
-  <link rel="stylesheet" href="../../.tmp/vendor/angular-ui-grid/ui-grid.css" />
-  <link rel="stylesheet" href="../../.tmp/vendor/bootstrap/dist/css/bootstrap.css" />
-  <link rel="stylesheet" href="../../.tmp/vendor/angular-notify/dist/angular-notify.css" />
-  <link rel="stylesheet" href="../../.tmp/vendor/angular-tree-control/css/tree-control.css" />
   <!-- endbower -->
   <!-- endbuild -->
 
   <!-- build:css(client/dist) styles/main.css -->
-  <!-- html-stage-build:styles -->
-  <link rel="stylesheet" href="styles/jchptf/app.css">
-  <link rel="stylesheet" href="styles/jchptf/crosswords/crosswords.css">
-  <link rel="stylesheet" href="styles/jchptf/home/home.css">
-  <link rel="stylesheet" href="styles/vendor/angular-csp.css">
-  <link rel="stylesheet" href="styles/todo.css">
-  <!-- /html-stage-build -->
+  <!-- hbuild:style bundle -->
+  <!-- /hbuild -->
   <!-- endbuild -->
 </head>
 
 <body>
-<div class="container">
-  <nav-bar></nav-bar>
-  <div ui-view="/"></div>
-  <div class="row">
-    <div class="span12">
-      <footer>
-        <!--div ng-include="viewNavBar.html"></div-->
-        <p>&copy; John C. Heinnickel, 2015</p>
-      </footer>
+  <div class="container">
+    <nav-bar></nav-bar>
+    <div ui-view=""></div>
+    <div class="row">
+      <div class="span12">
+        <footer>
+          <p>&copy; John C. Heinnickel, 2015</p>
+        </footer>
+      </div>
     </div>
   </div>
-</div>
 
-<!--[if lt IE 9]>
-<script src="vendor/es5-shim/es5-shim.js"></script>
-<script src="vendor/json3/lib/json3.js"></script>
-<![endif]-->
+  <!--[if lt IE 9]>
+  <script src="vendor/es5-shim/es5-shim.js" type="text/javascript"></script>
+  <script src="vendor/json3/lib/json3.js" type="text/javascript"></script>
+  <![endif]-->
 
-<script src="vendor/angular-nvd3/dist/angular-nvd3.min.js"></script>
-<!-- build:js(client/dist) scripts/vendor.js -->
-<script src="vendor/underscore/underscore.js"></script>
-<!-- bower:js -->
+  <!-- build:js(client/dist) scripts/vendor.js -->
+  <script src="vendor/underscore/underscore.js" type="text/javascript"></script>
+  <!-- bower:js -->
+  <!-- endbower -->
+  <!-- endbuild -->
+  <script src="vendor/angular-nvd3/dist/angular-nvd3.min.js" type="text/javascript"></script>
 
-<!-- endbower -->
-<!-- endbuild -->
+  <!-- build:js(client/dist) scripts/scripts.js -->
+  <script src="scripts/jchptf.js" type="text/javascript"></script>
+  <!-- endbuild -->
 
-<!-- build:js(client/dist) scripts/scripts.js -->
-<!-- html-stage-build:scripts -->
-<!-- /html-stage-build -->
-<!-- endbuild -->
-
-<!-- html-dist-build:remove -->
-<script src="scripts/livereload.js"></script>
-<!-- /html-dist-build -->
+  <!-- dbuild:remove -->
+  <script src="scripts/livereload.js" type="text/javascript"></script>
+  <!-- /dbuild -->
 </body>
 </html>
