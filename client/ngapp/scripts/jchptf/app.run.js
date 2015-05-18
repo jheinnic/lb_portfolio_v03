@@ -1,17 +1,10 @@
 (function() {
   'use strict';
 
-  /**
-   * @ngdoc overview
-   * @name jchpft.app
-   * @description
-   * # jchPortfolioApp
-   *
-   * Main module of the author's portfolio application.  Responsible for establishing global
-   * configuration and bootstrapping the application's entry point for its run() method, which
-   * Angular executes once after all modules loading has completed.
-   */
-  angular.module('jchptf.app').run(portfolioAppLauncher);
+  module.exports = portfolioAppLauncher;
+
+  // require('jchptf').run(portfolioAppLauncher);
+  // angular.module('jchptf').run(portfolioAppLauncher);
 
   portfolioAppLauncher.$inject=['IdentityContext', '$state'];
   altPortfolioAppLauncher.$inject=['$rootScope', '$urlRouter', 'IdentityContext'];
