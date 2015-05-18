@@ -97,7 +97,4 @@ NavBarModelPackage = () ->
     # navBarModel is not an enumerable property, but it can be read by other members of this package that
     # have implicit knowledge about its existence.
 
-  return
-    NavBarModel: NavBarModel,
-    TabModel: TabModel,
-    NavBarBuilder: NavBarBuilder
+  return NavBarModel: NavBarModel, TabModel: TabModel, NavBarBuilder: NavBarBuilder
