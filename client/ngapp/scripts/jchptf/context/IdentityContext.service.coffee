@@ -1,35 +1,38 @@
 'use strict'
 
 # Interim NodeJS/BrowserJS compatibility glue
-if !exports
-  require = (name) =>
-    @jchptfModels
-  if !@jchptfModels
-    exports = @jchptfModels = {}
-else
-  require('coffee-script/registry')
+# if !exports
+#   if !@jchptfModels
+#     @jchptfModels = {}
+#   exports = @jchptfModels
+#   require = (name) =>
+#     @jchptfModels
+# else
+#   require('coffee-script/registry')
 
 
-###
-@ngdoc overview
-@name jchpft.context
-@description
-Module for maintaining "global" application state that needs to be able
-to survive UI view changes and remain available for the duration of a
-user's interaction time with the application.
+module.exports = IdentityContext
 
-There are two known contexts at this time:
-<ol>
-<li>A user's authenticated login state, credential token, and
-the websocket session through which they receive pushed notifications
-from the server and establish a presence in the cluster.</li>
-<li>Project catalog and impact analysis metadata, synchronized with
-the backend to avoid the cost of redundant retrieval and also to
-inform users about unresolved change propagation requirements.</li>
-</ol>
-###
-angular.module('jchptf.context').factory('IdentityContext', IdentityContext)
+{AuthTokenEventKind,AuthTokenEvent} = require('./context.modelPkg.coffee')
 
+###*
+# @ngdoc factory
+# @name jchptf.context:IdentityContext
+# @description
+# Module for maintaining "global" application state that needs to be able
+# to survive UI view changes and remain available for the duration of a
+# user's interaction time with the application.
+#.
+# There are two known contexts at this time:
+# <ol>
+# <li>A user's authenticated login state, credential token, and
+# the websocket session through which they receive pushed notifications
+# from the server and establish a presence in the cluster.</li>
+# <li>Project catalog and impact analysis metadata, synchronized with
+# the backend to avoid the cost of redundant retrieval and also to
+# inform users about unresolved change propagation requirements.</li>
+# </ol>
+####
 class IdentityContext
   @$inject = ['$q']
 
@@ -51,19 +54,36 @@ class IdentityContext
 
   logout: () => @identityContextInternals.logout()
 
-  #/**
-  # * @method
-  # *
-  # * Unlike its stronger sibling, validateAuthTokenStatus(), this method
-  # * just returns cached auth token state.  It does not look for an
-  # * AUTH_TOKEN or attempt to decode it.  IF you have no reason to believe
-  # * user has just returned with an AUTH_TOKEN, it is still more appropriate
-  # * to use this method than validateAuthTokenStatus().
-  # *
-  # * Also note that getAuthTokenStatus() is unable to fire events due to
-  # * state changes, which is because it is returning old state about the
-  # * most recent known state change.
-  # */
+  ###*
+  # Provides access to the authentication token service's information model.
+  # Any service that manages state will have an accessor method like this for
+  # retrieving CoffeeScript-derived types provided to define its data access
+  # API.
+  #.
+  # The authentication token service uses value classes and enumerations to
+  # expose its information content, and has no significant requirements that
+  # require either factory/builders to enable two-way message/command for
+  # reply/result exchanges, or mutable/interactive objects that encapsulate
+  # behavioral aspects of the domain they model, but these patterns can be
+  # found on other services.
+  ####
+  # getAuthTokenModel: () ->
+  #   AuthTokenEventEnum: AuthTokenEventEnum,
+  #   AuthTokenEventClass: AuthTokenEvent
+
+  ###*
+  #  @method
+  #
+  #  Unlike its stronger sibling, validateAuthTokenStatus(), this method
+  #  just returns cached auth token state.  It does not look for an
+  #  AUTH_TOKEN or attempt to decode it.  IF you have no reason to believe
+  #  user has just returned with an AUTH_TOKEN, it is still more appropriate
+  #  to use this method than validateAuthTokenStatus().
+  #
+  #  Also note that getAuthTokenStatus() is unable to fire events due to
+  #  state changes, which is because it is returning old state about the
+  #  most recent known state change.
+  ###
   getLatestTokenEvent: () => @identityContextInternals.latestTokenEvent
 
   verifyAuthTokenStatus: () => @identityContextInternals.verifyAuthTokenStatus()
@@ -90,7 +110,7 @@ class IdentityContext
       throw new Error 'Cannot de-register an unregistered event handler'
 
 class IdentityContextInternals
-  AuthTokenEventKind = require('./AuthTokenEventKind.enum').AuthTokenEventKind
+  # AuthTokenEventKind = require('./AuthTokenEventKind.enum').AuthTokenEventKind
 
   constructor: ($q) ->
     # TODO: Add JWT token handling utilities, and tools for accepting
@@ -149,18 +169,3 @@ class IdentityContextInternals
   logout: () =>
     @fireTokenEvent new AuthTokenEvent
       eventType: AuthTokenEventKind.NO_TOKEN_AVAILABLE
-
-
-# TODO: Try to do token attachment to requests by way of a before
-#       advising interceptor, transparently to the calling service,
-#       negating any need to expose the AUTH_TOKEN via service API.
-class AuthTokenEvent
-  constructor: (eventProps) ->
-    {@eventType, @uuid, @displayName, @loginId, @tokenExpiration, @tokenTimeout, @authToken} = eventProps
-
-    Object.freeze(this)
-
-  isLoggedIn: () => @eventType.isLoggedIn()
-
-exports.IdentityContext = IdentityContext
-exports.AuthTokenEvent = AuthTokenEvent
