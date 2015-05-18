@@ -47,6 +47,4 @@ ContextModelPackage = (CoreModelPackage) ->
   ###*
   # @type ContextModelPackage
   ####
-  return
-    AuthTokenEvent: AuthTokenEvent
-    AuthTokenEventKind: AuthTokenEventKind
+  return AuthTokenEvent: AuthTokenEvent, AuthTokenEventKind: AuthTokenEventKind

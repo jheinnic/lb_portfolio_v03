@@ -1,8 +1,8 @@
 (function() {
   'use strict';
 
-  authenticationConfig.$inject=['$stateProvider'];
-  module.exports = authenticationConfig
+  module.exports = authenticateConfig;
+  authenticateConfig.$inject=['$stateProvider'];
 
     /**
      * @ngdoc method
@@ -11,16 +11,16 @@
      * @description
      * Routing component of the portfolio application's authentication module.
      */
-    function authenticationConfig ($stateProvider) {
+    function authenticateConfig ($stateProvider) {
         $stateProvider.state(
             'login',
             {
                 url: '/login/showForm',
-                templateUrl: '/views/authentication/loginForm.view.html',
+                templateUrl: 'views/jchptf/authenticate/loginForm.view.html',
                 controller: 'LoginController',
                 controllerAs: 'login',
                 resolve: {
-                    appContextStatus: null
+                    appContextStatus: checkAppContext
                 },
                 abstract: false,
                 authenticate: false
