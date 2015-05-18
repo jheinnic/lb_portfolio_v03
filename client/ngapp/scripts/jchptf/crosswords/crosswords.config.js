@@ -1,16 +1,16 @@
 (function() {
   'use strict';
 
-  angular.module('jchptf.crosswords').config(crosswordRoutes);
-
-  crosswordRoutes.$inject=['$stateProvider'];
+  module.exports = crosswordRoutes;
+  // crosswordRoutes.$inject=['$stateProvider'];
 
   // TODO: Make sure IdentityContext is wired in to the authenticate check
   // TODO: Add the project query to repository service.
-  function crosswordRoutes ($stateProvider) {
+  function crosswordRoutes (/*$stateProvider*/) {
+    /*
     $stateProvider.state(
       'crosswords', {
-        templateUrl: '/views/jchptf/crosswords/browseRepository.view.html',
+        templateUrl: 'views/jchptf/crosswords/browse_crosswords.view.html',
         controller: 'CrosswordsCtrl',
         controllerAs: 'crosswords',
         resolve: { },
@@ -18,5 +18,6 @@
         authenticate: true
       }
     );
+    */
   }
 }).call(window);

@@ -2,11 +2,12 @@
 
 module.exports = XwModelPackage
 
-XwModelPackage.$inject = ['CoreModelPackage', 'DocumentModelPackage']
+XwModelPackage.$inject = ['CoreModelPackage', 'DocumentModelPackage', 'RepositoryDomainPacakge']
 
-XwModelPackage = (CoreModelPackage, DocumentModelPackage) ->
+XwModelPackage = (CoreModelPackage, DocumentModelPackage, RepositoryDomainPackage) ->
   Enum = CoreModelPackage.Enum
   {AbstractDocument, DocumentKind, ExportRoleKind, ModelObject} = DocumentModelPackage
+  {ROOT_FOLDER, EditorKind, CanvasKind, AbstractCanvas, AbstractEditor} = RepositoryDomainPackage
 
   class LifeStageKind extends Enum
   new LifeStageKind('DESCRIBE')
@@ -26,6 +27,7 @@ XwModelPackage = (CoreModelPackage, DocumentModelPackage) ->
   new GameVariantKind('TRIPLE_WITH_SPOT', true, true, false)
   new GameVariantKind('FIVE_X', false, true, true)
 
+  new CanvasFactoryKind('XW_TICKET', )
   ##
   ## ModelFactory Service
   ##
@@ -156,20 +158,34 @@ XwModelPackage = (CoreModelPackage, DocumentModelPackage) ->
 
     getGameVariantKind: () -> GameVariantKind.FIVE_X
 
-  XwTicketDocument extends AbstractDocument
+# Temporary stand-ins!!
+  class XwTicket extends AbstractDocument
+    constructor: (params) ->
+      docModel = params.docModel
+      # (docModel? && docModel.getRootObject()?)
 
-  XwTicketExportRoleKind extends ExportRoleKind
-    @_ABSTRACT = false
+      super(params)
 
+  # Temporary stand-ins!!
+  class XwResult extends AbstractDocument
+    constructor: (params) ->
+      {@uuid, nodeUrl, createdAt, modifiedAt, importSources, exportRoles} = params
+      super(nodeUrl, createdAt, modifiedAt, importSources, exportRoles} = params
+  class XwTicketExportRoleKind extends ExportRoleKind
   new XwTicketExportRoleKind('forResults', AbstractTicket)
   XwTicketExportRoleKind.finalize()
 
-  new DocumentKind('XW_TICKET', 'xwt', XwTicketDocument, XwTicketExportRoleKind)
+  class NullExportRoleKind extends ExportRoleKind
+  NullExportRoleKind.finalize()
 
-  return
+  new DocumentKind('XW_TICKET', 'xwt', AbstractTicket, XwTicketExportRoleKind);
+  new DocumentKind('XW_RESULT', 'xwr', AbstractResult, NullExportRoleKind);
+
+  return {
     XwModelFactory: XwModelFactory
     TripleNoTwentyTicket: TripleNoTwentyTicket
     TripleWithSpotTicket: TripleWithSpotTicket
     FiveXTicket: FiveXTicket
     GameVariantKind: GameVariantKind
     LifeStageKind: LifeStageKind
+  }

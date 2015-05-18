@@ -1,19 +1,22 @@
 (function() {
   'use strict';
 
-  XWInventoryCanvas.$inject = [];
+  XWInventoryCanvas.$inject = ['Studio', 'RepositoryDomainPackage'];
   module.exports = XWInventoryCanvas;
 
   var _ = require('lodash');
-  var crosswordsModel = require('./xwModel.modelPkg.coffee');
 
-  function XWInventoryCanvas() {
-    this.isCanvas = function isCanvas() {
-      return true;
-    };
+  function XwInventoryCanvas(Studio, RepositoryDomainPackage) {
+    var Folder = RepositoryDomainPackage.Folder;
+    var RootFolder = RepositoryDomainPackage.RootFolder;
 
-    this.getCrosswordsModel = function() {
-      return _.clone(crosswordsModel);
-    };
+    // this.documentCacheManager = Studio;
+    this.rootFolder = RepositoryDomainPackage.ROOT_FOLDER;
+    // this.rootFolder = documentCacheManager.getRootFolder();
+    this.rootFolder.traverse().then(
+      function (data) {
+        console.log(data);
+      }
+    );
   }
-})(window);
+}).call(window);

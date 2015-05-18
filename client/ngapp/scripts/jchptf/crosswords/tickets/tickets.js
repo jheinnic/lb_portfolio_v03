@@ -12,6 +12,19 @@
    */
   angular.module(
     'jchptf.crosswords.tickets',
-    ['ui.router', 'jchptf.context', 'jchptf.authenticate', 'jchptf.site.notification']
-  );
+    [
+      'ui.router',
+      'drahak.hotkeys',
+      'angularModalService',
+      require('jchptf.context'),
+      require('jchptf.repository'),
+      require('jchptf.authenticate'),
+      require('jchptf.tools.iconPanel'),
+      require('jchptf.site.notification')
+    ]
+  )
+    .controller('BonusWordModalController', require('./BonusWordModalController.controller'))
+    .controller('TicketController', require('./TicketController.controller'))
+    .service('OpenTicketCanvas', require('./OpenTicketCanvas.service.coffee'))
+    .factory('XwTicketModelPackage', require('./XwTicketModelPackage.factory.coffee'));
 }).call(window);
