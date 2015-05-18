@@ -1,5 +1,8 @@
 (function() {
   'use strict';
 
-  angular.module('jchptf.tools.keyboard', []);
+  module.export = 'jchptf.tools.keyboard';
+
+  angular.module('jchptf.tools.keyboard', ['ng'])
+    .factory('KeypressHelper', require('./keypressHelper.factory'));
 }).call(window);

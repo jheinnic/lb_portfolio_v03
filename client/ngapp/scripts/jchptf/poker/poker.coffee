@@ -1,5 +1,6 @@
 xwModule = angular.module 'poker', [
   'ng'
+  'ngDragDrop'
   'mgcrea.ngStrap.button'
   'jch-ui-blocks'
 ]
@@ -37,7 +38,7 @@ xwModule.directive 'testGridOne', [() ->
     gridCtrl.addDynamicImageLayer 'pkr-content', 'contentImage'
     gridCtrl.addClickHandler 'default', changeContent
     gridCtrl.addClickHandler 'frozen', null
-    gridCtrl.populateGrid 2, 13, 28, 28, $scope.alphabetCells, '1D'
+    gridCtrl.populateGrid 4, 13, 28, 28, $scope.alphabetCells, '1D'
     return
 ]
 
