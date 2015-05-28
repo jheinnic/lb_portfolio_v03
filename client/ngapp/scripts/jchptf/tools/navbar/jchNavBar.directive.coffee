@@ -1,17 +1,16 @@
 _ = require('lodash')
 
 module.exports = jchNavBar
-jchNavBar.$inject = ['JchNavData']
+jchNavBar.$inject = ['JchNavData', 'NavBarModelPackage']
 
-NavBarModel = require('./NavBarModel.model')
-TabModel = require('./TabModel.model')
+jchNavBar = (JchNavData, NavBarModelPackage) ->
+  {NavBarModel, TabModel} = NavBarModelPackage
 
-jchNavBar = (JchNavData) ->
   return {
     restrict: 'E'
     scope: { }
     templateUrl: 'views/jchptf/tools/navbar/jch_navbar.html'
-    link: ($scope, $elem, $attr) ->
+    link: ($scope) ->
       updateModel = (data) ->
         data.nextPromise.then(updateModel)
         $scope.navDataModel = _.omit(data, 'nextPromise')

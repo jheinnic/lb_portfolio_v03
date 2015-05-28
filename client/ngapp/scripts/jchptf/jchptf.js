@@ -24,6 +24,6 @@
     require('jchptf.site.notification'),
     require('jchptf.site.navigation')
   ])
-    .config(require('./app.configuration'))
+    .config(require('./app.config'))
     .run(require('./app.run'));
 }).call(window);

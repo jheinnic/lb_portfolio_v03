@@ -2,23 +2,37 @@ _ = require('lodash')
 
 module.exports = JchNavData
 
-{TabModel, NavBarModel, NavBarBuilder} = require('./NavBar.modelPkg')
-# TabModel = require('./TabModel.model')
-# NavBarModel = require('./NavBarModel.model')
-# NavBarBuilder = require('./NavBarBuilder.model')
-
 class JchNavData
-  @$inject: ['$q']
+  @$inject: ['$q', 'NavBarModelPackage']
+
+  ###*
+  # @constructor
+  ###
+  TabModel = undefined
+
+  ###*
+  # @constructor
+  ###
+  NavBarModel = undefined
+
+  ###*
+  # @constructor
+  ###
+  NavBarBuilder = undefined
 
   # This is a singleton
-  constructor: ($q) ->
+  constructor: ($q, NavBarModelPackage) ->
+    TabModel = NavBarModelPackage.TabModel
+    NavBarModel = NavBarModelPackage.NavBarModel
+    NavBarBuilder = NavBarModelPackage.NavBarBuilder
+
     @$q = $q
     @updateHandle = $q.defer()
     @nbDataModel = new NavBarModel(
       brandName: 'John Heinnickel',
       tabModels: [
         new TabModel displayLabel: 'Home', matchRoute: '/$', clickRoute: '/'
-        new TabModel displayLavel: 'Crosswords', matchRoute: '/crosswords$', clickRoute: '/crosswords'
+        new TabModel displayLabel: 'Crosswords', matchRoute: '/crosswords$', clickRoute: '/crosswords'
         new TabModel displayLabel: 'Poker', matchRoute: '/poker/odds$', clickRoute: '/poker/odds'
         new TabModel displayLabel: 'Videos', matchRoute: '/videos$', clickRoute: '/videos'
       ]
@@ -26,9 +40,7 @@ class JchNavData
     )
 
   getNavBarModel: () =>
-    retVal = _.deepCopy @nbDataModel
-    Object.seal retVal
-    return retVal
+    return Object.freeze _.deepCopy @nbDataModel
 
   changeNavBarModel: (changeDirector) =>
     updatedModel  = _.deepCopy @nbDataModel
@@ -37,14 +49,8 @@ class JchNavData
 
     if navBarBuilder.hasUpdatedModel?
       lastDefer = @updateHandle
-
       @updateHandle = @$q.defer()
       @nbDataModel  = updatedModel
       @nbDataModel.nextPromise = @updateHandle.promise
 
-      lastDefer.resolve(
-        Object.seal(
-          _.deepCopy updatedModel
-        )
-      )
-
+      lastDefer.resolve( @getNavBarModel() )

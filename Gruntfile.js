@@ -216,7 +216,7 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 3000,
+        port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
         livereload: 35729
@@ -393,7 +393,8 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.staging %>/app.js': [
             '<%= yeoman.app %>/scripts/**/*.js',
-            '<%= yeoman.app %>/scripts/**/*.coffee'
+            '<%= yeoman.app %>/scripts/**/*.coffee',
+            '<%= common/components/'
             // '<%= yeoman.staging %>/scripts/jchptf/**/*.js',
             // '<%= yeoman.staging %>/scripts/enum.js'
           ]
@@ -404,11 +405,12 @@ module.exports = function (grunt) {
             'jchptf.authenticate': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/authenticate/authenticate.js'),
             'jchptf.context': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/context/context.js'),
             'jchptf.crosswords': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/crosswords.js'),
+            'jchptf.crosswords.browse': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/browse/browse.js'),
             'jchptf.crosswords.tickets': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/tickets/tickets.js'),
             'jchptf.crosswords.results': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/results/results.js'),
             'jchptf.modeling.core': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/modeling/core/core.js'),
-            'jchptf.modeling.document': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/modeling/document/document.js'),
             'jchptf.modeling.repository': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/modeling/repository/repository.js'),
+            'jchptf.modeling.studio': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/modeling/studio/studio.js'),
             'jchptf.site.navigation': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/site/navigation/navigation.js'),
             'jchptf.site.notification': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/site/notification/notification.js'),
             'jchptf.tools.iconPanel': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/iconPanel/iconPanel.js'),
@@ -490,15 +492,13 @@ module.exports = function (grunt) {
 
     // Automatically inject Bower components into the app
     wiredep: {
-      options: {
-        bowerJson: require('./bower.json'),
-        directory: '<%= yeoman.staging %>/vendor'
-      },
       dev: {
-        src: ['<%= yeoman.staging %>/index.html']
+        src: ['<%= yeoman.staging %>/index.html'],
+	ignorePath: /\.\.\/client\/ngapp\//
       },
       dist: {
-        src: ['<%= yeoman.dist %>/index.html']
+        src: ['<%= yeoman.dist %>/index.html'],
+	ignorePath: /\.\.\/ngapp\//
       }
     },
 
@@ -744,14 +744,14 @@ dist: {
     //},
 
     // Replace Google CDN references
-    cdnify: {
-      dist: {
-        html: ['<%= yeoman.dist %>/index.html']
-      },
-      dev: {
-        html: ['<%= yeoman.staging %>/index.html']
-      }
-    },
+    // cdnify: {
+    //   dist: {
+    //     html: ['<%= yeoman.dist %>/index.html']
+    //   },
+    //   dev: {
+    //     html: ['<%= yeoman.staging %>/index.html']
+    //   }
+    // },
 
     // Copies all files that don't migrate to where they are expected
     // through a pre-processing plugin.  A given build should copy:dist
@@ -759,10 +759,25 @@ dist: {
     // a dev build, and copy:dist for running or packaging a production
     // build.
     //
-    // Difference is that only production builds need to copy generated
-    // images from staging since there are no downstream image preprocessors
-    // to pick the images up from there, whereas only dev builds need to
-    // stage the test scripts (in order to run them from there).
+    // Differences between the two copy sets are as follows:
+    // -- Only production builds need to copy generated images from staging.
+    // Both staging and production include the image processing work, but
+    // there is no production-only followup work to take the files from there
+    // unless and until cache-bust renaming and/or minification start
+    // working again.
+    // -- The dev build acquires application code by Browserification, not
+    // direct copy.  But it does copy the Javascript spec files for testing
+    // and it Coffee-compiles any spec files written in CoffeeScript.  The
+    // production build, in contrast, copies the browserified application code
+    // (unless minifcation is run and transfers it through that pipeline),
+    // and it omits the taest cases from acquisition.
+    //
+    // Less migrates all template-based CSS files to staging by writing
+    // their compiled output there, but hand-created .css files need to be
+    // copied there.  By the time dist wants them, they have already been
+    // concatenated and analysed for minification, but not yet minified.
+    //
+    // Less is to CSS as Coffee is to Javascript, so ditto for those types.
     copy: {
       dist: {
         files: [{
@@ -775,24 +790,25 @@ dist: {
             '*.{ico,png,txt}',
             'styles/fonts/**/*',
             'fonts/**/*',
+            'images/**/*.webp',
+            'images/**/*.{jpg,jpeg,gif,png,svg}', // TODO: This line should be done by image minification
             'views/**/*.html',
-            'index.html',
+            'index.html'
           ]
         }, {
           expand: true,
-          cwd: '<%= yeoman.app %>/images/',
+          cwd: '<%= yeoman.staging %>/',
+          dest: '<%= yeoman.dist %>/',
           src: [
-            '**/*.webp',
-            '**/*.{jpg,jpeg,gif,png,svg}' // TODO: Should be done by image minification
-          ],
-          dest: '<%= yeoman.dist %>/images/'
+            'styles/{main,vendor}.css',
+            'scripts/{app,vendor}.js',
+            'images/generated/**/*'
+          ]
         }, {
           expand: true,
-          cwd: '<%= yeoman.staging %>/images/',
-          src: [
-            'generated/**/*',
-          ],
-          dest: '<%= yeoman.dist %>/images/'
+          cwd: '<%= yeoman.lbclient %>/',
+          dest: '<%= yeoman.dist %>/lbclient/',
+          src: 'browser.bundle.js'
         }]
       },
       dev: {
@@ -800,70 +816,49 @@ dist: {
           expand: true,
           dot: true,
           cwd: '<%= yeoman.app %>/',
+          dest: '<%= yeoman.staging %>/',
           src: [
-            'test/**/*.{js,conf,json,coffee}',
+            'test/**/*',
+            'styles/**/*.css',
             '.htaccess',
             '*.{ico,png,txt}',
             'styles/fonts/**/*',
             'fonts/**/*',
             'views/**/*.html',
             'index.html'
-          ],
-          dest: '<%= yeoman.staging %>/'
+          ]
         }, {
           expand: true,
           cwd: '<%= yeoman.app %>/images/',
+          dest: '<%= yeoman.staging %>/images/',
           src: [
-            '**/*.{jpg,jpeg,gif,png,webp,svg}'
-          ],
-        }, {
-          expand: true,
-          cwd: '<%= yeoman.staging %>/images/',
-          src: [
-            'generated/**/*'
-          ],
-          dest: '<%= yeoman.dist %>/images/'
-        }]
-      },
-      vendor: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: '<%= yeoman.vendor %>/',
-          src: '**/*',
-          dest: '<%= yeoman.staging %>/vendor'
-        }]
-      },
-      styles: {
-        files: [{
-          // less migrates all template-based CSS files, but hand-created
-          // .css files don't reach the staging area via a pre-processor.
-          expand: true,
-          cwd: '<%= yeoman.app %>/styles/',
-          src: '**/*.css',
-          dest: '<%= yeoman.staging %>/styles/'
-        }]
-      },
-      scripts: {
-        // coffee migrates all compiled coffeeScript files, but hand-created
-        // .js files don't reach the staging area via a pre-processor.
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/scripts/',
-          src: '**/*.{js,coffee}',
-          dest: '<%= yeoman.staging %>/scripts/'
+            '**/*.webp',                         // TODO: Yes, this block is redundant, but there is some cleanup
+            '**/*.{jpg,jpeg,gif,png,svg}'        //       work yet for image handling that will make the reasons for
+          ]                                      //       keeping the boundary between classifications intact make sense.
         }, {
           expand: true,
           cwd: '<%= yeoman.lbclient %>/',
-          src: 'browser.bundle.js',
-          dest: '<%= yeoman.staging %>/lbclient/'
+          dest: '<%= yeoman.staging %>/lbclient/',
+          src: 'browser.bundle.js'
         }]
       }
     },
 
     // Run some tasks in parallel to speed up the build process
+    // To do a combined dev and dist full build, you must first follow the dev process because the dist
     concurrent: {
-      testLint: [
+      build: [
+        'less',
+        'copy:dev',
+        'coffeelint:dist',
+        'jshint:dist',
+        'build-lbclient',
+        'build-config'
+      ],
+      test: [
+        // TODO: Need view HTML?
+        'less',
+        'copy:dev',
         'coffeelint:test',
         'jshint:test',
         'coffeelint:dist',
@@ -871,39 +866,11 @@ dist: {
         'build-lbclient',
         'build-config'
       ],
-      appLint: [
-        'coffeelint:dist',
-        'jshint:dist',
-        'build-lbclient',
-        'build-config'
-      ],
-      dev: [
-        'less',
-        // 'coffee:dist',
-        // 'jade:dev',
-        'copy:dev',
-        'copy:vendor',
-        // 'copy:scripts',
-        'copy:styles'
-      ],
-      test: [
-        // TODO: Need view HTML?
-        // 'copy:staging',
-        'coffee:dist',
-        'coffee:test',
-        'copy:dev',
-        'copy:vendor',
-        'copy:scripts'
-       //'copy:styles'
-      ],
       dist: [
-        'less',
-        // 'coffee:dist',
-        // 'jade:dist',
-        'copy:dist',
-        'copy:vendor',
-        // 'copy:scripts',
-        'copy:styles'
+        // The dist step follows the build or test step.  It has only one more item in it (until image processing
+        // is restored), but it is functionally dependent on the minification that needs staging to finish being
+        // build before it may proceed.
+        'copy:dist'
         // TODO: Migrate images from copy:dist if these can be made to work.
         //'imagemin'
         //'svgmin'
@@ -1026,13 +993,16 @@ dist: {
       });
 
     var stagingDir = path.resolve(__dirname, '.tmp');
-    fs.mkdirSync(stagingDir);
-
     var outputDir = path.join(stagingDir, 'config');
     var outputPath = path.resolve(outputDir, 'bundle.js');
-    var content = 'window.CONFIG = ' +
-        JSON.stringify(config, null, 2) + ';\n';
-    fs.mkdirSync(outputDir);
+    if (! fs.existsSync(stagingDir)) {
+      fs.mkdirSync(stagingDir);
+      fs.mkdirSync(outputDir);
+    } else if (! fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir);
+    }
+
+    var content = 'window.CONFIG = ' + JSON.stringify(config, null, 2) + ';\n';
     fs.writeFileSync(outputPath, content, 'utf-8');
   });
 
@@ -1079,26 +1049,22 @@ dist: {
   });
 
   grunt.registerTask('test:client', [
-    'env:test',
     'build:test',
     'connect:test',
     'karma'
   ]);
 
   grunt.registerTask('test:common', [
-    'clean:all',
     'build:test',
     'mochaTest:common'
   ]);
 
   grunt.registerTask('test:server', [
-    'clean:all',
     'build:test',
     'mochaTest:server'
   ]);
 
   grunt.registerTask('test', [
-    'clean:all',
     'build:test',
     'mochaTest:common',
     'mochaTest:server',
@@ -1106,30 +1072,47 @@ dist: {
     'karma'
   ]);
 
+  grunt.registerTask('build:temp', [
+    'clean:all',
+    'build:dev'
+  ]);
+
   grunt.registerTask('build', [
     'clean:all',
-    'build:dev',
-    'build:test',
-    'build:dist'
+    'env:test',
+    'concurrent:test',
+    'browserify:dist',
+    'coffee:test',
+    'wiredep:dev',
+    'autoprefixer',
+    'env:dist',
+    'copy:dist',
+    'wiredep:dist',
+    'useminPrepare',
+    'concat:generated',
+    'cssmin:generated',
+    'uglify:generated',
+    'filerev',
+    'usemin',
+    'htmlmin'
   ]);
 
   grunt.registerTask('build:test', [
+    'clean:all',
     'env:test',
-    'concurrent:testLint',
     'concurrent:test',
     'browserify:dist',
     'wiredep:dev',
-    'cdnify:dev',
     'autoprefixer'
   ]);
 
   grunt.registerTask('build:dist', [
+    'clean:all',
     'env:dist',
-    'concurrent:appLint',
-    'concurrent:dist',
+    'concurrent:build',
     'browserify:dist',
+    'copy:dist',
     'wiredep:dist',
-    'cdnify:dist',
     'useminPrepare',
     'autoprefixer',
     'concat:generated',
@@ -1137,17 +1120,15 @@ dist: {
     'uglify:generated',
     'filerev',
     'usemin',
-    // 'ngAnnotate'
     'htmlmin'
   ]);
 
   grunt.registerTask('build:dev', [
+    'clean:all',
     'env:dev',
-    'concurrent:appLint',
-    'concurrent:dev',
+    'concurrent:build',
     'browserify:dist',
     'wiredep:dev',
-    'cdnify:dev',
     'autoprefixer'
   ]);
 
@@ -1156,9 +1137,10 @@ dist: {
   ]);
 
   grunt.registerTask('default', [
-    'env:test',
     'clean:all',
+    'build:test',
     'test',
-    'build'
+    'build:dist',
+    'test'
   ]);
 };

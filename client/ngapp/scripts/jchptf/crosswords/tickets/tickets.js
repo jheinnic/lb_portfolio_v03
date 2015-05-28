@@ -17,8 +17,9 @@
       'drahak.hotkeys',
       'angularModalService',
       require('jchptf.context'),
-      require('jchptf.repository'),
       require('jchptf.authenticate'),
+      require('jchptf.modeling.core'),
+      require('jchptf.modeling.repository'),
       require('jchptf.tools.iconPanel'),
       require('jchptf.site.notification')
     ]

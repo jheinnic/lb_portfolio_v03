@@ -10,7 +10,7 @@
    *              including a pattern for creating Enumerations and another for creating deep read-only clones.
    */
   angular.module('jchptf.modeling.core', [])
-    .factory('CoreModelPackage', require('./CoreModelPackage.factory.coffee'))
-    .service('ModelUtils', require('./ModelUtils.service'))
+    .service('CoreModelPackage', require('./CoreModelPackage.service'))
+    // .service('ModelUtils', require('./ModelUtils.service'))
   ;
 }).call(window);

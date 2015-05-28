@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  module.exports = 'jchptf.repository';
+  module.exports = 'jchptf.modeling.repository';
 
   /**
    * @ngdoc overview
@@ -9,17 +9,14 @@
    * @description Context module that is responsible for tracking global state, such as current logged in user.
    */
   angular.module(
-    'jchptf.repository',
+    'jchptf.modeling.repository',
     [
       'ng',
       'ngEventAggregator',
       'LocalForageModule',
       require('jchptf.modeling.core'),
-      require('jchptf.modeling.document')
     ]
   )
     .config(require('./repository.config.js'))
-    .factory('DirtyTracker', require('./DirtyTracker.factory.coffee'))
-    .service('DocumentCacheManager', require('./DocumentCacheManager.service.coffee'))
-    .factory('RepositoryModelPackage', require('./RepositoryModelPackage.factory.coffee'));
+    .factory('RepositoryModelPackage', require('./RepositoryDomainPackage.factory.coffee'));
 }).call(window);

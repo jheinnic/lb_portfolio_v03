@@ -1,19 +1,8 @@
 'use strict'
 
-# Interim NodeJS/BrowserJS compatibility glue
-# if !exports
-#   if !@jchptfModels
-#     @jchptfModels = {}
-#   exports = @jchptfModels
-#   require = (name) =>
-#     @jchptfModels
-# else
-#   require('coffee-script/registry')
-
-
 module.exports = IdentityContext
 
-{AuthTokenEventKind,AuthTokenEvent} = require('./context.modelPkg.coffee')
+IdentityContext.$inject = ['$q', 'ContextModelPackageFactory']
 
 ###*
 # @ngdoc factory
@@ -34,10 +23,13 @@ module.exports = IdentityContext
 # </ol>
 ####
 class IdentityContext
-  @$inject = ['$q']
+  AuthTokenEventKind = undefined
+  AuthTokenEvent = undefined
 
-  constructor: ($q) ->
-    Object.defineProperty(@, 'identityContextInternal',
+  constructor: ($q, ContextModelPackage) ->
+    {AuthTokenEventKind,AuthTokenEvent} = ContextModelPackage
+
+    Object.defineProperty(@, 'identityContextInternals',
       configurable: false
       enumerable: false
       editable: false
@@ -169,3 +161,4 @@ class IdentityContextInternals
   logout: () =>
     @fireTokenEvent new AuthTokenEvent
       eventType: AuthTokenEventKind.NO_TOKEN_AVAILABLE
+

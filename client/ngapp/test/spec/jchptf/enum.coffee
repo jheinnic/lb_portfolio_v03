@@ -2,7 +2,7 @@
 
 should = require('chai').should
 
-describe('CoffeeScript Tool: Enum Class', () ->
+describe('Configuring the Repository service', () ->
   Enum
 
   # Reacquire the Enum base class before each test.
