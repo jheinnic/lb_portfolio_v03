@@ -10,5 +10,23 @@
   },
   "user": {
     "dataSource": "remote"
+  },
+  "Document": {
+    "dataSource": "remote"
+  },
+  "Folder": {
+    "dataSource": "remote"
+  },
+  "XwTicket": {
+    "dataSource": "remote"
+  },
+  "FiveXTicket": {
+    "dataSource": "remote"
+  },
+  "TripOnlyTicket": {
+    "dataSource": "remote"
+  },
+  "TripSpotTicket": {
+    "dataSource": "remote"
   }
 }

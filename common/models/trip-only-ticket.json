@@ -1,0 +1,14 @@
+{
+  "name": "TripOnlyTicket",
+  "base": "XwTicket",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "trackChanges": true,
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

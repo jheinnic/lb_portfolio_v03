@@ -1,11 +1,33 @@
 {
   "_meta": {
-    "sources": ["../common/models"]
+    "sources": [
+      "../common/models"
+    ]
   },
   "Todo": {
     "dataSource": "db"
   },
   "user": {
     "dataSource": "db"
+  },
+  "Document": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Folder": {
+    "dataSource": "db",
+    "public": true
+  },
+  "FiveXTicket": {
+    "dataSource": "db",
+    "public": true
+  },
+  "TripSpotTicket": {
+    "dataSource": "db",
+    "public": true
+  },
+  "TripOnlyTicket": {
+    "dataSource": "db",
+    "public": true
   }
 }
