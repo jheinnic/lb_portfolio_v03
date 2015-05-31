@@ -29,6 +29,13 @@ app.get('/', function(req, res) {
   res.sendFile(app.get('indexFile'));
 });
 
+app.use(
+  '/**',
+  loopback.static(
+    app.get('indexFile')
+  )
+);
+
 // Requests that get this far won't be handled
 // by any middleware. Convert them into a 404 error
 // that will be handled later down the chain.
