@@ -94,6 +94,8 @@ module.exports = function (grunt) {
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       nodemon: {
+        // If nodemon recycles the server, it touches this marker, which in turn causes livereload to
+        // signal need for refresh to browsers.
         files: ['.rebooted'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -109,35 +111,31 @@ module.exports = function (grunt) {
       },
       coffee: {
         files: ['<%= yeoman.app %>/scripts/**/*.coffee'],
-        tasks: ['coffeelint:dist', 'coffee:dist'],
+        tasks: ['coffeelint:dist', 'browserify'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
       },
       js: {
-        // TODO: Can we skip the copy step?  Its needed for minification pipeline, but for development
-        //       watch purposes, livereload should serve the true source files so debugging is done
-        //       with the true source files.
         files: ['<%= yeoman.app %>/scripts/**/*.js'],
-        tasks: ['newer:jshint:dist', 'newer:copy:scripts'],
+        tasks: ['newer:jshint:dist', 'browserify'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
       },
+      // TODO: Can we skip the copy step?  Its needed for minification pipeline, but for debug purpose, watch
+      //       for livereload should serve the true source files.
       // coffeeTest: {
       //   files: ['<%= yeoman.app %>/test/spec/**/*.coffee'],
       //   tasks: ['coffeelint:test', 'coffee:test', 'karma']
       // },
       // jsTest: {
-      //   // TODO: Can we skip the copy step?  Its needed for minification pipeline, but for debug
-      //   //       purpose, the livereload watch should serve the true source files.
       //   files: ['<%= yeoman.app %>/test/spec/**/*.js'],
       //   // tasks: ['newer:copy:test', 'newer:jshint:test', 'karma']
       //   tasks: ['newer:jshint:test', 'newer:copy:staging', 'karma']
       // },
       less: {
         files: ['<%= yeoman.app %>/styles/**/*.less'],
-        // tasks: ['newer:copy:styles', 'newer:less', 'autoprefixer', 'useminPrepare', 'usemin', 'filerev']
         tasks: ['newer:less', 'autoprefixer'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -175,7 +173,8 @@ module.exports = function (grunt) {
         }
       },
       gruntfile: {
-        files: ['Gruntfile.js']
+        files: ['Gruntfile.js'],
+        tasks: ['browserify']
       },
       livereload: {
         files: [
@@ -185,7 +184,7 @@ module.exports = function (grunt) {
           //    '<%= yeoman.app %>/{fonts,styles/fonts}/**/*',
           // '<%= yeoman.staging %>/styles/**/*.css',
           // TODO: Consider refining server file watch dependencies since they also cause a need to restart.
-          '{common,server}/**/*'
+          // '{common,server}/**/*'
         ],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -219,6 +218,7 @@ module.exports = function (grunt) {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
+        host: 'localhost',
         livereload: 35729
       },
       test: {
@@ -366,10 +366,10 @@ module.exports = function (grunt) {
     },
 
     // Compiles CoffeeScript to JavaScript.
-    // coffee: {
-    //   options: {
-    //     sourceMap: true
-    //   },
+    coffee: {
+      options: {
+        sourceMap: true
+      },
     //   dist: {
     //     ext: '.js',
     //     extDot: 'last',
@@ -378,18 +378,18 @@ module.exports = function (grunt) {
     //     src: ['**/*.coffee'],
     //     dest: '<%= yeoman.staging %>/scripts/'
     //   },
-    //   test: {
-    //     ext: '.js',
-    //     extDot: 'last',
-    //     expand: true,
-    //     cwd: '<%= yeoman.app %>/test/spec',
-    //     src: ['**/*.coffee'],
-    //     dest: '<%= yeoman.staging %>/test/spec/'
-    //   }
-    // },
+      test: {
+        ext: '.js',
+        extDot: 'last',
+        expand: true,
+        cwd: '<%= yeoman.app %>/test/spec',
+        src: ['**/*.coffee'],
+        dest: '<%= yeoman.staging %>/test/spec/'
+      }
+    },
 
     browserify: {
-      dist: {
+      task: {
         files: {
           '<%= yeoman.staging %>/app.js': [
             '<%= yeoman.app %>/scripts/**/*.js',
@@ -398,72 +398,81 @@ module.exports = function (grunt) {
             // '<%= yeoman.staging %>/scripts/jchptf/**/*.js',
             // '<%= yeoman.staging %>/scripts/enum.js'
           ]
-        },
-        options: {
-          alias: {
-            'jchptf' : path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/jchptf.js'),
-            'jchptf.authenticate': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/authenticate/authenticate.js'),
-            'jchptf.context': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/context/context.js'),
-            'jchptf.crosswords': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/crosswords.js'),
-            'jchptf.crosswords.browse': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/browse/browse.js'),
-            'jchptf.crosswords.tickets': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/tickets/tickets.js'),
-            'jchptf.crosswords.results': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/results/results.js'),
-            'jchptf.modeling.core': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/modeling/core/core.js'),
-            'jchptf.modeling.repository': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/modeling/repository/repository.js'),
-            'jchptf.modeling.studio': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/modeling/studio/studio.js'),
-            'jchptf.site.navigation': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/site/navigation/navigation.js'),
-            'jchptf.site.notification': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/site/notification/notification.js'),
-            'jchptf.tools.iconPanel': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/iconPanel/iconPanel.js'),
-            'jchptf.tools.keyboard': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/keyboard/keyboard.js'),
-            'jchptf.tools.liveReload': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/liveReload/liveReload.js'),
-            'jchptf.tools.navbar': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/navbar/navbar.js'),
-            // 'jchptf.tools.workspace': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/workspace/workspace.js'),
-            // 'enum' : path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/enum/enum.coffee'),
-            // 'document' : path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/workspace/Document.model.coffee')
-            //'jchptf.poker': path.normalize(__dirname  +  '/.tmp/scripts/jchptf/poker/poker.js'),
-            //'jchptf.support.feedback': path.normalize(__dirname  +  '/.tmp/scripts/jchptf/support/feedback/feedback.js'),
-            //'jchptf.support.password': path.normalize(__dirname + '/.tmp/scripts/jchptf/support/password/password.js'),
-            // 'jchptf.user': path.normalize(__dirname '/.tmp/scripts/jchptf/user/user.js')
-          },
-          browserifyOptions: {
-            debug: process.env.NODE_ENV === 'development',
-            configure: function (b) {
-              console.log('Browserify configure event fired', b);
-              b.on('remapify:files', function(file, expandedAliases, pattern){
-                fs.writeFileSync( 'foo/file' + Math.random(),'Remapify for <' + file + '> from pattern <' + pattern + '> has expanded aliases <' + expandedAliases + '>');
-              });
-            },
-            preBundleCB: function (b) {
-              console.log('Browserify Pre-bundle event fired', b);
-              b.on('remapify:files', function(file, expandedAliases, pattern){
-                fs.writeFileSync( 'foo/file' + Math.random(),'Remapify for <' + file + '> from pattern <' + pattern + '> has expanded aliases <' + expandedAliases + '>');
-              });
-            },
-            postBundleCB: function (err, src, next) {
-              if (err) {
-                console.error('Error while processing', src, err);
-              } else {
-                console.error('Successfully processed', src);
-              }
-              console.error('Next to process is', next);
-            }
-          },
-          transform: ['coffeeify']
-//          plugin: [
-//            [
-//              'remapify',
-//              [
-//                {
-//                  // src: '<%= yeoman.staging %>/scripts/jchptf/**/*js',  // glob for the files to remap
-//                  src: 'client\\ngapp\\scripts\\jchptf\\**\\*.js',  // glob for the files to remap
-//                  expose: 'jchptf', // Expose `<%= yeoman.staging %>/scripts/jchptf/a/b/c/home.js` as `jchptf/a/b/c/home`
-//                  cwd: __dirname
-//                  // `cwd: 'D:\\DevProj\\Git\\lb_express_sandbox\\.tmp\\scripts\\jchptf'
-//                }
-//              ]
-//            ]
-//          ]
         }
+      },
+      options: {
+        alias: {
+          'jchptf' : path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/jchptf.js'),
+//            'jchptf.authenticate': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/authenticate/authenticate.js'),
+//            'jchptf.context': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/context/context.js'),
+//            'jchptf.crosswords': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/crosswords.js'),
+//            'jchptf.crosswords.browse': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/browse/browse.js'),
+//            'jchptf.crosswords.tickets': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/tickets/tickets.js'),
+//            'jchptf.crosswords.results': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/results/results.js'),
+//            'jchptf.modeling.core': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/modeling/core/core.js'),
+//            'jchptf.modeling.repository': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/modeling/repository/repository.js'),
+//            'jchptf.modeling.studio': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/modeling/studio/studio.js'),
+          'jchptf.site.navigation': path.join(__dirname, appConfig.app, 'scripts', 'jchptf', 'site', 'navigation', 'navigation.js'),
+          'jchptf.site.notification': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/site/notification/notification.js'),
+          'jchptf.tools.iconPanel': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/iconPanel/iconPanel.js'),
+          'jchptf.tools.keyboard': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/keyboard/keyboard.js'),
+          'jchptf.tools.navbar': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/navbar/navbar.js'),
+          // 'jchptf.tools.workspace': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/workspace/workspace.js'),
+          // 'jchptf.poker': path.normalize(__dirname  +  '/.tmp/scripts/jchptf/poker/poker.js'),
+          // 'jchptf.support.feedback': path.normalize(__dirname  +  '/.tmp/scripts/jchptf/support/feedback/feedback.js'),
+          // 'jchptf.support.password': path.normalize(__dirname + '/.tmp/scripts/jchptf/support/password/password.js'),
+          // 'jchptf.user': path.normalize(__dirname '/.tmp/scripts/jchptf/user/user.js')
+        },
+        require: [
+          [path.normalize(
+            path.join(__dirname, appConfig.app, 'scripts/jchptf/jchptf.js')
+          ), {expose: 'jchptf'}]
+        ],
+        browserifyOptions: {
+          debug: process.env.NODE_ENV === 'development',
+          configure: function (b) {
+            console.log('Browserify configure event fired', b);
+            b.on('remapify:files', function(file, expandedAliases, pattern){
+              fs.writeFileSync(
+                path.join('foo', 'file1_') + Math.random(),
+                'Remapify for <' + file + '> from pattern <' + pattern + '> has expanded aliases <' + expandedAliases + '>'
+              );
+            });
+          },
+          preBundleCB: function (b) {
+            console.log('Browserify Pre-bundle event fired', b);
+            b.on('remapify:files', function(file, expandedAliases, pattern){
+              fs.writeFileSync(
+                path.resolve('foo/file2_') + Math.random(),
+                'Remapify for <' + file + '> from pattern <' + pattern + '> has' + ' expanded aliases <' + expandedAliases + '>'
+              );
+            });
+          },
+          postBundleCB: function (err, src, next) {
+            if (err) {
+              console.error('Error while processing', src, err);
+            } else {
+              console.error('Successfully processed', src);
+            }
+            console.error('Next to process is', next);
+            next();
+          }
+        },
+        transform: ['coffeeify']
+//      plugin: [
+//        [
+//          'remapify',
+//          [
+//            {
+//              // src: '<%= yeoman.staging %>/scripts/jchptf/**/*js',  // glob for the files to remap
+//              src: 'client\\ngapp\\scripts\\jchptf\\**\\*.js',  // glob for the files to remap
+//              expose: 'jchptf', // Expose `<%= yeoman.staging %>/scripts/jchptf/a/b/c/home.js` as `jchptf/a/b/c/home`
+//              cwd: __dirname
+//              // `cwd: 'D:\\DevProj\\Git\\lb_express_sandbox\\.tmp\\scripts\\jchptf'
+//            }
+//          ]
+//        ]
+//      ]
       }
     },
 
@@ -494,11 +503,11 @@ module.exports = function (grunt) {
     wiredep: {
       dev: {
         src: ['<%= yeoman.staging %>/index.html'],
-	ignorePath: /\.\.\/client\/ngapp\//
+        ignorePath: /^\.\.\/client\/ngapp\//
       },
       dist: {
         src: ['<%= yeoman.dist %>/index.html'],
-	ignorePath: /\.\.\/ngapp\//
+        ignorePath: /^\.\.\/ngapp\//
       }
     },
 
@@ -529,7 +538,7 @@ module.exports = function (grunt) {
           }
         },
         files: {
-          '<%= yeoman.staging %>/index.html': '<%= yeoman.app %>/index.jade'
+          '<%= yeoman.dist %>/index.html': '<%= yeoman.app %>/index.jade'
         }
       }
     },
@@ -601,14 +610,14 @@ dist: {
     // additional tasks can operate on them.
     useminPrepare: {
       html: [
-        '<%= yeoman.app %>/index.html'
-        // '<%= yeoman.app %>/views/**/*.html'
+        '<%= yeoman.dist %>/index.html',
+        '<%= yeoman.dist %>/views/**/*.html'
       ],
       options: {
-        root: '<%= yeoman.app %>/',
-          staging: '<%= yeoman.staging %>/',
-          dest: '<%= yeoman.dist %>/',
-          flow: {
+        root: '<%= yeoman.dist %>/',
+        staging: '<%= yeoman.staging %>/',
+        dest: '<%= yeoman.dist %>/',
+        flow: {
           html: {
             steps: {
               js: ['concat', 'uglifyjs'],
@@ -793,15 +802,15 @@ dist: {
             'images/**/*.webp',
             'images/**/*.{jpg,jpeg,gif,png,svg}', // TODO: This line should be done by image minification
             'views/**/*.html',
-            'index.html'
           ]
         }, {
           expand: true,
           cwd: '<%= yeoman.staging %>/',
           dest: '<%= yeoman.dist %>/',
           src: [
-            'styles/{main,vendor}.css',
-            'scripts/{app,vendor}.js',
+            'index.html',
+            'styles/**/*.css',
+            'scripts/**/*.js',
             'images/generated/**/*'
           ]
         }, {
@@ -819,6 +828,7 @@ dist: {
           dest: '<%= yeoman.staging %>/',
           src: [
             'test/**/*',
+            'scripts/livereload.js',
             'styles/**/*.css',
             '.htaccess',
             '*.{ico,png,txt}',
@@ -1081,13 +1091,12 @@ dist: {
     'clean:all',
     'env:test',
     'concurrent:test',
-    'browserify:dist',
+    'browserify',
     'coffee:test',
     'wiredep:dev',
     'autoprefixer',
     'env:dist',
     'copy:dist',
-    'wiredep:dist',
     'useminPrepare',
     'concat:generated',
     'cssmin:generated',
@@ -1101,7 +1110,7 @@ dist: {
     'clean:all',
     'env:test',
     'concurrent:test',
-    'browserify:dist',
+    'browserify',
     'wiredep:dev',
     'autoprefixer'
   ]);
@@ -1110,9 +1119,9 @@ dist: {
     'clean:all',
     'env:dist',
     'concurrent:build',
-    'browserify:dist',
+    'browserify',
+    'wiredep:dev',
     'copy:dist',
-    'wiredep:dist',
     'useminPrepare',
     'autoprefixer',
     'concat:generated',
@@ -1127,7 +1136,7 @@ dist: {
     'clean:all',
     'env:dev',
     'concurrent:build',
-    'browserify:dist',
+    'browserify',
     'wiredep:dev',
     'autoprefixer'
   ]);
