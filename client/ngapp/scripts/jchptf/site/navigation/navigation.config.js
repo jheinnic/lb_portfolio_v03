@@ -9,14 +9,15 @@
    * @name jchptf.site.navigation:config
    *
    * @description
-   * Routing component of the portfolio application's navigation module.
+   * Routing configuration for portfolio application's navigation module.
+   * Defines the landing page, /home.
    */
   function navigationConfig ($stateProvider) {
     $stateProvider.state(
       'home',
       {
-        url: '/login/showForm',
-        templateUrl: '/views/jchptf/site/navigation/home.view.html',
+        url: '/home',
+        templateUrl: 'views/jchptf/site/navigation/home.view.html',
         controller: 'HomeController',
         controllerAs: 'home',
         abstract: false,

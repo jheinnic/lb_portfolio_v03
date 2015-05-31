@@ -12,5 +12,5 @@
    * at a suitable location in a view and a service for accepting them
    * from places where events trigger.
    */
-  angular.module('jchptf.site.notification', ['ng', 'ui.bootstrap', 'toastr']);
+  angular.module('jchptf.site.notification', ['ng', /*'ui.bootstrap',*/ 'toastr']);
 }).call(window);

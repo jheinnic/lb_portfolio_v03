@@ -23,14 +23,13 @@ module.exports = NavBarModelPackage =
         switch
           when @clickRoute != parsedRoute.path
             throw new Error "clickRoute, #{@clickRoute}, does not match parsed route, #{parsedRoute.path}"
-          when parsedRoute.query.match(/\?/)?
+          when parsedRoute.query?.match(/\?/)?
             throw new Error "clickRoute, #{@clickRoute}, has more than one query separator"
           when @clickRoute.match(/:/)?
             throw new Error "clickRoute, #{@clickRoute}, must supply path variable values, not bindings."
 
         if @matchRoute?
-          @matchRoute = new RegEx(@matchRoute)
-          unless @clickRoute.match(matchRegex)?
+          unless @clickRoute.match(@matchRoute)?
             throw new Error "If given, matchRoute, #{@matchRoute}, must be a regex match to clickRoute, #{@clickRoute}"
         else
           @matchRoute = new RegEx("^#{@clickRoute}$")
