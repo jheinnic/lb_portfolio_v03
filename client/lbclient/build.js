@@ -10,8 +10,11 @@ module.exports = function buildBrowserBundle(env, callback) {
     { basedir: __dirname },
     { // TODO(bajtos) debug should be always true, the sourcemaps should be
       // saved to a standalone file when !isDev(env)
-      // NOTE(jheinnic) See https://github.com/thlorenz/exorcist#usage to
-      // accomplish the above TODO.
+      // TODO(jch) Assess https://github.com/thlorenz/exorcist#usage as an
+      // non-dev build extra step for extracting source maps from the bundle
+      // after generating it.  Browserify does not seem to have an option for
+      // generating them outside the bundle, but this tool is capable of
+      // extracting them after-the-fact.
       debug: isDevEnv
     }
   );
