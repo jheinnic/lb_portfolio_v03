@@ -12,29 +12,46 @@ module.exports = NavBarModelPackage =
         unless @brandName? then @brandName = ''
         unless @tabModels? then @tabModels = []
 
-        console.log(typeof @refreshPromise)
-        console.log(typeof @tabModels)
-
     class TabModel
       constructor: (params) ->
-        {@displayLabel, @clickRoute, @matchRoute} = params
+        {displayLabel, clickRoute, matchRoute} = params
 
-        parsedRoute = url.parse(@clickRoute)
+        parsedRoute = url.parse(clickRoute)
         switch
-          when @clickRoute != parsedRoute.path
-            throw new Error "clickRoute, #{@clickRoute}, does not match parsed route, #{parsedRoute.path}"
+          when clickRoute != parsedRoute.path
+            throw new Error "clickRoute, #{clickRoute}, does not match parsed route, #{parsedRoute.path}"
           when parsedRoute.query?.match(/\?/)?
-            throw new Error "clickRoute, #{@clickRoute}, has more than one query separator"
-          when @clickRoute.match(/:/)?
-            throw new Error "clickRoute, #{@clickRoute}, must supply path variable values, not bindings."
+            throw new Error "clickRoute, #{clickRoute}, has more than one query separator"
+          when clickRoute.match(/:/)?
+            throw new Error "clickRoute, #{clickRoute}, must supply path variable values, not bindings."
 
-        if @matchRoute?
-          unless @clickRoute.match(@matchRoute)?
-            throw new Error "If given, matchRoute, #{@matchRoute}, must be a regex match to clickRoute, #{@clickRoute}"
+        if matchRoute?
+          unless clickRoute.match(matchRoute)?
+            throw new Error "If given, matchRoute, #{matchRoute}, must be a regex match to clickRoute, #{clickRoute}"
         else
-          @matchRoute = new RegEx("^#{@clickRoute}$")
+          matchRoute = new RegEx("^#{clickRoute}$")
 
+        Object.defineProperties(
+          @,
+          {
+            displayLabel: {
+              enumerable: true
+              get: () -> return displayLabel
+            }
+            clickRoute: {
+              enumerable: true
+              get: () -> return clickRoute
+            }
+            matchRoute: {
+              enumerable: true
+              get: () -> return matchRoute
+            }
+          }
+        )
         Object.seal(@)
+
+      getMatchRoute: () -> matchRoute
+
 
     class NavBarBuilder
       constructor: (navBarModel) ->
