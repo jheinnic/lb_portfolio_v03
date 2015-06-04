@@ -1,6 +1,6 @@
-var path = require('path');
 var loopback = require('loopback');
 var boot = require('loopback-boot');
+var path = require('path');
 
 var app = module.exports = loopback();
 
@@ -24,10 +24,6 @@ boot(app, __dirname);
 // All static middleware should be registered at the end, as all requests
 // passing the static middleware are hitting the file system
 app.use(loopback.static(path.dirname(app.get('indexFile'))));
-
-app.get('/', function(req, res) {
-  res.sendFile(app.get('indexFile'));
-});
 
 app.use(
   '/**',

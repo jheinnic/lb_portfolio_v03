@@ -1,10 +1,13 @@
-module.exports=Module
+'use strict'
 
+module.exports = Module
+
+###
 # Modules are classes designed to be reused as run-time mixins rather
 # compile-time subclasses.
 #
 # When a module extends a module, the extended module's properties are copied as
-# properties of the exending module.  The extending class acquires new class
+# properties of the extending module.  The extending class acquires new class
 # properties from the extended module's class properties.
 
 # When an module includes a module, the included module's properties are copied as
@@ -18,6 +21,7 @@ module.exports=Module
 # is extended or included.  The object properties named 'extended' and
 # 'included' are reserved for this purpose and are never copied during
 # either operation.
+###
 class Module
   moduleKeywords = ['extended', 'included']
 

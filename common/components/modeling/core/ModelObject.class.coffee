@@ -1,3 +1,7 @@
+'use strict';
+
+module.exports = ModelObject
+
 ###*
 # Base class to help Documents keep track of their contained objects and to help Objects find their
 # immediate parent and root ancestor DataObject containers.
@@ -19,10 +23,4 @@ class ModelObject
   hasSuperTypeOf: (target) -> return @getType().isSuperTypeOf(target)
   hasSubTypeOf: (target) -> return @getType().isSubTypeOf(target)
 
-  equals: (other) -> return this == other
-
-module.exports = ModelObject
-console.log('a')
-console.log(module.exports)
-console.log('b')
-
+  equals: (other) -> return @ == other

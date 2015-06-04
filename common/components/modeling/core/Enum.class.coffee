@@ -3,15 +3,13 @@
 _ = require('lodash')
 ModelObject = require('./ModelObject.class.coffee')
 
+module.exports = Enum
+
 class Enum extends ModelObject
   _name: undefined
   _ordinal: undefined
 
   constructor: (name) ->
-    #keysMode = Class._KEYS_MODE || EnumKeysMode.DYNAMIC
-    #unless keysMode instanceof EnumKeysMode
-    #  throw new Error "Enum's _KEYS_MODE class property may only assigned EnumKeysMode.DYNAMIC or EnumKeysMode.STATIC"
-
     throw new Error "name must be defined" unless name?
     throw new Error "name may not be blank" if _.isEmpty(name)
     name = name.toUpperCase()
@@ -23,9 +21,7 @@ class Enum extends ModelObject
     throw new Error "Abstract enumerations may not instantiate values" if Class._ABSTRACT
     throw new Error "#{Class.name} already has an enumerated value named #{name}!" if Class[name]?
 
-    #else if @getSuperType != Enum
     SuperType = @getSuperType()
-    #else if @getSuperType != Enum
     while Enum.isSuperTypeOf(SuperType)
       unless SuperType._ABSTRACT == true
         throw new Error "Enum allows only one concrete subtype in any inheritance chain, but #{SuperType.name} is already concrete"
@@ -93,5 +89,3 @@ class Enum extends ModelObject
   ordinal: () -> return @ordinal
   compareTo: (other) -> return if @getType() == other.getType() then @ordinal - other.ordinal else undefined
   toString: () -> return "#{@getType().name}::#{@name}(#{@ordinal})"
-
-module.exports = Enum

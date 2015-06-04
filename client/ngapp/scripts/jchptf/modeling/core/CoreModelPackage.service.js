@@ -1,12 +1,12 @@
 (function() {
-  'use strict'
+  'use strict';
 
-  module.exports = CoreModelPackage
-
+  module.exports = CoreModelPackage;
   CoreModelPackage.$inject = [];
 
   function CoreModelPackage() {
-    this.Enum = require('./Enum.class.coffee')
-    this.ModelObject = require('./ModelObject.class.coffee')
+    this.Enum = require('modeling/core/Enum.class.coffee');
+    this.Module = require('modeling/core/Module.class.coffee');
+    this.ModelObject = require('modeling/core/ModelObject.class.coffee');
   }
-})(window);
+}).call(window);
