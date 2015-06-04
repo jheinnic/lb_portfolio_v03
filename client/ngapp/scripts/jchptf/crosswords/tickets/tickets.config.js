@@ -9,13 +9,13 @@
   // TODO: Add the project query to repository service.
   function ticketsRoutes ($stateProvider) {
     $stateProvider.state(
-      'xw_ticket', {
-        templateUrl: 'views/jchptf/crosswords/ticket/xwTicket.view.html',
+      'crossword.ticket', {
+        url: '/crosswords/tickets/:ticketId',
         controller: 'TicketController',
-        controllerAs: 'ticket',
         resolve: {
             documentCanvas: documentCanvas
-        }
+        },
+        abstract: false
       }
     );
   }

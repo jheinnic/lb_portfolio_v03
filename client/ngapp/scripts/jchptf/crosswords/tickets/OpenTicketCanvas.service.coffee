@@ -1,9 +1,10 @@
 'use strict'
 
 module.exports = OpenTicketCanvas
-OpenTicketCanvas.$inject = ['XwTicketModelPackage']
 
 class OpenTicketCanvas
+  @$inject: ['XwTicketModelPackage']
+
   @AbstractTicket: null
 
   constructor: (XwTicketModelPackage) ->

@@ -17,12 +17,13 @@
       'ui.router',
       'drahak.hotkeys',
       'tree.control',
-      require('jchptf.context'),
-      require('jchptf.authenticate'),
+      /*require('jchptf.context'),
+      require('jchptf.authenticate'),*/
       require('jchptf.site.notification')
     ]
   )
     .config(require('./browse.config'))
-    .service('XWInventoryCanvas', require('./XWInventoryCanvas.service'))
-    .controller('XWInventoryController', require('./XWInventoryController.controller'));
+    // .service('XWInventoryCanvas', require('./XWInventoryCanvas.service'))
+    .controller('XWInventoryController', require('./XWInventoryController.controller'))
+  ;
 }).call(window);

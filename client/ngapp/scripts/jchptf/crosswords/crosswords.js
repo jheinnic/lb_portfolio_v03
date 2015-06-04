@@ -14,8 +14,8 @@
     'jchptf.crosswords',
     [
       require('jchptf.crosswords.browse'),
-      require('jchptf.crosswords.tickets'),
-      require('jchptf.crosswords.results')
+      require('jchptf.crosswords.tickets')
+      // require('jchptf.crosswords.results')
     ]
   );
 }).call(window);

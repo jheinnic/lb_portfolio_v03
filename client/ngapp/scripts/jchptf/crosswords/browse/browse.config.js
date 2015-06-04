@@ -10,9 +10,10 @@
   function browseRoutes ($stateProvider) {
     $stateProvider.state(
       'crosswords', {
-        templateUrl: 'views/jchptf/crosswords/browse_crosswords.view.html',
-        controller: 'CrosswordsCtrl',
-        controllerAs: 'crosswords',
+        url: '/crosswords/browse',
+        templateUrl: 'views/jchptf/crosswords/browse/browse_crosswords.view.html',
+        controller: 'XwInventoryController',
+        controllerAs: 'inventory',
         resolve: {
           traverseRoot: traverseRoot
         },
