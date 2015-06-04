@@ -103,22 +103,23 @@ module.exports = function (grunt) {
       },
       bower: {
         // TODO: This cannot yet handle a change to the app directory in bower.json on yeoman!!!
-        files: ['bower.json'],
-        tasks: ['wiredep'],
+        files: ['bower.json', 'build/*.js'],
+        tasks: ['copy:wiredep', 'wiredep:dev', 'browserify'],
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          livereload: '<%= connect.options.livereload %>',
+          reload: true
         }
       },
       coffee: {
-        files: ['<%= yeoman.app %>/scripts/**/*.coffee'],
+        files: ['<%= yeoman.app %>/scripts/**/*.coffee', 'common/components/**/*.coffee'],
         tasks: ['coffeelint:dist', 'browserify'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/**/*.js'],
-        tasks: ['newer:jshint:dist', 'browserify'],
+        files: ['<%= yeoman.app %>/scripts/**/*.js', 'common/components/**/*.js'],
+        tasks: ['jshint:dist', 'copy:wiredep', 'wiredep:dev', 'browserify'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -136,7 +137,7 @@ module.exports = function (grunt) {
       // },
       less: {
         files: ['<%= yeoman.app %>/styles/**/*.less'],
-        tasks: ['newer:less', 'autoprefixer'],
+        tasks: ['less', 'autoprefixer'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -144,7 +145,7 @@ module.exports = function (grunt) {
       styles: {
         files: ['<%= yeoman.app %>/styles/**/*.css'],
         // tasks: ['newer:copy:styles', 'newer:less', 'autoprefixer', 'useminPrepare', 'usemin', 'filerev']
-        tasks: ['newer:copy:styles', 'autoprefixer'],
+        tasks: ['copy:dev', 'autoprefixer'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -160,7 +161,7 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/styles/fonts/**/*'
         ],
         // tasks: ['newer:copy:dist', 'autoprefixer', 'useminPrepare', 'usemin', 'filerev']
-        tasks: ['newer:copy:staging'],
+        tasks: ['copy:dev'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -174,7 +175,10 @@ module.exports = function (grunt) {
       },
       gruntfile: {
         files: ['Gruntfile.js'],
-        tasks: ['browserify']
+        tasks: ['jshint', 'coffeelint', 'browserify', 'less', 'copy:dev', 'copy:wiredep', 'wiredep', 'autoprefixer'],
+        options: {
+          reload: true
+        }
       },
       livereload: {
         files: [
@@ -215,7 +219,7 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
+        port: 3000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
         host: 'localhost',
@@ -392,11 +396,9 @@ module.exports = function (grunt) {
       task: {
         files: {
           '<%= yeoman.staging %>/app.js': [
-            '<%= yeoman.app %>/scripts/**/*.js',
-            '<%= yeoman.app %>/scripts/**/*.coffee',
-            '<%= common/components/'
-            // '<%= yeoman.staging %>/scripts/jchptf/**/*.js',
-            // '<%= yeoman.staging %>/scripts/enum.js'
+            '<%= yeoman.app %>/scripts/**/*.{js,coffee}',
+            '<%= common/components/**/*.{js,coffee}',
+            '!<%= yeoman.app %>/scripts/lr_init.js'
           ]
         }
       },
@@ -828,14 +830,13 @@ dist: {
           dest: '<%= yeoman.staging %>/',
           src: [
             'test/**/*',
-            'scripts/livereload.js',
+            'scripts/lr_init.js',
             'styles/**/*.css',
             '.htaccess',
             '*.{ico,png,txt}',
             'styles/fonts/**/*',
             'fonts/**/*',
             'views/**/*.html',
-            'index.html'
           ]
         }, {
           expand: true,
@@ -849,6 +850,38 @@ dist: {
           expand: true,
           cwd: '<%= yeoman.lbclient %>/',
           dest: '<%= yeoman.staging %>/lbclient/',
+          src: 'browser.bundle.js'
+        }]
+      },
+      dist: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>/',
+          dest: '<%= yeoman.dist %>/',
+          src: [
+            '.htaccess',
+            '*.{ico,png,txt}',
+            'styles/fonts/**/*',
+            'fonts/**/*',
+            'images/**/*.webp',
+            'images/**/*.{jpg,jpeg,gif,png,svg}', // TODO: This line should be done by image minification
+            'views/**/*.html',
+          ]
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.staging %>/',
+          dest: '<%= yeoman.dist %>/',
+          src: [
+            'index.html',
+            'styles/**/*.css',
+            // 'scripts/**/*.js',
+            'images/generated/**/*'
+          ]
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.lbclient %>/',
+          dest: '<%= yeoman.dist %>/lbclient/',
           src: 'browser.bundle.js'
         }]
       }
@@ -900,12 +933,17 @@ dist: {
   nodemon: {
     dev: {
       script: 'server/server.js',
-      watch: ['common', 'server'],
       options: {
         nodeArgs: ['--debug'],
+        watch: ['common/models', 'server', '.tmp/app.js', '.tmp/index.html'],
         env: {
-          PORT: '3000'
+          PORT: 3000,
+          LIVE_RELOAD: '<%= connect.options.livereload %>'
         },
+        cwd: __dirname,
+        ignore: ['node_modules/**', 'client/**'],
+        ext: 'js,coffee,json',
+        delay: 1250,
         // omit this property if you aren't serving HTML files and
         // don't want to open a browser tab on start
         callback: function (nodemon) {
@@ -916,9 +954,10 @@ dist: {
           // opens browser on initial server start
           nodemon.on('config:update', function () {
             // Delay before browser opens navigation to root page
+            var portConfig = grunt.config.get().nodemon.dev.options.env.PORT;
             setTimeout(function() {
-              require('open')('http://localhost:3000');
-            }, 2500);
+              require('open')('http://localhost:' + portConfig);
+            }, 3500);
           });
 
           // refreshes browser when server reboots
@@ -926,14 +965,13 @@ dist: {
             // Delay before server listens on port
             setTimeout(function() {
               require('fs').writeFileSync('.rebooted', 'rebooted');
-            }, 2500);
+            }, 3500);
           });
 
           nodemon.on('error', function(err) {
             if (err.code === 'EADDRINUSE') {
-              var connectConfig = grunt.config.get().connect.options;
-              grunt.fatal('Port ' + connectConfig.port +
-                ' is already in use by another process.');
+              var portConfig = '<%= nodemon.dev.options.env.PORT %>';
+              grunt.fatal('Port ' + portConfig + ' is already in use by another process.', err);
             } else {
               grunt.fatal(err);
             }
@@ -947,7 +985,7 @@ dist: {
     karma: {
       unit: {
         // TODO: Can the config file exist in yeoman.app while all the scripts
-        //       being tested are tested from <%= yeoman.staging %> ?
+        //       being tested are tested from <%= yeoman.staging %>?
         // configFile: '<%= yeoman.app %>/test/karma.conf.js',
         configFile: '<%= yeoman.staging %>/test/karma.conf.js',
         browsers: [ 'PhantomJS' ],
@@ -1046,10 +1084,10 @@ dist: {
   grunt.registerTask('serve', 'Compile then start the app server', function (target) {
     if (target === 'dist') {
       // return grunt.task.run(['env:dist', 'build', 'run:dist:keepalive']);
-      return grunt.task.run(['clean:all', 'build:dist', 'concurrent:runServer']);
+      return grunt.task.run(['build:dist', 'concurrent:runServer']);
     } else {
       // TODO: serve test for continuous karma?
-      return grunt.task.run(['clean:all', 'build:dev', 'concurrent:runServer']);
+      return grunt.task.run(['build:dev', 'concurrent:runServer']);
     }
   });
 
@@ -1093,10 +1131,11 @@ dist: {
     'concurrent:test',
     'browserify',
     'coffee:test',
+    'copy:wiredep',
     'wiredep:dev',
     'autoprefixer',
     'env:dist',
-    'copy:dist',
+    'copy:dist',    // Does not use concurrent:dist as there is only one task here.
     'useminPrepare',
     'concat:generated',
     'cssmin:generated',
@@ -1111,6 +1150,7 @@ dist: {
     'env:test',
     'concurrent:test',
     'browserify',
+    'copy:wiredep',
     'wiredep:dev',
     'autoprefixer'
   ]);
@@ -1120,8 +1160,9 @@ dist: {
     'env:dist',
     'concurrent:build',
     'browserify',
+    'copy:wiredep',
     'wiredep:dev',
-    'copy:dist',
+    'copy:dist',    // Does not use concurrent:dist as there is only one task here.
     'useminPrepare',
     'autoprefixer',
     'concat:generated',
@@ -1137,6 +1178,7 @@ dist: {
     'env:dev',
     'concurrent:build',
     'browserify',
+    'copy:wiredep',
     'wiredep:dev',
     'autoprefixer'
   ]);
