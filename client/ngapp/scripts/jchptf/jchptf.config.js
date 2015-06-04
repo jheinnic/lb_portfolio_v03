@@ -17,7 +17,8 @@
 
     // $repositoryProvider.setLocalRootDirectory('D:\\DevProj\\Git\\lb_express_sandbox\\junk\\repository\\');
     // TBD
-    console.log($repositoryProvider);
+    // console.log($repositoryProvider);
+    if ($repositoryProvider) { $repositoryProvider = undefined; }
   }
 
   function altPortfolioModuleConfig($locationProvider, $repositoryProvider, $urlRouterProvider) {
