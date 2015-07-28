@@ -1,0 +1,35 @@
+{
+  "name": "Document",
+  "base": "PersistedModel",
+  "trackChanges": true,
+  "properties": {
+    "uuid": {
+      "id": true,
+      "type": "String",
+      "required": false
+    },
+    "documentType": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "rootModel": {
+      "type": "belongsTo",
+      "model": "XwTicket",
+      "foreignKey": ""
+    },
+    "parentFolder": {
+      "type": "belongsTo",
+      "model": "Folder",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

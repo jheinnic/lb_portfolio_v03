@@ -8,47 +8,30 @@
 
 # Windows environment
 desktop.ini
+Thumbs.db
 
 # Node dependency management
 node_modules
 npm-debug.log
 
 # Bower dependency management
-vendor
+client/ngapp/vendor
 
 # vi temp files
 *~
 .*.swp
 
-# Compiled JavaScript
-#jchpft-ui/features/*.js
-#jchpft-ui/features/*.map
-#jchpft-ui/features/**/*.js
-#jchpft-ui/features/**/*.map
-jchpft-ui/components/**/*.js
-jchpft-ui/components/**/*.map
-jchpft-common/components/**/*.js
-jchpft-common/components/**/*.map
-
-# Compiled Less
-# jchpft-ui/features/**/*.css
-jchpft-ui/components/**/*.css
-jchpft-common/components/**/*.css
-
-# Compiled Jade
-jchpft-backend/views/**/*.html
-jchpft-backend/views/*.html
-
 # A kitchen sink for project-associated files that are local notes not to be
 # committed to Git.
 junk
 
-Thumbs.db
-
 # Some unused subdirs
-images/bootstrap
-images/jwplayer
+client/ngapp/images/jchptf/bootstrap
+client/ngapp/images/jchptf/jwplayer
 
+# Nodemon/Grunt
+.rebooted
+`
 # Loopback additions
 *.csv
 *.dat
@@ -69,7 +52,7 @@ lib-cov
 local.config.js
 logs
 pids
-public/bundle.js
+lbclient/browser.bundle.js
 results
 
 

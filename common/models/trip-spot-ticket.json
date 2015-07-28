@@ -1,0 +1,19 @@
+{
+  "name": "TripSpotTicket",
+  "base": "XwTicket",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "trackChanges": true,
+  "properties": {
+    "bonusWord": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

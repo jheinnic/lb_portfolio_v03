@@ -1,0 +1,29 @@
+{
+  "name": "Folder",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "trackChanges": true,
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "parentFolder": {
+      "type": "belongsTo",
+      "model": "Folder",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

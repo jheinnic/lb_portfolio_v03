@@ -1,4 +1,5 @@
 module.exports = function(app) {
+  /*
   var routes = require('../../client/ngapp/config/routes');
   Object
     .keys(routes)
@@ -7,4 +8,5 @@ module.exports = function(app) {
         res.sendfile(app.get('indexFile'));
       });
     });
+    */
 };
