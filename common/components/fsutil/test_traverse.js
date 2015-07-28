@@ -2,8 +2,9 @@
  *
  * Created by John on 5/9/2015.
  */
+'use strict';
 
-traverse = require('./traverse');
+var traverse = require('./traverse');
 
 function onFile(currentFile) {
   console.log('File:', currentFile);

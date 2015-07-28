@@ -66,7 +66,8 @@ module.exports = function (grunt) {
     }
   );
 
-  // Define the configuration for all the tasks
+  // Define the configuration for all the tasks, mostly the environment variables that affect the running application when launched
+  // by Grunt (e.g. grunt serve).  Also used to determine whehter or not Browserify is expected to build inline or extrenal source maps.
   grunt.initConfig({
     // Project settings
     yeoman: appConfig,
@@ -89,8 +90,8 @@ module.exports = function (grunt) {
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       nodemon: {
-        // If nodemon recycles the server, it touches this marker, which in turn causes livereload to
-        // signal need for refresh to browsers.
+        // If nodemon recycles the server, it touches this marker, which in turn causes watch to signal whoever
+        // is serving livereload to request the client browser reload itself.
         files: ['.rebooted'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -119,17 +120,6 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         }
       },
-      // TODO: Can we skip the copy step?  Its needed for minification pipeline, but for debug purpose, watch
-      //       for livereload should serve the true source files.
-      // coffeeTest: {
-      //   files: ['<%= yeoman.app %>/test/spec/**/*.coffee'],
-      //   tasks: ['coffeelint:test', 'coffee:test', 'karma']
-      // },
-      // jsTest: {
-      //   files: ['<%= yeoman.app %>/test/spec/**/*.js'],
-      //   // tasks: ['newer:copy:test', 'newer:jshint:test', 'karma']
-      //   tasks: ['newer:jshint:test', 'newer:copy:staging', 'karma']
-      // },
       less: {
         files: ['<%= yeoman.app %>/styles/**/*.less'],
         tasks: ['less', 'autoprefixer'],
@@ -139,23 +129,16 @@ module.exports = function (grunt) {
       },
       styles: {
         files: ['<%= yeoman.app %>/styles/**/*.css'],
-        // tasks: ['newer:copy:styles', 'newer:less', 'autoprefixer', 'useminPrepare', 'usemin', 'filerev']
         tasks: ['copy:dev', 'autoprefixer'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
       },
-      // images: {
-      //   files: ['<%= yeoman.app %>/images/**/*.webp'],
-      //   // tasks: ['newer:copy:dist', 'imagemin', 'svgmin', 'userminPrepare', 'usemin', 'filerev']
-      //   tasks: ['newer:copy:dist']
-      // },
       fonts: {
         files: [
           '<%= yeoman.app %>/fonts/**/*',
           '<%= yeoman.app %>/styles/fonts/**/*'
         ],
-        // tasks: ['newer:copy:dist', 'autoprefixer', 'useminPrepare', 'usemin', 'filerev']
         tasks: ['copy:dev'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -177,15 +160,18 @@ module.exports = function (grunt) {
       },
       livereload: {
         files: [
-          '<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
-          // TODO: Confirm that node doesn't require a restart to serve modified HTML due to caching.
-          '<%= yeoman.app %>/views/**/*.html',
-          //    '<%= yeoman.app %>/{fonts,styles/fonts}/**/*',
-          // '<%= yeoman.staging %>/styles/**/*.css',
-          // TODO: Consider refining server file watch dependencies since they also cause a need to restart.
-          // '{common,server}/**/*'
+          // Focus on the staging artifacts that indicate a deployment has happened, not one that idiciates one is needed.
+          '<%= yeoman.staging %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
+          '<%= yeoman.staging %>/views/**/*.html',
+          '<%= yeoman.staging %>/{fonts,styles/fonts}/**/*',
+          '<%= yeoman.staging %>/styles/**/*.css',
+          '<%= yeoman.staging %>/app.js',
+          '<%= yeoman.staging %>/index.html',
         ],
         options: {
+          // Connect and Loopback should configure the same port for receiving external game events that require action
+          // so the build doesn't need two different ways of signaling notifications and so the delivery method (local or
+          // remote) can be reasily interchanged doesn the road.s of time of this comment, that seems to be the case at present.
           livereload: '<%= connect.options.livereload %>'
         }
       },
@@ -214,11 +200,11 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 3000,
+        port: 3000,   // <-- This port receives cues from the app requesting it be reloaded
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
         host: 'localhost',
-        livereload: 35729
+        livereload: 35729  // <-- This port hosts the Websockets for node/server communication
       },
       test: {
         options: {
@@ -226,56 +212,35 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               connect.static('<%= yeoman.staging %>'),
-              // connect.static('test'),
               connect().use(
-                '/vendor', '<%= yeoman.vendor %>'
-              ),
-              connect().use(
-                '/lbclient', connect.static( '<%= yeoman.lbclient %>' )
-              ),
-              connect.use(
-                '/views', connect.static( '<%= yeoman.app %>/views' )
-              ),
-              connect.use(
-                '/images', connect.static( '<%= yeoman.app %>/images' )
+                '/vendor', connect.static('<%= yeoman.vendor %>')
               ),
               connect().use(
-                '/config',
-                // function() {
-                  connect.static('<%= yeoman.staging %>/config')
-                  // connect.static('<%= yeoman.app %>/config');
-                // }
+                '/lbclient', connect.static('<%= yeoman.lbclient %>')
               ),
               connect.use(
-                '/scripts',
-                // function() {
-                //   connect.static( '<%= yeoman.app %>/scripts' );
-                  connect.static( '<%= yeoman.staging %>/scripts' )
-                // }
+                '/views', connect.static('<%= yeoman.app %>/views')
               ),
               connect.use(
-                '/styles',
-                // function() {
-                  // connect.static( '<%= yeoman.app %>/styles' );
-                  connect.static( '<%= yeoman.staging %>/styles' )
-                // }
+                '/images', connect.static('<%= yeoman.app %>/images')
+              ),
+              connect().use(
+                '/config', connect.static('<%= yeoman.staging %>/config')
               ),
               connect.use(
-                '/fonts',
-                connect.static( '<%= yeoman.staging %>/fonts' )
+                '/scripts', connect.static('<%= yeoman.staging %>/scripts')
               ),
               connect.use(
-                '/styles/fonts',
-                connect.static( '<%= yeoman.staging %>/styles/fonts' )
+                '/styles', connect.static('<%= yeoman.staging %>/styles')
               ),
-              // To support refresh and bookmarks in Angular HTML5 mode, final
-              // URL re-write rule must redirect all to index.html.  If all
-              // Angular routes are known a priori, a preferable approach is to
-              // selectively redirect only those routes to index.html, allowing
-              // errors to be generated for genuinely bad routes.
               connect.use(
-                '/',
-                connect.static( '<%= yeoman.staging %>/index.html' )
+                '/fonts', connect.static('<%= yeoman.staging %>/fonts')
+              ),
+              connect.use(
+                '/styles/fonts', connect.static('<%= yeoman.staging %>/styles/fonts')
+              ),
+              connect.use(
+                '/**', connect.static('<%= yeoman.staging %>/index.html')
               )
             ];
           }
@@ -289,9 +254,9 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '<%= yeoman.staging %>',
+            '<%= yeoman.staging %>/**/*',
             '<%= yeoman.dist %>/**/*',
-            '!<%= yeoman.dist %>/.git*',
+            '!<%= yeoman.dist %>/.git/**/*',
             '<%= yeoman.lbclient %>/browser.bundle.js',
             '<%= yeoman.app %>/config/bundle.js'
           ]
@@ -301,27 +266,30 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '<%= yeoman.staging %>',
+            '<%= yeoman.staging %>/**/*',
             '<%= yeoman.dist %>/**/*',
             '!<%= yeoman.dist %>/.git*'
           ]
         }]
       },
-      server: '<%= yeoman.staging %>',
       lbclient: '<%= yeoman.lbclient %>/browser.bundle.js',
       config: '<%= yeoman.app %>/config/bundle.js'
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
-      },
       dist: {
+        options: {
+          jshintrc: '.jshintrc',
+          reporter: require('jshint-stylish')
+        },
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/**/*.js'
+          '<%= yeoman.app %>/scripts/**/*.js',
+          'common/**/*.js',
+          '!common/**/test/**/*.js',
+          'server/**/*.js',
+          '!server/**/test/**/*.js'
         ]
       },
       test: {
@@ -330,17 +298,29 @@ module.exports = function (grunt) {
           reporter: require('jshint-stylish')
         },
         src: [
-            '<%= yeoman.app %>/test/spec/**/*.js'
+          '<%= yeoman.app %>/test/spec/**/*.js',
+          'common/**/test/**/*.js',
+          'server/**/test/**/*.js'
         ]
       }
     },
 
     coffeelint: {
       dist: {
-        src: ['<%= yeoman.app %>/scripts/**/*.coffee']
+        src: [
+          '<%= yeoman.app %>/scripts/**/*.coffee',
+          'common/**/*.coffee',
+          '!common/**/test/**/*.coffee',
+          'server/**/*.coffee',
+          '!server/**/test/**/*.coffee'
+        ]
       },
       test: {
-        src: ['<%= yeoman.app %>/test/spec/**/*.coffee']
+        src: [
+          '<%= yeoman.app %>/test/spec/**/*.coffee',
+          'common/**/test/**/*.coffee',
+          'server/**/test/**/*.coffee'
+        ]
       },
       options: {
         configFile: 'coffeelint.json'
@@ -369,14 +349,6 @@ module.exports = function (grunt) {
       options: {
         sourceMap: true
       },
-    //   dist: {
-    //     ext: '.js',
-    //     extDot: 'last',
-    //     expand: true,
-    //     cwd: '<%= yeoman.app %>/scripts',
-    //     src: ['**/*.coffee'],
-    //     dest: '<%= yeoman.staging %>/scripts/'
-    //   },
       test: {
         ext: '.js',
         extDot: 'last',
@@ -398,28 +370,7 @@ module.exports = function (grunt) {
         }
       },
       options: {
-//        alias: {
-//          'jchptf' : path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/jchptf.js'),
-////            'jchptf.authenticate': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/authenticate/authenticate.js'),
-////            'jchptf.context': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/context/context.js'),
-////            'jchptf.crosswords': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/crosswords.js'),
-////            'jchptf.crosswords.browse': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/browse/browse.js'),
-////            'jchptf.crosswords.tickets': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/tickets/tickets.js'),
-////            'jchptf.crosswords.results': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/crosswords/results/results.js'),
-////            'jchptf.modeling.core': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/modeling/core/core.js'),
-////            'jchptf.modeling.repository': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/modeling/repository/repository.js'),
-////            'jchptf.modeling.studio': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/modeling/studio/studio.js'),
-//          'jchptf.site.navigation': path.join(__dirname, appConfig.app, 'scripts', 'jchptf', 'site', 'navigation', 'navigation.js'),
-//          'jchptf.site.notification': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/site/notification/notification.js'),
-//          'jchptf.tools.iconPanel': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/iconPanel/iconPanel.js'),
-//          'jchptf.tools.keyboard': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/keyboard/keyboard.js'),
-//          'jchptf.tools.navbar': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/navbar/navbar.js'),
-//          // 'jchptf.tools.workspace': path.normalize(__dirname  +  '/' + appConfig.app + '/scripts/jchptf/tools/workspace/workspace.js'),
-//          // 'jchptf.poker': path.normalize(__dirname  +  '/.tmp/scripts/jchptf/poker/poker.js'),
-//          // 'jchptf.support.feedback': path.normalize(__dirname  +  '/.tmp/scripts/jchptf/support/feedback/feedback.js'),
-//          // 'jchptf.support.password': path.normalize(__dirname + '/.tmp/scripts/jchptf/support/password/password.js'),
-//          // 'jchptf.user': path.normalize(__dirname '/.tmp/scripts/jchptf/user/user.js')
-//        },
+        /*
         require: [
           [path.normalize(
             path.join(__dirname, appConfig.app, 'scripts', 'jchptf', 'jchptf.js')
@@ -431,12 +382,11 @@ module.exports = function (grunt) {
             path.join(__dirname, appConfig.app, 'scripts', 'jchptf', 'jchptf.run.js')
           ), {expose: 'jchptf/run'}]
         ],
-        /*
+        */
         browserifyOptions: {
-           debug: process.env.NODE_ENV === 'development'
+          debug: process.env.NODE_ENV === 'development',
           extensions: ['.js', '.json', '.coffee'],
           preBundleCB: function (b) {
-            process.exit(-6);
             console.log('Browserify configure event fired', b);
             b.on('remapify:files', function(files, expandedAliases, pattern){
               fs.writeFileSync(
@@ -449,21 +399,21 @@ module.exports = function (grunt) {
             });
           }
         },
-         */
         transform: ['coffeeify'],
         plugin: [
           [
             'remapify',
             [
               {
-                src: path.join('**', '*.js'),
-                cwd: path.join(__dirname, 'common', 'components')
-                // filter: require('./build/filterCommonAlias')
+                src: path.join('**', '*.{js,coffee}'),
+                cwd: path.join(__dirname, 'common', 'components'),
+                filter: require('./build/filterCommonAlias')
               },
+              /*
               {
                 src: path.join('**', '*.coffee'),
                 cwd: path.join(__dirname, 'common', 'components')
-                // filter: require('./build/filterCommonAlias')
+                filter: require('./build/filterCommonAlias')
               },
               {
                 src: path.join('*', '**', '*.js'),
@@ -471,11 +421,12 @@ module.exports = function (grunt) {
                 expose: 'jchptf',
                 filter: require('./build/filterAngularAlias')
               },
+              */
               {
-                src: path.join('*', '**', '*.coffee'),
+                src: path.join('**', '*.{js,coffee}'),
                 cwd: path.join(__dirname, 'client', 'ngapp', 'scripts', 'jchptf'),
-                expose: 'jchptf',
-                filter: require('./build/filterAngularAlias')
+                filter: require('./build/filterAngularAlias'),
+                expose: 'jchptf'
               }
             ]
           ]
@@ -484,6 +435,7 @@ module.exports = function (grunt) {
     },
 
     // Add vendor prefixed styles
+    // And move compiled less into the staging styles directory while at it.
     autoprefixer: {
       options: {
         browsers: ['last 1 version']
@@ -507,6 +459,9 @@ module.exports = function (grunt) {
     },
 
     // Automatically inject Bower components into the app
+    // Run copy:wiredep just before wiredep:dev to ensure there is an HTML file
+    // in place and ready for this transformation.  Likewise with copy:dist
+    // and wiredep:dist.
     wiredep: {
       dev: {
         src: ['<%= yeoman.staging %>/index.html'],
@@ -525,7 +480,6 @@ module.exports = function (grunt) {
           data: function () {
             return {
               isDevelopment: true,
-              // stagedScripts: stagedScripts,
               stagedStyles: stagedStyles
             };
           }
@@ -539,7 +493,6 @@ module.exports = function (grunt) {
           data: function () {
             return {
               isDevelopment: false,
-              // stagedScripts: stagedScripts,
               stagedStyles: stagedStyles
             };
           }
@@ -550,7 +503,8 @@ module.exports = function (grunt) {
       }
     },
 
-    // Renames files for browser caching purposes
+    // Renames files for browser caching purposes.  grunt-usemin carries out
+    // the in-memory plan built by this plugin.
     filerev: {
       dist: {
         src: [
@@ -589,18 +543,14 @@ module.exports = function (grunt) {
       }
     },
 
-  // Performs rewrites based on filerev and the useminPrepare configuration
-  //
-  // Uncommented css block below to turn on css minification via the 'cssmin'
-  // grunt plugin instead of inside 'usemin'.  Done so primarily because
-  // 'usemin' came configured to expect its input in location where 'cssmin'
-  // writes its output, and not from where 'cssmin' gets it input.
+    // Performs rewrites based on filerev and the useminPrepare configuration
+    // Configured for use after 'concat:generated', 'uglify-generated', and
+    // 'cssmin-generated'.  Works in-place, hense dist paths.
     usemin: {
       html: [
         '<%= yeoman.dist %>/index.html',
         '<%= yeoman.dist %>/views/**/*.html'
       ],
-      // css: ['<%= yeoman.staging %>/styles/**/*.css'],
       css: ['<%= yeoman.dist %>/styles/**/*.css'],
       options: {
         assetsDirs: [
@@ -644,27 +594,27 @@ module.exports = function (grunt) {
     //   dist: {}
     // },
 
-    // imagemin: {
-    //   dist: {
-    //     files: [{
-    //       expand: true,
-    //       cwd: '<%= yeoman.app %>/images',
-    //       src: '**/*.{png,jpg,jpeg,gif}',
-    //       dest: '<%= yeoman.dist %>/images'
-    //     }]
-    //   }
-    // },
+    imagemin: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/images',
+          src: '**/*.{png,jpg,jpeg,gif}',
+          dest: '<%= yeoman.dist %>/images'
+        }]
+      }
+    },
 
-    // svgmin: {
-    //   dist: {
-    //     files: [{
-    //       expand: true,
-    //       cwd: '<%= yeoman.app %>/images',
-    //       src: '**/*.svg',
-    //       dest: '<%= yeoman.dist %>/images'
-    //     }]
-    //   }
-    // },
+    svgmin: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/images',
+          src: '**/*.svg',
+          dest: '<%= yeoman.dist %>/images'
+        }]
+      }
+    },
 
     htmlmin: {
       dist: {
@@ -677,8 +627,8 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%= yeoman.dist %>',
-          // cwd: '<%= yeoman.app %>/',
+          // cwd: '<%= yeoman.dist %>',
+          cwd: '<%= yeoman.app %>',
           src: [
             'index.html',
             'views/**/*.html'
@@ -687,30 +637,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-
-    // ngAnnotate tries to make the code safe for minification automatically by
-    // using the Angular long form for dependency injection. It doesn't work on
-    // things like resolve or inject so those have to be done manually.
-    //ngAnnotate: {
-    //  dist: {
-    //    files: [{
-    //      expand: true,
-    //      cwd: '<%= yeoman.staging %>/concat/scripts',
-    //      src: ['**/*.js'],
-    //      dest: '<%= yeoman.staging %>/concat/scripts'
-    //    }]
-    //  }
-    //},
-
-    // Replace Google CDN references
-    // cdnify: {
-    //   dist: {
-    //     html: ['<%= yeoman.dist %>/index.html']
-    //   },
-    //   dev: {
-    //     html: ['<%= yeoman.staging %>/index.html']
-    //   }
-    // },
 
     // Copies all files that don't migrate to where they are expected through a pre-processing plugin.  A given build should copy:dist or
     // or copy:dev, but unlikely both.  Use copy:staging for running a dev build, and copy:dist for running/packaging a production build.
@@ -740,14 +666,10 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>/',
           dest: '<%= yeoman.staging %>/',
           src: [
-            'test/**/*',
-            'scripts/lr_init.js',
-            'styles/**/*.css',
-            '.htaccess',
-            '*.{ico,png,txt}',
-            'styles/fonts/**/*',
-            'fonts/**/*',
-            'views/**/*.html',
+            'views/**/*.html', 'test/**/*',
+            'scripts/lr_init.js', 'styles/**/*.css',
+            '.htaccess', '*.{ico,png,txt}',
+            'styles/fonts/**/*', 'fonts/**/*',
           ]
         }, {
           expand: true,
@@ -771,23 +693,17 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>/',
           dest: '<%= yeoman.dist %>/',
           src: [
-            '.htaccess',
-            '*.{ico,png,txt}',
-            'styles/fonts/**/*',
-            'fonts/**/*',
-            'images/**/*.webp',
-            'images/**/*.{jpg,jpeg,gif,png,svg}', // TODO: This line should be done by image minification
-            'views/**/*.html',
+            'views/**/*.html', '.htaccess', '*.{ico,png,txt}',
+            'styles/fonts/**/*', 'fonts/**/*', 'images/**/*.webp',
+            'images/**/*.{jpg,jpeg,gif,png,svg}'
+            // TODO: This line should be done by image minification
           ]
         }, {
           expand: true,
           cwd: '<%= yeoman.staging %>/',
           dest: '<%= yeoman.dist %>/',
           src: [
-            'index.html',
-            'styles/**/*.css',
-            // 'scripts/**/*.js',
-            'images/generated/**/*'
+            'index.html', 'styles/**/*.css', 'images/generated/**/*' // 'scripts/**/*.js',
           ]
         }, {
           expand: true,
@@ -810,13 +726,12 @@ module.exports = function (grunt) {
         'build-config'
       ],
       test: [
-        // TODO: Need view HTML?
         'less',
         'copy:dev',
-        'coffeelint:test',
-        'jshint:test',
         'coffeelint:dist',
+        'coffeelint:test',
         'jshint:dist',
+        'jshint:test',
         'build-lbclient',
         'build-config'
       ],
@@ -837,60 +752,57 @@ module.exports = function (grunt) {
       }
     },
 
-  'node-inspector': {
-    dev: {}
-  },
+    'node-inspector': {
+      dev: {}
+    },
 
-  nodemon: {
-    dev: {
-      script: 'server/server.js',
-      options: {
-        nodeArgs: ['--debug'],
-        watch: ['common/models', 'server', '.tmp/app.js', '.tmp/index.html'],
-        env: {
-          PORT: 3000,
-          LIVE_RELOAD: '<%= connect.options.livereload %>'
-        },
-        cwd: __dirname,
-        ignore: ['node_modules/**', 'client/**'],
-        ext: 'js,coffee,json',
-        delay: 1250,
-        // omit this property if you aren't serving HTML files and
-        // don't want to open a browser tab on start
-        callback: function (nodemon) {
-          nodemon.on('log', function (event) {
-            console.log(event.colour);
-          });
+    nodemon: {
+      dev: {
+        script: 'server/server.js',
+        options: {
+          nodeArgs: ['--debug'],
+          watch: ['common/models', 'server', '.tmp/app.js', '.tmp/index.html'],
+          env: {
+            PORT: 3000,
+            LIVE_RELOAD: '<%= connect.options.livereload %>'
+          },
+          cwd: __dirname,
+          ignore: ['node_modules/**', 'client/**'],
+          ext: 'js,coffee,json',
+          delay: 1250,
+          callback: function (nodemon) {
+            nodemon.on('log', function (event) {
+              console.log(event.colour);
+            });
 
-          // opens browser on initial server start
-          nodemon.on('config:update', function () {
-            // Delay before browser opens navigation to root page
-            var portConfig = grunt.config.get().nodemon.dev.options.env.PORT;
-            setTimeout(function() {
-              require('open')('http://localhost:' + portConfig);
-            }, 3500);
-          });
+            // opens browser on initial server start
+            nodemon.on('config:update', function () {
+              var portConfig = grunt.config.get().nodemon.dev.options.env.PORT;
+              setTimeout(function() {
+                require('open')('http://localhost:' + portConfig);
+              }, 5000);
+            });
 
-          // refreshes browser when server reboots
-          nodemon.on('restart', function () {
-            // Delay before server listens on port
-            setTimeout(function() {
-              require('fs').writeFileSync('.rebooted', 'rebooted');
-            }, 3500);
-          });
+            // refreshes browser when server reboots
+            nodemon.on('restart', function () {
+              // Delay before server listens on port
+              setTimeout(function() {
+                require('fs').writeFileSync('.rebooted', 'rebooted');
+              }, 5000);
+            });
 
-          nodemon.on('error', function(err) {
-            if (err.code === 'EADDRINUSE') {
-              var portConfig = '<%= nodemon.dev.options.env.PORT %>';
-              grunt.fatal('Port ' + portConfig + ' is already in use by another process.', err);
-            } else {
-              grunt.fatal(err);
-            }
-          });
+            nodemon.on('error', function(err) {
+              if (err.code === 'EADDRINUSE') {
+                var portConfig = '<%= nodemon.dev.options.env.PORT %>';
+                grunt.fatal('Port ' + portConfig + ' is already in use by another process.', err);
+              } else {
+                grunt.fatal(err);
+              }
+            });
+          }
         }
       }
-    }
-  },
+    },
 
     // Test settings
     karma: {
@@ -934,6 +846,7 @@ module.exports = function (grunt) {
     var ngapp = path.resolve(__dirname, appConfig.app);
     var configDir = path.join(ngapp, 'config');
     var config = {};
+    console.log('AIE');
 
     fs.readdirSync(configDir)
       .forEach(function(f) {
@@ -965,6 +878,7 @@ module.exports = function (grunt) {
     fs.writeFileSync(outputPath, content, 'utf-8');
   });
 
+  /*
   grunt.registerTask('run', 'Start the app server', function() {
     var done = this.async();
 
@@ -991,6 +905,7 @@ module.exports = function (grunt) {
         }
       });
   });
+  */
 
   grunt.registerTask('serve', 'Compile then start the app server', function (target) {
     if (target === 'dist') {
@@ -1031,29 +946,32 @@ module.exports = function (grunt) {
     'karma'
   ]);
 
-  grunt.registerTask('build:temp', [
-    'clean:all',
-    'build:dev'
-  ]);
-
   grunt.registerTask('build', [
     'clean:all',
     'env:test',
     'concurrent:test',
     'browserify',
-    'coffee:test',
     'copy:wiredep',
     'wiredep:dev',
     'autoprefixer',
+    'coffee:test',
+    'mochaTest:common',
+    'mochaTest:server',
+    'connect:test',
+    'karma',
     'env:dist',
     'copy:dist',    // Does not use concurrent:dist as there is only one task here.
     'useminPrepare',
+    'imagemin',
+    'svgmin',
     'concat:generated',
     'cssmin:generated',
     'uglify:generated',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'connect:test',
+    'karma'
   ]);
 
   grunt.registerTask('build:test', [
@@ -1073,9 +991,11 @@ module.exports = function (grunt) {
     'browserify',
     'copy:wiredep',
     'wiredep:dev',
+    'autoprefixer',
     'copy:dist',    // Does not use concurrent:dist as there is only one task here.
     'useminPrepare',
-    'autoprefixer',
+    'imagemin',
+    'svgmin',
     'concat:generated',
     'cssmin:generated',
     'uglify:generated',
@@ -1094,15 +1014,7 @@ module.exports = function (grunt) {
     'autoprefixer'
   ]);
 
-  grunt.registerTask('clean-all', [
-    'clean:all'
-  ]);
-
   grunt.registerTask('default', [
-    'clean:all',
-    'build:test',
-    'test',
-    'build:dist',
-    'test'
+    'build'
   ]);
 };
