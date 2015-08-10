@@ -42,7 +42,9 @@ client/ngapp/images/jchptf/jwplayer
 *.seed
 .DS_Store
 .tmp
-build
+build/dev
+build/dist
+build/temp
 global.config.js
 bower_components
 client/dist
