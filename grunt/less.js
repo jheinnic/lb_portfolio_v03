@@ -5,17 +5,17 @@ module.exports = function(grunt, options) {
     less: {
       options: {
         paths: [
-          '<%= yeoman.app %>/styles',
-          '<%= yeoman.vendor %>/bootstrap/less'
+          '<%= appConfig.app %>/styles',
+          '<%= appConfig.vendor %>/bootstrap/less'
         ]
       },
-      dist: {
+      dev: {
         ext: '.css',
         extDot: 'last',
         expand: true,
-        cwd: '<%= yeoman.app %>/styles',
+        cwd: '<%= appConfig.app %>/styles',
         src: ['**/*.less'],
-        dest: '<%= yeoman.staging %>/less/'
+        dest: '<%= appConfig.app %>/styles'
       }
     }
   };

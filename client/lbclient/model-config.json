@@ -8,13 +8,10 @@
   "LocalTodo": {
     "dataSource": "local"
   },
-  "user": {
+  "User": {
     "dataSource": "remote"
   },
-  "Document": {
-    "dataSource": "remote"
-  },
-  "Folder": {
+  "XwTicket": {
     "dataSource": "remote"
   },
   "XwTicket": {
@@ -23,9 +20,18 @@
   "FiveXTicket": {
     "dataSource": "remote"
   },
+  "FiveXTicket": {
+    "dataSource": "remote"
+  },
   "TripOnlyTicket": {
     "dataSource": "remote"
   },
+  "TripOnlyTicket": {
+    "dataSource": "remote"
+  },
+  "TripSpotTicket": {
+    "dataSource": "remote"
+  }
   "TripSpotTicket": {
     "dataSource": "remote"
   }

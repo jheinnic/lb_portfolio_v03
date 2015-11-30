@@ -1,12 +1,12 @@
 {
   "db": {
+    "port": 27017,
+    "database": "portfolio",
+    "password": "abcd1234",
     "name": "db",
     "connector": "mongodb",
-    "database": "portfolio",
     "hostname": "localhost",
-    "port": 27017,
-    "user": "jheinnic",
-    "password": "abcd1234"
+    "user": "jheinnic"
   },
   "memdb": {
     "name": "memdb",

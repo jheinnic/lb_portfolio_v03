@@ -1,6 +1,10 @@
 {
   "name": "TripOnlyTicket",
   "base": "XwTicket",
+  "mixins": {
+    "Timestamped": {},
+    "BonusWord": {"yourLettersMax": 18, "bonusWordLength": 5, "prizeValues": [0, 3, 4, 5, 10, 30]}
+  },
   "idInjection": false,
   "options": {
     "validateUpsert": true
@@ -10,5 +14,5 @@
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": []
+  "methods": {}
 }

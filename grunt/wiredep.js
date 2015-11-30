@@ -1,17 +1,11 @@
 'use strict';
 
-var pkg = require('./pkg');
+var pkg = require('./utils/pkg');
 module.exports = function (grunt, options) {
   return {
-    wiredep: {
-      dev: {
-        src: ['<%= yeoman.staging %>/index.html'],
-        ignorePath: /^\.\.\/client\/ngapp\//
-      },
-      dist: {
-        src: ['<%= yeoman.dist %>/index.html'],
-        ignorePath: /^\.\.\/ngapp\//
-      }
+    dev: {
+      src: ['<%= appConfig.dev %>/client/index.html'],
+      ignorePath: /^\.\.\/client\//
     }
   };
 };

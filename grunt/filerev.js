@@ -1,20 +1,18 @@
 'use strict';
 
-var pkg = require('./pkg');
+var pkg = require('./utils/pkg');
 module.exports = function (grunt, options) {
   return {
-    filerev: {
-      dist: {
-        src: [
-          // This would likely break Angular code references to templates...
-          '<%= yeoman.dist %>/*.js',
-          '<%= yeoman.dist %>/views/**/*.html',
-          '<%= yeoman.dist %>/styles/**/*.css',
-          '<%= yeoman.dist %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.dist %>/styles/fonts/**/*',
-          '<%= yeoman.dist %>/fonts/**/*'
-        ]
-      }
+    dist: {
+      src: [
+        // This would likely break Angular code references to templates...
+        appConfig.dist + '/client/*.js',
+        appConfig.dist + '/client/styles/**/*.css',
+        appConfig.dist + '/client/styles/fonts/**/*',
+        appConfig.dist + '/client/fonts/**/*',
+        appConfig.dist + '/client/views/**/*.html',
+        appConfig.dist + '/client/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
+      ]
     }
   };
 };

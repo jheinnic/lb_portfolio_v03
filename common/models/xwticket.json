@@ -6,6 +6,7 @@
     "abstract": true,
     "validateUpsert": true
   },
+  "trackChanges": true,
   "abstract": true,
   "properties": {
     "ticketId": {
@@ -18,10 +19,27 @@
       "type": "string",
       "required": true,
       "length": 121
+    },
+    "yourLetters": {
+      "type": "string",
+      "required": true,
+      "length": 26
+    },
+    "finalPayout": {
+      "type": "integer",
+      "required": false
+    },
+    "pendingComputation": {
+      "type": "PlayResult",
+      "required": false
+    },
+    "latestComputation": {
+      "type": "PlayResult",
+      "required": false
     }
   },
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": []
+  "methods": {}
 }

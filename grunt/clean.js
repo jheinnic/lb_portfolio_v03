@@ -1,17 +1,22 @@
 'use strict';
 
-var pkg = require('./pkg');
 module.exports = function (grunt, options) {
   return {
-    clean: {
-      dist: {
-        files: [
-          {
-            dot: true,
-            src: [
-              '<%= yeoman.dist %>/'
-          }
-      }
+    options: {
+      force: false,
+      "no-write": false
+    },
+    dist: {
+      dot: true,
+      src: appConfig.dist + '/*'
+    },
+    dev: {
+      dot: true,
+      src: '<%= appConfig.dev %>/*'
+    },
+    temp: {
+      dot: true,
+      src: appConfig.temp + '/*'
     }
-  };
+  }
 };

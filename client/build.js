@@ -5,10 +5,12 @@
 
   var fs         = require('fs'),
       path       = require('path'),
+      boot       = require('loopback-boot'),
       browserify = require('browserify'),
       remapify   = require('remapify'),
       _          = require('lodash'),
-      pkg        = require('./package.json');
+      pkg        = require('./package.json'),
+      bower      = require('../bower.json');
 
   /**
    * Applies the alias name transformation rule for angular application scripts using this project's file layout
@@ -36,63 +38,44 @@
    */
   function filterAngularAlias(alias, dirname, basename) {
     // Tolerate Windows and Unix path separators, just like Browserify and Remapify do.
-    var retVal    = alias,
-        moduleFQN = alias,
-        sepToken  = { regexp: undefined, join: undefined };
-
-    // Infer the module's fully qualified name and identify its separator character by figuring out which
-    // separator changes dirname when replaced by '.'
-    _([{ regexp: /\//g, join: '\/' }, { regexp: /\\/g, join: '\\' }]).find(
-      function(sep) {
-        if (sep.regexp.test(alias)) {
-          moduleFQN = dirname.replace(sep.regexp, '.');
-          sepToken = sep;
-          return true;
-        }
-
-        return false;
+    // Figure out which separator character to use by figuring out which modifies the content of alias.
+    var sepToken = _.find(
+      [{ regexp: /\//g, join: '\/' }, { regexp: /\\/g, join: '\\' }],
+      function checkForMatch(candidate) {
+        return candidate.regexp.test(alias);
       }
     );
 
-    // If moduleFQN was set, then we found the right separator and may proceed.
-    if (moduleFQN) {
-      var fileToken  = undefined;
-      _([/\.js$/, /\.coffee$/]).find(function(suffix) {
-        fileToken = basename.replace(suffix, '');
-        return fileToken != basename;
-      });
+    // Infer the module's fully qualified name by replacing all separators from dirname with '.'
+    // Remove the file extension from basename
+    // Concatenate moduleFQN to the extension-free base filename, joined by a '/' character if the file
+    //   is not a module descriptor, otherwise just return the moduleFQN.
+    var retVal = alias;
+    if (_.isObject(sepToken)) {
+      var moduleFQN = dirname.replace(sepToken.regexp, '.');
+      var fileToken = basename.replace(/\.(js|coffee)$/, '');
 
       // Capitalize on the module definition file naming convention to infer which transformation to apply.
-      var moduleName = _.last(moduleFQN.split('.'));
-      if (fileToken == moduleName) {
+      if (fileToken === 'module') {
         // This entry is a module definition script.  It will be named for require using only its fully qualified
         // module name (e.g. require('jchptf.site.navigation')).
         retVal = moduleFQN;
-      }
-      else {
-        if (fileToken == moduleName + '.config') {
-          fileToken = 'config'
-        } else if (fileToken == moduleName + '.run') {
-          fileToken = 'run'
-        }
-
+      } else {
         // This entry is part of a module's contents.  It will be named for require using a combination of its fully
         // qualified name and its file token, with a separator character sequence separating the two.  For example,
         // 'HomeController.controller.js' under Unix directory path jchptf/site/navigator would be named for require
         // as 'jchptf.site.navigation/HomeController.controller'.
         //
-        // NOTE: There are special rules for the special "config" and "run" subsections of a module.  These are both
-        // recognized by appending a designated suffix to the module's unqualified name, but they are named for require
-        // by applying the above combination rule to just the designated suffix.  For example, 'navigation.config' under
-        // unix folder path jchptf/site/navigation would be named for require as 'jchptf.site.navigation/config'.  On a
-        // Windows system, the same import could also be named 'jchptf.site.navigation\\config'.
-        retVal = [moduleFQN, fileToken].join(sepToken.join);
+        // On a Windows system, although we needed '\\' to split the path, we will still always join with '/' so the
+        // correct syntax to require is not OS-dependent!
+        // retVal = [moduleFQN, fileToken].join(sepToken.join);
+        retVal = moduleFQN + '/' + fileToken;
       }
 
-      // console.log('Transformed ' + alias + ' for ' + dirname + sepToken.join + basename + ' to ' + retVal);
+      console.log('Transformed ' + alias + ' for ' + dirname + sepToken.join + basename + ' into ' + retVal);
     } else {
       // If input alias failed to apply to either separator's re-write rule, leave retVal equal to alias.
-      // console.log('Retaining ' + retVal + ' for ' + dirname + '->' + basename + ' unmodified.');
+      console.log('Retaining ' + alias + ' for dirname=' + dirname + ' and basename=' + basename);
     }
 
     return retVal;
@@ -174,10 +157,10 @@
     return retVal;
   }
 
-  function buildNgAppBundle(env, angularScriptsDir, commonComponentsDir, commonComponentNames, buildOutputDir, callback) {
-    var isDevEnv      = ['debug', 'development', 'test'].indexOf(env) >= 0,
-        bundlePath    = path.join(buildOutputDir, 'app.bundle.js'),
-        sourceMapPath = path.join(buildOutputDir, 'app.bundle.js.map');
+  function buildNgAppBundle(env, angularScriptsDir, commonComponentsDir, buildOutputDir, callback) {
+    var isDevEnv    = ['debug', 'development', 'test'].indexOf(env) >= 0,
+      bundlePath    = path.join(buildOutputDir, 'app.js'),
+      sourceMapPath = path.join(buildOutputDir, 'app.js.map');
 
     // TODO(bajtos) debug should be always true, the source maps should be
     // saved to a standalone file when !isDev(env)
@@ -186,8 +169,86 @@
     // after generating it.  Browserify does not seem to have an option for
     // generating them outside the bundle, but this tool is capable of
     // extracting them after-the-fact.
-    var sourceGlob     = path.join('**', '*.{js,coffee}'),
-        b = browserify({basedir: __dirname}, {debug: true /*isDevEnv*/});
+    console.log('Basedir is ', __dirname);
+    var sourceGlob  = path.join('**', '*.{js,coffee}'),
+        b           = browserify({basedir: __dirname}, {debug: isDevEnv});
+
+    // Handle .coffee files
+    b.transform('coffeeify');
+    b._extensions.push('.coffee');
+
+    // Configure browserify to load the angular application's main module at end of bundle definition script's execution.
+    // var mainModuleFile = path.join(angularScriptsDir, pkg.main);
+    var mainModuleFile = pkg.browser;
+    var mainModuleFQN  =
+      path.dirname(
+        path.relative(bower.appPath, mainModuleFile));
+    console.log(mainModuleFQN, ' -from-> ', mainModuleFile);
+    b.require(mainModuleFile, {expose: mainModuleFQN});
+
+    // Debug verbosity--see what the bundle's remapify filters did and what files satisfied either input pattern.
+    b.on('remapify:files', function(files, expandedAliases, pattern){
+      console.log('Files:', files);
+      console.log('Expanded Aliases:', expandedAliases);
+      console.log('Pattern:', pattern);
+    });
+
+    // Configure remapify to select common and ngapp client files and apply project policy for naming commonjs
+    // packages that bundle both angular client code and common components.
+    b.plugin(
+      remapify,
+      [
+        { src: sourceGlob, cwd: angularScriptsDir, filter: filterAngularAlias },
+        { src: sourceGlob, cwd: commonComponentsDir, filter: filterCommonAlias }
+      ]
+    );
+
+    try {
+      boot.compileToBrowserify({
+        appRootDir: path.join(__dirname, ),
+        env: env
+      }, b);
+    } catch(err) {
+      return callback(err);
+    }
+
+    // Prepare and execute the output pipeline from Browserify runtime to local filesystem.
+    var out = fs.createWriteStream(bundlePath);
+
+    // All streams in the pipeline should invoke callback as their onError event handler.
+    out.on('error', callback);
+
+    // Only the last stream in the pipeline should invoke callback as its onClose event handler.
+    out.on('close', callback);
+
+    // Substitute an instance of exorcist between browserify and file writer if this is not a
+    // development artifact under construction.
+    if (! isDevEnv) {
+      var sourceMapOut = require('exorcist')(sourceMapPath, 'scripts/main.js.map', 'scripts');
+
+      sourceMapOut.pipe(out);
+      out = sourceMapOut;
+      out.on('error', callback);
+    }
+
+    // Connect the first stream of the output pipeline to browserify's bundle builder and let it run!
+    b.bundle().on('error', callback).pipe(out);
+  }
+
+  function oldBuildNgAppBundle(env, angularScriptsDir, commonComponentsDir, commonComponentNames, buildOutputDir, callback) {
+    var isDevEnv      = ['debug', 'development', 'test'].indexOf(env) >= 0,
+        bundlePath    = path.join(buildOutputDir, 'main.js'),
+        sourceMapPath = path.join(buildOutputDir, 'main.js.map');
+
+    // TODO(bajtos) debug should be always true, the source maps should be
+    // saved to a standalone file when !isDev(env)
+    // TODO(jch) Assess https://github.com/thlorenz/exorcist#usage as a
+    // non-dev build extra step for extracting source maps from the bundle
+    // after generating it.  Browserify does not seem to have an option for
+    // generating them outside the bundle, but this tool is capable of
+    // extracting them after-the-fact.
+    var sourceGlob = path.join('**', '*.{js,coffee}'),
+        b          = browserify({basedir: __dirname}, {debug: true /*isDevEnv*/});
 
     // Filter out this script's own output.
     b.exclude(bundlePath).ignore(bundlePath);

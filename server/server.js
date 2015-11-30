@@ -1,6 +1,7 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 var path = require('path');
+var loopbackJsonSchema = require('loopback-jsonschema');
 
 var app = module.exports = loopback();
 
@@ -19,6 +20,10 @@ if (livereload) {
 
 // boot scripts mount components like REST API
 boot(app, __dirname);
+
+// Enable JSON Schema support
+loopbackJsonSchema.init(app);
+loopbackJsonSchema.enableJsonSchemaMiddleware(app);
 
 // Mount static files like ngapp
 // All static middleware should be registered at the end, as all requests

@@ -1,7 +1,9 @@
 {
   "_meta": {
     "sources": [
-      "../common/models"
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
     ]
   },
   "Todo": {
@@ -10,11 +12,7 @@
   "user": {
     "dataSource": "db"
   },
-  "Document": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Folder": {
+  "XwTicket": {
     "dataSource": "db",
     "public": true
   },
@@ -29,5 +27,25 @@
   "TripOnlyTicket": {
     "dataSource": "db",
     "public": true
-  }
+  },
+  "BonusWord": {
+    "dataSource": "db",
+    "public": false
+  },
+  "AnalyticView": {
+    "dataSource": "transient",
+    "public": false
+  },
+  "RegionAnalysis": {
+    "dataSource": "transient",
+    "public": false
+  },
+  "WordAnalysis": {
+    "dataSource": "transient",
+    "public": false
+  },
+  "CellAnalysis": {
+    "dataSource": "transient",
+    "public": false
+  },
 }

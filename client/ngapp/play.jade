@@ -1,0 +1,57 @@
+doctype html
+html(lang="en", ng-app="jchptf.app")
+  head
+    meta(charset="utf-8")
+    meta(charset="utf-8")
+    meta(name="description", content="")
+    meta(name="viewport", content="width=device-width")
+
+    // The base allows us to use relative links to resources even when
+    // this page was served from non-root URL, e.g. '/my/todos'
+    base(href="/")
+
+    title John Heinnickel's Portfolio Website
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css(client/dist) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css(client/dist) styles/main.css -->
+    <!-- endbuild -->
+
+  body
+    .container
+      .row
+        .span12
+          p #{sample}
+          p #{viewAsset('a/b/c/d.html')}
+          p #{method()}
+          p #{viewAsset('jchptf.bibble.bobble', 'x/y/z.html')}
+          img(src="#{imageAsset('localImage.png')}")
+          img(src="#{imageAsset('jchptf.remote', 'remoteImage.png')}")
+      #ui-view(ui-view="")
+      .row
+        .span12
+          footer
+            p &copy; John C. Heinnickel, 2015
+
+    <!--[if lt IE 9]>
+    script(src="vendor/es5-shim/es5-shim.js")
+    script(src="vendor/json3/lib/json3.js")
+    <![endif]-->
+
+    <!-- build:js(client/dist) scripts/vendor.js -->
+    script(src="vendor/angular-nvd3/dist/angular-nvd3.min.js")
+    script(src="vendor/underscore/underscore.js")
+    <!-- bower:js -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js(client/dist) scripts/scripts.js -->
+    <!-- endbuild -->
+
+    if isDevelopment
+      script(src="scripts/lr_init.js")

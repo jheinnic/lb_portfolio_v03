@@ -1,23 +1,25 @@
 'use strict';
 
-var pkg = require('./pkg');
+var pkg = require('./utils/pkg');
 module.exports = function (grunt, options) {
   return {
     useminPrepare: {
-      html: [
-        '<%= yeoman.dist %>/index.html',
-        '<%= yeoman.dist %>/views/**/*.html'
-      ],
+      index: '<%= appConfig.dist %>/client/index.html',
+      views: '<%= appConfig.dist %>/client/views/**/*.html',
       options: {
-        root: '<%= yeoman.dist %>/',
-        staging: '<%= yeoman.staging %>/',
-        dest: '<%= yeoman.dist %>/',
+        root: '<%= appConfig.dist %>/',
+        staging: '<%= appConfig.temp %>/',
+        dest: '<%= appConfig.dist %>/',
         flow: {
-          html: {
+          dist: {
             steps: {
               js: ['concat', 'uglifyjs'],
-              css: ['concat', 'cssmin']
+              css: ['cssmin']
             },
+            post: {}
+          },
+          views: {
+            steps: {},
             post: {}
           }
         }
