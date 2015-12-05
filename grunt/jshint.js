@@ -10,9 +10,9 @@ module.exports = function (grunt, options) {
     },
     tests: {
       src: ['<%= appConfig.app %>/test/unit/**/*.js', '<%= appConfig.app %>/test/e2e/**/*.js']
-    },
-    build: {
-      src: ['Gruntfile.js', 'grunt/**/*.js']
+    //},
+    //build: {
+    //  src: ['Gruntfile.js', 'grunt/**/*.js']
     }
   };
 };

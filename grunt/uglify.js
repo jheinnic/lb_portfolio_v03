@@ -2,5 +2,7 @@
 
 module.exports =
   function (grunt, options) {
-    return {};
+    return {
+      generated: {}
+    };
   };

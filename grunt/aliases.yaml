@@ -1,3 +1,6 @@
+default:
+ - 'build'
+
 test:
  - 'jshint'
  - 'test-unit'
@@ -9,6 +12,22 @@ test-unit:
 test-unit-chrome:
  - 'karma:unit-chrome'
 
+test-coverage:
+ - 'karma:unit_coverage'
+
+coverage:
+ - 'karma:unit_coverage'
+ - 'open:coverage'
+ - 'connect:coverage'
+
+spec: #continuous running specs
+ - 'dev-build'
+ - 'concurrent:unit-mocha'
+
+spec-chrome:
+ - 'dev-build'
+ - 'concurrent:chrome'
+
 test-e2e:
  - 'shell:protractor_update'
  - 'connect:testserver'
@@ -19,28 +38,11 @@ test-e2e-firefox:
  - 'connect:testserver'
  - 'protractor:firefox'
 
-test-coverage:
- - 'karma:unit_coverage'
-
-coverage:
- - 'karma:unit_coverage'
- - 'open:coverage'
- - 'connect:coverage'
-
-install:
- - 'shell:npm_install'
- - 'bower:install'
- - 'shell:protractor_update'
-
-default:
- - 'build'
-
 # cause zsh always puts me in grunt folder
 # d:
 # - 'default'
 # s:
 # - 'serve'
-
 
 dev:
  - 'connect:devserver'
@@ -52,41 +54,61 @@ dev-chrome:
  - 'open:devserver'
  - 'watch:chrome'
 
-spec: #continuous running specs
- - 'fast-build'
- - 'concurrent:unit-mocha'
-
-spec-chrome:
- - 'fast-build'
- - 'concurrent:chrome'
+dev-test-unit:
+ - 'clean'
+ - 'dev-build'
+ - 'concurrent:unit'
 
 serve:
  - 'concurrent:watchServe'
 
-fast-build:
- - 'clean:dist'
- - 'jshint'
- - 'less'
- - 'autoprefixer'
- - 'wiredep'
- - 'concat:dist'
- - 'concat:distMapped'
- - 'ngAnnotate'
+#
+# Build steps
+#
 
-d-watch:
- - 'fast-build'
- - 'concurrent:unit'
+reset:
+ - 'clean'
+ - 'mkdir'
 
 build:
- - 'fast-build'
+ - 'dev-build'
+ - 'dist-build'
+
+# TODO: Put jade back in!
+dev-build:
+ - 'jshint'
+ - 'copy:dev'
+ - 'less'
+ - 'bundle-client'
+ - 'autoprefixer'
+ - 'jade'
+ - 'wiredep'
+ - 'htmlbuild'
+
+dist-build:
+ - 'copy:dist'
+ - 'useminPrepare:index'
+ - 'concat'
  - 'uglify'
- - 'test-unit'
- - 'concat:license'
- - 'clean:pre'
+ - 'cssmin'
+ - 'filerev'
+ - 'usemin'
+
+# TODO
+after-css:
+ - 'imagemin'
+ - 'svgmin'
+
+bootstrap:
+ - 'shell:npm_install'
+ - 'bower:install'
+ - 'shell:protractor_update'
+
+# Future/TBD
 
 travis:
- - 'fast-build'
  - 'bower:install'
+ - 'dev-build'
  - 'test-unit'
 
 bump-@:

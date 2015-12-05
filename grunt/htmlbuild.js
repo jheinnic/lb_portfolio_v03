@@ -1,25 +1,15 @@
 'use strict';
 
-var pkg = require('./utils/pkg');
 module.exports = function (grunt, options) {
   return {
-    useminPrepare: {
-      html: [
-        '<%= appConfig.dist %>/index.html',
-        '<%= appConfig.dist %>/views/**/*.html'
-      ],
+    dev: {
+      src: '<%= appConfig.dev %>/client/index.html',
+      dest: '<%= appConfig.dev %>/client',
       options: {
-        root: '<%= appConfig.dist %>/',
-        staging: '<%= appConfig.temp %>/',
-        dest: '<%= appConfig.dist %>/',
-        flow: {
-          html: {
-            steps: {
-              js: ['concat', 'uglifyjs'],
-              css: ['concat', 'cssmin']
-            },
-            post: {}
-          }
+        parseTag: 'htmlbuild',
+        relative: true,
+        styles: {
+          bundle: ['<%= appConfig.dev %>/client/**/*.css']
         }
       }
     }

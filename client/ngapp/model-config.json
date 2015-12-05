@@ -2,37 +2,31 @@
   "_meta": {
     "sources": ["../../common/models", "./models"]
   },
+  "_mixins": {
+    "sources": ["../../common/mixins", "./mixins"]
+  },
   "Todo": {
     "dataSource": "remote"
   },
   "LocalTodo": {
     "dataSource": "local"
   },
-  "User": {
-    "dataSource": "remote"
-  },
-  "XwTicket": {
-    "dataSource": "remote"
-  },
-  "XwTicket": {
-    "dataSource": "remote"
-  },
   "FiveXTicket": {
     "dataSource": "remote"
   },
-  "FiveXTicket": {
-    "dataSource": "remote"
+  "LocalFiveXTicket": {
+    "dataSource": "local"
   },
   "TripOnlyTicket": {
     "dataSource": "remote"
   },
-  "TripOnlyTicket": {
-    "dataSource": "remote"
+  "LocalTripOnlyTicket": {
+    "dataSource": "local"
   },
   "TripSpotTicket": {
     "dataSource": "remote"
-  }
-  "TripSpotTicket": {
-    "dataSource": "remote"
+  },
+  "LocalTripSpotTicket": {
+    "dataSource": "local"
   }
 }

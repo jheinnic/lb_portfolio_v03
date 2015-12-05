@@ -24,6 +24,12 @@
   )
     .value('Todo', client.models.LocalTodo)
     .value('RemoteTodo', client.models.Todo)
+    .value('FiveXTicket', client.models.LocalFiveXTicket)
+    .value('RemoteFiveXTicket', client.models.FiveXTicket)
+    .value('TripOnlyTicket', client.models.LocalTripOnlyTicket)
+    .value('RemoteTripOnlyTicket', client.models.TripOnlyTicket)
+    .value('TripSpotTicket', client.models.LocalTripSpotTicket)
+    .value('RemoteTripSpotTicket', client.models.TripSpotTicket)
     .value('sync', client.sync)
     .value('network', client.network);
   ;

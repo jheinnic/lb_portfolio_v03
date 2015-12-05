@@ -8,7 +8,7 @@ module.exports = function (grunt, options) {
     },
     dist: {
       dot: true,
-      src: appConfig.dist + '/*'
+      src: '<%= appConfig.dist %>/*'
     },
     dev: {
       dot: true,
@@ -16,7 +16,7 @@ module.exports = function (grunt, options) {
     },
     temp: {
       dot: true,
-      src: appConfig.temp + '/*'
+      src: '<%= appConfig.temp %>/*'
     }
   }
 };
