@@ -1,7 +1,7 @@
 module.exports = createGruntBlock;
 
 var path = require('path'),
-    traverse = require('../../common/components/fsutil/traverse'),
+    traverse = require('./traverse'),
     devClient = '<%= appConfig.dev %>/client';
 
 function createGruntBlock(appConfig) {
