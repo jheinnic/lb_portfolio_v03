@@ -15,7 +15,7 @@ node_modules
 npm-debug.log
 
 # Bower dependency management
-client/ngapp/vendor
+client/vendor
 
 # vi temp files
 *~
