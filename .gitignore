@@ -14,7 +14,7 @@ node_modules
 npm-debug.log
 
 # Bower dependency management
-vendor
+client/vendor
 
 # vi temp files
 *~
@@ -47,5 +47,6 @@ Thumbs.db
 
 # Some unused subdirs
 images/bootstrap
-images/jwplayer
 
+build
+.rebooted
