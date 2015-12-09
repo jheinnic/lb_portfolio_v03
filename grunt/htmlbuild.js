@@ -9,7 +9,7 @@ module.exports = function (grunt, options) {
         parseTag: 'htmlbuild',
         relative: true,
         styles: {
-          bundle: ['<%= appConfig.dev %>/client/**/*.css']
+          bundle: ['<%= appConfig.dev %>/client/**/*.css', '!<%= appConfig.dev %>/client/**/_*.css']
         }
       }
     }
