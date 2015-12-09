@@ -4,17 +4,20 @@ module.exports = function(XwTicket) {
     return 0;
   }
 
-  XwTicket.getPayoutMatrix = function getPayoutMatrix() {
+  XwTicket.getPrizeMatrix = function getPrizeMatrix() {
 
   }
 
-  XwTicket.isDefinitionComplete = function getPayoutMatrix() {
+  XwTicket.prototype.isDefinitionComplete = function isDefinitionComplete() {
 
   }
 
-  XwTicket.getPayoutIndices = function getPayoutMatrix() {
-
+  XwTicket.prototype.getEditorModel = function getEditorModel() {
+    var EditorModel = XwTicket.app.models.EditorModel;
+    return EditorModel.init(this.gridContent);
   }
+
+
 
   //function AbstractWordAnalysis(rawWordStr, revealedLetters) {
   //    var missingLetterArray;

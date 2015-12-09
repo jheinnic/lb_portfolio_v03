@@ -3,7 +3,7 @@ module.exports = function(MultiSpot, options) {
   // options is an object containing the config properties from model definition
   var _ = require('lodash');
 
-  MultiSpot.defineProperty('multiValue', {type: integer, default: 0, min: 0, max: (options.maxMultiplier || 5)});
+  MultiSpot.defineProperty('multiValue', {type: 'number', default: 0, min: 0, max: (options.maxMultiplier || 5)});
 };
 
 

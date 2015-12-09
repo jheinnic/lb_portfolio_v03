@@ -3,7 +3,7 @@ module.exports = function(FastSpot, options) {
   // options is an object containing the config properties from model definition
   var _ = require('lodash');
 
-  FastSpot.defineProperty('fastValue', {type: 'integer', default: 0, min: 0});
+  FastSpot.defineProperty('fastValue', {type: 'number', default: 0, min: 0});
 
   FastSpot.prototype.hasWinningValue = function hasWinningValue() {
     var retVal = undefined;

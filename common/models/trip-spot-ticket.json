@@ -1,22 +1,30 @@
 {
   "name": "TripSpotTicket",
   "base": "XwTicket",
-  "mixins": {
-    "Timestamped": {},
-    "BonusWord": {"yourLettersMax": 18, "bonusWordLength": 5, "prizeValues": [0, 3, 4, 5, 10, 30]},
-    "FastSpot": {"winningValue": 20}
-  },
   "idInjection": false,
   "options": {
     "validateUpsert": true
   },
-  "trackChanges": true,
-  "properties": {
-    "bonusWord": {
-      "type": "string",
-      "required": true
+  "mixins": {
+    "Timestamped": {},
+    "BonusWord": {
+      "yourLettersCount": 18,
+      "bonusWordLength": 5,
+      "prizeValues": [
+        0,
+        3,
+        4,
+        5,
+        10,
+        30
+      ]
+    },
+    "FastSpot": {
+      "winningValue": 20
     }
   },
+  "trackChanges": true,
+  "properties": {},
   "validations": [],
   "relations": {},
   "acls": [],

@@ -1,0 +1,11 @@
+{
+  "ids": {
+    "RegionKind": 5
+  },
+  "models": {
+    "RegionKind": {
+      "cols": "{\"name\":\"cols\"}",
+      "rows": "{\"name\":\"rows\"}"
+    }
+  }
+}

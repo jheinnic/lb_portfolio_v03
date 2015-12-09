@@ -4,12 +4,19 @@
       "loopback/common/models",
       "loopback/server/models",
       "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
     ]
   },
   "Todo": {
     "dataSource": "db"
   },
-  "user": {
+  "User": {
     "dataSource": "db"
   },
   "XwTicket": {
@@ -28,20 +35,24 @@
     "dataSource": "db",
     "public": true
   },
-  "AnalyticView": {
+  "PlayResult": {
     "dataSource": "transient",
     "public": false
   },
-  "RegionAnalysis": {
+  "EditorModel": {
     "dataSource": "transient",
     "public": false
   },
-  "WordAnalysis": {
+  "OrientationModel": {
     "dataSource": "transient",
     "public": false
   },
-  "CellAnalysis": {
+  "CellOrientation": {
     "dataSource": "transient",
     "public": false
   },
+  "GridRegion": {
+    "dataSource": "transient",
+    "public": false
+  }
 }

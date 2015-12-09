@@ -8,14 +8,14 @@ module.exports = function(BonusWord, options) {
       ? options.bonusWordLength
       : 5;
 
-  BonusWord.defineProperty('wordContent', {type: 'string', default: '', length: bonusWordLength});
-  BonusWord.defineProperty('prizeValue', {type: 'integer', default: -1, min: -1, max: numPrizes});
+  BonusWord.defineProperty('bonusWord', {type: 'string', default: '', length: bonusWordLength});
+  BonusWord.defineProperty('prizeValue', {type: 'number', default: -1, min: -1, max: numPrizes});
   BonusWord.defineProperty('scratchSpace', {type: 'array', persistent: false, hidden: true});
 
   BonusWord.validate(function(obj, a, b) {
     console.log( 'Validate: ', obj, a, b );
     var uniqueLetters = {};
-    this.wordContent.split('').forEach(
+    this.bonusWord.split('').forEach(
       function trackUniqueLetters(reqdLetter) {
         uniqueLetters[reqdLetter] = 1;
       }
@@ -36,13 +36,13 @@ module.exports = function(BonusWord, options) {
   BonusWord.prototype.isWordCovered = function isWordCovered(yourLettersSet) {
     var retVal = undefined;
     if (this.isValid()) {
-      retVal = this.wordContent.split('').every(
+      retVal = this.bonusWord.split('').every(
         function isLetterCovered(reqdLetter) {
           return ! _.isUndefined(yourLettersSet[reqdLetter]);
         }
       );
 
-      if ((retVal === false) && (_.keys(yourLettersSet).length < options.yourLettersMax)) {
+      if ((retVal === false) && (_.keys(yourLettersSet).length < options.yourLettersCount)) {
         retVal = undefined;
       }
     }

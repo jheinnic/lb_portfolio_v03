@@ -9,25 +9,37 @@
   "trackChanges": true,
   "abstract": true,
   "properties": {
-    "ticketId": {
+    "id": {
+      "type": "string",
       "id": true,
+      "required": true,
+      "defaultFn": "guid"
+    },
+    "ticketId": {
       "type": "string",
       "required": true,
+      "index": true,
       "length": 12
     },
     "gridContent": {
       "type": "string",
       "required": true,
-      "length": 121
+      "length": 121,
+      "default": "_________________________________________________________________________________________________________________________",
+      "pattern": "/[A-Za-z_]{121}/"
     },
     "yourLetters": {
       "type": "string",
       "required": true,
-      "length": 26
+      "length": 18,
+      "default": "__________________",
+      "pattern": "/([a-z]{18})|([a-z]{17}_)|([a-z]{16}_{2})|([a-z]{15}_{3})|([a-z]{14}_{4})|([a-z]{13}_{5})|([a-z]{12}_{6})|([a-z]{11}_{7})|([a-z]{10}_{8})|([a-z]{9}_{9})|([a-z]{8}_{10})|([a-z]{7}_{11})|([a-z]{6}_{12})|([a-z]{5}_{13})|([a-z]{4}_{14})|([a-z]{3}_{15})|([a-z]{2}_{16})|([a-z]{1}_{17})|(_{18})/"
     },
     "finalPayout": {
-      "type": "integer",
-      "required": false
+      "type": "number",
+      "required": false,
+      "min": -1,
+      "max": 17
     },
     "pendingComputation": {
       "type": "PlayResult",

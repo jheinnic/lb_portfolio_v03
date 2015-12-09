@@ -1,0 +1,46 @@
+{
+  "name": "OrientationModel",
+  "base": "Model",
+  "idInjection": false,
+  "options": {},
+  "properties": {
+    "id": {
+      "id": true,
+      "type": "string",
+      "defaultFn": "guid",
+      "required": true
+    },
+    "orientation": {
+      "type": "string",
+      "required": true,
+      "pattern": "/horizontal|vertical/"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "rowEditModel": {
+      "type": "belongsTo",
+      "model": "EditorModel",
+      "foreignKey": "rowEditModelId"
+    },
+    "colEditModel": {
+      "type": "belongsTo",
+      "model": "EditorModel",
+      "foreignKey": "colEditModelId"
+    },
+    "_cells": {
+      "type": "embedsMany",
+      "model": "CellOrientation",
+      "property": "cells",
+      "foreignKey": "alignModelId"
+    },
+    "_regions": {
+      "type": "embedsMany",
+      "model": "GridRegion",
+      "property": "regions",
+      "foreignKey": "alignModelId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

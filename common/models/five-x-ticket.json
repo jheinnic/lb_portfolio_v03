@@ -1,14 +1,18 @@
 {
   "name": "FiveXTicket",
   "base": "XwTicket",
-  "mixins": {
-    "Timestamped": {},
-    "MultiSpot": {"maxMultiplier": 5},
-    "FastSpot": {"winningValue": 20}
-  },
   "idInjection": false,
   "options": {
     "validateUpsert": true
+  },
+  "mixins": {
+    "Timestamped": {},
+    "MultiSpot": {
+      "maxMultiplier": 5
+    },
+    "FastSpot": {
+      "winningValue": 20
+    }
   },
   "trackChanges": true,
   "properties": {},
