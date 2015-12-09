@@ -4,6 +4,8 @@ module.exports = function(server) {
   var restApiRoot = server.get('restApiRoot');
 
   var explorerApp = explorer(server, { basePath: restApiRoot });
+  console.log(restApiRoot);
+  console.log(explorerApp);
   server.use('/explorer', explorerApp);
   server.once('started', function() {
     var baseUrl = server.get('url').replace(/\/$/, '');
