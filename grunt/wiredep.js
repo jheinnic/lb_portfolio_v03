@@ -1,6 +1,6 @@
 'use strict';
 
-var pkg = require('./utils/pkg');
+// var pkg = require('./utils/pkg');
 module.exports = function (grunt, options) {
   return {
     dev: {

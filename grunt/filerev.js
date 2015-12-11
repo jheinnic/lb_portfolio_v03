@@ -1,13 +1,12 @@
 'use strict';
 
-// var pkg = require('./utils/pkg');
-module.exports = function (grunt, options) {
+module.exports = function filerev(/*grunt, options*/) {
   return {
     dist: {
       src: [
-        // This would likely break Angular code references to templates...
-        '<%= appConfig.dist %>/client/*.js',
-        '<%= appConfig.dist %>/client/**/*.{html,css,bmp,webp,png,jpg,jpeg,gif,svg,eot,ttf,woff,woff2}'
+        // '<%= appConfig.dist %>/client/{app,vendor}.js',
+        // TODO: This could break templates from within Angular scripts and/or template files...  Check both!!!
+        '<%= appConfig.dist %>/client/**/*.{js,html,css,bmp,webp,png,jpg,jpeg,gif,svg,eot,ttf,woff,woff2}'
       ]
     }
   };
