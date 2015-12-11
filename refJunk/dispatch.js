@@ -3,7 +3,7 @@
 // Construct grunt-dispatch configuration block by filesystem traversal for discovery.
 
 module.exports = function(grunt, options) {
-  return sourceBlocks.dispatch;
+  return global.sourceBlocks.dispatch;
 
   //var path = require('path'),
   //    traverse = require('../common/components/fsutil/traverse'),
