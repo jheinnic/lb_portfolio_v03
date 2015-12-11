@@ -5,9 +5,6 @@ module.exports = function jade(grunt, options) {
     dev: {
       options: {
         data: { isDev: true }
-        //data: function (dest, src) {
-        //  return { isDev: true };
-        //}
       },
       files: {
         cwd: '<%= appConfig.app %>',
