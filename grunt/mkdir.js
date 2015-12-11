@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (grunt, options) {
+module.exports = function mkdir(grunt, options) {
   return {
     build: {
       options: {
@@ -8,11 +8,13 @@ module.exports = function (grunt, options) {
         create: [
           '<%= appConfig.dev %>',
           '<%= appConfig.dist %>',
+          '<%= appConfig.temp %>',
           '<%= appConfig.dev %>/client',
           '<%= appConfig.dist %>/client',
+          '<%= appConfig.temp %>/client',
           '<%= appConfig.dev %>/server',
           '<%= appConfig.dist %>/server',
-          '<%= appConfig.temp %>'
+          '<%= appConfig.temp %>/server'
         ]
       }
     }

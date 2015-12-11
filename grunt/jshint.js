@@ -1,18 +1,35 @@
 'use strict';
 
 module.exports = function (grunt, options) {
-  // var fs =  require('fs');
-
   return {
-    options: JSON.parse(fs.readFileSync('.jshintrc')),
-    source: {
-      src: ['<%= appConfig.app %>/ngapp/**/*.js']
+    options: {
+      jshintrc: '.jshintrc',
+      reporter: require('jshint-stylish')
     },
-    tests: {
-      src: ['<%= appConfig.app %>/test/unit/**/*.js', '<%= appConfig.app %>/test/e2e/**/*.js']
-    //},
-    //build: {
-    //  src: ['Gruntfile.js', 'grunt/**/*.js']
+    build: {
+      src: ['Gruntfile.js', 'grunt/**/*.js', 'client/build.js']
+    },
+    source: {
+      src: ['<%= appConfig.app %>/**/*.js', '{common,server}/**/*.js', '!{common,server}/test/**/*.js']
+    },
+    'client-source': {
+      src: ['<%= appConfig.app %>/**/*.js']
+    },
+    'common-source': {
+      src: ['common/**/*.js', '!common/test/**/*.js']
+    },
+    'server-source': {
+      src: ['server/**/*.js', '!server/test/**/*.js']
+    },
+    test: {
+      options: {
+        jshintrc: 'client/test/.jshintrc'
+        // reporter: require('jshint-stylish')
+      },
+      src: [
+        'client/test/{e2e,spec}/**/*.js',
+        '{common,server}/test/**/*.js'
+      ]
     }
   };
 };

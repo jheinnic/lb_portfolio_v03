@@ -1,37 +1,41 @@
 'use strict';
 
-module.exports = function (grunt, options) {
+// TODO: Performing htmlbuild before wiredep should eliminate the need to copy html files at all.  Right?
+
+module.exports = function copy(grunt, options) {
+  var assetsPattern = '**/*.{html,bmp,jpg,jpeg,gif,png,webp,svg,eot,ttf,woff,woff2}';
+
   return {
     dev: {
       files: [
         {
+          '<%= appConfig.dev %>/client/lr_init.js': 'client/lr_init.js'
+        },
+        {
           expand: true,
           dot: true,
           cwd: '<%= appConfig.app %>',
-          dest: '<%= appConfig.dev %>/client',
-          src: [
-            'lr_init.js',
-            '**/*.{html,bmp,webp,jpg,jpeg,gif,png,svg,eot,ttf,woff,woff2}',
-            '.htaccess',
-            '*.{ico,png,txt}'
-          ]
+          src: [assetsPattern, '.htaccess', '*.{ico,png,txt}'],
+          dest: '<%= appConfig.dev %>/client'
         }
       ]
     },
     dist: {
-      files: [
-        {
-          expand: true,
-          dot: true,
-          cwd: '<%= appConfig.dev %>/client',
-          dest: '<%= appConfig.dist %>/client',
-          src: [
-            '**/*.{html,bmp,webp,jpg,jpeg,gif,png,svg,eot,ttf,woff,woff2}',
-            '.htaccess',
-            '*.{ico,png,txt}'
-          ]
-        }
-      ]
+      // TODO: Build-derived images?  Images currently re-copied from source.
+      //
+      // NOTE: Distribution starts with the source index.html, but all other files come from the dev area.
+      //   Rather than using partial artifact from dev, index.html is rebuilt from source in order to support
+      //   different plugin behavior branched by different options to htmlbuild and jade plugins, restricted
+      //   to the activation of <!-- htmlbuild:ignore --> directive (htmlbuild) and 'isDevelopment: false'
+      //   data attribute (jade).
+      files: {
+        expand: true,
+        dot: true,
+        cwd: '<%= appConfig.app %>',
+        src: ['**/*.{webp,eot,ttf,woff,woff2}', 'index.html', '.htaccess', '*.{ico,txt}'],
+        // '**/*.{html,css,webp,eot,ttf,woff,woff2}', '!index.html', '.htaccess', '*.{ico,txt}'
+        dest: '<%= appConfig.dist %>/client'
+      }
     }
   };
 };

@@ -1,110 +1,201 @@
-default:
- - 'build'
+##
+# Build-time test targets (TODO: Not thoroughly implemented or populated)
+##
 
 test:
- - 'jshint'
+ - 'lint-for-test'
  - 'test-unit'
  - 'test-e2e'
 
 test-unit:
+ - 'lint-for-test'
  - 'karma:unit'
 
 test-unit-chrome:
+ - 'lint-for-test'
  - 'karma:unit-chrome'
 
 test-coverage:
- - 'karma:unit_coverage'
+ - 'lint-for-test'
+ - 'karma:unit-coverage'
 
 coverage:
- - 'karma:unit_coverage'
+ - 'test-coverage'
  - 'open:coverage'
  - 'connect:coverage'
 
-spec: #continuous running specs
+test-e2e:
+ - 'lint-for-test'
+ - 'update-env'
+ - 'connect:test'
+ - 'protractor:run'
+
+test-e2e-firefox:
+ - 'lint-for-test'
+ - 'update-env'
+ - 'connect:testserver'
+ - 'protractor:firefox'
+
+lint-build:
+ - 'jshint:build'
+ - 'coffeelint:build'
+
+lint-source:
+ - 'jshint:source'
+ - 'coffeelint:source'
+
+lint-test:
+ - 'jshint:test'
+ - 'coffeelint:test'
+
+lint-for-build:
+ - 'lint-build'
+ - 'lint-source'
+
+lint-for-test:
+ - 'lint-build'
+ - 'lint-source'
+ - 'lint-test'
+
+
+##
+# Continuous test targets for developers
+##
+
+spec: # continuous running specs
+ - 'clean:build'
  - 'dev-build'
  - 'concurrent:unit-mocha'
 
 spec-chrome:
+ - 'clean:build'
  - 'dev-build'
  - 'concurrent:chrome'
 
-test-e2e:
- - 'shell:protractor_update'
- - 'connect:testserver'
- - 'protractor:run'
+dev-test-unit:
+ - 'clean:build'
+ - 'dev-build'
+ - 'concurrent:unit'
 
-test-e2e-firefox:
- - 'shell:protractor_update'
- - 'connect:testserver'
- - 'protractor:firefox'
 
-# cause zsh always puts me in grunt folder
-# d:
-# - 'default'
-# s:
-# - 'serve'
+##
+# Continuous targets for developers (TODO: Watch target subsets not yet implemented!)
+##
 
 dev:
- - 'connect:devserver'
+ - 'connect:dev'
  - 'open:devserver'
  - 'watch:source'
 
 dev-chrome:
- - 'connect:devserver'
+ - 'connect:dev'
  - 'open:devserver'
  - 'watch:chrome'
-
-dev-test-unit:
- - 'clean'
- - 'dev-build'
- - 'concurrent:unit'
 
 serve:
  - 'concurrent:watchServe'
 
-#
-# Build steps
-#
 
-reset:
- - 'clean'
+##
+# One-time toolchain targets
+##
+
+install-env:
+ - 'clean:all'
+ - 'shell:npm-install'
+ - 'bower:install'
+ - 'shell:protractor-install'
  - 'mkdir'
 
-build:
- - 'dev-build'
- - 'dist-build'
+update-env:
+ - 'clean:build'
+ - 'shell:npm-update'
+ - 'bower:update'
+ - 'shell:protractor-update'
+ - 'mkdir'
 
-# TODO: Put jade back in!
+reset-build:
+ - 'clean:build'
+ - 'mkdir'
+
+
+##
+# One-time build targets
+##
+
+default:
+ - 'build'
+
+build:
+ - 'update-env'
+ - 'lint-for-build'
+ - 'dev-build'
+ - 'contd-dist-build'
+
+candidate:
+ - 'install-env'
+ - 'lint-for-build'
+ - 'full-dist-build'
+
 dev-build:
- - 'jshint'
  - 'copy:dev'
  - 'less'
+ - 'autoprefixer:dev'
+ - 'jade:dev'
+ - 'wiredep:dev'
+ - 'htmlbuild:dev'
  - 'bundle-client'
- - 'autoprefixer'
- - 'jade'
- - 'wiredep'
- - 'htmlbuild'
 
-dist-build:
+# NOTE: This build target is only valid after having evaluated 'dev-build'.  For CSS, it reuses
+#       less and autoprefix preprocessor outputs.  For HTML, it reuses jade output for templates,
+#       but rebuilds index.html from source.  It copies the Browserify bundle from the dev build,
+#       and all other files from source, then performs minification.
+contd-dist-build:
  - 'copy:dist'
+ - 'jade:dist'
+ - 'wiredep:dist'
+ - 'htmlbuild:dist'
+ - 'minify'
+
+# NOTE: This will still populates some content under build/dev, but it will not include all
+#       files produced during a real dev build.  Optimizable image assets are populated as output
+#       of their appropriate optimizer from source (imagemin and svgmin), and non-optimizable
+#       iamges and fonts are only copied once from source to dist (copy:dist).  HTML processing for
+#       index.html, is performed once for dist (copy:dist, jade:dist, wiredep:dist, and htmlbuild:dist),
+#       but skipped for dev (Same plugins with :dev subtargets).
+full-dist-build:
+ - 'copy:dist'
+ - 'less'
+ - 'autoprefixer:dist'
+ - 'jade:dist'
+ - 'wiredep:dist'
+ - 'htmlbuild:dist'
+ - 'bundle-client'
+ - 'minify'
+
+# NOTE: concat, uglify, and cssmin use the generated target populated by useminPrepare:index.
+minify:
+ - 'ngAnnotate'
+ - 'svgmin'
+ - 'imagemin'
+ - 'useminPrepare:views'
+ - 'usemin'
  - 'useminPrepare:index'
  - 'concat'
  - 'uglify'
  - 'cssmin'
  - 'filerev'
  - 'usemin'
+ - 'htmlmin'
 
-# TODO
-after-css:
- - 'imagemin'
- - 'svgmin'
 
-bootstrap:
- - 'shell:npm_install'
- - 'bower:install'
- - 'shell:protractor_update'
+##
+# Dependency environment bootstrapping tasks
+##
 
+##
 # Future/TBD
+##
 
 travis:
  - 'bower:install'

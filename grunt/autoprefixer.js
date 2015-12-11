@@ -5,10 +5,10 @@ module.exports = function(grunt, options) {
     options: {
       browsers: ['last 2 version']
     },
-    dist: {
+    dev: {
       files: [
         { expand: true, cwd: '<%= appConfig.app %>', src: ['**/*.css'], dest: '<%= appConfig.dev %>/client' },
-        { expand: true, cwd: '<%= appConfig.temp %>/less', src: ['**/*.css'], dest: '<%= appConfig.dev %>/client' }
+        { expand: true, cwd: '<%= appConfig.temp %>/client', src: ['**/*.css'], dest: '<%= appConfig.dev %>/client' }
       ]
     }
   };

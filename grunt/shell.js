@@ -1,22 +1,26 @@
 'use strict';
 
-module.exports = function(grunt, options) {
+module.exports = function shell(grunt, options) {
   return {
     options: {
-      stdout: true
+      stdout: true,
+      async: false
     },
-    selenium: {
-      command: 'node node_modules/protractor/bin/webdriver-manager start',
+    'protractor-install': {
       options: {
         stdout: false,
         async: true
-      }
+      },
+      command: 'node node_modules/protractor/bin/webdriver-manager start'
     },
-    protractor_update: {
+    'protractor-update': {
       command: 'node node_modules/protractor/bin/webdriver-manager update'
     },
-    npm_install: {
+    'npm-install': {
       command: 'npm install'
+    },
+    'npm-update': {
+      command: 'npm update'
     },
     examples: {
       command: 'node generate-examples.js'

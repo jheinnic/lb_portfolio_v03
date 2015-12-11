@@ -5,10 +5,7 @@
      options: {},
      build: {
        files: {
-         expand: true,
-         cwd: '<%= appConfig.app %>',
-         src: '**/*.js',
-         dest: '<%= appConfig.dev %>/client'
+         '<%= appConfig.dist %>/client/app.js': '<%= appConfig.dev %>/client/app.js'
        }
      }
    };

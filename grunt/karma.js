@@ -38,7 +38,7 @@ module.exports = function (grunt, options) {
             autoWatch: true,
             singleRun: true
         },
-        unit_coverage: {
+        'unit-coverage': {
             configFile: 'test/karma-unit.conf.js',
             autoWatch: false,
             singleRun: true,

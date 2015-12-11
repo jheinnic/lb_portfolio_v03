@@ -1,35 +1,46 @@
 'use strict';
-var getAvailPort = require('./utils/getAvailPort');
-var port = getAvailPort(8888);
 
 module.exports = function (grunt, options) {
-    return {
-        options: {
-            base: ''
-        },
-        webserver: {
-            options: {
-                port: port,
-                keepalive: true
-            }
-        },
-        devserver: {
-            options: {
-                port: 8888
-            }
-        },
-        testserver: {
-            options: {
-                port: 9999
-            }
-        },
-        coverage: {
-            options: {
-                base: 'coverage/',
-                directory: 'coverage/',
-                port: 5555,
-                keepalive: true
-            }
+  var getAvailPort = require('./utils/getAvailPort');
+  var assetPort = getAvailPort(8888);
+  var lrPort = getAvailPort(35729);
+
+  return {
+    serve: {
+      options: {
+        // hostname: 'localhost',
+        // host: 'localhost',
+        base: '',
+        port: assetPort,
+        livereload: lrPort,
+        keepalive: true,
+        middleware: function (connect) {
+          return [
+            connect.static('<%= appConfig.dev %>/client'),
+            connect.use('/vendor', '<%= appConfig.vendor %>')
+          ];
         }
-    };
+      }
+    },
+    test: {
+      options: {
+        base: '',
+        port: 9999,
+        middleware: function (connect) {
+          return [
+            connect.static('<%= appConfig.dev %>/client'),
+            connect.use('/vendor', '<%= appConfig.vendor %>')
+          ];
+        }
+      }
+    },
+    coverage: {
+      options: {
+        port: 5555,
+        keepalive: true,
+        base: 'coverage/',
+        directory: 'coverage/'
+      }
+    }
+  };
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(grunt, options) {
+module.exports = function less(grunt, options) {
   return {
     options: {
       paths: [
@@ -8,13 +8,13 @@ module.exports = function(grunt, options) {
         '<%= appConfig.vendor %>/bootstrap/less'
       ]
     },
-    dev: {
+    build: {
       ext: '.css',
       extDot: 'last',
       expand: true,
       cwd: '<%= appConfig.app %>',
       src: ['**/*.less'],
-      dest: '<%= appConfig.temp %>/less'
+      dest: '<%= appConfig.temp %>/client'
     }
   };
 };

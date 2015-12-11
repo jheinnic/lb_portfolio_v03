@@ -1,6 +1,18 @@
 'use strict';
 
 module.exports =
-  function (grunt, options) {
-    return {};
+  function svgmin(grunt,options) {
+    return {
+      dist: {
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: '<%= appConfig.app %>',
+            src: '**/*.svg',
+            dest: '<%= appConfig.dist %>/client'
+          }
+        ]
+      }
+    };
   };

@@ -7,6 +7,12 @@ module.exports = function (grunt, options) {
         targetDir: path.resolve(__dirname, appConfig.vendor),
         cleanup: true
       }
+    },
+    update: {
+      options: {
+        targetDir: path.resolve(__dirname, appConfig.vendor),
+        cleanup: true
+      }
     }
   };
 };

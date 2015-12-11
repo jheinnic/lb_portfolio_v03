@@ -6,8 +6,8 @@ module.exports = function (grunt, options) {
     dist: {
       src: [
         // This would likely break Angular code references to templates...
-        appConfig.dist + '/client/*.js',
-        appConfig.dist + '/client/**/*.{html,css,bmp,webp,png,jpg,jpeg,gif,svg,eot,ttf,woff,woff2}'
+        '<%= appConfig.dist %>/client/*.js',
+        '<%= appConfig.dist %>/client/**/*.{html,css,bmp,webp,png,jpg,jpeg,gif,svg,eot,ttf,woff,woff2}'
       ]
     }
   };

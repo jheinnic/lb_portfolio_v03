@@ -2,29 +2,23 @@
 
 module.exports = function (grunt, options) {
     return {
-        watchServe: {
-            tasks: ['watch:fast', 'connect:webserver'],
-            options: {
-                logConcurrentOutput: true
-            }
-        },
-        chrome: {
-            tasks: ['karma:unit-chrome', 'watch:chrome'],
-            options: {
-                logConcurrentOutput: true
-            }
-        },
-        unit: {
-            tasks: ['karma:unit', 'watch:unit'],
-            options: {
-                logConcurrentOutput: true
-            }
-        },
-        'unit-mocha': {
-            tasks: ['karma:unit-mocha', 'watch:unit-mocha'],
-            options: {
-                logConcurrentOutput: true
-            }
-        }
-    };
+      options: { logConcurrentOutput: true },
+      watchServe: {
+        tasks: ['connect:serve', 'nodemon:serve', 'node-inspector:serve', 'watch']
+      },
+
+      // Inherited targets:
+      watchConnect: {
+        tasks: ['watch:fast', 'connect:webserver'],
+      },
+      chrome: {
+        tasks: ['karma:unit-chrome', 'watch:chrome'],
+      },
+      unit: {
+        tasks: ['karma:unit', 'watch:unit'],
+      },
+      'unit-mocha': {
+        tasks: ['karma:unit-mocha', 'watch:unit-mocha'],
+      }
+  };
 };

@@ -1,15 +1,15 @@
 'use strict';
 
 var pkg = require('./utils/pkg');
-module.exports = function (grunt, options) {
-  function assetMethod(assetType, selfModule, moduleName, assetPath) {
-    if (assetPath === undefined) {
-      assetPath = moduleName;
-      moduleName = selfModule;
-    }
-
-    return assetType + '/' + moduleName + '/' + assetPath;
-  }
+module.exports = function jade(grunt, options) {
+  //function assetMethod(assetType, selfModule, moduleName, assetPath) {
+  //  if (assetPath === undefined) {
+  //    assetPath = moduleName;
+  //    moduleName = selfModule;
+  //  }
+  //
+  //  return assetType + '/' + moduleName + '/' + assetPath;
+  //}
 
   return {
     //play: {
@@ -31,17 +31,29 @@ module.exports = function (grunt, options) {
     //    '<%= appConfig.dev %>/play.html': '<%= appConfig.app %>/play.jade'
     //  }
     //},
-    build: {
+    dev: {
       options: {
-        data: function (dest, src) {
-          return {
-            isDevelopment: true,
-            method: function() { return 'Ah-hah!' }
-          };
-        }
+        data: { isDev: true }
+        //data: function (dest, src) {
+        //  return { isDev: true };
+        //}
       },
       files: {
-        '<%= appConfig.dev %>/client/index.html': '<%= appConfig.app %>/index.jade'
+        cwd: '<%= appConfig.app %>',
+        src: ['**/*.jade'],
+        expand: true, ext: '.html', extDot: 'last',
+        dest: '<%= appConfig.dev %>/client'
+      }
+    },
+    dist: {
+      options: {
+        data: { isDev: false }
+      },
+      files: {
+        cwd: '<%= appConfig.app %>',
+        src: ['**/*.jade'],
+        expand: true, ext: '.html', extDot: 'last',
+        dest: '<%= appConfig.dist %>/client'
       }
     }
   };

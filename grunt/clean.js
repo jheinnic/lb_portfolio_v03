@@ -6,6 +6,25 @@ module.exports = function (grunt, options) {
       force: false,
       "no-write": false
     },
+    all: {
+      dot: true,
+      src: [
+        '<%= appConfig.dev %>/*',
+        '<%= appConfig.dist %>/*',
+        '<%= appConfig.temp %>/*',
+        '<%= appConfig.stage %>/*',
+        '<%= appConfig.vendor %>/*'
+      ]
+    },
+    build: {
+      dot: true,
+      src: [
+        '<%= appConfig.dev %>/*',
+        '<%= appConfig.dist %>/*',
+        '<%= appConfig.temp %>/*',
+        '<%= appConfig.stage %>/*'
+      ]
+    },
     dist: {
       dot: true,
       src: '<%= appConfig.dist %>/*'
@@ -17,6 +36,10 @@ module.exports = function (grunt, options) {
     temp: {
       dot: true,
       src: '<%= appConfig.temp %>/*'
+    },
+    vendor: {
+      dot: true,
+      src: '<%= appConfig.vendor %>/*'
     }
   }
 };
