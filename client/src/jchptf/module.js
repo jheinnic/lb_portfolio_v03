@@ -1,4 +1,4 @@
-(function() {
+(function(angular) {
   'use strict';
 
   module.exports = 'jchptf';
@@ -32,4 +32,4 @@
   )
     .run(require('./run'))
   ;
-}).call(window);
+}).call(window, angular);

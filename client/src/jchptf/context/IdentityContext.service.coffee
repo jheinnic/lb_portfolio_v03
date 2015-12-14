@@ -1,9 +1,5 @@
 'use strict'
 
-module.exports = IdentityContext
-
-IdentityContext.$inject = ['$q', 'ContextModelPackageFactory']
-
 ###*
 # @ngdoc factory
 # @name jchptf.context:IdentityContext
@@ -21,10 +17,12 @@ IdentityContext.$inject = ['$q', 'ContextModelPackageFactory']
 # the backend to avoid the cost of redundant retrieval and also to
 # inform users about unresolved change propagation requirements.</li>
 # </ol>
-####
-class IdentityContext
+###
+module.exports = class IdentityContext
   AuthTokenEventKind = undefined
   AuthTokenEvent = undefined
+
+  @$inject = ['$q', 'ContextModelPackageFactory']
 
   constructor: ($q, ContextModelPackage) ->
     {AuthTokenEventKind,AuthTokenEvent} = ContextModelPackage
@@ -58,7 +56,7 @@ class IdentityContext
   # reply/result exchanges, or mutable/interactive objects that encapsulate
   # behavioral aspects of the domain they model, but these patterns can be
   # found on other services.
-  ####
+  ###
   # getAuthTokenModel: () ->
   #   AuthTokenEventEnum: AuthTokenEventEnum,
   #   AuthTokenEventClass: AuthTokenEvent

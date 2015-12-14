@@ -33,4 +33,4 @@
     .value('sync', client.sync)
     .value('network', client.network)
   ;
-}).call(window.angular);
+}).call(window, angular);
