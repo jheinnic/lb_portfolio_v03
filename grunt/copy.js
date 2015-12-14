@@ -5,7 +5,7 @@
 module.exports = function copy(grunt, options) {
   var appConfig = options.appConfig;
   var devAssetsPattern =
-    appConfig.app + '/**/*.{html,bmp,jpg,jpeg,gif,png,webp,svg,eot,ttf,woff,woff2}';
+    '**/*.{html,bmp,jpg,jpeg,gif,png,webp,svg,eot,ttf,woff,woff2}';
 
   return {
     vendor: {
@@ -18,51 +18,31 @@ module.exports = function copy(grunt, options) {
         }
       ]
     },
-    dev: {
+    nodeModules: {
       files: [
         {
           // TODO: This is what the slc deploy commands are for!!
           expand: true,
           dot: true,
-          src: ['global-config.js', 'package.json', 'bower.json', 'node_modules/**/*', '.npmrc', '.bowerrc', 'README.md'],
-          dest: appConfig.dev.root
-        }, {
-          expand: true,
-          cwd: appConfig.source.client + '/..',
-          src: 'lr_init.js',
-          dest: appConfig.dev.client
-        }, {
+          src: ['node_modules/**/*'],
+          dest: appConfig.dist.root
+        }
+      ]
+    },
+    dev: {
+      files: [
+        {
           expand: true,
           dot: true,
           cwd: appConfig.source.client,
-          src: [
-            devAssetsPattern, appConfig.app + '/.htaccess', appConfig.app + '/*.{ico,png,txt}'
-          ],
+          src: ['lr_init.js'],
           dest: appConfig.dev.client
         }, {
           expand: true,
           dot: true,
-          cwd: appConfig.source.common,
-          src: '**/*',
-          dest: appConfig.dev.common
-        }, {
-          expand: true,
-          dot: true,
-          cwd: appConfig.source.server,
-          src: '**/*',
-          dest: appConfig.dev.server
-        }, {
-          expand: true,
-          dot: true,
-          cwd: appConfig.vendor,
-          src: '**/*',
-          dest: appConfig.devroo + '/vendor'
-        }, {
-          expand: true,
-          dot: true,
-          cwd: appConfig.vendor,
-          src: '**/*',
-          dest: appConfig.dev.client + '/vendor'
+          cwd: appConfig.source.client + '/' + appConfig.app,
+          src: [devAssetsPattern, '.htaccess', '*.{png,txt,ico}'],
+          dest: appConfig.dev.client + '/' + appConfig.app
         }
       ]
     },
@@ -77,8 +57,9 @@ module.exports = function copy(grunt, options) {
       files: [
         {
           expand: true,
-          src: ['global-config.js', 'package.json', 'bower.json', 'node_modules/**/*', '.npmrc', '.bowerrc', 'README.md'],
-          dest: appConfig.dist.server
+          dot: true,
+          src: ['global-config.js', 'package.json', 'bower.json', '.npmrc', '.bowerrc', 'README.md'],
+          dest: appConfig.dist.root
         },
         {
           expand: true,
@@ -88,6 +69,12 @@ module.exports = function copy(grunt, options) {
             appConfig.app + '/**/*.{webp,eot,ttf,woff,woff2}', appConfig.app + '/{index.html,.htaccess,*.{ico,txt}}'
           ],
           dest: appConfig.dist.client
+        }, {
+          expand: true,
+          dot: true,
+          cwd: appConfig.source.common,
+          src: '**/*',
+          dest: appConfig.dist.common
         }, {
           expand: true,
           dot: true,

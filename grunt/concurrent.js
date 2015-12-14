@@ -4,6 +4,9 @@
   module.exports = function concurrent(/*grunt, options*/) {
     return {
       options: {logConcurrentOutput: true},
+      minify: {
+        tasks: ['minify', 'copy:nodeModules']
+      },
       watchServe: {
         tasks: ['nodemon:serve', 'node-inspector:serve', 'watch']
       },
