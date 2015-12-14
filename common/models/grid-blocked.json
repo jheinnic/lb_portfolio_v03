@@ -1,0 +1,15 @@
+{
+  "name": "GridBlocked",
+  "base": "GridRegion",
+  "idInjection": false,
+  "options": { },
+  "properties": {
+    "kind": {
+      "default": "blocked"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

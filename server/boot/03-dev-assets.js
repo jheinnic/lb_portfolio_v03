@@ -1,15 +1,21 @@
-var path = require('path');
+(function () {
+  'use strict';
 
-module.exports = function(app) {
-  if (!app.get('isDevEnv')) return;
+  module.exports = function (app) {
+    // TODO: Use a config property that defines whether to serve assets or to run as API-only
+    // if (app.get('isDevEnv') === false) return;
 
-  var serveDir = app.loopback.static;
+    var path = require('path');
+    var serveDir = app.loopback.static;
 
-  app.use(serveDir(projectPath('.tmp')));
-  app.use('/vendor', serveDir(projectPath('client/ngapp/vendor')));
-  app.use('/lbclient', serveDir(projectPath('client/lbclient')));
-};
-
-function projectPath(relative) {
-  return path.resolve(__dirname, '../..', relative);
-}
+    // Build configuration can allow dev/dist builds to happen anywhere, but it always leaves:
+    // 1) 'client' a sibling of 'server'
+    // 2) 'boot' a child of 'server'
+    // So the path from a script in boot to the content root in client is always ../../client.
+    app.use(
+      serveDir(
+        path.resolve(__dirname, '../../client')
+      )
+    );
+  };
+}).call();

@@ -1,0 +1,264 @@
+##
+# Build-time test targets (TODO: Not thoroughly implemented or populated)
+##
+
+test:
+ - 'lint-for-test'
+ - 'test-unit'
+ - 'test-e2e'
+
+test-unit:
+ - 'lint-for-test'
+ - 'karma:unit'
+
+test-unit-chrome:
+ - 'lint-for-test'
+ - 'karma:unit-chrome'
+
+test-coverage:
+ - 'lint-for-test'
+ - 'karma:unit-coverage'
+
+coverage:
+ - 'test-coverage'
+ - 'open:coverage'
+ - 'connect:coverage'
+
+test-e2e:
+ - 'lint-for-test'
+ - 'update-env'
+ - 'connect:test'
+ - 'protractor:run'
+
+test-e2e-firefox:
+ - 'lint-for-test'
+ - 'update-env'
+ - 'connect:testserver'
+ - 'protractor:firefox'
+
+lint-build:
+ - 'jshint:build'
+ - 'coffeelint:build'
+
+lint-source:
+ - 'jshint:source'
+ - 'coffeelint:source'
+
+lint-test:
+ - 'jshint:test'
+ - 'coffeelint:test'
+
+lint-for-build:
+ - 'lint-build'
+ - 'lint-source'
+
+lint-for-test:
+ - 'lint-build'
+ - 'lint-source'
+ - 'lint-test'
+
+
+##
+# Continuous test targets for developers
+##
+
+spec: # continuous running specs
+ - 'clean:build'
+ - 'dev-build'
+ - 'concurrent:unit-mocha'
+
+spec-chrome:
+ - 'clean:build'
+ - 'dev-build'
+ - 'concurrent:chrome'
+
+dev-test-unit:
+ - 'clean:build'
+ - 'dev-build'
+ - 'concurrent:unit'
+
+
+##
+# Continuous targets for developers (TODO: Watch target subsets not yet implemented!)
+##
+
+dev:
+ - 'concurrent:watchServe'
+
+dev-connect:
+ - 'connect:dev'
+ - 'open:dev'
+ - 'watch:source'
+
+dev-connect-chrome:
+ - 'connect:dev'
+ - 'open:devserver'
+ - 'watch:chrome'
+
+
+##
+# One-time toolchain targets
+##
+
+env-install:
+ - 'clean:all'
+ - 'shell:npm-install'
+ - 'bower:install'
+ - 'shell:protractor-install'
+ - 'mkdir'
+
+update-env:
+ - 'clean:build'
+ - 'shell:npm-update'
+ - 'bower:update'
+ - 'shell:protractor-update'
+ - 'mkdir'
+
+reset-build:
+ - 'clean:build'
+ - 'mkdir'
+
+
+##
+# One-time build targets
+##
+
+default:
+ - 'build'
+
+build:
+ - 'update-env'
+ - 'lint-for-build'
+ - 'make-dev-build'
+ - 'cont-dist-build'
+
+build-release:
+ - 'env-install'
+ - 'lint-for-build'
+ - 'make-dist-build'
+
+# NOTE: copy:dev must precede jade:dev to ensure index.html or index.jade remains optional.
+# NOTE: copy:dev must precede autoprefixer:dev to ensure less preprocessing is optional.
+make-dev-build:
+ - 'less'
+ - 'copy:dev'
+ - 'jade:dev'
+ - 'autoprefixer:dev'
+ - 'wiredep:dev'
+ - 'htmlbuild:dev'
+ - 'bundle-client'
+
+# NOTE: This build target is only valid after having evaluated 'dev-build'.  For CSS, it reuses
+#       less and autoprefix preprocessor outputs.  For HTML, it reuses jade output for templates,
+#       but rebuilds index.html from source.  It copies the Browserify bundle from the dev build,
+#       and all other files from source, then performs minification.
+# NOTE: copy:dist must precede jade:dist to ensure index.html or index.jade remains optional.
+cont-dist-build:
+ - 'copy:dist'
+ - 'jade:dist'
+ - 'wiredep:dist'
+ - 'htmlbuild:dist'
+ - 'minify'
+
+# NOTE: This will still populates some content under build/dev, but it will not include all
+#       files produced during a real dev build.  Optimizable image assets are populated as output
+#       of their appropriate optimizer from source (imagemin and svgmin), and non-optimizable
+#       iamges and fonts are only copied once from source to dist (copy:dist).  HTML processing for
+#       index.html, is performed once for dist (copy:dist, jade:dist, wiredep:dist, and htmlbuild:dist),
+#       but skipped for dev (Same plugins with :dev subtargets).
+# NOTE: copy:dist must precede jade:dist to ensure index.html or index.jade remains optional.
+# NOTE: copy:dist must precede autoprefixer:dist to ensure less preprocessing is optional.
+make-dist-build:
+ - 'less'
+ - 'copy:dist'
+ - 'jade:dist'
+ - 'autoprefixer:dist'
+ - 'wiredep:dist'
+ - 'htmlbuild:dist'
+ - 'bundle-client'
+ - 'minify'
+
+# NOTE: concat, uglify, and cssmin use the generated target populated by useminPrepare:index.
+minify:
+ - 'svgmin'
+ - 'imagemin'
+ - 'ngAnnotate'
+ - 'useminPrepare:views'
+ - 'usemin'
+ - 'useminPrepare:index'
+ - 'concat'
+ - 'uglify'
+ - 'cssmin'
+ - 'filerev'
+ - 'usemin'
+ - 'htmlmin'
+
+
+##
+# Dependency environment bootstrapping tasks
+##
+
+##
+# Future/TBD
+##
+
+travis:
+ - 'bower:install'
+ - 'dev-build'
+ - 'test-unit'
+
+bump-@:
+ - 'changelog:patch'
+ - 'build-release'
+ - 'bump-only'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-minor:
+ - 'changelog:minor'
+ - 'build-release'
+ - 'bump-only:minor'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-major:
+ - 'changelog:major'
+ - 'build-release'
+ - 'bump-only:major'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-pre:
+ - 'changelog:prerelease'
+ - 'build-release'
+ - 'bump-only:prerelease'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-prepatch:
+ - 'changelog:prepatch'
+ - 'build-release'
+ - 'bump-only:prepatch'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-preminor:
+ - 'changelog:preminor'
+ - 'build-release'
+ - 'bump-only:preminor'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-premajor:
+ - 'changelog:premajor'
+ - 'build-release'
+ - 'bump-only:premajor'
+ - 'graph'
+ - 'bump-commit'
+
+examples:
+ - 'shell:examples'
+ - 'concat:examples'
+
+graph:
+ - 'angular_architecture_graph'

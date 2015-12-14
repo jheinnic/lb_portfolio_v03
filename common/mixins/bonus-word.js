@@ -1,12 +1,12 @@
+'use strict';
+
 module.exports = function(BonusWord, options) {
   // BonusWord is the model class
   // options is an object containing the config properties from model definition
   var _ = require('lodash');
   var numPrizes = (_.isArray(options.prizeValues)) ? options.prizeValues.length : 0;
   var bonusWordLength =
-    ((options.bonusWordLength > 0) && options.bonusWordLength <= 26)
-      ? options.bonusWordLength
-      : 5;
+    (options.bonusWordLength > 0 && options.bonusWordLength <= 26) ? options.bonusWordLength : 5;
 
   BonusWord.defineProperty('bonusWord', {type: 'string', default: '', length: bonusWordLength});
   BonusWord.defineProperty('prizeValue', {type: 'number', default: -1, min: -1, max: numPrizes});
@@ -25,7 +25,7 @@ module.exports = function(BonusWord, options) {
   });
 
   BonusWord.prototype.isPrizeValueKnown = function isPrizeValueKnown() {
-    var retVal = undefined;
+    var retVal;
     if (this.isValid()) {
       retVal = (this.prizeValue > 0);
     }
@@ -34,7 +34,7 @@ module.exports = function(BonusWord, options) {
   };
 
   BonusWord.prototype.isWordCovered = function isWordCovered(yourLettersSet) {
-    var retVal = undefined;
+    var retVal;
     if (this.isValid()) {
       retVal = this.bonusWord.split('').every(
         function isLetterCovered(reqdLetter) {
@@ -54,12 +54,12 @@ module.exports = function(BonusWord, options) {
    * @return
    */
   BonusWord.prototype.isPayoutKnown = function isPayoutKnown(yourLettersSet) {
-    var retVal = undefined;
+    var retVal;
     if (this.isValid()) {
       retVal = (this.isPrizeValueKnown() && this.isWordCovered(yourLettersSet));
     }
 
     return retVal;
-  }
+  };
 };
 

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xw="http://info.jchein/ECORE+Crossword+Resource+Representations/EN/0.0.1" targetNamespace="http://info.jchein/ECORE+Crossword+Resource+Representations/EN/0.0.1">
+  <xsd:import namespace="http://www.omg.org/XMI" schemaLocation="platform:/plugin/org.eclipse.emf.ecore/model/XMI.xsd"/>
+  <xsd:simpleType name="BonusValue">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="FOUR"/>
+      <xsd:enumeration value="FIVE"/>
+      <xsd:enumeration value="TEN"/>
+      <xsd:enumeration value="THIRTY"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="PendingTicketDetail">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="boardContent" type="xsd:string"/>
+    <xsd:attribute name="bonusWord" type="xsd:string"/>
+    <xsd:attribute name="twentySpotIncluded" type="xsd:boolean"/>
+  </xsd:complexType>
+  <xsd:element name="PendingTicketDetail" type="xw:PendingTicketDetail"/>
+  <xsd:complexType name="PublishedTicketDetail">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="boardContent" type="xsd:string"/>
+    <xsd:attribute name="bonusWord" type="xsd:string"/>
+    <xsd:attribute name="twentySpotIncluded" type="xsd:boolean"/>
+  </xsd:complexType>
+  <xsd:element name="PublishedTicketDetail" type="xw:PublishedTicketDetail"/>
+  <xsd:complexType name="BoardCoverage">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="bonusWord" type="xw:BonusWordCoverage"/>
+      <xsd:element name="allWords" type="xw:GridWordCoverage"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="BoardCoverage" type="xw:BoardCoverage"/>
+  <xsd:complexType abstract="true" name="AbstractWordCoverage">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="rawWord" type="xsd:string"/>
+    <xsd:attribute name="displayWord" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="AbstractWordCoverage" type="xw:AbstractWordCoverage"/>
+  <xsd:complexType name="BonusWordCoverage">
+    <xsd:complexContent>
+      <xsd:extension base="xw:AbstractWordCoverage"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="BonusWordCoverage" type="xw:BonusWordCoverage"/>
+  <xsd:complexType name="GridWordCoverage">
+    <xsd:complexContent>
+      <xsd:extension base="xw:AbstractWordCoverage"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="GridWordCoverage" type="xw:GridWordCoverage"/>
+  <xsd:complexType name="RevealedInformation">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="letterPool" type="xsd:string"/>
+    <xsd:attribute name="twentySpotPaid" type="xsd:boolean"/>
+    <xsd:attribute name="bonusValue" type="xw:BonusValue"/>
+  </xsd:complexType>
+  <xsd:element name="RevealedInformation" type="xw:RevealedInformation"/>
+  <xsd:complexType name="PrizeAnalysis">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="prizeDistribution" type="xsd:int"/>
+      <xsd:element name="dynamicInput" type="xw:RevealedInformation"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="PrizeAnalysis" type="xw:PrizeAnalysis"/>
+  <xsd:complexType name="PlayableTicket">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="fixedDetails" type="xw:PublishedTicketDetail"/>
+      <xsd:element name="dynamicInput" type="xw:RevealedInformation"/>
+      <xsd:element name="latestAnalysis" type="xw:PrizeAnalysis"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="PlayableTicket" type="xw:PlayableTicket"/>
+  <xsd:complexType name="ResolvedTicket">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="fixedDetails" type="xw:PublishedTicketDetail"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="letterPool" type="xsd:string"/>
+    <xsd:attribute name="twentySpotPaid" type="xsd:boolean"/>
+    <xsd:attribute name="bonusValue" type="xw:BonusValue" use="required"/>
+    <xsd:attribute name="payoutTier" type="xsd:int"/>
+  </xsd:complexType>
+  <xsd:element name="ResolvedTicket" type="xw:ResolvedTicket"/>
+</xsd:schema>

@@ -1,0 +1,86 @@
+@namespace(uri="http://info.jchein/ECORE+Crossword+Resource+Representations/EN/0.0.1", prefix="xw")
+@genmodel(basePackage="info.jchein.sandbox.app.crossword.resources")
+package xw;
+
+class PendingTicketDetail {
+	attr String boardContent = "_________________________________________________________________________________________________________________________";
+	unsettable attr String bonusWord;
+	unsettable attr boolean twentySpotIncluded;
+	derived readonly volatile transient attr String[0..22] allWords;
+	derived readonly volatile transient attr String[0..18] basicWords;
+	derived readonly volatile transient attr String[0..4] tripleWords;
+	derived readonly volatile transient attr boolean publishable;
+}
+
+class PublishedTicketDetail {
+	attr String boardContent;
+    attr String bonusWord;
+	attr boolean twentySpotIncluded;
+}
+
+enum BonusValue {
+	FOUR=0;
+	FIVE=1;
+	TEN=2;
+	THIRTY=3;
+}
+
+class BoardCoverage {
+	val BonusWordCoverage[1] bonusWord;
+	val GridWordCoverage[22] allWords;
+	derived readonly volatile transient val GridWordCoverage[18] basicWords;
+	derived readonly volatile transient val GridWordCoverage[4] tripleWords;	
+}
+
+abstract class AbstractWordCoverage {
+	attr String rawWord;
+	attr String displayWord;
+	derived readonly volatile transient attr String uncoveredLetters;
+}
+
+class BonusWordCoverage extends AbstractWordCoverage {
+	derived readonly volatile transient attr boolean bonusPaid;
+}
+
+class GridWordCoverage extends AbstractWordCoverage {
+	derived readonly volatile transient attr boolean wordCovered;
+	derived readonly volatile transient attr boolean tripling;
+}
+
+class RevealedInformation {
+	attr String letterPool = "__________________";
+	unsettable attr boolean twentySpotPaid;
+	unsettable attr BonusValue bonusValue;
+}
+
+class PrizeAnalysis {
+	attr int[18] prizeDistribution;
+	val RevealedInformation dynamicInput;
+}
+
+class PlayableTicket {
+	val PublishedTicketDetail[1] fixedDetails;
+	derived readonly volatile transient attr String boardContent;
+	derived readonly volatile transient attr String bonusWord;
+	derived readonly volatile transient attr boolean twentySpotIncluded;
+
+	val RevealedInformation[1] dynamicInput;
+	val PrizeAnalysis[0..1] latestAnalysis;
+	
+	derived readonly volatile transient val BoardCoverage boardCoverage;
+	derived readonly volatile transient attr boolean resolved;	
+}
+
+class ResolvedTicket {
+	val PublishedTicketDetail[1] fixedDetails;
+	derived readonly volatile transient attr String boardContent;
+	derived readonly volatile transient attr String bonusWord;
+	derived readonly volatile transient attr boolean twentySpotIncluded;
+	
+	attr String letterPool;
+	attr boolean twentySpotPaid;
+	attr BonusValue[1] bonusValue;
+	attr int payoutTier;
+	
+	derived readonly volatile transient val BoardCoverage boardCoverage;
+}

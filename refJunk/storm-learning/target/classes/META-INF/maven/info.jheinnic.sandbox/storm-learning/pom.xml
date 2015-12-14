@@ -1,0 +1,161 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>info.jheinnic.sandbox</groupId>
+	<artifactId>storm-learning</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Apache Storm Standbox</name>
+	<description>For learning Apache Storm 0.9.1</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.7</java.version>
+		<release.version>0.0.1-SNAPSHOT</release.version>
+
+		<storm.version>0.9.1-incubating</storm.version>
+		<tycho.version>0.20.0-SNAPSHOT</tycho.version>
+
+		<maven-compiler.plugin-version>3.1</maven-compiler.plugin-version>
+		<maven-surefire.plugin-version>2.10</maven-surefire.plugin-version>
+
+		<eclipse.repo-url>http://download.eclipse.org/releases/kepler</eclipse.repo-url>
+		<epsilon.repo-url>http://download.eclipse.org/epsilon/updates</epsilon.repo-url>
+		<paho.repo-url>https://repo.eclipse.org/content/repositories/paho-releases/</paho.repo-url>
+
+		<tycho-maven-repo.url>https://oss.sonatype.org/content/groups/public/</tycho-maven-repo.url>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.storm</groupId>
+			<artifactId>storm-core</artifactId>
+			<version>${storm.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.paho</groupId>
+			<artifactId>mqtt-client</artifactId>
+			<version>0.4.0</version>
+		</dependency>
+
+		<!-- Test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler.plugin-version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.4.1</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.3.1</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.5</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire.plugin-version}</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-versions-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<newVersion>${release.version}</newVersion>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>eclipse-kepler</id>
+			<url>${eclipse.repo-url}</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>eclipse-epsilon</id>
+			<url>${epsilon.repo-url}</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>paho-mqtt-client</id>
+			<name>Paho MQTT Client</name>
+			<url>${paho.repo-url}</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>tycho</id>
+			<url>${tycho-maven-repo.url}</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<profiles>
+		<profile>
+			<id>coverage</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<modules>
+				<module>org.eclemma.runtime.equinox</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>static-checks</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>findbugs-maven-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-pmd-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

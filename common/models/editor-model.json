@@ -37,6 +37,13 @@
   },
   "validations": [],
   "relations": {
+    "_sourceTicket": {
+      "type": "belongsTo",
+      "model": "XwTicket",
+      "property": "sourceTicket",
+      "properties": ["gridContent"],
+      "foreignKey": "sourceTicketId"
+    },
     "_horizontalModel": {
       "type": "embedsOne",
       "model": "OrientationModel",

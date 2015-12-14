@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xw" nsURI="http://info.jchein/ECORE+Crossword+Resource+Representations/EN/0.0.1"
+    nsPrefix="xw">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="basePackage" value="info.jchein.sandbox.app.crossword.resources"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="PendingTicketDetail">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boardContent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="_________________________________________________________________________________________________________________________"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bonusWord" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="twentySpotIncluded" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allWords" upperBound="22"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="basicWords" upperBound="18"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tripleWords" upperBound="4"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="publishable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PublishedTicketDetail">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boardContent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bonusWord" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="twentySpotIncluded" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BonusValue">
+    <eLiterals name="FOUR"/>
+    <eLiterals name="FIVE" value="1"/>
+    <eLiterals name="TEN" value="2"/>
+    <eLiterals name="THIRTY" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BoardCoverage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bonusWord" lowerBound="1"
+        eType="#//BonusWordCoverage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allWords" lowerBound="22"
+        upperBound="22" eType="#//GridWordCoverage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="basicWords" lowerBound="18"
+        upperBound="18" eType="#//GridWordCoverage" changeable="false" volatile="true"
+        transient="true" derived="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tripleWords" lowerBound="4"
+        upperBound="4" eType="#//GridWordCoverage" changeable="false" volatile="true"
+        transient="true" derived="true" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractWordCoverage" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rawWord" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayWord" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uncoveredLetters" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BonusWordCoverage" eSuperTypes="#//AbstractWordCoverage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bonusPaid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GridWordCoverage" eSuperTypes="#//AbstractWordCoverage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wordCovered" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tripling" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RevealedInformation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="letterPool" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="__________________"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="twentySpotPaid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bonusValue" eType="#//BonusValue"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrizeAnalysis">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prizeDistribution" lowerBound="18"
+        upperBound="18" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicInput" eType="#//RevealedInformation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlayableTicket">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fixedDetails" lowerBound="1"
+        eType="#//PublishedTicketDetail" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boardContent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bonusWord" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="twentySpotIncluded" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicInput" lowerBound="1"
+        eType="#//RevealedInformation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="latestAnalysis" eType="#//PrizeAnalysis"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boardCoverage" eType="#//BoardCoverage"
+        changeable="false" volatile="true" transient="true" derived="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ResolvedTicket">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fixedDetails" lowerBound="1"
+        eType="#//PublishedTicketDetail" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boardContent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bonusWord" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="twentySpotIncluded" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="letterPool" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="twentySpotPaid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bonusValue" lowerBound="1"
+        eType="#//BonusValue"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="payoutTier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boardCoverage" eType="#//BoardCoverage"
+        changeable="false" volatile="true" transient="true" derived="true" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

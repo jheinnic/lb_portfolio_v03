@@ -1,3 +1,10 @@
-module.exports = function(FiveXTicket) {
+(
+  function () {
+    'use strict';
 
-};
+    module.exports = function (FiveXTicket) {
+      // Just for jshint
+      return FiveXTicket;
+    };
+  }
+).call();

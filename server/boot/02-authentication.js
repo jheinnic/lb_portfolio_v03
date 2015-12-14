@@ -1,5 +1,11 @@
-module.exports = function(server) {
+(function () {
+  'use strict';
 
-// enable authentication
-// server.enableAuth();
-};
+  module.exports = function (app) {
+    // enable authentication
+    // app.enableAuth();
+
+    // Just for jshint for now
+    return app;
+  };
+}).call();

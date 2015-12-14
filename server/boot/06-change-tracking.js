@@ -1,20 +1,35 @@
-module.exports = function(server) {
-  var _        = require('lodash'),
-      db       = server.dataSources.db,
-      modelCfg = require('../model-config');
+(function () {
+  'use strict';
 
-  // TODO(ritch) this should be unecessary soon....
-  _.chain(Object.keys(modelCfg))
-    .without('_meta')
-    .map(function (name) { return server.models[name]; })
-    .filter(function(model) { return ! _.isUndefined(model.Change); })
-    .each(function(model) { server.model(model.getChangeModel()); });
+  module.exports = function (app) {
+    var _  = require('lodash');
+    var modelCfg = require('../model-config');
+    // var db = app.dataSources.db,
 
-  //.map(function (name) { console.log(db[name]); return db[name]; })
-  //   .filter(function(model) { console.error(model); return _.isDefined(model.Change); })
-  //   .valueOf();
-  // console.log(models);
+    // TODO(ritch) this should be unecessary soon....
+    _.chain(Object.keys(modelCfg)
+    ).without('_meta'
+    ).map(
+      function (name) {
+        return app.models[name];
+      }
+    ).filter(
+      function (model) {
+        return !_.isUndefined(model.Change);
+      }
+    ).each(
+      function (model) {
+        app.model(model.getChangeModel());
+        console.log('Added change model for: ', model.name);
+      }
+    );
 
-  // var Todo = server.models.Todo;
-  // server.model(Todo.getChangeModel());
-};
+    //.map(function (name) { console.log(db[name]); return db[name]; })
+    //   .filter(function(model) { console.error(model); return _.isDefined(model.Change); })
+    //   .valueOf();
+    // console.log(models);
+
+    // var Todo = app.models.Todo;
+    // app.model(Todo.getChangeModel());
+  };
+}).call();

@@ -1,3 +1,10 @@
-module.exports = function(CellOrientation) {
+(
+  function () {
+    'use strict';
 
-};
+    module.exports = function (CellOrientation) {
+      // NOTE: Just to satisfy jshint.
+      return CellOrientation;
+    };
+  }
+).call();

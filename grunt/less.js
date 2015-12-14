@@ -1,20 +1,22 @@
 'use strict';
 
 module.exports = function less(grunt, options) {
+  var appConfig = options.appConfig;
+
   return {
     options: {
       paths: [
-        '<%= appConfig.app %>',
-        '<%= appConfig.vendor %>/bootstrap/less'
+        appConfig.source.client,
+        appConfig.vendor + '/bootstrap/less'
       ]
     },
     build: {
-      ext: '.css',
-      extDot: 'last',
       expand: true,
-      cwd: '<%= appConfig.app %>',
-      src: ['**/*.less'],
-      dest: '<%= appConfig.temp %>/client'
+      cwd: appConfig.source.client,
+      src: '**/*.less',
+      dest: appConfig.temp.client,
+      ext: '.css',
+      extDot: 'last'
     }
   };
 };

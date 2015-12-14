@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:pcalc="http://info.jchein/ECORE+Crossword+Storm+Topology+Messages/EN/0.0.1" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xw="http://info.jchein/ECORE+Crossword+Resource+Representations/EN/0.0.1" targetNamespace="http://info.jchein/ECORE+Crossword+Storm+Topology+Messages/EN/0.0.1">
+  <xsd:import namespace="http://www.omg.org/XMI" schemaLocation="platform:/plugin/org.eclipse.emf.ecore/model/XMI.xsd"/>
+  <xsd:import namespace="http://info.jchein/ECORE+Crossword+Resource+Representations/EN/0.0.1" schemaLocation="xw.xsd"/>
+  <xsd:complexType name="AsyncPrizeAnalysisRequest">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="revealedInfo" type="xw:RevealedInformation"/>
+      <xsd:element name="boardCoverage" type="xw:BoardCoverage"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="ticketHref" type="xsd:string"/>
+    <xsd:attribute name="revealedInfo" type="xsd:string"/>
+    <xsd:attribute name="boardCoverage" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="AsyncPrizeAnalysisRequest" type="pcalc:AsyncPrizeAnalysisRequest"/>
+  <xsd:complexType name="AsyncPrizeAnalysisResponse">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="AsyncPrizeAnalysisResponse" type="pcalc:AsyncPrizeAnalysisResponse"/>
+  <xsd:complexType name="ReportPrizeAnalysisRequest">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="prizeAnalysis" type="xw:PrizeAnalysis"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="prizeAnalysis" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="ReportPrizeAnalysisRequest" type="pcalc:ReportPrizeAnalysisRequest"/>
+  <xsd:complexType name="ReportPrizeAnalysisResponse">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="ReportPrizeAnalysisResponse" type="pcalc:ReportPrizeAnalysisResponse"/>
+  <xsd:complexType name="AvailableLetter">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="letter" type="xsd:string" use="required"/>
+    <xsd:attribute name="wordHitMask" type="xsd:string" use="required"/>
+  </xsd:complexType>
+  <xsd:element name="AvailableLetter" type="pcalc:AvailableLetter"/>
+  <xsd:complexType name="TicketState">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="incompleteWords" type="xsd:int"/>
+      <xsd:element name="availableLetters" type="pcalc:AvailableLetter"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="bonusWordIndex" type="xsd:int"/>
+    <xsd:attribute name="tripled" type="xsd:boolean"/>
+    <xsd:attribute name="wordsCompleted" type="xsd:int"/>
+  </xsd:complexType>
+  <xsd:element name="TicketState" type="pcalc:TicketState"/>
+  <xsd:complexType name="BeginCalculation">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="ticketState" type="pcalc:TicketState"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="ticketHref" type="xsd:string"/>
+    <xsd:attribute name="ticketState" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="BeginCalculation" type="pcalc:BeginCalculation"/>
+  <xsd:complexType name="SubtaskRequest">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="pStateInit" type="xsd:int"/>
+      <xsd:element name="ticketState" type="pcalc:TicketState"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="subTaskId" type="xsd:string"/>
+    <xsd:attribute name="taskId" type="xsd:string"/>
+    <xsd:attribute name="ticketHref" type="xsd:string"/>
+    <xsd:attribute name="maxPermutes" type="xsd:int"/>
+    <xsd:attribute name="ticketState" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="SubtaskRequest" type="pcalc:SubtaskRequest"/>
+  <xsd:complexType name="SubtaskResponse">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="prizeDistribution" type="xsd:int"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="subTaskId" type="xsd:string"/>
+    <xsd:attribute name="taskId" type="xsd:string"/>
+    <xsd:attribute name="ticketHref" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="SubtaskResponse" type="pcalc:SubtaskResponse"/>
+  <xsd:complexType name="TaskResult">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="report" type="xw:PrizeAnalysis"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="taskId" type="xsd:string"/>
+    <xsd:attribute name="ticketHref" type="xsd:string"/>
+    <xsd:attribute name="report" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="TaskResult" type="pcalc:TaskResult"/>
+</xsd:schema>

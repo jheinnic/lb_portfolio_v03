@@ -1,11 +1,17 @@
-'use strict';
+(function () {
+  'use strict';
 
-module.exports = function (grunt, options) {
-  return {
-    diagram: {
-      files: {
-        "dist/architecture": ["dist/<%= pkg.name %>.js"]
+  module.exports = function angularArchitectureGraph(grunt, options) {
+    var appConfig = options.appConfig;
+
+    var retVal = {
+      diagram: {
+        files: {
+        }
       }
-    }
+    };
+    retVal.diagram.files[appConfig.dist.client + '/architecture'] = [appConfig.dist.client + '/app.js'];
+
+    return retVal;
   };
-};
+}).call();

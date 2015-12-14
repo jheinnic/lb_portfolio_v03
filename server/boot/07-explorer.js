@@ -1,11 +1,22 @@
-var explorer = require('loopback-explorer');
+(function () {
+  'use strict';
 
-module.exports = function(server) {
-  var restApiRoot = server.get('restApiRoot');
+  module.exports = function (app) {
+    var restApiRoot = app.get('restApiRoot');
+    var explorer = require('loopback-explorer');
 
-  var explorerApp = explorer(server, { mountPath: '/explorer', basePath: restApiRoot });
-  server.once('started', function() {
-    var baseUrl = server.get('url').replace(/\/$/, '');
-    console.log('Browse your REST API at %s%s', baseUrl, '/explorer');
-  });
-};
+    explorer(
+      app, {
+        mountPath: '/explorer',
+        basePath: restApiRoot
+      }
+    );
+
+    app.once(
+      'started', function () {
+        var baseUrl = app.get('url').replace(/\/$/, '');
+        console.log('Browse your REST API at %s%s', baseUrl, '/explorer');
+      }
+    );
+  };
+}).call();

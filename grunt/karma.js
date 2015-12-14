@@ -1,59 +1,70 @@
-'use strict';
+(function () {
+  'use strict';
 
-module.exports = function (grunt, options) {
+  module.exports = function karma(grunt, options) {
+    var appConfig = options.appConfig;
+
     return {
-        unit: {
-            configFile: 'test/karma-unit.conf.js',
-            autoWatch: false,
-            singleRun: true
+      unit: {
+        configFile: appConfig.test.client + '/karma-unit.conf.js',
+        autoWatch: false,
+        singleRun: true
+      },
+      'unit-mocha': {
+        configFile: appConfig.test.client + '/karma-unit.conf.js',
+        autoWatch: false,
+        singleRun: true,
+        reporters: ['mocha']
+      },
+      'unit-dots': {
+        configFile: appConfig.test.client + '/karma-unit.conf.js',
+        autoWatch: false,
+        singleRun: true,
+        reporters: ['dots']
+      },
+      'unit-chrome': {
+        configFile: appConfig.test.client + '/karma-unit.conf.js',
+        browsers: ['Chrome'],
+        autoWatch: true,
+        singleRun: false
+      },
+      'unit-chrome-mocha': {
+        configFile: appConfig.test.client + '/karma-unit.conf.js',
+        browsers: ['Chrome'],
+        autoWatch: true,
+        singleRun: false,
+        reporters: ['mocha']
+      },
+      'unit-chrome-once': {
+        configFile: appConfig.test.client + '/karma-unit.conf.js',
+        browsers: ['Chrome'],
+        autoWatch: true,
+        singleRun: true
+      },
+      'unit-coverage': {
+        configFile: appConfig.test.client + '/karma-unit.conf.js',
+        autoWatch: false,
+        singleRun: true, //logLevel: 'DEBUG',
+        reporters: ['progress', 'coverage'], // TODO: Use appConfig here too!!!
+        preprocessors: {
+          '{client,common,server}/**/*.coffee': ['coffee'],
+          '<%= appConfig.dist %>/app.js': ['coverage'],
+          '<%= appConfig.app %>/**/*.js': ['coverage']
         },
-        'unit-mocha': {
-            configFile: 'test/karma-unit.conf.js',
-            autoWatch: false,
-            singleRun: true,
-            reporters: ['mocha']
-        },
-        'unit-dots': {
-            configFile: 'test/karma-unit.conf.js',
-            autoWatch: false,
-            singleRun: true,
-            reporters: ['dots']
-        },
-        'unit-chrome': {
-            configFile: 'test/karma-unit.conf.js',
-            browsers: ['Chrome'],
-            autoWatch: true,
-            singleRun: false
-        },
-        'unit-chrome-mocha': {
-            configFile: 'test/karma-unit.conf.js',
-            browsers: ['Chrome'],
-            autoWatch: true,
-            singleRun: false,
-            reporters: ['mocha']
-        },
-        'unit-chrome-once': {
-            configFile: 'test/karma-unit.conf.js',
-            browsers: ['Chrome'],
-            autoWatch: true,
-            singleRun: true
-        },
-        'unit-coverage': {
-            configFile: 'test/karma-unit.conf.js',
-            autoWatch: false,
-            singleRun: true,
-            //logLevel: 'DEBUG',
-            reporters: ['progress', 'coverage'],
-            preprocessors: {
-                'test/**/**/*.coffee': ['coffee'],
-                'dist/angular-leaflet-directive.js': ['coverage']
-            },
-            coverageReporter: {
-                reporters:[
-                    {type: 'lcov', dir:'coverage/', subdir:'report'},
-                    {type: 'text-summary', dir:'coverage/', subdir:'report'}
-                ]
+        coverageReporter: {
+          reporters: [
+            {
+              type: 'lcov',
+              dir: 'coverage/',
+              subdir: 'report'
+            }, {
+              type: 'text-summary',
+              dir: 'coverage/',
+              subdir: 'report'
             }
+          ]
         }
+      }
     };
-};
+  };
+}).call();

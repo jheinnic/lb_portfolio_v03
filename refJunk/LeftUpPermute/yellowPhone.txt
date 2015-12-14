@@ -1,0 +1,494 @@
+Calculating naive possibilities... (This may take a while)
+
+For a bonus spot value of <30>, the distribution is:
+** <233242> combinations won nothing
+** <199748> combinations won <3>
+** <173765> combinations won <4>
+** <133575> combinations won <5>
+** <91899> combinations won <10>
+** <48311> combinations won <12>
+** <57002> combinations won <15>
+** <58577> combinations won <20>
+** <73451> combinations won <30>
+** <47584> combinations won <50>
+** <71869> combinations won <60>
+** <13548> combinations won <100>
+** <52618> combinations won <150>
+** <39357> combinations won <300>
+** <4581> combinations won <1000>
+** <25181> combinations won <3000>
+** <1282> combinations won <20000>
+** <236685> combinations were invalid
+==========
+Total combinations = <1562275>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+l
+
+Factoring in <l>...
+For a bonus spot value of <30>, the distribution is:
+** <180353> combinations won nothing
+** <144321> combinations won <3>
+** <124714> combinations won <4>
+** <94341> combinations won <5>
+** <62627> combinations won <10>
+** <35403> combinations won <12>
+** <39930> combinations won <15>
+** <39579> combinations won <20>
+** <49330> combinations won <30>
+** <30742> combinations won <50>
+** <47236> combinations won <60>
+** <8907> combinations won <100>
+** <32898> combinations won <150>
+** <23566> combinations won <300>
+** <3307> combinations won <1000>
+** <14557> combinations won <3000>
+** <820> combinations won <20000>
+** <148944> combinations were invalid
+==========
+Total combinations = <1081575>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+b
+
+Factoring in <b>...
+For a bonus spot value of <30>, the distribution is:
+** <140668> combinations won nothing
+** <106497> combinations won <3>
+** <90122> combinations won <4>
+** <65527> combinations won <5>
+** <41426> combinations won <10>
+** <23609> combinations won <12>
+** <27102> combinations won <15>
+** <24934> combinations won <20>
+** <32495> combinations won <30>
+** <18067> combinations won <50>
+** <29166> combinations won <60>
+** <4892> combinations won <100>
+** <19239> combinations won <150>
+** <13287> combinations won <300>
+** <1643> combinations won <1000>
+** <7664> combinations won <3000>
+** <412> combinations won <20000>
+** <88721> combinations were invalid
+==========
+Total combinations = <735471>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+y
+
+Factoring in <y>...
+For a bonus spot value of <30>, the distribution is:
+** <88239> combinations won nothing
+** <69137> combinations won <3>
+** <55963> combinations won <4>
+** <42661> combinations won <5>
+** <25370> combinations won <10>
+** <14850> combinations won <12>
+** <16392> combinations won <15>
+** <14979> combinations won <20>
+** <21514> combinations won <30>
+** <13678> combinations won <50>
+** <18884> combinations won <60>
+** <3149> combinations won <100>
+** <11792> combinations won <150>
+** <8090> combinations won <300>
+** <978> combinations won <1000>
+** <4810> combinations won <3000>
+** <216> combinations won <20000>
+** <79612> combinations were invalid
+==========
+Total combinations = <490314>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+j
+
+Factoring in <j>...
+For a bonus spot value of <30>, the distribution is:
+** <67087> combinations won nothing
+** <48355> combinations won <3>
+** <37222> combinations won <4>
+** <26641> combinations won <5>
+** <15093> combinations won <10>
+** <10924> combinations won <12>
+** <11792> combinations won <15>
+** <8384> combinations won <20>
+** <14390> combinations won <30>
+** <6560> combinations won <50>
+** <11651> combinations won <60>
+** <1376> combinations won <100>
+** <6734> combinations won <150>
+** <4261> combinations won <300>
+** <378> combinations won <1000>
+** <2290> combinations won <3000>
+** <68> combinations won <20000>
+** <46564> combinations were invalid
+==========
+Total combinations = <319770>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+k
+
+Factoring in <k>...
+For a bonus spot value of <30>, the distribution is:
+** <49429> combinations won nothing
+** <33454> combinations won <3>
+** <24307> combinations won <4>
+** <17649> combinations won <5>
+** <9243> combinations won <10>
+** <6796> combinations won <12>
+** <6656> combinations won <15>
+** <4700> combinations won <20>
+** <8341> combinations won <30>
+** <3590> combinations won <50>
+** <6293> combinations won <60>
+** <592> combinations won <100>
+** <3560> combinations won <150>
+** <2168> combinations won <300>
+** <129> combinations won <1000>
+** <1061> combinations won <3000>
+** <20> combinations won <20000>
+** <25502> combinations were invalid
+==========
+Total combinations = <203490>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+v
+
+Factoring in <v>...
+For a bonus spot value of <30>, the distribution is:
+** <36142> combinations won nothing
+** <22596> combinations won <3>
+** <15590> combinations won <4>
+** <10421> combinations won <5>
+** <5095> combinations won <10>
+** <4009> combinations won <12>
+** <3592> combinations won <15>
+** <2317> combinations won <20>
+** <4797> combinations won <30>
+** <1595> combinations won <50>
+** <3109> combinations won <60>
+** <222> combinations won <100>
+** <1581> combinations won <150>
+** <957> combinations won <300>
+** <31> combinations won <1000>
+** <429> combinations won <3000>
+** <3> combinations won <20000>
+** <13484> combinations were invalid
+==========
+Total combinations = <125970>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+n
+
+Factoring in <n>...
+For a bonus spot value of <30>, the distribution is:
+** <24964> combinations won nothing
+** <13802> combinations won <3>
+** <8668> combinations won <4>
+** <5807> combinations won <5>
+** <2955> combinations won <10>
+** <2239> combinations won <12>
+** <1999> combinations won <15>
+** <1434> combinations won <20>
+** <2714> combinations won <30>
+** <834> combinations won <50>
+** <1675> combinations won <60>
+** <133> combinations won <100>
+** <828> combinations won <150>
+** <433> combinations won <300>
+** <29> combinations won <1000>
+** <180> combinations won <3000>
+** <3> combinations won <20000>
+** <6885> combinations were invalid
+==========
+Total combinations = <75582>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+i
+
+Factoring in <i>...
+For a bonus spot value of <30>, the distribution is:
+** <12940> combinations won nothing
+** <6261> combinations won <3>
+** <3821> combinations won <4>
+** <2521> combinations won <5>
+** <1025> combinations won <10>
+** <2183> combinations won <12>
+** <1824> combinations won <15>
+** <465> combinations won <20>
+** <2561> combinations won <30>
+** <494> combinations won <50>
+** <1567> combinations won <60>
+** <50> combinations won <100>
+** <791> combinations won <150>
+** <385> combinations won <300>
+** <18> combinations won <1000>
+** <166> combinations won <3000>
+** <2> combinations won <20000>
+** <6684> combinations were invalid
+==========
+Total combinations = <43758>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+x
+
+Factoring in <x>...
+For a bonus spot value of <30>, the distribution is:
+** <8754> combinations won nothing
+** <3639> combinations won <3>
+** <2170> combinations won <4>
+** <1257> combinations won <5>
+** <532> combinations won <10>
+** <1045> combinations won <12>
+** <886> combinations won <15>
+** <239> combinations won <20>
+** <1290> combinations won <30>
+** <224> combinations won <50>
+** <670> combinations won <60>
+** <19> combinations won <100>
+** <293> combinations won <150>
+** <144> combinations won <300>
+** <9> combinations won <1000>
+** <46> combinations won <3000>
+** <2> combinations won <20000>
+** <3091> combinations were invalid
+==========
+Total combinations = <24310>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+f
+
+Factoring in <f>...
+For a bonus spot value of <30>, the distribution is:
+** <5573> combinations won nothing
+** <1835> combinations won <3>
+** <1024> combinations won <4>
+** <481> combinations won <5>
+** <183> combinations won <10>
+** <667> combinations won <12>
+** <499> combinations won <15>
+** <61> combinations won <20>
+** <684> combinations won <30>
+** <45> combinations won <50>
+** <260> combinations won <60>
+** <2> combinations won <100>
+** <106> combinations won <150>
+** <42> combinations won <300>
+** <1> combinations won <1000>
+** <9> combinations won <3000>
+** <0> combinations won <20000>
+** <1398> combinations were invalid
+==========
+Total combinations = <12870>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+p
+
+Factoring in <p>...
+For a bonus spot value of <30>, the distribution is:
+** <2223> combinations won nothing
+** <929> combinations won <3>
+** <683> combinations won <4>
+** <335> combinations won <5>
+** <108> combinations won <10>
+** <489> combinations won <12>
+** <322> combinations won <15>
+** <28> combinations won <20>
+** <275> combinations won <30>
+** <21> combinations won <50>
+** <149> combinations won <60>
+** <1> combinations won <100>
+** <80> combinations won <150>
+** <33> combinations won <300>
+** <0> combinations won <1000>
+** <8> combinations won <3000>
+** <0> combinations won <20000>
+** <751> combinations were invalid
+==========
+Total combinations = <6435>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+u
+
+Factoring in <u>...
+For a bonus spot value of <30>, the distribution is:
+** <1275> combinations won nothing
+** <423> combinations won <3>
+** <295> combinations won <4>
+** <187> combinations won <5>
+** <62> combinations won <10>
+** <191> combinations won <12>
+** <88> combinations won <15>
+** <18> combinations won <20>
+** <90> combinations won <30>
+** <11> combinations won <50>
+** <39> combinations won <60>
+** <1> combinations won <100>
+** <26> combinations won <150>
+** <10> combinations won <300>
+** <0> combinations won <1000>
+** <2> combinations won <3000>
+** <0> combinations won <20000>
+** <285> combinations were invalid
+==========
+Total combinations = <3003>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+t
+
+Factoring in <t>...
+For a bonus spot value of <30>, the distribution is:
+** <624> combinations won nothing
+** <200> combinations won <3>
+** <142> combinations won <4>
+** <70> combinations won <5>
+** <18> combinations won <10>
+** <53> combinations won <12>
+** <27> combinations won <15>
+** <9> combinations won <20>
+** <29> combinations won <30>
+** <0> combinations won <50>
+** <7> combinations won <60>
+** <1> combinations won <100>
+** <4> combinations won <150>
+** <2> combinations won <300>
+** <0> combinations won <1000>
+** <0> combinations won <3000>
+** <0> combinations won <20000>
+** <101> combinations were invalid
+==========
+Total combinations = <1287>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+c
+
+Factoring in <c>...
+For a bonus spot value of <30>, the distribution is:
+** <278> combinations won nothing
+** <88> combinations won <3>
+** <45> combinations won <4>
+** <21> combinations won <5>
+** <2> combinations won <10>
+** <19> combinations won <12>
+** <9> combinations won <15>
+** <2> combinations won <20>
+** <4> combinations won <30>
+** <0> combinations won <50>
+** <4> combinations won <60>
+** <0> combinations won <100>
+** <1> combinations won <150>
+** <0> combinations won <300>
+** <0> combinations won <1000>
+** <0> combinations won <3000>
+** <0> combinations won <20000>
+** <22> combinations were invalid
+==========
+Total combinations = <495>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+o
+
+Factoring in <o>...
+For a bonus spot value of <30>, the distribution is:
+** <112> combinations won nothing
+** <31> combinations won <3>
+** <12> combinations won <4>
+** <3> combinations won <5>
+** <0> combinations won <10>
+** <4> combinations won <12>
+** <1> combinations won <15>
+** <0> combinations won <20>
+** <0> combinations won <30>
+** <0> combinations won <50>
+** <0> combinations won <60>
+** <0> combinations won <100>
+** <0> combinations won <150>
+** <0> combinations won <300>
+** <0> combinations won <1000>
+** <0> combinations won <3000>
+** <0> combinations won <20000>
+** <2> combinations were invalid
+==========
+Total combinations = <165>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+h
+
+Factoring in <h>...
+For a bonus spot value of <30>, the distribution is:
+** <34> combinations won nothing
+** <7> combinations won <3>
+** <2> combinations won <4>
+** <0> combinations won <5>
+** <0> combinations won <10>
+** <1> combinations won <12>
+** <0> combinations won <15>
+** <0> combinations won <20>
+** <0> combinations won <30>
+** <0> combinations won <50>
+** <0> combinations won <60>
+** <0> combinations won <100>
+** <0> combinations won <150>
+** <0> combinations won <300>
+** <0> combinations won <1000>
+** <0> combinations won <3000>
+** <0> combinations won <20000>
+** <1> combinations were invalid
+==========
+Total combinations = <45>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+r
+
+Factoring in <r>...
+For a bonus spot value of <30>, the distribution is:
+** <6> combinations won nothing
+** <2> combinations won <3>
+** <0> combinations won <4>
+** <0> combinations won <5>
+** <0> combinations won <10>
+** <0> combinations won <12>
+** <0> combinations won <15>
+** <0> combinations won <20>
+** <0> combinations won <30>
+** <0> combinations won <50>
+** <0> combinations won <60>
+** <0> combinations won <100>
+** <0> combinations won <150>
+** <0> combinations won <300>
+** <0> combinations won <1000>
+** <0> combinations won <3000>
+** <0> combinations won <20000>
+** <1> combinations were invalid
+==========
+Total combinations = <9>
+
+Reveal another letter, type it at the prompt below, then hit <ENTER>.
+a
+
+Factoring in <a>...
+For a bonus spot value of <30>, the distribution is:
+** <1> combinations won nothing
+** <0> combinations won <3>
+** <0> combinations won <4>
+** <0> combinations won <5>
+** <0> combinations won <10>
+** <0> combinations won <12>
+** <0> combinations won <15>
+** <0> combinations won <20>
+** <0> combinations won <30>
+** <0> combinations won <50>
+** <0> combinations won <60>
+** <0> combinations won <100>
+** <0> combinations won <150>
+** <0> combinations won <300>
+** <0> combinations won <1000>
+** <0> combinations won <3000>
+** <0> combinations won <20000>
+** <0> combinations were invalid
+==========
+Total combinations = <1>
+
+
+How lucky were you today?

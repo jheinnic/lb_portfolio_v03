@@ -2,6 +2,7 @@
   "name": "GridRegion",
   "base": "Model",
   "idInjection": false,
+  "abstract": true,
   "options": { },
   "properties": {
     "id": {
@@ -12,17 +13,13 @@
     },
     "kind": {
       "type": "string",
-      "required": true,
+      "required": false,
       "pattern": "/open|word|short|blocked/"
     },
     "orientation": {
       "type": "string",
       "required": true,
       "pattern": "/horizontal|vertical/"
-    },
-    "hasMulti": {
-      "type": "boolean",
-      "default": false
     }
   },
   "validations": [],

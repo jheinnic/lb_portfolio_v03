@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="prizecalc" nsURI="http://info.jchein/ECORE+Crossword+Storm+Topology+Messages/EN/0.0.1"
+    nsPrefix="pcalc">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="basePackage" value="info.jchein.sandbox.app.crossword.prizecalc"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="AsyncPrizeAnalysisRequest">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ticketHref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="revealedInfo" eType="ecore:EClass http://info.jchein/ECORE+Crossword+Resource+Representations/EN/0.0.1#//RevealedInformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boardCoverage" eType="ecore:EClass http://info.jchein/ECORE+Crossword+Resource+Representations/EN/0.0.1#//BoardCoverage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AsyncPrizeAnalysisResponse"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReportPrizeAnalysisRequest">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="prizeAnalysis" eType="ecore:EClass http://info.jchein/ECORE+Crossword+Resource+Representations/EN/0.0.1#//PrizeAnalysis"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReportPrizeAnalysisResponse"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="BitSet" instanceClassName="java.util.BitSet"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AvailableLetter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="letter" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EChar"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wordHitMask" lowerBound="1"
+        eType="#//BitSet"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TicketState">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="documentation" value="A rearrangement of the reusable information from Task input, optimized for the analysis task."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bonusWordIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="documentation" value="If the bonus word has been covered, this value will be -1.  Otherwise, it will be the index of both incompleteWords and wordHit BitMask that represents the bonus word."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tripled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="documentation" value="If true, at least one tripling word has already been covered.  If false, then the incomplete words at indices 0..3 are qualifiers for the triple bonus"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wordsCompleted" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="documentation" value="The number of crossword grid words already covered and therefore excluded from incompleteWords and the wordHit BitMask"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="incompleteWords" lowerBound="13"
+        upperBound="23" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="documentation" value="Each array value gives the number of unique letters remaining to cover an incomplete word.  For each AvailableLetter in the availableLetters property that corresponds to one of those missing letters, that object's wordHit BitMask has a bit set at the same index."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="availableLetters" lowerBound="9"
+        upperBound="26" eType="#//AvailableLetter" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="documentation" value="A collection of objects representing the unique letters not yet uncovered and an associated BitMask selecting the indices of wordsCompleted that represent words that need the associated letter."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BeginCalculation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ticketHref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ticketState" eType="#//TicketState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubtaskRequest">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subTaskId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="taskId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ticketHref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ticketState" eType="#//TicketState"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pStateInit" lowerBound="11"
+        upperBound="28" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxPermutes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubtaskResponse">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subTaskId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="taskId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ticketHref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prizeDistribution" lowerBound="18"
+        upperBound="18" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TaskResult">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="taskId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ticketHref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="report" eType="ecore:EClass http://info.jchein/ECORE+Crossword+Resource+Representations/EN/0.0.1#//PrizeAnalysis"/>
+  </eClassifiers>
+</ecore:EPackage>

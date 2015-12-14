@@ -1,7 +1,9 @@
-'use strict';
+(function () {
+  'use strict';
 
-module.exports = function(grunt, options) {
-  return {
-    serve: {}
+  module.exports = function ngInspector(/*grunt, options*/) {
+    return {
+      serve: {}
+    };
   };
-};
+}).call();

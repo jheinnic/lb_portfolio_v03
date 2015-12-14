@@ -1,22 +1,36 @@
 ##
-# Build-time test targets (TODO: Not thoroughly implemented or populated)
+# One-time full test suite targets
 ##
 
 test:
- - 'lint-for-test'
+ - 'lint-test'
+ - 'update-env'
  - 'test-unit'
  - 'test-e2e'
 
+
+##
+# One-time unit test targets
+##
+
 test-unit:
- - 'lint-for-test'
+ - 'lint-test'
+ - 'update-env'
  - 'karma:unit'
 
 test-unit-chrome:
- - 'lint-for-test'
+ - 'lint-test'
+ - 'update-env'
  - 'karma:unit-chrome'
 
+
+##
+# One-time unit test coverage targets
+##
+
 test-coverage:
- - 'lint-for-test'
+ - 'lint-test'
+ - 'update-env'
  - 'karma:unit-coverage'
 
 coverage:
@@ -24,17 +38,27 @@ coverage:
  - 'open:coverage'
  - 'connect:coverage'
 
+
+##
+# One-time end-to-end test targets
+##
+
 test-e2e:
- - 'lint-for-test'
+ - 'lint-test'
  - 'update-env'
  - 'connect:test'
  - 'protractor:run'
 
 test-e2e-firefox:
- - 'lint-for-test'
+ - 'lint-test'
  - 'update-env'
- - 'connect:testserver'
+ - 'connect:test'
  - 'protractor:firefox'
+
+
+##
+# One-time lint targets
+##
 
 lint-build:
  - 'jshint:build'
@@ -49,75 +73,73 @@ lint-test:
  - 'coffeelint:test'
 
 lint-for-build:
- - 'lint-build'
  - 'lint-source'
-
-lint-for-test:
  - 'lint-build'
- - 'lint-source'
- - 'lint-test'
 
 
 ##
-# Continuous test targets for developers
+# Continuous testing targets for developers
 ##
 
 spec: # continuous running specs
- - 'clean:build'
- - 'dev-build'
- - 'concurrent:unit-mocha'
+ - 'build-dev'
+ - 'concurrent:unit'
 
 spec-chrome:
- - 'clean:build'
- - 'dev-build'
+ - 'build-dev'
  - 'concurrent:chrome'
 
-dev-test-unit:
- - 'clean:build'
- - 'dev-build'
- - 'concurrent:unit'
+spec-mocha:
+ - 'build-dev'
+ - 'concurrent:unit-mocha'
 
 
 ##
 # Continuous targets for developers (TODO: Watch target subsets not yet implemented!)
 ##
 
-dev:
+develop:
+ - 'build-dev'
+ - 'concurrent:watchServe'
+
+develop-fast:
+ - 'build-dev-fast'
+ - 'concurrent:watchServe'
+
+develop-serve:
+ - 'concurrent:watchServe'
+
+dev-connect:
  - 'connect:dev'
- - 'open:devserver'
+ - 'open:dev'
  - 'watch:source'
 
-dev-chrome:
+dev-connect-chrome:
  - 'connect:dev'
- - 'open:devserver'
+ - 'open:dev'
  - 'watch:chrome'
-
-serve:
- - 'concurrent:watchServe'
 
 
 ##
 # One-time toolchain targets
 ##
 
-install-env:
- - 'clean:all'
+env-install:
+ - 'lint-for-build'
+ - 'clean:dependencies'
  - 'shell:npm-install'
- - 'bower:install'
+ - 'shell:bower-install'
  - 'shell:protractor-install'
- - 'mkdir'
 
-update-env:
- - 'clean:build'
- - 'shell:npm-update'
- - 'bower:update'
+env-update:
+ - 'lint-for-build'
+ - 'shell:npm-install'
+ - 'shell:bower-update'
  - 'shell:protractor-update'
- - 'mkdir'
 
-reset-build:
+env-clean:
  - 'clean:build'
  - 'mkdir'
-
 
 ##
 # One-time build targets
@@ -126,22 +148,56 @@ reset-build:
 default:
  - 'build'
 
+
 build:
- - 'update-env'
- - 'lint-for-build'
- - 'dev-build'
- - 'contd-dist-build'
+ - 'env-update'
+ - 'build-fast'
 
-candidate:
- - 'install-env'
- - 'lint-for-build'
- - 'full-dist-build'
+build-fast:
+ - 'env-clean'
+ - 'make-dev-build'
+ - 'cont-dist-build'
 
-dev-build:
- - 'copy:dev'
+
+build-dev:
+ - 'env-update'
+ - 'build-dev-fast'
+
+build-dev-fast:
+ - 'env-clean'
+ - 'make-dev-build'
+
+
+build-dist:
+ - 'env-update'
+ - 'build-dist-fast'
+
+build-dist-fast:
+ - 'env-clean'
+ - 'make-dist-build'
+
+
+build-both:
+ - 'env-update'
+ - 'build-both-fast'
+
+build-both-fast:
+ - 'env-clean'
+ - 'make-dist-build'
+ - 'make-dev-build'
+
+build-both-slow:
+ - 'env-install'
+ - 'build-both-fast'
+
+
+# NOTE: copy:dev must precede jade:dev to ensure index.html or index.jade remains optional.
+# NOTE: copy:dev must precede autoprefixer:dev to ensure less preprocessing is optional.
+make-dev-build:
  - 'less'
- - 'autoprefixer:dev'
+ - 'copy:dev'
  - 'jade:dev'
+ - 'autoprefixer:dev'
  - 'wiredep:dev'
  - 'htmlbuild:dev'
  - 'bundle-client'
@@ -150,7 +206,8 @@ dev-build:
 #       less and autoprefix preprocessor outputs.  For HTML, it reuses jade output for templates,
 #       but rebuilds index.html from source.  It copies the Browserify bundle from the dev build,
 #       and all other files from source, then performs minification.
-contd-dist-build:
+# NOTE: copy:dist must precede jade:dist to ensure index.html or index.jade remains optional.
+cont-dist-build:
  - 'copy:dist'
  - 'jade:dist'
  - 'wiredep:dist'
@@ -163,11 +220,13 @@ contd-dist-build:
 #       iamges and fonts are only copied once from source to dist (copy:dist).  HTML processing for
 #       index.html, is performed once for dist (copy:dist, jade:dist, wiredep:dist, and htmlbuild:dist),
 #       but skipped for dev (Same plugins with :dev subtargets).
-full-dist-build:
- - 'copy:dist'
+# NOTE: copy:dist must precede jade:dist to ensure index.html or index.jade remains optional.
+# NOTE: copy:dist must precede autoprefixer:dist to ensure less preprocessing is optional.
+make-dist-build:
  - 'less'
- - 'autoprefixer:dist'
+ - 'copy:dist'
  - 'jade:dist'
+ - 'autoprefixer:dist'
  - 'wiredep:dist'
  - 'htmlbuild:dist'
  - 'bundle-client'
@@ -175,9 +234,9 @@ full-dist-build:
 
 # NOTE: concat, uglify, and cssmin use the generated target populated by useminPrepare:index.
 minify:
- - 'ngAnnotate'
  - 'svgmin'
  - 'imagemin'
+ - 'ngAnnotate'
  - 'useminPrepare:views'
  - 'usemin'
  - 'useminPrepare:index'
@@ -198,28 +257,56 @@ minify:
 ##
 
 travis:
- - 'bower:install'
+ - 'shell:bower-install'
  - 'dev-build'
  - 'test-unit'
 
 bump-@:
- - 'changelog'
+ - 'changelog:patch'
+ - 'build-release'
  - 'bump-only'
- - 'default'
  - 'graph'
  - 'bump-commit'
 
 bump-@-minor:
- - 'changelog'
+ - 'changelog:minor'
+ - 'build-release'
  - 'bump-only:minor'
- - 'default'
  - 'graph'
  - 'bump-commit'
 
 bump-@-major:
- - 'changelog'
+ - 'changelog:major'
+ - 'build-release'
  - 'bump-only:major'
- - 'default'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-pre:
+ - 'changelog:prerelease'
+ - 'build-release'
+ - 'bump-only:prerelease'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-prepatch:
+ - 'changelog:prepatch'
+ - 'build-release'
+ - 'bump-only:prepatch'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-preminor:
+ - 'changelog:preminor'
+ - 'build-release'
+ - 'bump-only:preminor'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-premajor:
+ - 'changelog:premajor'
+ - 'build-release'
+ - 'bump-only:premajor'
  - 'graph'
  - 'bump-commit'
 

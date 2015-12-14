@@ -1,8 +1,10 @@
-'use strict';
+(function () {
+  'use strict';
 
-module.exports =
-  function (grunt, options) {
+  module.exports = function concat(/*grunt, options*/) {
+    // NOTE: Allocated for usemin:index to override
     return {
       generated: {}
     };
   };
+}).call();

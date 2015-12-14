@@ -233,10 +233,10 @@ module.exports = function (grunt) {
               connect().use(
                 '/lbclient', connect.static( '<%= yeoman.lbclient %>' )
               ),
-              connect.use(
+              connect().use(
                 '/views', connect.static( '<%= yeoman.app %>/views' )
               ),
-              connect.use(
+              connect().use(
                 '/images', connect.static( '<%= yeoman.app %>/images' )
               ),
               connect().use(
@@ -246,25 +246,25 @@ module.exports = function (grunt) {
                   // connect.static('<%= yeoman.app %>/config');
                 // }
               ),
-              connect.use(
+              connect().use(
                 '/scripts',
                 // function() {
                 //   connect.static( '<%= yeoman.app %>/scripts' );
                   connect.static( '<%= yeoman.staging %>/scripts' )
                 // }
               ),
-              connect.use(
+              connect().use(
                 '/styles',
                 // function() {
                   // connect.static( '<%= yeoman.app %>/styles' );
                   connect.static( '<%= yeoman.staging %>/styles' )
                 // }
               ),
-              connect.use(
+              connect().use(
                 '/fonts',
                 connect.static( '<%= yeoman.staging %>/fonts' )
               ),
-              connect.use(
+              connect().use(
                 '/styles/fonts',
                 connect.static( '<%= yeoman.staging %>/styles/fonts' )
               ),
@@ -273,7 +273,7 @@ module.exports = function (grunt) {
               // Angular routes are known a priori, a preferable approach is to
               // selectively redirect only those routes to index.html, allowing
               // errors to be generated for genuinely bad routes.
-              connect.use(
+              connect().use(
                 '/',
                 connect.static( '<%= yeoman.staging %>/index.html' )
               )

@@ -54,5 +54,17 @@
   "GridRegion": {
     "dataSource": "transient",
     "public": false
+  },
+  "GridWord": {
+    "dataSource": "transient",
+    "public": false
+  },
+  "GridShort": {
+    "dataSource": "transient",
+    "public": false
+  },
+  "GridBlocked": {
+    "dataSource": "transient",
+    "public": false
   }
 }

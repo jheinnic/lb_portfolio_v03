@@ -1,3 +1,10 @@
-module.exports = function(TripSpotTicket) {
+(
+  function () {
+    'use strict';
 
-};
+    module.exports = function (TripSpotTicket) {
+      // Just for jshint
+      return TripSpotTicket;
+    };
+  }
+).call();

@@ -1,0 +1,15 @@
+{
+  "name": "GridShort",
+  "base": "GridRegion",
+  "idInjection": false,
+  "options": { },
+  "properties": {
+    "kind": {
+      "default": "short"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
