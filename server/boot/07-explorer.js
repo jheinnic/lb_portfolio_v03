@@ -3,7 +3,7 @@
 
   module.exports = function (app) {
     var restApiRoot = app.get('restApiRoot');
-    var explorer = require('loopback-explorer');
+    var explorer = require('loopback-component-explorer');
 
     explorer(
       app, {
