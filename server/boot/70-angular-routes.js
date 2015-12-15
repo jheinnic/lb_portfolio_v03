@@ -12,7 +12,11 @@
     );
     */
 
-    // Just for jshint for now
-    return app;
+    // Until there is a way to target specific paths,
+    app.use(
+      '/**', loopback.static(
+        app.get('indexFile')
+      )
+    );
   };
 }).call();
