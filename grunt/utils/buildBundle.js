@@ -6,7 +6,7 @@
   var _          = require('lodash');
   var fs         = require('fs');
   var path       = require('path');
-  var remapify   = require('remapify');
+  // var remapify   = require('remapify');
   var browserify = require('browserify');
   var boot       = require('loopback-boot');
 
@@ -33,7 +33,6 @@
    * @param {string} dirname
    * @param {string} basename
    * @returns {string} An angularized alias name if the transformation was applicable, otherwise the original alias.
-   */
   function filterAngularAlias(alias, dirname, basename) {
     // Tolerate Windows and Unix path separators, just like Browserify and Remapify do.
     // Figure out which separator character to use by figuring out which modifies the content of alias.
@@ -87,6 +86,7 @@
 
     return retVal;
   }
+   */
 
 
   /**
@@ -199,24 +199,25 @@
       );
     _.forEach(
       found, function aliasModules(modulePath) {
-        var filePath = './' + path.relative(appConfig.source.client, modulePath).replace(/\\/g, '/');
+        var filePath = path.relative(appConfig.source.client, modulePath).replace(/\\/g, '/');
         var moduleFQN = path.dirname(filePath).replace(/\//g, '.');
         var baseName  = path.basename(filePath).replace(/\.coffee$|\.js$/, '');
-        var exposedName;
 
+        var exposedName;
         if (baseName === 'module') {
           exposedName = moduleFQN;
         } else {
           exposedName = moduleFQN + '/' + baseName;
         }
 
+        filePath = './' + filePath;
         console.log( modulePath, filePath, moduleFQN, exposedName );
         b.add( filePath, { expose: exposedName } );
       }
     );
 
     // Configure browserify to load Loopback and Main Angular Application Module to bootstrap bundle activation on load.
-    // b.require( './lbclient.js', { expose: 'lbclient' } );
+    b.add( './lbclient.js', { expose: 'lbclient' } );
     b.require( './' + appConfig.app + '/module.js', { expose: appConfig.app } );
 
     // Debug verbosity--see what the bundle's remapify filters did and what files satisfied either input pattern.

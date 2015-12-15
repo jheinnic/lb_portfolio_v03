@@ -30,7 +30,7 @@
           appConfig.source.server + '/**/*.{js,coffee,json}'
         ],
         tasks: [
-          'newer:jshint:common-source', 'newer:coffeelint:common-source', 'bundle-client', 'newer:copy:dev', 'reload-assets'
+          'newer:jshint:source', 'newer:coffeelint:source', 'bundle-client', 'reload-assets'
         ]
       },
 
