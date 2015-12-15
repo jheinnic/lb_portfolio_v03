@@ -4,7 +4,7 @@
   // Mount static files like ngapp
   // All static middleware should be registered at the end, as all requests
   // passing the static middleware are hitting the file system
-  module.exports = function (app) {
+  module.exports = function bootDevAssets(app) {
     // TODO: Use a config property that defines whether to serve assets or to run as API-only
     //       and use same to help loopback-angular-sdk locate apiUrlRoot.
     var path = require('path');

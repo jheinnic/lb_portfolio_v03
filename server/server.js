@@ -30,8 +30,7 @@
   /*
    var path = require('path');
   app.use(loopback.static(path.dirname(app.get('indexFile'))));
-   */
- );
+  */
 
 // Requests that get this far won't be handled
 // by any middleware. Convert them into a 404 error
