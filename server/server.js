@@ -3,7 +3,6 @@
 
   var loopback = require('loopback');
   var boot = require('loopback-boot');
-  var path = require('path');
 
   var app = module.exports = loopback();
 
@@ -29,14 +28,10 @@
   boot(app, __dirname);
 
   /*
+   var path = require('path');
   app.use(loopback.static(path.dirname(app.get('indexFile'))));
    */
-
-  app.use(
-    '/**', loopback.static(
-      app.get('indexFile')
-    )
-  );
+ );
 
 // Requests that get this far won't be handled
 // by any middleware. Convert them into a 404 error
