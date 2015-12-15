@@ -22,6 +22,5 @@
     ],
     require('./config')
   )
-    .controller('HomeController', require('./HomeController.controller'))
   ;
-}).call(window.angular);
+}).call(window, angular);

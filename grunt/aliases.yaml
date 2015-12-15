@@ -198,6 +198,7 @@ make-dev-build:
  - 'copy:dev'
  - 'jade:dev'
  - 'autoprefixer:dev'
+ - 'copy:vendor'
  - 'wiredep:dev'
  - 'htmlbuild:dev'
  - 'bundle-client'
@@ -210,9 +211,9 @@ make-dev-build:
 cont-dist-build:
  - 'copy:dist'
  - 'jade:dist'
- - 'wiredep:dist'
+# - 'wiredep:dist'
  - 'htmlbuild:dist'
- - 'minify'
+ - 'concurrent:minify'
 
 # NOTE: This will still populates some content under build/dev, but it will not include all
 #       files produced during a real dev build.  Optimizable image assets are populated as output
@@ -227,10 +228,11 @@ make-dist-build:
  - 'copy:dist'
  - 'jade:dist'
  - 'autoprefixer:dist'
+ - 'copy:vendor'
  - 'wiredep:dist'
  - 'htmlbuild:dist'
  - 'bundle-client'
- - 'minify'
+ - 'concurrent:minify'
 
 # NOTE: concat, uglify, and cssmin use the generated target populated by useminPrepare:index.
 minify:

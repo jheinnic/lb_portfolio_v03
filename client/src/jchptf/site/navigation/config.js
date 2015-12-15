@@ -17,7 +17,7 @@
       'home',
       {
         url: '/home',
-        templateUrl: 'views/jchptf/site/navigation/home.view.html',
+        templateUrl: 'jchptf/site/navigation/_home.view.html',
         controller: 'HomeController',
         controllerAs: 'home',
         abstract: false,

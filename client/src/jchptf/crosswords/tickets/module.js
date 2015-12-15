@@ -1,6 +1,8 @@
 (function(angular) {
   'use strict';
 
+  module.exports = 'jchptf.crosswords.tickets';
+
   /**
    * @ngdoc overview
    * @name jchptf.crosswords.tickets
@@ -11,7 +13,7 @@
    * hidden information that yields the ticket's prize value.
    */
   angular.module(
-    'jchptf.crosswords.tickets',
+    module.exports,
     [
       'ui.router',
       'drahak.hotkeys',
@@ -32,4 +34,4 @@
     //.factory('XwTicketModelPackage', require('./XwTicketModelPackage.factory.coffee'));
     .factory('XwTicketModelPackage', require('./XwTicketModelPackage.factory'))
   ;
-}).call(window.angular);
+}).call(window, angular);

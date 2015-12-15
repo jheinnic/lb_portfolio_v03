@@ -2,7 +2,6 @@
  * Global configuration shared by components.
  */
 
-var pkg = require('./package.json');
 var process = require('process');
 var vsprintf = require('sprintf-js').vsprintf;
 
@@ -20,7 +19,8 @@ if (process.env.NODE_ENV === 'development') {
     exports.restApiUrl = exports.restApiRoot;
   } else {
     var port = process.env.REST_API_PORT ? Number.parseInt(process.env.REST_API_PORT) : 3000;
-    exports.restApiUtl = vsprintf('http://localhost:%d/', port);
+    console.log(port);
+    exports.restApiUtl = vsprintf('http://localhost:%d/', [port]);
   }
 } else {
   if (process.env.REST_API_URL) {

@@ -11,7 +11,7 @@
    * Root module for the "Crosswords" feature set.
    */
   angular.module(
-    'jchptf.crosswords',
+    module.exports,
     [
       'ui.router',
       'cgnotify',
@@ -26,4 +26,4 @@
     // .service('XWInventoryCanvas', require('./XWInventoryCanvas.service'))
     .controller('XWInventoryController', require('./XWInventoryController.controller'))
   ;
-}).call(window.angular);
+}).call(window, angular);

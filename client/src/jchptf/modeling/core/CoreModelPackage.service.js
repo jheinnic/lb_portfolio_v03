@@ -5,8 +5,8 @@
   CoreModelPackage.$inject = [];
 
   function CoreModelPackage() {
-    this.Enum = require('modeling/core/Enum.class.coffee');
-    this.Module = require('modeling/core/Module.class.coffee');
-    this.ModelObject = require('modeling/core/ModelObject.class.coffee');
+    this.Enum = require('jchptf.modeling.core/Enum.class');
+    this.Module = require('jchptf.modeling.core/Module.class');
+    this.ModelObject = require('./ModelObject.class');
   }
 }).call(window);

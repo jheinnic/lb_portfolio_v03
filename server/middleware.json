@@ -12,6 +12,9 @@
       }
     }
   },
+  "initial:after": {
+    "connect-livereload": {}
+  },
   "session": {},
   "auth": {},
   "parse": {},

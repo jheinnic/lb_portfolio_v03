@@ -7,7 +7,7 @@
     var fs = require('fs');
 
     function onEventFn(event) {
-      console.log(event.colour, event.message);
+      console.log(event.colour);
     }
 
     function onErrorFn(err) {
@@ -37,24 +37,20 @@
     var afterRestartFn = _.partial(
       setTimeout,
       function onServerRestart() {
-        var isDone = this.async();
-        _.exists(
+        console.log('Handling after restart');
+        fs.exists(
           'build/.reloadAssets',
           function checkForAssetsReloadRequest(exists) {
             if (exists) {
-              _.stat(
+              fs.stat(
                 'build/.reloadAssets',
                 function signalIfAssetsReloadRequested(stat) {
                   if (lastAssetReload !== stat.mtime) {
                     lastAssetReload = stat.mtime;
-                    fs.writeFile(appConfig.temp.server + '/.rebooted', lastAssetReload, isDone);
-                  } else {
-                    isDone();
+                    fs.writeFile(appConfig.temp.server + '/.rebooted', lastAssetReload);
                   }
                 }
               );
-            } else {
-              isDone();
             }
           }
         );
@@ -63,7 +59,7 @@
 
     return {
       serve: {
-        script: appConfig.dev.server + '/server.js',
+        script: appConfig.source.server + '/server.js',
         options: {
           cwd: process.cwd(),
           nodeArgs: ['--debug'],

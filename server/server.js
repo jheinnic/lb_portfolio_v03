@@ -28,10 +28,9 @@
   // boot scripts mount components like REST API
   boot(app, __dirname);
 
-// Mount static files like ngapp
-// All static middleware should be registered at the end, as all requests
-// passing the static middleware are hitting the file system
+  /*
   app.use(loopback.static(path.dirname(app.get('indexFile'))));
+   */
 
   app.use(
     '/**', loopback.static(

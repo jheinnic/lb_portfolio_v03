@@ -4,9 +4,9 @@
   module.export = 'jchptf.tools.keyboard';
 
   angular.module(
-    'jchptf.tools.keyboard',
+    module.export,
     ['ng', 'drahak.hotkeys']
   )
     .factory('KeypressHelper', require('./keypressHelper.factory'))
   ;
-}).call(window.angular);
+}).call(window, angular);

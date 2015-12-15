@@ -18,4 +18,4 @@
     require('./config')
   )
   ;
-}).call(window.angular);
+}).call(window, angular);

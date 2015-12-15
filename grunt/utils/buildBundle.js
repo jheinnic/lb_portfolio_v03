@@ -6,7 +6,7 @@
   var _          = require('lodash');
   var fs         = require('fs');
   var path       = require('path');
-  var remapify   = require('remapify');
+  // var remapify   = require('remapify');
   var browserify = require('browserify');
   var boot       = require('loopback-boot');
 
@@ -33,7 +33,6 @@
    * @param {string} dirname
    * @param {string} basename
    * @returns {string} An angularized alias name if the transformation was applicable, otherwise the original alias.
-   */
   function filterAngularAlias(alias, dirname, basename) {
     // Tolerate Windows and Unix path separators, just like Browserify and Remapify do.
     // Figure out which separator character to use by figuring out which modifies the content of alias.
@@ -87,6 +86,7 @@
 
     return retVal;
   }
+   */
 
 
   /**
@@ -167,7 +167,7 @@
 
     var isDevEnv      = ['debug', 'development', 'test'].indexOf(appConfig.nodeEnv) >= 0,
         cwd           = appConfig.cwd,
-        sourceGlob    = appConfig.app + '/**/*.{js,coffee}',
+        sourceGlob    = appConfig.source.client + '/' + appConfig.app + '/**/*.{js,coffee}',
         clientSrcDir  = path.normalize(
           path.join(cwd, appConfig.source.client)
         ),
@@ -177,15 +177,48 @@
         bundleMapPath = bundlePath + '.map';
 
     // NOTE(bajtos) debug should be always true, the source maps should be saved to a standalone file when !isDev(env)
-    var b = browserify( { basedir: clientSrcDir }, { debug: true } );
+    var b = browserify( { basedir: appConfig.source.client }, { debug: true } );
 
     // Handle .coffee files
-    b.transform('coffeeify');
+    b.transform(require('coffeeify'));
     b._extensions.push('.coffee');
 
+    var found =
+      grunt.file.glob(
+        sourceGlob,
+        {
+          sync: true,
+          strict: true,
+          stat: false,
+          dot: true,
+          nonull: false,
+          nosort: true,
+          nounique: true,
+          nodir: true
+        }
+      );
+    _.forEach(
+      found, function aliasModules(modulePath) {
+        var filePath = path.relative(appConfig.source.client, modulePath).replace(/\\/g, '/');
+        var moduleFQN = path.dirname(filePath).replace(/\//g, '.');
+        var baseName  = path.basename(filePath).replace(/\.coffee$|\.js$/, '');
+
+        var exposedName;
+        if (baseName === 'module') {
+          exposedName = moduleFQN;
+        } else {
+          exposedName = moduleFQN + '/' + baseName;
+        }
+
+        filePath = './' + filePath;
+        console.log( modulePath, filePath, moduleFQN, exposedName );
+        b.add( filePath, { expose: exposedName } );
+      }
+    );
+
     // Configure browserify to load Loopback and Main Angular Application Module to bootstrap bundle activation on load.
-    b.require( path.join(clientSrcDir, 'lbclient'), { expose: 'lbclient' } );
-    b.require( path.join(clientSrcDir, appConfig.app, 'module'), { expose: appConfig.app } );
+    b.add( './lbclient.js', { expose: 'lbclient' } );
+    b.require( './' + appConfig.app + '/module.js', { expose: appConfig.app } );
 
     // Debug verbosity--see what the bundle's remapify filters did and what files satisfied either input pattern.
     // b.on(
@@ -209,11 +242,13 @@
     // packages that bundle both angular client code and common components.
     // TODO: Rather than using remapify at all, loop over the results of a glob and wire a series of direct
     //       calls to one of Wiredep's static registration methods: alias or one whose name I can't recall.
+    /*
     b.plugin(
       remapify, [
         { src: sourceGlob, cwd: clientSrcDir, filter: filterAngularAlias }
       ]
     );
+    */
 
     // Prepare and execute output pipeline from Browserify runtime to local filesystem.
     var out = fs.createWriteStream(bundlePath);
@@ -234,7 +269,7 @@
       //
       //       More clarify on their precise meaning is needed to help complete this documentation
       var bundleMapOut =
-        require('exorcist')(bundleMapPath, 'url', 'root', 'base');
+        require('exorcist')(bundleMapPath, path.basename(bundleMapPath), 'root', 'base');
       bundleMapOut.pipe(out);
       bundleMapOut.on('error', callback);
 
