@@ -23,37 +23,71 @@
         options: {reload: true}
       },
 
-      scripts: {
+      clientScripts: {
         files: [
           appConfig.source.client + '/**/*.{js,coffee,json}',
+        ],
+        tasks: [
+          'newer:jshint:client-source', 'newer:coffeelint:client-source', 'bundle-client', 'reload-assets'
+        ]
+      },
+      commonScripts: {
+        files: [
           appConfig.source.common + '/**/*.{js,coffee,json}',
+        ],
+        tasks: [
+          'newer:jshint:common-source', 'newer:coffeelint:common-source', 'bundle-client', 'newer:copy:dev', 'reload-assets'
+        ]
+      },
+      serverScripts: {
+        // TODO: Unlike clientScript restart, it is not necessary to refresh the browser for server-centric changes.
+        files: [
           appConfig.source.server + '/**/*.{js,coffee,json}'
         ],
         tasks: [
-          'newer:jshint:source', 'newer:coffeelint:source', 'bundle-client', 'reload-assets'
+          'newer:jshint:server-source', 'newer:coffeelint:server-source', 'newer:copy:dev', 'restart-server'
         ]
       },
-
-      index: {
-        files: [appConfig.source.client + '/index.{html,jade}'],
-        tasks: ['newer:copy:dev', 'newer:jade:dev', 'wiredep:dev', 'htmlbuild:dev', 'reload-assets']
+      testScripts: {
+        // TODO: Confirm the role of watch during test builds!
+        files: [
+          appConfig.test.client + '/**/*.{js,coffee}', appConfig.test.common + '/**/*.{js,coffee}',
+          appConfig.test.server + '/**/*.{js,coffee}'
+        ],
+        tasks: ['newer:jshint:test', 'newer:coffeelint:test', 'karma']
       },
-      templates: {
-        files: [appModRoot + '/**/*.{html,jade}'],
-        tasks: ['newer:copy:dev', 'newer:jade:templates', 'reload-assets']
+
+      indexJade: {
+        files: [appConfig.source.client + '/index.jade'],
+        tasks: ['jade:dev', 'wiredep:dev', 'htmlbuild:dev', 'reload-assets'],
+      },
+      indexHtml: {
+        files: [appConfig.source.client + '/index.html'],
+        tasks: ['newer:copy:dev', 'wiredep:dev', 'htmlbuild:dev', 'reload-assets'],
+      },
+      templatesJade: {
+        files: [appModRoot + '/**/*.jade'],
+        tasks: ['jade:templates', 'reload-assets'],
+      },
+      templatesHtml: {
+        files: [appModRoot + '/**/*.html'],
+        tasks: ['newer:copy:dev', 'reload-assets'],
       },
 
       styles: {
-        // NOTE: This directive covers both style sheets and fonts potentially used by style sheets.
+        files: [appModRoot + '/**/*.{css,less}'],
+        tasks: ['newer:copy:dev', 'newer:less', 'autoprefixer', 'htmlbuild:dev', 'reload-assets']
+      },
+      fonts: {
         // NOTE: All less sheets are re-parsed since we have no way of using file newness to test which may reference
         //       affected fonts.  Otherwise we could handle fonts and style sheets in a single common task.
-        // NOTE: We invoke autoprefixer and htmlbuild only because we have to propagate result of having called less
-        //       to account for font references.
-        files: [appModRoot + '/**/*.{css,less}', appModRoot + '/**/*.{svg,eot,ttf,woff,woff2}'],
-        tasks: ['newer:copy:dev', 'less', 'newer:autoprefixer', 'htmlbuild:dev', 'reload-assets']
+        // NOTE: We only invoke autoprefixer and htmlbuild only because we have to propagate result of having
+        //       called less to account for font references.
+        files: [appModRoot + '/**/*.{svg,eot,ttf,woff,woff2}'],
+        tasks: ['newer:copy:dev', 'less', 'autoprefixer', 'htmlbuild:dev', 'reload-assets']
       },
       images: {
-        files: [appModRoot + '/**/*.{bmp,png,jpg,jpeg,gif,webp}'],
+        files: [appModRoot + '/**/*.{bmp,png,jpg,jpeg,gif,webp,svg}'],
         tasks: ['newer:copy:dev', 'reload-assets']
       },
 

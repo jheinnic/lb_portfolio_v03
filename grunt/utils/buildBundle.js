@@ -45,7 +45,7 @@
       exposedName = moduleFQN + '/' + baseName;
     }
 
-    registeredFilePath = './' + filePath;
+    registeredFilePath = './' + registeredFilePath;
     // console.log(fileGlobPath, registeredFilePath, moduleFQN, exposedName);
     b.add(registeredFilePath, {expose: exposedName});
   }
@@ -65,13 +65,7 @@
     }
 
     // Construct file glob and normalized absolute path for use with grunt and browserify here.
-    var cwd           = appConfig.cwd;
     var sourceGlob    = appConfig.source.client + '/' + appConfig.app + '/**/*.{js,coffee}';
-    var clientSrcDir  = path.normalize(
-      path.join(cwd, appConfig.source.client));
-    var bundlePath    = path.normalize(
-      path.join(cwd, appConfig.dev.client, 'app.js'));
-    var bundleMapPath = bundlePath + '.map';
 
     // NOTE(bajtos) debug should be always true, the source maps should be saved to a standalone file when !isDev(env)
     var isDevEnv      = ['debug', 'development', 'test'].indexOf(appConfig.nodeEnv) >= 0;
@@ -100,6 +94,8 @@
       { expose: appConfig.app }
     );
 
+    var clientSrcDir  = path.normalize(
+      path.join(appConfig.cwd, appConfig.source.client));
     try {
       boot.compileToBrowserify(clientSrcDir, b);
     } catch (err) {
@@ -110,6 +106,8 @@
     }
 
     // Prepare and execute output pipeline from Browserify runtime to local filesystem.
+    var bundlePath = path.normalize(
+      path.join(appConfig.cwd, appConfig.dev.client, 'app.js'));
     var out = fs.createWriteStream(bundlePath);
 
     // All streams in the pipeline should invoke callback as their onError event handler.
@@ -127,11 +125,12 @@
       //       "base": ???
       //
       //       More clarify on their precise meaning is needed to help complete this documentation
-      var bundleMapOut =
+      var bundleMapPath = bundlePath + '.map';
+      var bundleMapOut  =
         require('exorcist')(bundleMapPath, path.basename(bundleMapPath), 'root', 'base');
+
       bundleMapOut.pipe(out);
       bundleMapOut.on('error', callback);
-
       out = bundleMapOut;
     }
 
@@ -141,12 +140,11 @@
       b.bundle().on('error', callback).pipe(out);
       console.log('Finished buildBundle()', new Date());
     } catch(err) {
-      console.log('Failed buildBundle()', new Date());
+      console.error('Failed buildBundle()', new Date(), err);
 
       // NOTE: Here it seems important to catch the Exception since it appears to be thrown from some
       //       code downstream of on() that is not callback aware and so has not yet passed its error
       //       to callback before it hurls an Error back towards its caller.
-      console.error(err);
       callback(err);
     }
   }
