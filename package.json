@@ -9,13 +9,8 @@
   "homepage": "http://jchein.info/portfolio",
   "license": "MIT",
   "main": "server/server.js",
-  "browser": "client/ngapp/jchptf/module.js",
-  "oldBrowser": "./client/ngapp/scripts/jchptf/main.js",
-  "oldBrowserify": {
-    "transform": [
-      "coffeeify"
-    ]
-  },
+  "browser": "client/app.js",
+  "oldBrowser": "./client/src/jchptf/jchptf.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/jheinnic/lb_express_sandbox.git"
@@ -47,12 +42,6 @@
   },
   "files": [
     "build/dist",
-    "client/ngapp",
-    "client/lbclient",
-    "client/build.js",
-    "client/lr_init.js",
-    "server",
-    "common",
     "package.json",
     "bower.json",
     ".bowerrc",
@@ -67,7 +56,7 @@
   "scripts": {
     "preinstall": "bower install",
     "postinstall": "echo create db for postinstall",
-    "build": "grunt build --stack",
+    "build": "grunt build-fast --stack",
     "pretest": "echo init db for pretest",
     "test": "grunt test",
     "start": "grunt serve"
