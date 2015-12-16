@@ -8,7 +8,8 @@
       html: [appConfig.dist.client + '/**/*.html'],
       css: [appConfig.dist.client + '/**/*.css'],
       options: {
-        assetsDirs: [appConfig.dist.client]
+        assetsDirs: [appConfig.dist.client],
+        patterns: []
       }
     };
   };

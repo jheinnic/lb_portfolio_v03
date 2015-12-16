@@ -12,7 +12,7 @@
           {
             expand: true,
             dot: true,
-            cwd: appConfig.source.client + '/' + appConfig.app,
+            cwd: appConfig.source.client,
             src: '**/*.{bmp,png,jpg,jpeg,gif}',
             dest: appConfig.dist.client
           }

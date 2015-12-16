@@ -14,7 +14,7 @@ module.exports = function less(grunt, options) {
       expand: true,
       cwd: appConfig.source.client,
       src: '**/*.less',
-      dest: appConfig.temp.client,
+      dest: appConfig.dev.client,
       ext: '.css',
       extDot: 'last'
     }

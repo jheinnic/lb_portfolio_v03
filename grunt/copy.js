@@ -5,7 +5,7 @@
 module.exports = function copy(grunt, options) {
   var appConfig = options.appConfig;
   var devAssetsPattern =
-    '**/*.{html,bmp,jpg,jpeg,gif,png,webp,svg,eot,ttf,woff,woff2}';
+    '**/*.{html,css,bmp,jpg,jpeg,gif,png,webp,svg,eot,ttf,woff,woff2}';
 
   return {
     vendor: {
@@ -32,58 +32,83 @@ module.exports = function copy(grunt, options) {
     dev: {
       files: [
         {
+          // NOTE: Jade trumps static HTML when names collide.  By copying the static
+          //       files before resolving Jade, we ensure that Jade overwrites any name
+          //       conflicts without excluding non-conflicting static HTML.
           expand: true,
           dot: true,
           cwd: appConfig.source.client,
-          src: ['lr_init.js'],
+          src: [
+            appConfig.app + '/.htaccess', appConfig.app + '/*.{png,txt,ico}',
+            appConfig.app + '/' + devAssetsPattern, '**/*.json', 'lr_init.js'
+          ],
           dest: appConfig.dev.client
-        }, {
-          expand: true,
-          dot: true,
-          cwd: appConfig.source.client + '/' + appConfig.app,
-          src: [devAssetsPattern, '.htaccess', '*.{png,txt,ico}'],
-          dest: appConfig.dev.client + '/' + appConfig.app
         }
       ]
     },
     dist: {
       // TODO: Build-derived images?  Images currently re-copied from source.
       //
-      // NOTE: Distribution starts with the source index.html, but all other files come from the dev area.
-      //   Rather than using partial artifact from dev, index.html is rebuilt from source in order to support
-      //   different plugin behavior branched by different options to htmlbuild and jade plugins, restricted
-      //   to the activation of <!-- htmlbuild:ignore --> directive (htmlbuild) and 'isDevelopment: false'
-      //   data attribute (jade).
+      // NOTE: Distribution starts with the source index.html, but all other
+      //       files come from the dev area.  Rather than using partial
+      //       artifacts from dev, index.html is rebuilt from source in
+      //       order to support different plugin behavior branched by
+      //       different options to htmlbuild and jade plugins, restricted
+      //       to the activation of <!-- htmlbuild:ignore --> directive
+      //       (htmlbuild) and 'isDevelopment: false' data attribute (jade).
       files: [
         {
           expand: true,
           dot: true,
           src: ['global-config.js', 'package.json', 'bower.json', '.npmrc', '.bowerrc', 'README.md'],
           dest: appConfig.dist.root
-        },
-        {
-          expand: true,
+        }, {
+          // TODO: Change CSS and HTML builds to first populate an area in temp, so Jade's dev/dist
+          //       stages can overwrite the files there for dist without overwriting what was previously
+          //       copied from there for dev.  Then htmlbuild & usemin can run against overwritten html
+          //       without needing to copy unnecessary CSS files into dist or run less/autoprefix twice.
           dot: true,
+          expand: true,
           cwd: appConfig.source.client,
           src: [
-            appConfig.app + '/**/*.{webp,eot,ttf,woff,woff2}', appConfig.app + '/{index.html,.htaccess,*.{ico,txt}}'
+            appConfig.app + '/.htaccess',
+            appConfig.app + '/*.{ico,txt}',
+            appConfig.app + '/**/*.{webp,eot,ttf,woff,woff2}',
+            '**/*.json'
           ],
           dest: appConfig.dist.client
         }, {
-          expand: true,
           dot: true,
+          expand: true,
+          cwd: appConfig.dev.client,
+          src: ['app.js', '**/_*.css', '**/*.html', '!index.html'],
+          dest: appConfig.dist.client
+        }, {
+          dot: true,
+          expand: true,
           cwd: appConfig.source.common,
-          src: '**/*',
+          src: ['**/*'],
           dest: appConfig.dist.common
         }, {
-          expand: true,
           dot: true,
+          expand: true,
           cwd: appConfig.source.server,
-          src: '**/*',
+          src: ['**/*'],
           dest: appConfig.dist.server
         }
       ]
     }
   };
+
+  // Account for the renamed index.html due to linefeed compensation.
+  //var devIndexCopy = {};
+  //devIndexCopy[appConfig.dev.client + '/index.html'] = appConfig.temp.client + '/fixedIndex.html';
+  //configObj.dev.files.push(devIndexCopy);
+  //
+  //var distIndexCopy = {};
+  //distIndexCopy[appConfig.dist.client + '/index.html'] = appConfig.temp.client + '/fixedIndex.html';
+  //configObj.dist.files.push(distIndexCopy);
+  //
+  //return configObj;
 };
 

@@ -8,6 +8,8 @@ module.exports = function (grunt/*, options*/) {
   var path = require('path');
   var _ = require('lodash');
 
+  console.log(grunt.util.linefeed);
+
   require('./grunt/utils/customTasks')(grunt, appConfig);
 
   // Load grunt config from per-plugin files under 'grunt' subdirectory
