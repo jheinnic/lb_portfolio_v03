@@ -10,7 +10,7 @@
           {
             expand: true,
             dot: true,
-            cwd: appConfig.source.client + '/' + appConfig.app,
+            cwd: appConfig.source.client,
             src: '**/*.svg',
             dest: appConfig.dist.client
           }

@@ -20,8 +20,8 @@ html(lang="en", ng-app="jchptf")
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:css(build/dev/client) main.css -->
-    <!-- htmlbuild:style bundle -->
+    <!-- build:css(build/dev/client) app.css -->
+    <!-- htmlbuild:style app -->
     <!-- /htmlbuild -->
     <!-- endbuild -->
 
@@ -45,7 +45,10 @@ html(lang="en", ng-app="jchptf")
     <!-- endbower -->
     <!-- endbuild -->
 
+    <!-- build:js(build/dev/client) app.js -->
     script(src="app.js", type="text/javascript")
+    <!-- endbuild -->
 
-    if isDevelopment
-      script(src="scripts/livereload.js", type="text/javascript")
+    <!-- distbuild:remove -->
+    script(src="lr_init.js", type="text/javascript")
+    <!-- /distbuild -->

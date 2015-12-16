@@ -5,24 +5,17 @@
     var appConfig = options.appConfig;
 
     return {
-      index: appConfig.dist.client + '/index.html',
-      views: appConfig.dev.client + '/' + appConfig.app + '/**/*.html',
+      html: appConfig.dist.client + '/**/*.html',
       options: {
-        root: appConfig.dist.client,
+        root: appConfig.source.client,
         staging: appConfig.temp.client,
         dest: appConfig.dist.client,
         flow: {
-          index: {
-            steps: {
-              js: ['concat', 'uglifyjs'],
-              css: ['cssmin']
-            },
-            post: {}
+          steps: {
+            js: ['concat', 'uglifyjs'],
+            css: ['cssmin']
           },
-          views: {
-            steps: {},
-            post: {}
-          }
+          post: {}
         }
       }
     };

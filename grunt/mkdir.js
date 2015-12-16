@@ -8,10 +8,9 @@ module.exports = function mkdir(grunt, options) {
       options: {
         mode: 755,
         create: [
-          appConfig.dev.client, appConfig.dist.client, appConfig.temp.client,
-          appConfig.dev.common, appConfig.dist.common, appConfig.temp.common,
-          appConfig.dev.server, appConfig.dist.server, appConfig.temp.server,
-          appConfig.vendor, appConfig.node, 'bower_components', 'node_modules'
+          appConfig.vendor, appConfig.node, 'bower_components', 'node_modules',
+          appConfig.dist.client, appConfig.dist.common, appConfig.dist.server,
+          appConfig.dev.client, appConfig.temp.client
         ]
       }
     }

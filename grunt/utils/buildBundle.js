@@ -59,13 +59,11 @@
    * @returns {string} An angularized alias name if the transformation was applicable, otherwise the original alias.
    */
   function buildNgAppBundle(grunt, appConfig, callback) {
+    console.log('Config client-bundle', new Date());
     // Acquire appConfig by requiring it if the argument passed is not a non-null object.
     if ((appConfig === null) || (typeof appConfig !== 'object')) {
       appConfig = require('./appConfig');
     }
-
-    // Construct file glob and normalized absolute path for use with grunt and browserify here.
-    var sourceGlob    = appConfig.source.client + '/' + appConfig.app + '/**/*.{js,coffee}';
 
     // NOTE(bajtos) debug should be always true, the source maps should be saved to a standalone file when !isDev(env)
     var isDevEnv      = ['debug', 'development', 'test'].indexOf(appConfig.nodeEnv) >= 0;
@@ -75,7 +73,10 @@
     b.transform(require('coffeeify'));
     b._extensions.push('.coffee');
 
+    // Construct file glob and normalized absolute path for use with grunt and browserify here.
     // Register source files using the moduleFQN/fileName convention described in function comment block.
+    console.log('Pre-Glob client-bundle', new Date());
+    var sourceGlob    = appConfig.source.client + '/' + appConfig.app + '/**/*.{js,coffee}';
     _.forEach(
       grunt.file.glob(
         sourceGlob,
@@ -86,9 +87,12 @@
       ),
       _.partial(registerFileByModuleAlias, b, appConfig)
     );
+    console.log('Post-Glob client-bundle', new Date());
 
     // Configure browserify to load Loopback and Main Angular Application Module to bootstrap bundle activation on load.
     b.add( './lbclient.js', { expose: 'lbclient' } );
+    // b.add( 'boot/replication.js', { expose: 'boot/replication' } );
+    // b.add( 'datasources.local.js', { expose: 'datasources.local' } );
     b.require(
       sprintf('./%s/module.js', appConfig.app),
       { expose: appConfig.app }
