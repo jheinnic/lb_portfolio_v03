@@ -1,0 +1,468 @@
+lb_express_sandbox@0.0.4-SNAPSHOT D:\DevProj\Git\lb_express_sandbox
+├── async@0.9.2
+├── bluebird@2.10.2
+├─┬ compression@1.6.0
+│ ├─┬ accepts@1.3.0
+│ │ ├─┬ mime-types@2.1.7
+│ │ │ └── mime-db@1.19.0
+│ │ └── negotiator@0.6.0
+│ ├── bytes@2.1.0
+│ ├─┬ compressible@2.0.6
+│ │ └── mime-db@1.20.0
+│ ├─┬ debug@2.2.0
+│ │ └── ms@0.7.1
+│ ├── on-headers@1.0.1
+│ └── vary@1.1.0
+├─┬ errorhandler@1.4.2
+│ ├─┬ accepts@1.2.13
+│ │ ├─┬ mime-types@2.1.7
+│ │ │ └── mime-db@1.19.0
+│ │ └── negotiator@0.5.3
+│ └── escape-html@1.0.2
+├─┬ kerberos@0.0.17
+│ └── nan@2.0.9
+├── lodash@3.10.1
+├─┬ loopback@2.25.0
+│ ├── bcryptjs@2.3.0
+│ ├─┬ body-parser@1.14.1
+│ │ ├── bytes@2.1.0
+│ │ ├── content-type@1.0.1
+│ │ ├─┬ http-errors@1.3.1
+│ │ │ ├── inherits@2.0.1
+│ │ │ └── statuses@1.2.1
+│ │ ├── iconv-lite@0.4.12
+│ │ ├─┬ on-finished@2.3.0
+│ │ │ └── ee-first@1.1.1
+│ │ ├── qs@5.1.0
+│ │ ├─┬ raw-body@2.1.4
+│ │ │ └── unpipe@1.0.0
+│ │ └─┬ type-is@1.6.9
+│ │   ├── media-typer@0.3.0
+│ │   └─┬ mime-types@2.1.7
+│ │     └── mime-db@1.19.0
+│ ├── canonical-json@0.0.4
+│ ├─┬ continuation-local-storage@3.1.4
+│ │ ├─┬ async-listener@0.5.6
+│ │ │ └── shimmer@1.0.0
+│ │ └─┬ emitter-listener@1.0.1
+│ │   └── shimmer@1.0.0
+│ ├─┬ cookie-parser@1.4.0
+│ │ ├── cookie@0.2.2
+│ │ └── cookie-signature@1.0.6
+│ ├─┬ debug@2.2.0
+│ │ └── ms@0.7.1
+│ ├── depd@1.1.0
+│ ├── ejs@2.3.4
+│ ├─┬ express@4.13.3
+│ │ ├─┬ accepts@1.2.13
+│ │ │ ├─┬ mime-types@2.1.7
+│ │ │ │ └── mime-db@1.19.0
+│ │ │ └── negotiator@0.5.3
+│ │ ├── array-flatten@1.1.1
+│ │ ├── content-disposition@0.5.0
+│ │ ├── content-type@1.0.1
+│ │ ├── cookie@0.1.3
+│ │ ├── cookie-signature@1.0.6
+│ │ ├── depd@1.0.1
+│ │ ├── escape-html@1.0.2
+│ │ ├── etag@1.7.0
+│ │ ├─┬ finalhandler@0.4.0
+│ │ │ └── unpipe@1.0.0
+│ │ ├── fresh@0.3.0
+│ │ ├── merge-descriptors@1.0.0
+│ │ ├── methods@1.1.1
+│ │ ├─┬ on-finished@2.3.0
+│ │ │ └── ee-first@1.1.1
+│ │ ├── parseurl@1.3.0
+│ │ ├── path-to-regexp@0.1.7
+│ │ ├─┬ proxy-addr@1.0.8
+│ │ │ ├── forwarded@0.1.0
+│ │ │ └── ipaddr.js@1.0.1
+│ │ ├── qs@4.0.0
+│ │ ├── range-parser@1.0.3
+│ │ ├─┬ send@0.13.0
+│ │ │ ├── destroy@1.0.3
+│ │ │ ├─┬ http-errors@1.3.1
+│ │ │ │ └── inherits@2.0.1
+│ │ │ ├── mime@1.3.4
+│ │ │ ├── ms@0.7.1
+│ │ │ └── statuses@1.2.1
+│ │ ├── serve-static@1.10.0
+│ │ ├─┬ type-is@1.6.9
+│ │ │ ├── media-typer@0.3.0
+│ │ │ └─┬ mime-types@2.1.7
+│ │ │   └── mime-db@1.19.0
+│ │ ├── utils-merge@1.0.0
+│ │ └── vary@1.0.1
+│ ├── inflection@1.8.0
+│ ├── loopback-connector-remote@1.0.3
+│ ├── loopback-phase@1.2.0
+│ ├─┬ nodemailer@1.10.0
+│ │ ├─┬ libmime@1.2.0
+│ │ │ ├── iconv-lite@0.4.13
+│ │ │ ├── libbase64@0.1.0
+│ │ │ └── libqp@1.1.0
+│ │ ├─┬ mailcomposer@2.1.0
+│ │ │ └─┬ buildmail@2.0.0
+│ │ │   ├── addressparser@0.3.2
+│ │ │   ├── libbase64@0.1.0
+│ │ │   ├── libqp@1.1.0
+│ │ │   └─┬ needle@0.10.0
+│ │ │     └── iconv-lite@0.4.13
+│ │ ├─┬ needle@0.11.0
+│ │ │ └── iconv-lite@0.4.13
+│ │ ├─┬ nodemailer-direct-transport@1.1.0
+│ │ │ └── smtp-connection@1.3.1
+│ │ └─┬ nodemailer-smtp-transport@1.0.4
+│ │   ├── clone@1.0.2
+│ │   ├── nodemailer-wellknown@0.1.7
+│ │   └── smtp-connection@1.3.1
+│ ├── nodemailer-stub-transport@0.1.5
+│ ├─┬ serve-favicon@2.3.0
+│ │ ├── etag@1.7.0
+│ │ ├── fresh@0.3.0
+│ │ ├── ms@0.7.1
+│ │ └── parseurl@1.3.0
+│ ├── sl-blip@1.0.0
+│ ├── stable@0.1.5
+│ ├─┬ strong-remoting@2.22.2
+│ │ ├─┬ cors@2.7.1
+│ │ │ └── vary@1.1.0
+│ │ ├── eventemitter2@0.4.14
+│ │ ├─┬ jayson@1.2.2
+│ │ │ ├─┬ commander@1.3.2
+│ │ │ │ └── keypress@0.1.0
+│ │ │ ├── eyes@0.1.8
+│ │ │ ├─┬ JSONStream@1.0.3
+│ │ │ │ ├── jsonparse@1.0.0
+│ │ │ │ └── through@2.3.8
+│ │ │ └── lodash@3.6.0
+│ │ ├── js2xmlparser@0.1.9
+│ │ ├─┬ mux-demux@3.7.9
+│ │ │ ├── duplex@1.0.0
+│ │ │ ├── json-buffer@2.0.11
+│ │ │ ├─┬ msgpack-stream@0.0.12
+│ │ │ │ ├─┬ bops@0.0.6
+│ │ │ │ │ ├── base64-js@0.0.2
+│ │ │ │ │ └── to-utf8@0.0.1
+│ │ │ │ ├── msgpack-js@0.3.0
+│ │ │ │ └── through@2.3.4
+│ │ │ ├─┬ stream-combiner@0.0.2
+│ │ │ │ └── duplexer@0.0.4
+│ │ │ ├── stream-serializer@1.1.2
+│ │ │ ├── through@2.3.8
+│ │ │ └── xtend@1.0.3
+│ │ ├── qs@2.4.2
+│ │ ├─┬ request@2.67.0
+│ │ │ ├── aws-sign2@0.6.0
+│ │ │ ├─┬ bl@1.0.0
+│ │ │ │ └─┬ readable-stream@2.0.4
+│ │ │ │   ├── core-util-is@1.0.2
+│ │ │ │   ├── inherits@2.0.1
+│ │ │ │   ├── isarray@0.0.1
+│ │ │ │   ├── process-nextick-args@1.0.3
+│ │ │ │   ├── string_decoder@0.10.31
+│ │ │ │   └── util-deprecate@1.0.2
+│ │ │ ├── caseless@0.11.0
+│ │ │ ├─┬ combined-stream@1.0.5
+│ │ │ │ └── delayed-stream@1.0.0
+│ │ │ ├── extend@3.0.0
+│ │ │ ├── forever-agent@0.6.1
+│ │ │ ├─┬ form-data@1.0.0-rc3
+│ │ │ │ └── async@1.5.0
+│ │ │ ├─┬ har-validator@2.0.3
+│ │ │ │ ├─┬ chalk@1.1.1
+│ │ │ │ │ ├── ansi-styles@2.1.0
+│ │ │ │ │ ├── escape-string-regexp@1.0.3
+│ │ │ │ │ ├─┬ has-ansi@2.0.0
+│ │ │ │ │ │ └── ansi-regex@2.0.0
+│ │ │ │ │ ├─┬ strip-ansi@3.0.0
+│ │ │ │ │ │ └── ansi-regex@2.0.0
+│ │ │ │ │ └── supports-color@2.0.0
+│ │ │ │ ├─┬ commander@2.9.0
+│ │ │ │ │ └── graceful-readlink@1.0.1
+│ │ │ │ ├─┬ is-my-json-valid@2.12.3
+│ │ │ │ │ ├── generate-function@2.0.0
+│ │ │ │ │ ├─┬ generate-object-property@1.2.0
+│ │ │ │ │ │ └── is-property@1.0.2
+│ │ │ │ │ ├── jsonpointer@2.0.0
+│ │ │ │ │ └── xtend@4.0.1
+│ │ │ │ └─┬ pinkie-promise@2.0.0
+│ │ │ │   └── pinkie@2.0.1
+│ │ │ ├─┬ hawk@3.1.2
+│ │ │ │ ├── boom@2.10.1
+│ │ │ │ ├── cryptiles@2.0.5
+│ │ │ │ ├── hoek@2.16.3
+│ │ │ │ └── sntp@1.0.9
+│ │ │ ├─┬ http-signature@1.1.0
+│ │ │ │ ├── assert-plus@0.1.5
+│ │ │ │ ├─┬ jsprim@1.2.2
+│ │ │ │ │ ├── extsprintf@1.0.2
+│ │ │ │ │ ├── json-schema@0.2.2
+│ │ │ │ │ └── verror@1.3.6
+│ │ │ │ └─┬ sshpk@1.7.0
+│ │ │ │   ├── asn1@0.2.3
+│ │ │ │   ├── assert-plus@0.2.0
+│ │ │ │   ├─┬ dashdash@1.10.1
+│ │ │ │   │ └── assert-plus@0.1.5
+│ │ │ │   ├── ecc-jsbn@0.1.1
+│ │ │ │   ├── jodid25519@1.0.2
+│ │ │ │   ├── jsbn@0.1.0
+│ │ │ │   └── tweetnacl@0.13.2
+│ │ │ ├── is-typedarray@1.0.0
+│ │ │ ├── isstream@0.1.2
+│ │ │ ├── json-stringify-safe@5.0.1
+│ │ │ ├─┬ mime-types@2.1.7
+│ │ │ │ └── mime-db@1.19.0
+│ │ │ ├── node-uuid@1.4.7
+│ │ │ ├── oauth-sign@0.8.0
+│ │ │ ├── qs@5.2.0
+│ │ │ ├── stringstream@0.0.5
+│ │ │ ├── tough-cookie@2.2.1
+│ │ │ └── tunnel-agent@0.4.1
+│ │ ├─┬ sse@0.0.6
+│ │ │ └── options@0.0.6
+│ │ ├── traverse@0.6.6
+│ │ └─┬ xml2js@0.4.15
+│ │   ├── sax@1.1.4
+│ │   └── xmlbuilder@4.1.0
+│ ├── uid2@0.0.3
+│ └── underscore.string@3.2.2
+├─┬ loopback-boot@2.14.2
+│ ├── commondir@0.0.1
+│ ├─┬ debug@2.2.0
+│ │ └── ms@0.7.1
+│ ├── semver@4.3.6
+│ └── toposort@0.2.12
+├─┬ loopback-connector-mongodb@1.13.1
+│ ├── async@1.5.0
+│ ├─┬ debug@2.2.0
+│ │ └── ms@0.7.1
+│ ├── loopback-connector@2.3.0
+│ └─┬ mongodb@2.0.49
+│   ├── es6-promise@2.1.1
+│   ├─┬ kerberos@0.0.17
+│   │ └── nan@2.0.9
+│   ├─┬ mongodb-core@1.2.24
+│   │ └── bson@0.4.19
+│   └─┬ readable-stream@1.0.31
+│     ├── core-util-is@1.0.2
+│     ├── inherits@2.0.1
+│     ├── isarray@0.0.1
+│     └── string_decoder@0.10.31
+├─┬ loopback-datasource-juggler@2.43.0
+│ ├── async@1.0.0
+│ ├─┬ debug@2.2.0
+│ │ └── ms@0.7.1
+│ ├── depd@1.1.0
+│ ├── inflection@1.8.0
+│ ├── loopback-connector@2.3.0
+│ ├── node-uuid@1.4.7
+│ ├── qs@3.1.0
+│ └── traverse@0.6.6
+├─┬ loopback-explorer@1.8.0
+│ ├─┬ cors@2.7.1
+│ │ └── vary@1.1.0
+│ ├─┬ debug@1.0.4
+│ │ └── ms@0.6.2
+│ ├─┬ express@3.21.2
+│ │ ├── basic-auth@1.0.3
+│ │ ├── commander@2.6.0
+│ │ ├─┬ connect@2.30.2
+│ │ │ ├── basic-auth-connect@1.0.0
+│ │ │ ├─┬ body-parser@1.13.3
+│ │ │ │ ├── iconv-lite@0.4.11
+│ │ │ │ ├─┬ on-finished@2.3.0
+│ │ │ │ │ └── ee-first@1.1.1
+│ │ │ │ └─┬ raw-body@2.1.4
+│ │ │ │   ├── iconv-lite@0.4.12
+│ │ │ │   └── unpipe@1.0.0
+│ │ │ ├── bytes@2.1.0
+│ │ │ ├─┬ compression@1.5.2
+│ │ │ │ ├─┬ accepts@1.2.13
+│ │ │ │ │ ├─┬ mime-types@2.1.7
+│ │ │ │ │ │ └── mime-db@1.19.0
+│ │ │ │ │ └── negotiator@0.5.3
+│ │ │ │ └─┬ compressible@2.0.6
+│ │ │ │   └── mime-db@1.20.0
+│ │ │ ├─┬ connect-timeout@1.6.2
+│ │ │ │ └── ms@0.7.1
+│ │ │ ├── cookie-parser@1.3.5
+│ │ │ ├─┬ csurf@1.8.3
+│ │ │ │ └─┬ csrf@3.0.0
+│ │ │ │   ├── base64-url@1.2.1
+│ │ │ │   ├── rndm@1.1.1
+│ │ │ │   ├── scmp@1.0.0
+│ │ │ │   └── uid-safe@2.0.0
+│ │ │ ├─┬ errorhandler@1.4.2
+│ │ │ │ └─┬ accepts@1.2.13
+│ │ │ │   ├─┬ mime-types@2.1.7
+│ │ │ │   │ └── mime-db@1.19.0
+│ │ │ │   └── negotiator@0.5.3
+│ │ │ ├─┬ express-session@1.11.3
+│ │ │ │ ├── crc@3.3.0
+│ │ │ │ └─┬ uid-safe@2.0.0
+│ │ │ │   └── base64-url@1.2.1
+│ │ │ ├─┬ finalhandler@0.4.0
+│ │ │ │ ├─┬ on-finished@2.3.0
+│ │ │ │ │ └── ee-first@1.1.1
+│ │ │ │ └── unpipe@1.0.0
+│ │ │ ├─┬ http-errors@1.3.1
+│ │ │ │ ├── inherits@2.0.1
+│ │ │ │ └── statuses@1.2.1
+│ │ │ ├── method-override@2.3.5
+│ │ │ ├─┬ morgan@1.6.1
+│ │ │ │ └─┬ on-finished@2.3.0
+│ │ │ │   └── ee-first@1.1.1
+│ │ │ ├─┬ multiparty@3.3.2
+│ │ │ │ ├─┬ readable-stream@1.1.13
+│ │ │ │ │ ├── core-util-is@1.0.2
+│ │ │ │ │ ├── inherits@2.0.1
+│ │ │ │ │ ├── isarray@0.0.1
+│ │ │ │ │ └── string_decoder@0.10.31
+│ │ │ │ └── stream-counter@0.2.0
+│ │ │ ├── on-headers@1.0.1
+│ │ │ ├── pause@0.1.0
+│ │ │ ├── qs@4.0.0
+│ │ │ ├── response-time@2.3.1
+│ │ │ ├─┬ serve-favicon@2.3.0
+│ │ │ │ └── ms@0.7.1
+│ │ │ ├─┬ serve-index@1.7.2
+│ │ │ │ ├─┬ accepts@1.2.13
+│ │ │ │ │ └── negotiator@0.5.3
+│ │ │ │ ├── batch@0.5.2
+│ │ │ │ └─┬ mime-types@2.1.7
+│ │ │ │   └── mime-db@1.19.0
+│ │ │ ├── serve-static@1.10.0
+│ │ │ ├─┬ type-is@1.6.9
+│ │ │ │ ├── media-typer@0.3.0
+│ │ │ │ └─┬ mime-types@2.1.7
+│ │ │ │   └── mime-db@1.19.0
+│ │ │ └── vhost@3.0.2
+│ │ ├── content-disposition@0.5.0
+│ │ ├── content-type@1.0.1
+│ │ ├── cookie@0.1.3
+│ │ ├── cookie-signature@1.0.6
+│ │ ├─┬ debug@2.2.0
+│ │ │ └── ms@0.7.1
+│ │ ├── depd@1.0.1
+│ │ ├── escape-html@1.0.2
+│ │ ├── etag@1.7.0
+│ │ ├── fresh@0.3.0
+│ │ ├── merge-descriptors@1.0.0
+│ │ ├── methods@1.1.1
+│ │ ├─┬ mkdirp@0.5.1
+│ │ │ └── minimist@0.0.8
+│ │ ├── parseurl@1.3.0
+│ │ ├─┬ proxy-addr@1.0.8
+│ │ │ ├── forwarded@0.1.0
+│ │ │ └── ipaddr.js@1.0.1
+│ │ ├── range-parser@1.0.3
+│ │ ├─┬ send@0.13.0
+│ │ │ ├── destroy@1.0.3
+│ │ │ ├─┬ http-errors@1.3.1
+│ │ │ │ └── inherits@2.0.1
+│ │ │ ├── mime@1.3.4
+│ │ │ ├── ms@0.7.1
+│ │ │ ├─┬ on-finished@2.3.0
+│ │ │ │ └── ee-first@1.1.1
+│ │ │ └── statuses@1.2.1
+│ │ ├── utils-merge@1.0.0
+│ │ └── vary@1.0.1
+│ ├── lodash@2.4.2
+│ └─┬ swagger-ui@2.0.24
+│   ├── coffee-script@1.6.3
+│   ├─┬ handlebars@1.0.12
+│   │ ├─┬ optimist@0.3.7
+│   │ │ └── wordwrap@0.0.3
+│   │ └─┬ uglify-js@2.3.6
+│   │   ├── async@0.2.10
+│   │   └─┬ source-map@0.1.43
+│   │     └── amdefine@1.0.0
+│   ├─┬ less@1.4.2
+│   │ ├── mime@1.2.11
+│   │ ├── mkdirp@0.3.5
+│   │ ├─┬ request@2.67.0
+│   │ │ ├── aws-sign2@0.6.0
+│   │ │ ├─┬ bl@1.0.0
+│   │ │ │ └─┬ readable-stream@2.0.4
+│   │ │ │   ├── core-util-is@1.0.2
+│   │ │ │   ├── inherits@2.0.1
+│   │ │ │   ├── isarray@0.0.1
+│   │ │ │   ├── process-nextick-args@1.0.3
+│   │ │ │   ├── string_decoder@0.10.31
+│   │ │ │   └── util-deprecate@1.0.2
+│   │ │ ├── caseless@0.11.0
+│   │ │ ├─┬ combined-stream@1.0.5
+│   │ │ │ └── delayed-stream@1.0.0
+│   │ │ ├── extend@3.0.0
+│   │ │ ├── forever-agent@0.6.1
+│   │ │ ├─┬ form-data@1.0.0-rc3
+│   │ │ │ └── async@1.5.0
+│   │ │ ├─┬ har-validator@2.0.3
+│   │ │ │ ├─┬ chalk@1.1.1
+│   │ │ │ │ ├── ansi-styles@2.1.0
+│   │ │ │ │ ├── escape-string-regexp@1.0.3
+│   │ │ │ │ ├─┬ has-ansi@2.0.0
+│   │ │ │ │ │ └── ansi-regex@2.0.0
+│   │ │ │ │ ├─┬ strip-ansi@3.0.0
+│   │ │ │ │ │ └── ansi-regex@2.0.0
+│   │ │ │ │ └── supports-color@2.0.0
+│   │ │ │ ├─┬ commander@2.9.0
+│   │ │ │ │ └── graceful-readlink@1.0.1
+│   │ │ │ ├─┬ is-my-json-valid@2.12.3
+│   │ │ │ │ ├── generate-function@2.0.0
+│   │ │ │ │ ├─┬ generate-object-property@1.2.0
+│   │ │ │ │ │ └── is-property@1.0.2
+│   │ │ │ │ ├── jsonpointer@2.0.0
+│   │ │ │ │ └── xtend@4.0.1
+│   │ │ │ └─┬ pinkie-promise@2.0.0
+│   │ │ │   └── pinkie@2.0.1
+│   │ │ ├─┬ hawk@3.1.2
+│   │ │ │ ├── boom@2.10.1
+│   │ │ │ ├── cryptiles@2.0.5
+│   │ │ │ ├── hoek@2.16.3
+│   │ │ │ └── sntp@1.0.9
+│   │ │ ├─┬ http-signature@1.1.0
+│   │ │ │ ├── assert-plus@0.1.5
+│   │ │ │ ├─┬ jsprim@1.2.2
+│   │ │ │ │ ├── extsprintf@1.0.2
+│   │ │ │ │ ├── json-schema@0.2.2
+│   │ │ │ │ └── verror@1.3.6
+│   │ │ │ └─┬ sshpk@1.7.0
+│   │ │ │   ├── asn1@0.2.3
+│   │ │ │   ├── assert-plus@0.2.0
+│   │ │ │   ├─┬ dashdash@1.10.1
+│   │ │ │   │ └── assert-plus@0.1.5
+│   │ │ │   ├── ecc-jsbn@0.1.1
+│   │ │ │   ├── jodid25519@1.0.2
+│   │ │ │   ├── jsbn@0.1.0
+│   │ │ │   └── tweetnacl@0.13.2
+│   │ │ ├── is-typedarray@1.0.0
+│   │ │ ├── isstream@0.1.2
+│   │ │ ├── json-stringify-safe@5.0.1
+│   │ │ ├─┬ mime-types@2.1.7
+│   │ │ │ └── mime-db@1.19.0
+│   │ │ ├── node-uuid@1.4.7
+│   │ │ ├── oauth-sign@0.8.0
+│   │ │ ├── qs@5.2.0
+│   │ │ ├── stringstream@0.0.5
+│   │ │ ├── tough-cookie@2.2.1
+│   │ │ └── tunnel-agent@0.4.1
+│   │ └── ycssmin@1.0.1
+│   └─┬ swagger-client@2.0.36
+│     ├── btoa@1.1.1
+│     └─┬ shred@0.8.10
+│       ├── ax@0.1.8
+│       ├── cookiejar@1.3.1
+│       ├── iconv-lite@0.4.13
+│       └── sprintf@0.1.1
+├─┬ serve-favicon@2.3.0
+│ ├── etag@1.7.0
+│ ├── fresh@0.3.0
+│ ├── ms@0.7.1
+│ └── parseurl@1.3.0
+├── sprintf-js@1.0.3
+├── strong-express-metrics@1.1.0
+└── strong-logger@0.0.3
+

@@ -1,0 +1,212 @@
+[4mInitializing[24m
+Command-line options: [36m--verbose[39m, [36m--force[39m
+
+Reading "Gruntfile.js" Gruntfile...[32mOK[39m
+
+[1mRegistering Gruntfile tasks.[22m
+
+[1mRegistering "grunt-autoprefixer" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-autoprefixer\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-autoprefixer\package.json...[32mOK[39m
+Loading "autoprefixer.js" tasks...[32mOK[39m
++ [36mautoprefixer[39m
+
+[1mRegistering "grunt-coffeelint" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-coffeelint\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-coffeelint\package.json...[32mOK[39m
+Loading "coffeelint.js" tasks...[32mOK[39m
++ [36mcoffeelint[39m
+
+[1mRegistering "grunt-concurrent" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-concurrent\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-concurrent\package.json...[32mOK[39m
+Loading "concurrent.js" tasks...[32mOK[39m
++ [36mconcurrent[39m
+
+[1mRegistering "grunt-contrib-clean" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-clean\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-clean\package.json...[32mOK[39m
+Loading "clean.js" tasks...[32mOK[39m
++ [36mclean[39m
+
+[1mRegistering "grunt-contrib-coffee" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-coffee\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-coffee\package.json...[32mOK[39m
+Loading "coffee.js" tasks...[32mOK[39m
++ [36mcoffee[39m
+
+[1mRegistering "grunt-contrib-concat" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-concat\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-concat\package.json...[32mOK[39m
+Loading "concat.js" tasks...[32mOK[39m
++ [36mconcat[39m
+
+[1mRegistering "grunt-contrib-connect" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-connect\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-connect\package.json...[32mOK[39m
+Loading "connect.js" tasks...[32mOK[39m
++ [36mconnect[39m
+
+[1mRegistering "grunt-contrib-copy" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-copy\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-copy\package.json...[32mOK[39m
+Loading "copy.js" tasks...[32mOK[39m
++ [36mcopy[39m
+
+[1mRegistering "grunt-contrib-cssmin" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-cssmin\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-cssmin\package.json...[32mOK[39m
+Loading "cssmin.js" tasks...[32mOK[39m
++ [36mcssmin[39m
+
+[1mRegistering "grunt-contrib-htmlmin" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-htmlmin\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-htmlmin\package.json...[32mOK[39m
+Loading "htmlmin.js" tasks...[32mOK[39m
++ [36mhtmlmin[39m
+
+[1mRegistering "grunt-contrib-imagemin" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-imagemin\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-imagemin\package.json...[32mOK[39m
+Loading "imagemin.js" tasks...[32mOK[39m
++ [36mimagemin[39m
+
+[1mRegistering "grunt-contrib-jasmine" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-jasmine\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-jasmine\package.json...[32mOK[39m
+Loading "jasmine.js" tasks...[32mOK[39m
++ [36mjasmine[39m
+
+[1mRegistering "grunt-contrib-jshint" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-jshint\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-jshint\package.json...[32mOK[39m
+Loading "jshint.js" tasks...[32mOK[39m
++ [36mjshint[39m
+
+[1mRegistering "grunt-contrib-less" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-less\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-less\package.json...[32mOK[39m
+Loading "less.js" tasks...[32mOK[39m
++ [36mless[39m
+
+[1mRegistering "grunt-contrib-uglify" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-uglify\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-uglify\package.json...[32mOK[39m
+Loading "uglify.js" tasks...[32mOK[39m
++ [36muglify[39m
+
+[1mRegistering "grunt-contrib-watch" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-watch\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-contrib-watch\package.json...[32mOK[39m
+Loading "watch.js" tasks...[32mOK[39m
++ [36mwatch[39m
+
+[1mRegistering "grunt-docker" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-docker\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-docker\package.json...[32mOK[39m
+Loading "docker.js" tasks...[32mOK[39m
++ [36mdocker[39m
+
+[1mRegistering "grunt-docker-io" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-docker-io\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-docker-io\package.json...[32mOK[39m
+Loading "docker_io.js" tasks...[32mOK[39m
++ [36mdocker_io[39m
+
+[1mRegistering "grunt-filerev" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-filerev\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-filerev\package.json...[32mOK[39m
+Loading "filerev.js" tasks...[32mOK[39m
++ [36mfilerev[39m
+
+[1mRegistering "grunt-google-cdn" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-google-cdn\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-google-cdn\package.json...[32mOK[39m
+Loading "cdnify.js" tasks...[32mOK[39m
++ [36mcdnify[39m
+
+[1mRegistering "grunt-html2js" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-html2js\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-html2js\package.json...[32mOK[39m
+Loading "html2js.js" tasks...[32mOK[39m
++ [36mhtml2js[39m
+
+[1mRegistering "grunt-htmlbuild" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-htmlbuild\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-htmlbuild\package.json...[32mOK[39m
+Loading "htmlbuild.js" tasks...[32mOK[39m
++ [36mhtmlbuild[39m
+
+[1mRegistering "grunt-inject" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-inject\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-inject\package.json...[32mOK[39m
+Loading "index.js" tasks...[32mOK[39m
++ [36minject[39m
+
+[1mRegistering "grunt-karma" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-karma\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-karma\package.json...[32mOK[39m
+Loading "grunt-karma.js" tasks...[32mOK[39m
++ [36mkarma[39m
+
+[1mRegistering "grunt-mocha-test" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-mocha-test\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-mocha-test\package.json...[32mOK[39m
+Loading "mocha-test.js" tasks...[32mOK[39m
++ [36mmochaTest[39m
+
+[1mRegistering "grunt-newer" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-newer\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-newer\package.json...[32mOK[39m
+Loading "newer.js" tasks...[32mOK[39m
++ [36many-newer[39m, [36mnewer[39m, [36mnewer-clean[39m, [36mnewer-postrun[39m
+
+[1mRegistering "grunt-ng-annotate" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-ng-annotate\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-ng-annotate\package.json...[32mOK[39m
+Loading "ng-annotate.js" tasks...[32mOK[39m
++ [36mngAnnotate[39m
+
+[1mRegistering "grunt-node-inspector" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-node-inspector\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-node-inspector\package.json...[32mOK[39m
+Loading "inspector.js" tasks...[32mOK[39m
++ [36mnode-inspector[39m
+
+[1mRegistering "grunt-nodemon" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-nodemon\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-nodemon\package.json...[32mOK[39m
+Loading "nodemon.js" tasks...[32mOK[39m
++ [36mnodemon[39m
+
+[1mRegistering "grunt-recess" local Npm module tasks.[22m
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-recess\package.json...[32mOK[39m
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-recess\package.json...[32mOK[39m
+Loading "recess.js" tasks...OK
++ recess
+
+Registering "grunt-svgmin" local Npm module tasks.
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-svgmin\package.json...OK
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-svgmin\package.json...OK
+Loading "svgmin.js" tasks...OK
++ svgmin
+
+Registering "grunt-usemin" local Npm module tasks.
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-usemin\package.json...OK
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-usemin\package.json...OK
+Loading "usemin.js" tasks...OK
++ usemin, useminPrepare
+
+Registering "grunt-wiredep" local Npm module tasks.
+Reading D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-wiredep\package.json...OK
+Parsing D:\DevProj\Git\lb_express_sandbox\node_modules\grunt-wiredep\package.json...OK
+Loading "wiredep.js" tasks...OK
++ wiredep
+Initializing config...OK
+Loading "Gruntfile.js" tasks...OK
++ build, build-config, build-lbclient, clean-all, default, run, serve, server, test, test:client, test:common, test:server
+
+Running tasks: html-build
+Warning: Task "html-build" not found. Used --force, continuing.
+
+Done, but with warnings.

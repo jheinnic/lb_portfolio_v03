@@ -1,0 +1,2403 @@
+[4mInitializing[24m
+Command-line options: [36m--verbose[39m
+
+Reading "Gruntfile.js" Gruntfile...[32mOK[39m
+
+[1mRegistering Gruntfile tasks.[22m
+
+[1mRegistering "grunt-autoprefixer" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-autoprefixer\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-autoprefixer\package.json...[32mOK[39m
+Loading "autoprefixer.js" tasks...[32mOK[39m
++ [36mautoprefixer[39m
+
+[1mRegistering "grunt-coffeelint" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-coffeelint\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-coffeelint\package.json...[32mOK[39m
+Loading "coffeelint.js" tasks...[32mOK[39m
++ [36mcoffeelint[39m
+
+[1mRegistering "grunt-concurrent" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-concurrent\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-concurrent\package.json...[32mOK[39m
+Loading "concurrent.js" tasks...[32mOK[39m
++ [36mconcurrent[39m
+
+[1mRegistering "grunt-contrib-clean" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-clean\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-clean\package.json...[32mOK[39m
+Loading "clean.js" tasks...[32mOK[39m
++ [36mclean[39m
+
+[1mRegistering "grunt-contrib-coffee" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-coffee\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-coffee\package.json...[32mOK[39m
+Loading "coffee.js" tasks...[32mOK[39m
++ [36mcoffee[39m
+
+[1mRegistering "grunt-contrib-concat" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-concat\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-concat\package.json...[32mOK[39m
+Loading "concat.js" tasks...[32mOK[39m
++ [36mconcat[39m
+
+[1mRegistering "grunt-contrib-connect" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-connect\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-connect\package.json...[32mOK[39m
+Loading "connect.js" tasks...[32mOK[39m
++ [36mconnect[39m
+
+[1mRegistering "grunt-contrib-copy" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-copy\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-copy\package.json...[32mOK[39m
+Loading "copy.js" tasks...[32mOK[39m
++ [36mcopy[39m
+
+[1mRegistering "grunt-contrib-cssmin" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-cssmin\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-cssmin\package.json...[32mOK[39m
+Loading "cssmin.js" tasks...[32mOK[39m
++ [36mcssmin[39m
+
+[1mRegistering "grunt-contrib-htmlmin" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-htmlmin\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-htmlmin\package.json...[32mOK[39m
+Loading "htmlmin.js" tasks...[32mOK[39m
++ [36mhtmlmin[39m
+
+[1mRegistering "grunt-contrib-imagemin" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-imagemin\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-imagemin\package.json...[32mOK[39m
+Loading "imagemin.js" tasks...[32mOK[39m
++ [36mimagemin[39m
+
+[1mRegistering "grunt-contrib-jasmine" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-jasmine\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-jasmine\package.json...[32mOK[39m
+Loading "jasmine.js" tasks...[32mOK[39m
++ [36mjasmine[39m
+
+[1mRegistering "grunt-contrib-jshint" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-jshint\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-jshint\package.json...[32mOK[39m
+Loading "jshint.js" tasks...[32mOK[39m
++ [36mjshint[39m
+
+[1mRegistering "grunt-contrib-less" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-less\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-less\package.json...[32mOK[39m
+Loading "less.js" tasks...[32mOK[39m
++ [36mless[39m
+
+[1mRegistering "grunt-contrib-uglify" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-uglify\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-uglify\package.json...[32mOK[39m
+Loading "uglify.js" tasks...[32mOK[39m
++ [36muglify[39m
+
+[1mRegistering "grunt-contrib-watch" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-watch\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-watch\package.json...[32mOK[39m
+Loading "watch.js" tasks...[32mOK[39m
++ [36mwatch[39m
+
+[1mRegistering "grunt-docker" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-docker\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-docker\package.json...[32mOK[39m
+Loading "docker.js" tasks...[32mOK[39m
++ [36mdocker[39m
+
+[1mRegistering "grunt-docker-io" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-docker-io\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-docker-io\package.json...[32mOK[39m
+Loading "docker_io.js" tasks...[32mOK[39m
++ [36mdocker_io[39m
+
+[1mRegistering "grunt-filerev" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-filerev\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-filerev\package.json...[32mOK[39m
+Loading "filerev.js" tasks...[32mOK[39m
++ [36mfilerev[39m
+
+[1mRegistering "grunt-google-cdn" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-google-cdn\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-google-cdn\package.json...[32mOK[39m
+Loading "cdnify.js" tasks...[32mOK[39m
++ [36mcdnify[39m
+
+[1mRegistering "grunt-html2js" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-html2js\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-html2js\package.json...[32mOK[39m
+Loading "html2js.js" tasks...[32mOK[39m
++ [36mhtml2js[39m
+
+[1mRegistering "grunt-karma" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-karma\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-karma\package.json...[32mOK[39m
+Loading "grunt-karma.js" tasks...[32mOK[39m
++ [36mkarma[39m
+
+[1mRegistering "grunt-mocha-test" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-mocha-test\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-mocha-test\package.json...[32mOK[39m
+Loading "mocha-test.js" tasks...[32mOK[39m
++ [36mmochaTest[39m
+
+[1mRegistering "grunt-newer" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-newer\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-newer\package.json...[32mOK[39m
+Loading "newer.js" tasks...[32mOK[39m
++ [36many-newer[39m, [36mnewer[39m, [36mnewer-clean[39m, [36mnewer-postrun[39m
+
+[1mRegistering "grunt-ng-annotate" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-ng-annotate\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-ng-annotate\package.json...[32mOK[39m
+Loading "ng-annotate.js" tasks...[32mOK[39m
++ [36mngAnnotate[39m
+
+[1mRegistering "grunt-recess" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-recess\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-recess\package.json...[32mOK[39m
+Loading "recess.js" tasks...OK
++ recess
+
+Registering "grunt-svgmin" local Npm module tasks.
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-svgmin\package.json...OK
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-svgmin\package.json...OK
+Loading "svgmin.js" tasks...OK
++ svgmin
+
+Registering "grunt-usemin" local Npm module tasks.
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-usemin\package.json...OK
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-usemin\package.json...OK
+Loading "usemin.js" tasks...OK
++ usemin, useminPrepare
+
+Registering "grunt-wiredep" local Npm module tasks.
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-wiredep\package.json...OK
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-wiredep\package.json...OK
+Loading "wiredep.js" tasks...OK
++ wiredep
+{ app: 'client/ngapp',
+  vendor: 'client/ngapp/vendor',
+  dist: 'client/dist',
+  tempfiles: '.tmp' }
+Initializing config...OK
+Loading "Gruntfile.js" tasks...OK
++ build, build-config, build-lbclient, clean-all, default, run, serve, server, test, test:client, test:common, test:server
+
+Running tasks: build
+
+Running "build" task
+
+Running "clean:dist" (clean) task
+Verifying property clean.dist exists in config...OK
+Files: .tmp, client/dist/favicon.ico, client/dist/images, client/dist/images/jchptf, client/dist/images/jchptf/crossword, client/dist/images/jchptf/crossword/bootstrap, client/dist/images/jchptf/crossword/bootstrap/img, client/dist/images/jchptf/crossword/bootstrap/img/glyphicons-halflings-white.9bbc6e96.png, client/dist/images/jchptf/crossword/bootstrap/img/glyphicons-halflings.25163399.png, client/dist/images/jchptf/crossword/border, client/dist/images/jchptf/crossword/border/grid.b6948e3f.png, client/dist/images/jchptf/crossword/border/hend.9705f52d.png, client/dist/images/jchptf/crossword/border/hmid.e559c7bf.png, client/dist/images/jchptf/crossword/border/htop.808aa338.png, client/dist/images/jchptf/crossword/border/unit.0d1bc994.png, client/dist/images/jchptf/crossword/border/vend.347d8249.png, client/dist/images/jchptf/crossword/border/vmid.0da3e031.png, client/dist/images/jchptf/crossword/border/vtop.dc0723af.png, client/dist/images/jchptf/crossword/card, client/dist/images/jchptf/crossword/card/card.3ce4520a.jpg, client/dist/images/jchptf/crossword/card/card_00.7ee255fa.jpg, client/dist/images/jchptf/crossword/card/card_01.8955f8b1.jpg, client/dist/images/jchptf/crossword/card/card_02.582a531f.jpg, client/dist/images/jchptf/crossword/card/card_03.6d9311da.jpg, client/dist/images/jchptf/crossword/card/card_04.3d6afc3f.jpg, client/dist/images/jchptf/crossword/card/card_05.80e655cf.jpg, client/dist/images/jchptf/crossword/card/card_06.af799031.jpg, client/dist/images/jchptf/crossword/card/card_07.4bbf6958.jpg, client/dist/images/jchptf/crossword/card/card_08.defee122.jpg, client/dist/images/jchptf/crossword/card/card_09.c3883669.jpg, client/dist/images/jchptf/crossword/card/card_10.17deccb4.jpg, client/dist/images/jchptf/crossword/card/card_11.48326ec5.jpg, client/dist/images/jchptf/crossword/card/card_12.03386639.jpg, client/dist/images/jchptf/crossword/card/card_13.186795d4.jpg, client/dist/images/jchptf/crossword/card/card_14.51ff939f.jpg, client/dist/images/jchptf/crossword/card/card_15.e04b69b3.jpg, client/dist/images/jchptf/crossword/fill, client/dist/images/jchptf/crossword/fill/Medium Grey.0254abce.png, client/dist/images/jchptf/crossword/fill/Scratch1.21a9950f.png, client/dist/images/jchptf/crossword/fill/Scratch2.39b7fda6.png, client/dist/images/jchptf/crossword/fill/Scratch3.0754670c.png, client/dist/images/jchptf/crossword/fill/Scratch4.019e72e9.png, client/dist/images/jchptf/crossword/fill/Scratch5.e6f2c498.png, client/dist/images/jchptf/crossword/fill/Scratch6.9ddf6407.png, client/dist/images/jchptf/crossword/fill/SilverCover.ffbb71f2.png, client/dist/images/jchptf/crossword/fill/altPath.27ffc38f.png, client/dist/images/jchptf/crossword/fill/altPath2.5b5f7764.png, client/dist/images/jchptf/crossword/fill/brite1.d79da49b.png, client/dist/images/jchptf/crossword/fill/briteblue.ec192226.png, client/dist/images/jchptf/crossword/fill/cornsilk.566364ce.png, client/dist/images/jchptf/crossword/fill/darkGrey.f31cd249.png, client/dist/images/jchptf/crossword/fill/golden.22942ea5.png, client/dist/images/jchptf/crossword/fill/imageSrc.47fbed79.png, client/dist/images/jchptf/crossword/fill/lightGrey.aeb54a2f.png, client/dist/images/jchptf/crossword/fill/locked.a2c760e6.png, client/dist/images/jchptf/crossword/fill/pink1.7823e85c.png, client/dist/images/jchptf/crossword/fill/pink2.85c5e5b6.png, client/dist/images/jchptf/crossword/fill/scratched.31092940.png, client/dist/images/jchptf/crossword/fill/selected1.12de1fd3.png, client/dist/images/jchptf/crossword/gval, client/dist/images/jchptf/crossword/gval/A.1d7ef07b.png, client/dist/images/jchptf/crossword/gval/B.d3c5d4b6.png, client/dist/images/jchptf/crossword/gval/C.dacbb6c8.png, client/dist/images/jchptf/crossword/gval/D.d1fd7c40.png, client/dist/images/jchptf/crossword/gval/E.0caf867f.png, client/dist/images/jchptf/crossword/gval/F.53c573b5.png, client/dist/images/jchptf/crossword/gval/G.28a28674.png, client/dist/images/jchptf/crossword/gval/H.97709074.png, client/dist/images/jchptf/crossword/gval/I.b379b51c.png, client/dist/images/jchptf/crossword/gval/J.5638086a.png, client/dist/images/jchptf/crossword/gval/K.dfc13a4b.png, client/dist/images/jchptf/crossword/gval/L.d278d4ea.png, client/dist/images/jchptf/crossword/gval/M.1b331515.png, client/dist/images/jchptf/crossword/gval/N.fbd652fd.png, client/dist/images/jchptf/crossword/gval/O.0e9947bf.png, client/dist/images/jchptf/crossword/gval/P.c61b4b86.png, client/dist/images/jchptf/crossword/gval/Q.f771d5ae.png, client/dist/images/jchptf/crossword/gval/R.249fa1e6.png, client/dist/images/jchptf/crossword/gval/S.37faa1c0.png, client/dist/images/jchptf/crossword/gval/T.c92ffeff.png, client/dist/images/jchptf/crossword/gval/U.20330708.png, client/dist/images/jchptf/crossword/gval/V.8bdface5.png, client/dist/images/jchptf/crossword/gval/W.9fc38a7f.png, client/dist/images/jchptf/crossword/gval/X.b723c5a2.png, client/dist/images/jchptf/crossword/gval/Y.b22dd6bf.png, client/dist/images/jchptf/crossword/gval/Z.ed51c254.png, client/dist/images/jchptf/crossword/val, client/dist/images/jchptf/crossword/val/10.e93796d2.png, client/dist/images/jchptf/crossword/val/30.d11c8ab7.png, client/dist/images/jchptf/crossword/val/4.d24152d5.png, client/dist/images/jchptf/crossword/val/5.01a65dd4.png, client/dist/images/jchptf/crossword/val/A.39cf2517.png, client/dist/images/jchptf/crossword/val/B.eb46f4fc.png, client/dist/images/jchptf/crossword/val/C.04b9f463.png, client/dist/images/jchptf/crossword/val/D.b2c8c4b5.png, client/dist/images/jchptf/crossword/val/E.34595fc4.png, client/dist/images/jchptf/crossword/val/F.5a1dc220.png, client/dist/images/jchptf/crossword/val/G.bdabff08.png, client/dist/images/jchptf/crossword/val/H.59a66507.png, client/dist/images/jchptf/crossword/val/I.f9bafda9.png, client/dist/images/jchptf/crossword/val/J.c41ca95a.png, client/dist/images/jchptf/crossword/val/K.dd1b866b.png, client/dist/images/jchptf/crossword/val/L.14804c8e.png, client/dist/images/jchptf/crossword/val/M.cca39400.png, client/dist/images/jchptf/crossword/val/N.5c9ee2f4.png, client/dist/images/jchptf/crossword/val/O.29d64ef6.png, client/dist/images/jchptf/crossword/val/P.4cf55b11.png, client/dist/images/jchptf/crossword/val/Q.3c3ebfaf.png, client/dist/images/jchptf/crossword/val/R.ff9db90d.png, client/dist/images/jchptf/crossword/val/S.8e7dbdf3.png, client/dist/images/jchptf/crossword/val/T.06330f35.png, client/dist/images/jchptf/crossword/val/U.158383b5.png, client/dist/images/jchptf/crossword/val/V.7ce337c0.png, client/dist/images/jchptf/crossword/val/W.145d7d2a.png, client/dist/images/jchptf/crossword/val/X.07bc166f.png, client/dist/images/jchptf/crossword/val/Y.39ddbb59.png, client/dist/images/jchptf/crossword/val/Z.d45e3b8e.png, client/dist/images/jchptf/crossword/val/blank.a1c932b0.png, client/dist/images/jchptf/crossword/val/qm.fcc01291.png, client/dist/images/jchptf/crossword/val/unk.0a800f7a.png, client/dist/index.html, client/dist/robots.txt, client/dist/scripts, client/dist/scripts/scripts.js, client/dist/scripts/vendor.js, client/dist/styles, client/dist/styles/main.css, client/dist/styles/vendor.css, client/dist/views, client/dist/views/changes.html, client/dist/views/jchptf, client/dist/views/jchptf/crossword, client/dist/views/jchptf/crossword/result, client/dist/views/jchptf/crossword/result/altPayoutReport.html, client/dist/views/jchptf/crossword/result/payoutItem.html, client/dist/views/jchptf/crossword/result/payoutReport.html, client/dist/views/jchptf/crossword/result/progressItem.html, client/dist/views/jchptf/crossword/result/progressReport.html, client/dist/views/jchptf/crossword/ticket, client/dist/views/jchptf/crossword/ticket/bonusValue.html, client/dist/views/jchptf/crossword/ticket/bonusWordCell.html, client/dist/views/jchptf/crossword/ticket/bonusWordGrid.html, client/dist/views/jchptf/crossword/ticket/crosswordCell.html, client/dist/views/jchptf/crossword/ticket/crosswordGrid.html, client/dist/views/jchptf/crossword/ticket/view.html, client/dist/views/jchptf/crossword/ticket/xwTicket.html, client/dist/views/jchptf/crossword/ticket/yourLettersCell.html, client/dist/views/jchptf/crossword/ticket/yourLettersGrid.html, client/dist/views/jchptf/home, client/dist/views/jchptf/home/view.html, client/dist/views/jchptf/poker, client/dist/views/jchptf/poker/testGridOne.html, client/dist/views/jchptf/poker/view.html, client/dist/views/jchptf/uiTools, client/dist/views/jchptf/uiTools/navBar, client/dist/views/jchptf/uiTools/navBar/jchNavbar.html, client/dist/views/login.html, client/dist/views/register.html, client/dist/views/todos.html, client/dist/views/user.html, client/dist/views/welcome.html
+Options: force=false, no-write=false
+Cleaning .tmp...
+Cleaning client/dist/favicon.ico...
+Cleaning client/dist/images...
+Cleaning client/dist/index.html...
+Cleaning client/dist/robots.txt...
+Cleaning client/dist/scripts...
+Cleaning client/dist/styles...
+Cleaning client/dist/views...
+>> 161 paths cleaned.
+
+Running "coffeelint" task
+
+Running "coffeelint:dist" (coffeelint) task
+Verifying property coffeelint.dist exists in config...OK
+Files: [no src]
+Options: (none)
+>> 0 files lint free.
+
+Running "coffeelint:test" (coffeelint) task
+Verifying property coffeelint.test exists in config...OK
+Files: [no src]
+Options: (none)
+>> 0 files lint free.
+
+Running "jshint" task
+
+Running "jshint:dist" (jshint) task
+Verifying property jshint.dist exists in config...OK
+Files: Gruntfile.js, client/ngapp/scripts/controllers/change.js, client/ngapp/scripts/controllers/home.js, client/ngapp/scripts/controllers/login.js, client/ngapp/scripts/controllers/register.js, client/ngapp/scripts/controllers/todo.js, client/ngapp/scripts/controllers/user.js, client/ngapp/scripts/jchptf/app.configuration.js, client/ngapp/scripts/jchptf/app.js, client/ngapp/scripts/jchptf/app.run.js, client/ngapp/scripts/jchptf/authenticate/AuthToken.service.js, client/ngapp/scripts/jchptf/authenticate/LoginController.controller.js, client/ngapp/scripts/jchptf/authenticate/authenticate.js, client/ngapp/scripts/jchptf/authenticate/authenticate.routes.js, client/ngapp/scripts/jchptf/authenticate/ptfLoginModal.directive.js, client/ngapp/scripts/jchptf/context/context.js, client/ngapp/scripts/jchptf/crosswords/crosswords.js, client/ngapp/scripts/jchptf/crosswords/crosswords.routes.js, client/ngapp/scripts/jchptf/crosswords/results/results.js, client/ngapp/scripts/jchptf/crosswords/tickets/tickets.js, client/ngapp/scripts/jchptf/site/navigation/navigation.js, client/ngapp/scripts/jchptf/site/notification/notification.js, client/ngapp/scripts/jchptf/tools/keyboard/keyboard.directive.js, client/ngapp/scripts/services/lbclient.js
+Options: force=false, reporter="d:\\DevProj\\git\\lb_express_sandbox\\node_modules\\jshint-stylish\\stylish.js", jshintrc=".jshintrc"
+
+√ No problems
+
+
+Running "jshint:test" (jshint) task
+Verifying property jshint.test exists in config...OK
+Files: client/ngapp/test/spec/controllers/change.js, client/ngapp/test/spec/controllers/home.js, client/ngapp/test/spec/controllers/login.js, client/ngapp/test/spec/controllers/register.js, client/ngapp/test/spec/controllers/todo.js, client/ngapp/test/spec/controllers/user.js, client/ngapp/test/spec/services/lbclient.js
+Options: force=false, reporter="d:\\DevProj\\git\\lb_express_sandbox\\node_modules\\jshint-stylish\\stylish.js", jshintrc="client/ngapp/test/.jshintrc"
+
+√ No problems
+
+
+Running "coffee" task
+
+Running "coffee:dist" (coffee) task
+Verifying property coffee.dist exists in config...OK
+Files: client/ngapp/scripts/enum.coffee -> .tmp/scripts/enum.js
+Files: client/ngapp/scripts/jchptf/context/AuthTokenEventKind.constant.coffee -> .tmp/scripts/jchptf/context/AuthTokenEventKind.constant.js
+Files: client/ngapp/scripts/jchptf/context/IdentityContext.service.coffee -> .tmp/scripts/jchptf/context/IdentityContext.service.js
+Files: client/ngapp/scripts/jchptf/crosswords/results/xwReport.coffee -> .tmp/scripts/jchptf/crosswords/results/xwReport.js
+Files: client/ngapp/scripts/jchptf/crosswords/tickets/dynamic.coffee -> .tmp/scripts/jchptf/crosswords/tickets/dynamic.js
+Files: client/ngapp/scripts/jchptf/crosswords/xwModel.coffee -> .tmp/scripts/jchptf/crosswords/xwModel.js
+Files: client/ngapp/scripts/jchptf/features/features.coffee -> .tmp/scripts/jchptf/features/features.js
+Files: client/ngapp/scripts/jchptf/poker/poker.coffee -> .tmp/scripts/jchptf/poker/poker.js
+Files: client/ngapp/scripts/jchptf/site/navigation/home.coffee -> .tmp/scripts/jchptf/site/navigation/home.js
+Files: client/ngapp/scripts/jchptf/tools/dynamicNav/navBar.directive.coffee -> .tmp/scripts/jchptf/tools/dynamicNav/navBar.directive.js
+Files: client/ngapp/scripts/jchptf/tools/frozen/frozen.coffee -> .tmp/scripts/jchptf/tools/frozen/frozen.js
+Files: client/ngapp/scripts/jchptf/tools/frozen/frozen2.coffee -> .tmp/scripts/jchptf/tools/frozen/frozen2.js
+Files: client/ngapp/scripts/jchptf/tools/iconPanel/iconPanel.directive.coffee -> .tmp/scripts/jchptf/tools/iconPanel/iconPanel.directive.js
+Files: client/ngapp/scripts/jchptf/tools/keyboard/keyboard.coffee -> .tmp/scripts/jchptf/tools/keyboard/keyboard.js
+Files: client/ngapp/scripts/jchptf/tools/state/alias.directive.coffee -> .tmp/scripts/jchptf/tools/state/alias.directive.js
+Options: bare=false, join=false, sourceMap, joinExt=".src.coffee", separator="\r\n"
+Reading client/ngapp/scripts/enum.coffee...OK
+Writing .tmp/scripts/enum.js...OK
+File .tmp/scripts/enum.js created.
+Writing .tmp/scripts\enum.js.map...OK
+File .tmp/scripts\enum.js.map created (source map).
+Reading client/ngapp/scripts/jchptf/context/AuthTokenEventKind.constant.coffee...OK
+Writing .tmp/scripts/jchptf/context/AuthTokenEventKind.constant.js...OK
+File .tmp/scripts/jchptf/context/AuthTokenEventKind.constant.js created.
+Writing .tmp/scripts/jchptf/context\AuthTokenEventKind.constant.js.map...OK
+File .tmp/scripts/jchptf/context\AuthTokenEventKind.constant.js.map created (source map).
+Reading client/ngapp/scripts/jchptf/context/IdentityContext.service.coffee...OK
+Writing .tmp/scripts/jchptf/context/IdentityContext.service.js...OK
+File .tmp/scripts/jchptf/context/IdentityContext.service.js created.
+Writing .tmp/scripts/jchptf/context\IdentityContext.service.js.map...OK
+File .tmp/scripts/jchptf/context\IdentityContext.service.js.map created (source map).
+Reading client/ngapp/scripts/jchptf/crosswords/results/xwReport.coffee...OK
+Writing .tmp/scripts/jchptf/crosswords/results/xwReport.js...OK
+File .tmp/scripts/jchptf/crosswords/results/xwReport.js created.
+Writing .tmp/scripts/jchptf/crosswords/results\xwReport.js.map...OK
+File .tmp/scripts/jchptf/crosswords/results\xwReport.js.map created (source map).
+Reading client/ngapp/scripts/jchptf/crosswords/tickets/dynamic.coffee...OK
+Writing .tmp/scripts/jchptf/crosswords/tickets/dynamic.js...OK
+File .tmp/scripts/jchptf/crosswords/tickets/dynamic.js created.
+Writing .tmp/scripts/jchptf/crosswords/tickets\dynamic.js.map...OK
+File .tmp/scripts/jchptf/crosswords/tickets\dynamic.js.map created (source map).
+Reading client/ngapp/scripts/jchptf/crosswords/xwModel.coffee...OK
+Writing .tmp/scripts/jchptf/crosswords/xwModel.js...OK
+File .tmp/scripts/jchptf/crosswords/xwModel.js created.
+Writing .tmp/scripts/jchptf/crosswords\xwModel.js.map...OK
+File .tmp/scripts/jchptf/crosswords\xwModel.js.map created (source map).
+Reading client/ngapp/scripts/jchptf/features/features.coffee...OK
+Writing .tmp/scripts/jchptf/features/features.js...OK
+File .tmp/scripts/jchptf/features/features.js created.
+Writing .tmp/scripts/jchptf/features\features.js.map...OK
+File .tmp/scripts/jchptf/features\features.js.map created (source map).
+Reading client/ngapp/scripts/jchptf/poker/poker.coffee...OK
+Writing .tmp/scripts/jchptf/poker/poker.js...OK
+File .tmp/scripts/jchptf/poker/poker.js created.
+Writing .tmp/scripts/jchptf/poker\poker.js.map...OK
+File .tmp/scripts/jchptf/poker\poker.js.map created (source map).
+Reading client/ngapp/scripts/jchptf/site/navigation/home.coffee...OK
+Writing .tmp/scripts/jchptf/site/navigation/home.js...OK
+File .tmp/scripts/jchptf/site/navigation/home.js created.
+Writing .tmp/scripts/jchptf/site/navigation\home.js.map...OK
+File .tmp/scripts/jchptf/site/navigation\home.js.map created (source map).
+Reading client/ngapp/scripts/jchptf/tools/dynamicNav/navBar.directive.coffee...OK
+Writing .tmp/scripts/jchptf/tools/dynamicNav/navBar.directive.js...OK
+File .tmp/scripts/jchptf/tools/dynamicNav/navBar.directive.js created.
+Writing .tmp/scripts/jchptf/tools/dynamicNav\navBar.directive.js.map...OK
+File .tmp/scripts/jchptf/tools/dynamicNav\navBar.directive.js.map created (source map).
+Reading client/ngapp/scripts/jchptf/tools/frozen/frozen.coffee...OK
+Writing .tmp/scripts/jchptf/tools/frozen/frozen.js...OK
+File .tmp/scripts/jchptf/tools/frozen/frozen.js created.
+Writing .tmp/scripts/jchptf/tools/frozen\frozen.js.map...OK
+File .tmp/scripts/jchptf/tools/frozen\frozen.js.map created (source map).
+Reading client/ngapp/scripts/jchptf/tools/frozen/frozen2.coffee...OK
+Writing .tmp/scripts/jchptf/tools/frozen/frozen2.js...OK
+File .tmp/scripts/jchptf/tools/frozen/frozen2.js created.
+Writing .tmp/scripts/jchptf/tools/frozen\frozen2.js.map...OK
+File .tmp/scripts/jchptf/tools/frozen\frozen2.js.map created (source map).
+Reading client/ngapp/scripts/jchptf/tools/iconPanel/iconPanel.directive.coffee...OK
+Writing .tmp/scripts/jchptf/tools/iconPanel/iconPanel.directive.js...OK
+File .tmp/scripts/jchptf/tools/iconPanel/iconPanel.directive.js created.
+Writing .tmp/scripts/jchptf/tools/iconPanel\iconPanel.directive.js.map...OK
+File .tmp/scripts/jchptf/tools/iconPanel\iconPanel.directive.js.map created (source map).
+Reading client/ngapp/scripts/jchptf/tools/keyboard/keyboard.coffee...OK
+Writing .tmp/scripts/jchptf/tools/keyboard/keyboard.js...OK
+File .tmp/scripts/jchptf/tools/keyboard/keyboard.js created.
+Writing .tmp/scripts/jchptf/tools/keyboard\keyboard.js.map...OK
+File .tmp/scripts/jchptf/tools/keyboard\keyboard.js.map created (source map).
+Reading client/ngapp/scripts/jchptf/tools/state/alias.directive.coffee...OK
+Writing .tmp/scripts/jchptf/tools/state/alias.directive.js...OK
+File .tmp/scripts/jchptf/tools/state/alias.directive.js created.
+Writing .tmp/scripts/jchptf/tools/state\alias.directive.js.map...OK
+File .tmp/scripts/jchptf/tools/state\alias.directive.js.map created (source map).
+>> 15 files created.
+>> 15 source map files created.
+
+Running "coffee:test" (coffee) task
+Verifying property coffee.test exists in config...OK
+Files: client/ngapp/test/spec/enum.coffee -> .tmp/test/spec/enum.js
+Options: bare=false, join=false, sourceMap, joinExt=".src.coffee", separator="\r\n"
+Reading client/ngapp/test/spec/enum.coffee...OK
+Writing .tmp/test/spec/enum.js...OK
+File .tmp/test/spec/enum.js created.
+Writing .tmp/test/spec\enum.js.map...OK
+File .tmp/test/spec\enum.js.map created (source map).
+>> 1 files created.
+>> 1 source map files created.
+
+Running "less" task
+
+Running "less:dist" (less) task
+Verifying property less.dist exists in config...OK
+Files: client/ngapp/styles/jchptf/app.less -> .tmp/less/jchptf/app.css
+Files: client/ngapp/styles/jchptf/crosswords/crosswords.less -> .tmp/less/jchptf/crosswords/crosswords.css
+Files: client/ngapp/styles/jchptf/home/home.less -> .tmp/less/jchptf/home/home.css
+Options: banner="", paths=["client/ngapp/styles","client/ngapp/vendor/bootstrap/less"]
+Reading client/ngapp/styles/jchptf/app.less...OK
+Writing .tmp/less/jchptf/app.css...OK
+File .tmp/less/jchptf/app.css created
+Reading client/ngapp/styles/jchptf/crosswords/crosswords.less...OK
+Writing .tmp/less/jchptf/crosswords/crosswords.css...OK
+File .tmp/less/jchptf/crosswords/crosswords.css created
+Reading client/ngapp/styles/jchptf/home/home.less...OK
+Writing .tmp/less/jchptf/home/home.css...OK
+File .tmp/less/jchptf/home/home.css created
+
+Running "build-lbclient" task
+
+Running "build-config" task
+
+Running "copy:scripts" (copy) task
+Verifying property copy.scripts exists in config...OK
+Files: client/ngapp/scripts/controllers/change.js -> .tmp/scripts/controllers/change.js
+Files: client/ngapp/scripts/controllers/home.js -> .tmp/scripts/controllers/home.js
+Files: client/ngapp/scripts/controllers/login.js -> .tmp/scripts/controllers/login.js
+Files: client/ngapp/scripts/controllers/register.js -> .tmp/scripts/controllers/register.js
+Files: client/ngapp/scripts/controllers/todo.js -> .tmp/scripts/controllers/todo.js
+Files: client/ngapp/scripts/controllers/user.js -> .tmp/scripts/controllers/user.js
+Files: client/ngapp/scripts/jchptf/app.configuration.js -> .tmp/scripts/jchptf/app.configuration.js
+Files: client/ngapp/scripts/jchptf/app.js -> .tmp/scripts/jchptf/app.js
+Files: client/ngapp/scripts/jchptf/app.run.js -> .tmp/scripts/jchptf/app.run.js
+Files: client/ngapp/scripts/jchptf/authenticate/AuthToken.service.js -> .tmp/scripts/jchptf/authenticate/AuthToken.service.js
+Files: client/ngapp/scripts/jchptf/authenticate/LoginController.controller.js -> .tmp/scripts/jchptf/authenticate/LoginController.controller.js
+Files: client/ngapp/scripts/jchptf/authenticate/authenticate.js -> .tmp/scripts/jchptf/authenticate/authenticate.js
+Files: client/ngapp/scripts/jchptf/authenticate/authenticate.routes.js -> .tmp/scripts/jchptf/authenticate/authenticate.routes.js
+Files: client/ngapp/scripts/jchptf/authenticate/ptfLoginModal.directive.js -> .tmp/scripts/jchptf/authenticate/ptfLoginModal.directive.js
+Files: client/ngapp/scripts/jchptf/context/context.js -> .tmp/scripts/jchptf/context/context.js
+Files: client/ngapp/scripts/jchptf/crosswords/crosswords.js -> .tmp/scripts/jchptf/crosswords/crosswords.js
+Files: client/ngapp/scripts/jchptf/crosswords/crosswords.routes.js -> .tmp/scripts/jchptf/crosswords/crosswords.routes.js
+Files: client/ngapp/scripts/jchptf/crosswords/results/results.js -> .tmp/scripts/jchptf/crosswords/results/results.js
+Files: client/ngapp/scripts/jchptf/crosswords/tickets/tickets.js -> .tmp/scripts/jchptf/crosswords/tickets/tickets.js
+Files: client/ngapp/scripts/jchptf/site/navigation/navigation.js -> .tmp/scripts/jchptf/site/navigation/navigation.js
+Files: client/ngapp/scripts/jchptf/site/notification/notification.js -> .tmp/scripts/jchptf/site/notification/notification.js
+Files: client/ngapp/scripts/jchptf/tools/keyboard/keyboard.directive.js -> .tmp/scripts/jchptf/tools/keyboard/keyboard.directive.js
+Files: client/ngapp/scripts/services/lbclient.js -> .tmp/scripts/services/lbclient.js
+Files: client/lbclient/browser.bundle.js -> .tmp/lbclient/browser.bundle.js
+Files: client/ngapp/test/spec/controllers/change.js -> .tmp/test/spec/controllers/change.js
+Files: client/ngapp/test/spec/controllers/home.js -> .tmp/test/spec/controllers/home.js
+Files: client/ngapp/test/spec/controllers/login.js -> .tmp/test/spec/controllers/login.js
+Files: client/ngapp/test/spec/controllers/register.js -> .tmp/test/spec/controllers/register.js
+Files: client/ngapp/test/spec/controllers/todo.js -> .tmp/test/spec/controllers/todo.js
+Files: client/ngapp/test/spec/controllers/user.js -> .tmp/test/spec/controllers/user.js
+Files: client/ngapp/test/spec/services/lbclient.js -> .tmp/test/spec/services/lbclient.js
+Options: encoding="utf8", processContent=false, processContentExclude=[], timestamp=false, mode=false
+Copying client/ngapp/scripts/controllers/change.js -> .tmp/scripts/controllers/change.js
+Reading client/ngapp/scripts/controllers/change.js...OK
+Writing .tmp/scripts/controllers/change.js...OK
+Copying client/ngapp/scripts/controllers/home.js -> .tmp/scripts/controllers/home.js
+Reading client/ngapp/scripts/controllers/home.js...OK
+Writing .tmp/scripts/controllers/home.js...OK
+Copying client/ngapp/scripts/controllers/login.js -> .tmp/scripts/controllers/login.js
+Reading client/ngapp/scripts/controllers/login.js...OK
+Writing .tmp/scripts/controllers/login.js...OK
+Copying client/ngapp/scripts/controllers/register.js -> .tmp/scripts/controllers/register.js
+Reading client/ngapp/scripts/controllers/register.js...OK
+Writing .tmp/scripts/controllers/register.js...OK
+Copying client/ngapp/scripts/controllers/todo.js -> .tmp/scripts/controllers/todo.js
+Reading client/ngapp/scripts/controllers/todo.js...OK
+Writing .tmp/scripts/controllers/todo.js...OK
+Copying client/ngapp/scripts/controllers/user.js -> .tmp/scripts/controllers/user.js
+Reading client/ngapp/scripts/controllers/user.js...OK
+Writing .tmp/scripts/controllers/user.js...OK
+Copying client/ngapp/scripts/jchptf/app.configuration.js -> .tmp/scripts/jchptf/app.configuration.js
+Reading client/ngapp/scripts/jchptf/app.configuration.js...OK
+Writing .tmp/scripts/jchptf/app.configuration.js...OK
+Copying client/ngapp/scripts/jchptf/app.js -> .tmp/scripts/jchptf/app.js
+Reading client/ngapp/scripts/jchptf/app.js...OK
+Writing .tmp/scripts/jchptf/app.js...OK
+Copying client/ngapp/scripts/jchptf/app.run.js -> .tmp/scripts/jchptf/app.run.js
+Reading client/ngapp/scripts/jchptf/app.run.js...OK
+Writing .tmp/scripts/jchptf/app.run.js...OK
+Copying client/ngapp/scripts/jchptf/authenticate/AuthToken.service.js -> .tmp/scripts/jchptf/authenticate/AuthToken.service.js
+Reading client/ngapp/scripts/jchptf/authenticate/AuthToken.service.js...OK
+Writing .tmp/scripts/jchptf/authenticate/AuthToken.service.js...OK
+Copying client/ngapp/scripts/jchptf/authenticate/LoginController.controller.js -> .tmp/scripts/jchptf/authenticate/LoginController.controller.js
+Reading client/ngapp/scripts/jchptf/authenticate/LoginController.controller.js...OK
+Writing .tmp/scripts/jchptf/authenticate/LoginController.controller.js...OK
+Copying client/ngapp/scripts/jchptf/authenticate/authenticate.js -> .tmp/scripts/jchptf/authenticate/authenticate.js
+Reading client/ngapp/scripts/jchptf/authenticate/authenticate.js...OK
+Writing .tmp/scripts/jchptf/authenticate/authenticate.js...OK
+Copying client/ngapp/scripts/jchptf/authenticate/authenticate.routes.js -> .tmp/scripts/jchptf/authenticate/authenticate.routes.js
+Reading client/ngapp/scripts/jchptf/authenticate/authenticate.routes.js...OK
+Writing .tmp/scripts/jchptf/authenticate/authenticate.routes.js...OK
+Copying client/ngapp/scripts/jchptf/authenticate/ptfLoginModal.directive.js -> .tmp/scripts/jchptf/authenticate/ptfLoginModal.directive.js
+Reading client/ngapp/scripts/jchptf/authenticate/ptfLoginModal.directive.js...OK
+Writing .tmp/scripts/jchptf/authenticate/ptfLoginModal.directive.js...OK
+Copying client/ngapp/scripts/jchptf/context/context.js -> .tmp/scripts/jchptf/context/context.js
+Reading client/ngapp/scripts/jchptf/context/context.js...OK
+Writing .tmp/scripts/jchptf/context/context.js...OK
+Copying client/ngapp/scripts/jchptf/crosswords/crosswords.js -> .tmp/scripts/jchptf/crosswords/crosswords.js
+Reading client/ngapp/scripts/jchptf/crosswords/crosswords.js...OK
+Writing .tmp/scripts/jchptf/crosswords/crosswords.js...OK
+Copying client/ngapp/scripts/jchptf/crosswords/crosswords.routes.js -> .tmp/scripts/jchptf/crosswords/crosswords.routes.js
+Reading client/ngapp/scripts/jchptf/crosswords/crosswords.routes.js...OK
+Writing .tmp/scripts/jchptf/crosswords/crosswords.routes.js...OK
+Copying client/ngapp/scripts/jchptf/crosswords/results/results.js -> .tmp/scripts/jchptf/crosswords/results/results.js
+Reading client/ngapp/scripts/jchptf/crosswords/results/results.js...OK
+Writing .tmp/scripts/jchptf/crosswords/results/results.js...OK
+Copying client/ngapp/scripts/jchptf/crosswords/tickets/tickets.js -> .tmp/scripts/jchptf/crosswords/tickets/tickets.js
+Reading client/ngapp/scripts/jchptf/crosswords/tickets/tickets.js...OK
+Writing .tmp/scripts/jchptf/crosswords/tickets/tickets.js...OK
+Copying client/ngapp/scripts/jchptf/site/navigation/navigation.js -> .tmp/scripts/jchptf/site/navigation/navigation.js
+Reading client/ngapp/scripts/jchptf/site/navigation/navigation.js...OK
+Writing .tmp/scripts/jchptf/site/navigation/navigation.js...OK
+Copying client/ngapp/scripts/jchptf/site/notification/notification.js -> .tmp/scripts/jchptf/site/notification/notification.js
+Reading client/ngapp/scripts/jchptf/site/notification/notification.js...OK
+Writing .tmp/scripts/jchptf/site/notification/notification.js...OK
+Copying client/ngapp/scripts/jchptf/tools/keyboard/keyboard.directive.js -> .tmp/scripts/jchptf/tools/keyboard/keyboard.directive.js
+Reading client/ngapp/scripts/jchptf/tools/keyboard/keyboard.directive.js...OK
+Writing .tmp/scripts/jchptf/tools/keyboard/keyboard.directive.js...OK
+Copying client/ngapp/scripts/services/lbclient.js -> .tmp/scripts/services/lbclient.js
+Reading client/ngapp/scripts/services/lbclient.js...OK
+Writing .tmp/scripts/services/lbclient.js...OK
+Copying client/lbclient/browser.bundle.js -> .tmp/lbclient/browser.bundle.js
+Reading client/lbclient/browser.bundle.js...OK
+Writing .tmp/lbclient/browser.bundle.js...OK
+Copying client/ngapp/test/spec/controllers/change.js -> .tmp/test/spec/controllers/change.js
+Reading client/ngapp/test/spec/controllers/change.js...OK
+Writing .tmp/test/spec/controllers/change.js...OK
+Copying client/ngapp/test/spec/controllers/home.js -> .tmp/test/spec/controllers/home.js
+Reading client/ngapp/test/spec/controllers/home.js...OK
+Writing .tmp/test/spec/controllers/home.js...OK
+Copying client/ngapp/test/spec/controllers/login.js -> .tmp/test/spec/controllers/login.js
+Reading client/ngapp/test/spec/controllers/login.js...OK
+Writing .tmp/test/spec/controllers/login.js...OK
+Copying client/ngapp/test/spec/controllers/register.js -> .tmp/test/spec/controllers/register.js
+Reading client/ngapp/test/spec/controllers/register.js...OK
+Writing .tmp/test/spec/controllers/register.js...OK
+Copying client/ngapp/test/spec/controllers/todo.js -> .tmp/test/spec/controllers/todo.js
+Reading client/ngapp/test/spec/controllers/todo.js...OK
+Writing .tmp/test/spec/controllers/todo.js...OK
+Copying client/ngapp/test/spec/controllers/user.js -> .tmp/test/spec/controllers/user.js
+Reading client/ngapp/test/spec/controllers/user.js...OK
+Writing .tmp/test/spec/controllers/user.js...OK
+Copying client/ngapp/test/spec/services/lbclient.js -> .tmp/test/spec/services/lbclient.js
+Reading client/ngapp/test/spec/services/lbclient.js...OK
+Writing .tmp/test/spec/services/lbclient.js...OK
+Copied 31 files
+
+Running "wiredep" task
+
+Running "wiredep:app" (wiredep) task
+Verifying property wiredep.app exists in config...OK
+Files: client/ngapp/index.html
+Verifying property wiredep.app.src exists in config...OK
+Options: src=["client/ngapp/index.html"], cwd="client/ngapp", bowerJson={"name":"portfolio-xw","origName":"express_sandbox","version":"0.0.3-SNAPSHOT","main":"server/server.js","appPath":"client/ngapp","stagingPath":".tmp","authors":["John Heinnickel <jheinnic@hotmail.com>"],"description":"Crosswords Portfolio Project","keywords":["crosswords","angularJS","portfolio","loopback","mongodb","nodeJS","jheinnic"],"license":"MIT","homepage":"http://portfolio.jchein.us/xw/","origHomepage":"http://www.jchein.info/portfolio/","ignore":["**/.*","node_modules","**/bower_components","test","tests"],"moduleType":["commonjs"],"dependencies":{"angular":"~1.3","angular-cookies":"~1.3","angular-resource":"~1.3","angular-sanitize":"~1.3","angular-animate":"~1.3","angular-touch":"~1.3","angular-http-auth":"^1.2","angular-nvd3":"^1.0.0-beta","angular-underscore":"^0.5.0","angular-leaflet-directive":"^0.7.11","angular-ui-grid":"^3.0.0-rc.21","angular-bootstrap":"^0.12.1","angular-ui-router":"^0.2.13","angular-ui-utils":"^0.2.3","angular-strap":"^2.2.1","angular-dragdrop":"^1.0.11","angular-jwt":"^0.0.6","ngFx":"^1.0.6","nvd3":"^1.7.1","rang":"*","d3":"^3.3.13","async":"^0.9.2","jquery":"^2.1.4","leaflet":"^0.7.3","bootstrap":"^3.3.4","underscore":"^1.8.3","font-awesome":"~4.3.0","coffee-script":"^1.9.2","sprintf.js":"^1.0.2","es5-shim":"~3.1.0","json3":"~3.3.2","things-happened-angular":"~0.3.0","things-happened-util":"~0.4.3"},"devDependencies":{"angular-mocks":"~1.3","angular-scenario":"~1.3"},"resolutions":{"angular":"1.3.15","d3":"~3.4.11","nvd3":"^1.7.1","things-happened-util":"0.4.2"}}, directory="client/ngapp/vendor"
+
+Running "concurrent:dist" (concurrent) task
+Verifying property concurrent.dist exists in config...OK
+Files: [no src] -> dist
+Options: limit=16
+    
+[4mInitializing[24m
+Command-line options: [36m--verbose[39m
+
+Reading "Gruntfile.js" Gruntfile...[32mOK[39m
+
+[1mRegistering Gruntfile tasks.[22m
+
+[1mRegistering "grunt-autoprefixer" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-autoprefixer\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-autoprefixer\package.json...[32mOK[39m
+Loading "autoprefixer.js" tasks...[32mOK[39m
++ [36mautoprefixer[39m
+
+[1mRegistering "grunt-coffeelint" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-coffeelint\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-coffeelint\package.json...[32mOK[39m
+Loading "coffeelint.js" tasks...[32mOK[39m
++ [36mcoffeelint[39m
+
+[1mRegistering "grunt-concurrent" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-concurrent\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-concurrent\package.json...[32mOK[39m
+Loading "concurrent.js" tasks...[32mOK[39m
++ [36mconcurrent[39m
+
+[1mRegistering "grunt-contrib-clean" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-clean\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-clean\package.json...[32mOK[39m
+Loading "clean.js" tasks...[32mOK[39m
++ [36mclean[39m
+
+[1mRegistering "grunt-contrib-coffee" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-coffee\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-coffee\package.json...[32mOK[39m
+Loading "coffee.js" tasks...[32mOK[39m
++ [36mcoffee[39m
+
+[1mRegistering "grunt-contrib-concat" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-concat\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-concat\package.json...[32mOK[39m
+Loading "concat.js" tasks...[32mOK[39m
++ [36mconcat[39m
+
+[1mRegistering "grunt-contrib-connect" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-connect\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-connect\package.json...[32mOK[39m
+Loading "connect.js" tasks...[32mOK[39m
++ [36mconnect[39m
+
+[1mRegistering "grunt-contrib-copy" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-copy\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-copy\package.json...[32mOK[39m
+Loading "copy.js" tasks...[32mOK[39m
++ [36mcopy[39m
+
+[1mRegistering "grunt-contrib-cssmin" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-cssmin\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-cssmin\package.json...[32mOK[39m
+Loading "cssmin.js" tasks...[32mOK[39m
++ [36mcssmin[39m
+
+[1mRegistering "grunt-contrib-htmlmin" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-htmlmin\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-htmlmin\package.json...[32mOK[39m
+Loading "htmlmin.js" tasks...[32mOK[39m
++ [36mhtmlmin[39m
+
+[1mRegistering "grunt-contrib-imagemin" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-imagemin\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-imagemin\package.json...[32mOK[39m
+Loading "imagemin.js" tasks...[32mOK[39m
++ [36mimagemin[39m
+
+[1mRegistering "grunt-contrib-jasmine" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-jasmine\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-jasmine\package.json...[32mOK[39m
+Loading "jasmine.js" tasks...[32mOK[39m
++ [36mjasmine[39m
+
+[1mRegistering "grunt-contrib-jshint" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-jshint\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-jshint\package.json...[32mOK[39m
+Loading "jshint.js" tasks...[32mOK[39m
++ [36mjshint[39m
+
+[1mRegistering "grunt-contrib-less" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-less\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-less\package.json...[32mOK[39m
+Loading "less.js" tasks...[32mOK[39m
++ [36mless[39m
+
+[1mRegistering "grunt-contrib-uglify" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-uglify\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-uglify\package.json...[32mOK[39m
+Loading "uglify.js" tasks...[32mOK[39m
++ [36muglify[39m
+
+[1mRegistering "grunt-contrib-watch" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-watch\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-watch\package.json...[32mOK[39m
+Loading "watch.js" tasks...[32mOK[39m
++ [36mwatch[39m
+
+[1mRegistering "grunt-docker" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-docker\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-docker\package.json...[32mOK[39m
+Loading "docker.js" tasks...[32mOK[39m
++ [36mdocker[39m
+
+[1mRegistering "grunt-docker-io" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-docker-io\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-docker-io\package.json...[32mOK[39m
+Loading "docker_io.js" tasks...[32mOK[39m
++ [36mdocker_io[39m
+
+[1mRegistering "grunt-filerev" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-filerev\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-filerev\package.json...[32mOK[39m
+Loading "filerev.js" tasks...[32mOK[39m
++ [36mfilerev[39m
+
+[1mRegistering "grunt-google-cdn" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-google-cdn\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-google-cdn\package.json...[32mOK[39m
+Loading "cdnify.js" tasks...[32mOK[39m
++ [36mcdnify[39m
+
+[1mRegistering "grunt-html2js" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-html2js\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-html2js\package.json...[32mOK[39m
+Loading "html2js.js" tasks...[32mOK[39m
++ [36mhtml2js[39m
+
+[1mRegistering "grunt-karma" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-karma\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-karma\package.json...[32mOK[39m
+Loading "grunt-karma.js" tasks...[32mOK[39m
++ [36mkarma[39m
+
+[1mRegistering "grunt-mocha-test" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-mocha-test\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-mocha-test\package.json...[32mOK[39m
+Loading "mocha-test.js" tasks...[32mOK[39m
++ [36mmochaTest[39m
+
+[1mRegistering "grunt-newer" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-newer\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-newer\package.json...[32mOK[39m
+Loading "newer.js" tasks...[32mOK[39m
++ [36many-newer[39m, [36mnewer[39m, [36mnewer-clean[39m, [36mnewer-postrun[39m
+
+[1mRegistering "grunt-ng-annotate" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-ng-annotate\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-ng-annotate\package.json...[32mOK[39m
+Loading "ng-annotate.js" tasks...[32mOK[39m
++ [36mngAnnotate[39m
+
+[1mRegistering "grunt-recess" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-recess\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-recess\package.json...[32mOK[39m
+Loading "recess.js" tasks...OK
++ recess
+
+Registering "grunt-svgmin" local Npm module tasks.
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-svgmin\package.json...OK
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-svgmin\package.json...OK
+Loading "svgmin.js" tasks...OK
++ svgmin
+
+Registering "grunt-usemin" local Npm module tasks.
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-usemin\package.json...OK
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-usemin\package.json...OK
+Loading "usemin.js" tasks...OK
++ usemin, useminPrepare
+
+Registering "grunt-wiredep" local Npm module tasks.
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-wiredep\package.json...OK
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-wiredep\package.json...OK
+Loading "wiredep.js" tasks...OK
++ wiredep
+{ app: 'client/ngapp',
+  vendor: 'client/ngapp/vendor',
+  dist: 'client/dist',
+  tempfiles: '.tmp' }
+Initializing config...OK
+Loading "Gruntfile.js" tasks...OK
++ build, build-config, build-lbclient, clean-all, default, run, serve, server, test, test:client, test:common, test:server
+
+Running tasks: copy:styles
+
+Running "copy:styles" (copy) task
+Verifying property copy.styles exists in config...OK
+Files: client/ngapp/styles/todo.css -> .tmp/styles/todo.css
+Files: client/ngapp/styles/vendor/angular-csp.css -> .tmp/styles/vendor/angular-csp.css
+Options: encoding="utf8", processContent=false, processContentExclude=[], timestamp=false, mode=false
+Copying client/ngapp/styles/todo.css -> .tmp/styles/todo.css
+Reading client/ngapp/styles/todo.css...OK
+Writing .tmp/styles/todo.css...OK
+Copying client/ngapp/styles/vendor/angular-csp.css -> .tmp/styles/vendor/angular-csp.css
+Reading client/ngapp/styles/vendor/angular-csp.css...OK
+Writing .tmp/styles/vendor/angular-csp.css...OK
+Copied 2 files
+
+Done, without errors.
+    
+[4mInitializing[24m
+Command-line options: [36m--verbose[39m
+
+Reading "Gruntfile.js" Gruntfile...[32mOK[39m
+
+[1mRegistering Gruntfile tasks.[22m
+
+[1mRegistering "grunt-autoprefixer" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-autoprefixer\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-autoprefixer\package.json...[32mOK[39m
+Loading "autoprefixer.js" tasks...[32mOK[39m
++ [36mautoprefixer[39m
+
+[1mRegistering "grunt-coffeelint" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-coffeelint\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-coffeelint\package.json...[32mOK[39m
+Loading "coffeelint.js" tasks...[32mOK[39m
++ [36mcoffeelint[39m
+
+[1mRegistering "grunt-concurrent" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-concurrent\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-concurrent\package.json...[32mOK[39m
+Loading "concurrent.js" tasks...[32mOK[39m
++ [36mconcurrent[39m
+
+[1mRegistering "grunt-contrib-clean" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-clean\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-clean\package.json...[32mOK[39m
+Loading "clean.js" tasks...[32mOK[39m
++ [36mclean[39m
+
+[1mRegistering "grunt-contrib-coffee" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-coffee\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-coffee\package.json...[32mOK[39m
+Loading "coffee.js" tasks...[32mOK[39m
++ [36mcoffee[39m
+
+[1mRegistering "grunt-contrib-concat" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-concat\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-concat\package.json...[32mOK[39m
+Loading "concat.js" tasks...[32mOK[39m
++ [36mconcat[39m
+
+[1mRegistering "grunt-contrib-connect" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-connect\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-connect\package.json...[32mOK[39m
+Loading "connect.js" tasks...[32mOK[39m
++ [36mconnect[39m
+
+[1mRegistering "grunt-contrib-copy" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-copy\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-copy\package.json...[32mOK[39m
+Loading "copy.js" tasks...[32mOK[39m
++ [36mcopy[39m
+
+[1mRegistering "grunt-contrib-cssmin" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-cssmin\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-cssmin\package.json...[32mOK[39m
+Loading "cssmin.js" tasks...[32mOK[39m
++ [36mcssmin[39m
+
+[1mRegistering "grunt-contrib-htmlmin" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-htmlmin\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-htmlmin\package.json...[32mOK[39m
+Loading "htmlmin.js" tasks...[32mOK[39m
++ [36mhtmlmin[39m
+
+[1mRegistering "grunt-contrib-imagemin" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-imagemin\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-imagemin\package.json...[32mOK[39m
+Loading "imagemin.js" tasks...[32mOK[39m
++ [36mimagemin[39m
+
+[1mRegistering "grunt-contrib-jasmine" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-jasmine\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-jasmine\package.json...[32mOK[39m
+Loading "jasmine.js" tasks...[32mOK[39m
++ [36mjasmine[39m
+
+[1mRegistering "grunt-contrib-jshint" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-jshint\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-jshint\package.json...[32mOK[39m
+Loading "jshint.js" tasks...[32mOK[39m
++ [36mjshint[39m
+
+[1mRegistering "grunt-contrib-less" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-less\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-less\package.json...[32mOK[39m
+Loading "less.js" tasks...[32mOK[39m
++ [36mless[39m
+
+[1mRegistering "grunt-contrib-uglify" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-uglify\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-uglify\package.json...[32mOK[39m
+Loading "uglify.js" tasks...[32mOK[39m
++ [36muglify[39m
+
+[1mRegistering "grunt-contrib-watch" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-watch\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-contrib-watch\package.json...[32mOK[39m
+Loading "watch.js" tasks...[32mOK[39m
++ [36mwatch[39m
+
+[1mRegistering "grunt-docker" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-docker\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-docker\package.json...[32mOK[39m
+Loading "docker.js" tasks...[32mOK[39m
++ [36mdocker[39m
+
+[1mRegistering "grunt-docker-io" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-docker-io\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-docker-io\package.json...[32mOK[39m
+Loading "docker_io.js" tasks...[32mOK[39m
++ [36mdocker_io[39m
+
+[1mRegistering "grunt-filerev" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-filerev\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-filerev\package.json...[32mOK[39m
+Loading "filerev.js" tasks...[32mOK[39m
++ [36mfilerev[39m
+
+[1mRegistering "grunt-google-cdn" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-google-cdn\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-google-cdn\package.json...[32mOK[39m
+Loading "cdnify.js" tasks...[32mOK[39m
++ [36mcdnify[39m
+
+[1mRegistering "grunt-html2js" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-html2js\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-html2js\package.json...[32mOK[39m
+Loading "html2js.js" tasks...[32mOK[39m
++ [36mhtml2js[39m
+
+[1mRegistering "grunt-karma" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-karma\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-karma\package.json...[32mOK[39m
+Loading "grunt-karma.js" tasks...[32mOK[39m
++ [36mkarma[39m
+
+[1mRegistering "grunt-mocha-test" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-mocha-test\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-mocha-test\package.json...[32mOK[39m
+Loading "mocha-test.js" tasks...[32mOK[39m
++ [36mmochaTest[39m
+
+[1mRegistering "grunt-newer" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-newer\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-newer\package.json...[32mOK[39m
+Loading "newer.js" tasks...[32mOK[39m
++ [36many-newer[39m, [36mnewer[39m, [36mnewer-clean[39m, [36mnewer-postrun[39m
+
+[1mRegistering "grunt-ng-annotate" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-ng-annotate\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-ng-annotate\package.json...[32mOK[39m
+Loading "ng-annotate.js" tasks...[32mOK[39m
++ [36mngAnnotate[39m
+
+[1mRegistering "grunt-recess" local Npm module tasks.[22m
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-recess\package.json...[32mOK[39m
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-recess\package.json...[32mOK[39m
+Loading "recess.js" tasks...OK
++ recess
+
+Registering "grunt-svgmin" local Npm module tasks.
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-svgmin\package.json...OK
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-svgmin\package.json...OK
+Loading "svgmin.js" tasks...OK
++ svgmin
+
+Registering "grunt-usemin" local Npm module tasks.
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-usemin\package.json...OK
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-usemin\package.json...OK
+Loading "usemin.js" tasks...OK
++ usemin, useminPrepare
+
+Registering "grunt-wiredep" local Npm module tasks.
+Reading d:\DevProj\git\lb_express_sandbox\node_modules\grunt-wiredep\package.json...OK
+Parsing d:\DevProj\git\lb_express_sandbox\node_modules\grunt-wiredep\package.json...OK
+Loading "wiredep.js" tasks...OK
++ wiredep
+{ app: 'client/ngapp',
+  vendor: 'client/ngapp/vendor',
+  dist: 'client/dist',
+  tempfiles: '.tmp' }
+Initializing config...OK
+Loading "Gruntfile.js" tasks...OK
++ build, build-config, build-lbclient, clean-all, default, run, serve, server, test, test:client, test:common, test:server
+
+Running tasks: copy:images
+
+Running "copy:images" (copy) task
+Verifying property copy.images exists in config...OK
+Files: client/ngapp/images/jchptf/crossword/bootstrap/img/glyphicons-halflings-white.png -> client/dist/images/jchptf/crossword/bootstrap/img/glyphicons-halflings-white.png
+Files: client/ngapp/images/jchptf/crossword/bootstrap/img/glyphicons-halflings.png -> client/dist/images/jchptf/crossword/bootstrap/img/glyphicons-halflings.png
+Files: client/ngapp/images/jchptf/crossword/border/grid.png -> client/dist/images/jchptf/crossword/border/grid.png
+Files: client/ngapp/images/jchptf/crossword/border/hend.png -> client/dist/images/jchptf/crossword/border/hend.png
+Files: client/ngapp/images/jchptf/crossword/border/hmid.png -> client/dist/images/jchptf/crossword/border/hmid.png
+Files: client/ngapp/images/jchptf/crossword/border/htop.png -> client/dist/images/jchptf/crossword/border/htop.png
+Files: client/ngapp/images/jchptf/crossword/border/unit.png -> client/dist/images/jchptf/crossword/border/unit.png
+Files: client/ngapp/images/jchptf/crossword/border/vend.png -> client/dist/images/jchptf/crossword/border/vend.png
+Files: client/ngapp/images/jchptf/crossword/border/vmid.png -> client/dist/images/jchptf/crossword/border/vmid.png
+Files: client/ngapp/images/jchptf/crossword/border/vtop.png -> client/dist/images/jchptf/crossword/border/vtop.png
+Files: client/ngapp/images/jchptf/crossword/card/card.jpg -> client/dist/images/jchptf/crossword/card/card.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_00.jpg -> client/dist/images/jchptf/crossword/card/card_00.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_01.jpg -> client/dist/images/jchptf/crossword/card/card_01.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_02.jpg -> client/dist/images/jchptf/crossword/card/card_02.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_03.jpg -> client/dist/images/jchptf/crossword/card/card_03.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_04.jpg -> client/dist/images/jchptf/crossword/card/card_04.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_05.jpg -> client/dist/images/jchptf/crossword/card/card_05.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_06.jpg -> client/dist/images/jchptf/crossword/card/card_06.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_07.jpg -> client/dist/images/jchptf/crossword/card/card_07.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_08.jpg -> client/dist/images/jchptf/crossword/card/card_08.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_09.jpg -> client/dist/images/jchptf/crossword/card/card_09.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_10.jpg -> client/dist/images/jchptf/crossword/card/card_10.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_11.jpg -> client/dist/images/jchptf/crossword/card/card_11.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_12.jpg -> client/dist/images/jchptf/crossword/card/card_12.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_13.jpg -> client/dist/images/jchptf/crossword/card/card_13.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_14.jpg -> client/dist/images/jchptf/crossword/card/card_14.jpg
+Files: client/ngapp/images/jchptf/crossword/card/card_15.jpg -> client/dist/images/jchptf/crossword/card/card_15.jpg
+Files: client/ngapp/images/jchptf/crossword/fill/Medium Grey.png -> client/dist/images/jchptf/crossword/fill/Medium Grey.png
+Files: client/ngapp/images/jchptf/crossword/fill/Scratch1.png -> client/dist/images/jchptf/crossword/fill/Scratch1.png
+Files: client/ngapp/images/jchptf/crossword/fill/Scratch2.png -> client/dist/images/jchptf/crossword/fill/Scratch2.png
+Files: client/ngapp/images/jchptf/crossword/fill/Scratch3.png -> client/dist/images/jchptf/crossword/fill/Scratch3.png
+Files: client/ngapp/images/jchptf/crossword/fill/Scratch4.png -> client/dist/images/jchptf/crossword/fill/Scratch4.png
+Files: client/ngapp/images/jchptf/crossword/fill/Scratch5.png -> client/dist/images/jchptf/crossword/fill/Scratch5.png
+Files: client/ngapp/images/jchptf/crossword/fill/Scratch6.png -> client/dist/images/jchptf/crossword/fill/Scratch6.png
+Files: client/ngapp/images/jchptf/crossword/fill/SilverCover.png -> client/dist/images/jchptf/crossword/fill/SilverCover.png
+Files: client/ngapp/images/jchptf/crossword/fill/altPath.png -> client/dist/images/jchptf/crossword/fill/altPath.png
+Files: client/ngapp/images/jchptf/crossword/fill/altPath2.png -> client/dist/images/jchptf/crossword/fill/altPath2.png
+Files: client/ngapp/images/jchptf/crossword/fill/brite1.png -> client/dist/images/jchptf/crossword/fill/brite1.png
+Files: client/ngapp/images/jchptf/crossword/fill/briteblue.png -> client/dist/images/jchptf/crossword/fill/briteblue.png
+Files: client/ngapp/images/jchptf/crossword/fill/cornsilk.png -> client/dist/images/jchptf/crossword/fill/cornsilk.png
+Files: client/ngapp/images/jchptf/crossword/fill/darkGrey.png -> client/dist/images/jchptf/crossword/fill/darkGrey.png
+Files: client/ngapp/images/jchptf/crossword/fill/golden.png -> client/dist/images/jchptf/crossword/fill/golden.png
+Files: client/ngapp/images/jchptf/crossword/fill/imageSrc.png -> client/dist/images/jchptf/crossword/fill/imageSrc.png
+Files: client/ngapp/images/jchptf/crossword/fill/lightGrey.png -> client/dist/images/jchptf/crossword/fill/lightGrey.png
+Files: client/ngapp/images/jchptf/crossword/fill/locked.png -> client/dist/images/jchptf/crossword/fill/locked.png
+Files: client/ngapp/images/jchptf/crossword/fill/pink1.png -> client/dist/images/jchptf/crossword/fill/pink1.png
+Files: client/ngapp/images/jchptf/crossword/fill/pink2.png -> client/dist/images/jchptf/crossword/fill/pink2.png
+Files: client/ngapp/images/jchptf/crossword/fill/scratched.png -> client/dist/images/jchptf/crossword/fill/scratched.png
+Files: client/ngapp/images/jchptf/crossword/fill/selected1.png -> client/dist/images/jchptf/crossword/fill/selected1.png
+Files: client/ngapp/images/jchptf/crossword/gval/A.png -> client/dist/images/jchptf/crossword/gval/A.png
+Files: client/ngapp/images/jchptf/crossword/gval/B.png -> client/dist/images/jchptf/crossword/gval/B.png
+Files: client/ngapp/images/jchptf/crossword/gval/C.png -> client/dist/images/jchptf/crossword/gval/C.png
+Files: client/ngapp/images/jchptf/crossword/gval/D.png -> client/dist/images/jchptf/crossword/gval/D.png
+Files: client/ngapp/images/jchptf/crossword/gval/E.png -> client/dist/images/jchptf/crossword/gval/E.png
+Files: client/ngapp/images/jchptf/crossword/gval/F.png -> client/dist/images/jchptf/crossword/gval/F.png
+Files: client/ngapp/images/jchptf/crossword/gval/G.png -> client/dist/images/jchptf/crossword/gval/G.png
+Files: client/ngapp/images/jchptf/crossword/gval/H.png -> client/dist/images/jchptf/crossword/gval/H.png
+Files: client/ngapp/images/jchptf/crossword/gval/I.png -> client/dist/images/jchptf/crossword/gval/I.png
+Files: client/ngapp/images/jchptf/crossword/gval/J.png -> client/dist/images/jchptf/crossword/gval/J.png
+Files: client/ngapp/images/jchptf/crossword/gval/K.png -> client/dist/images/jchptf/crossword/gval/K.png
+Files: client/ngapp/images/jchptf/crossword/gval/L.png -> client/dist/images/jchptf/crossword/gval/L.png
+Files: client/ngapp/images/jchptf/crossword/gval/M.png -> client/dist/images/jchptf/crossword/gval/M.png
+Files: client/ngapp/images/jchptf/crossword/gval/N.png -> client/dist/images/jchptf/crossword/gval/N.png
+Files: client/ngapp/images/jchptf/crossword/gval/O.png -> client/dist/images/jchptf/crossword/gval/O.png
+Files: client/ngapp/images/jchptf/crossword/gval/P.png -> client/dist/images/jchptf/crossword/gval/P.png
+Files: client/ngapp/images/jchptf/crossword/gval/Q.png -> client/dist/images/jchptf/crossword/gval/Q.png
+Files: client/ngapp/images/jchptf/crossword/gval/R.png -> client/dist/images/jchptf/crossword/gval/R.png
+Files: client/ngapp/images/jchptf/crossword/gval/S.png -> client/dist/images/jchptf/crossword/gval/S.png
+Files: client/ngapp/images/jchptf/crossword/gval/T.png -> client/dist/images/jchptf/crossword/gval/T.png
+Files: client/ngapp/images/jchptf/crossword/gval/U.png -> client/dist/images/jchptf/crossword/gval/U.png
+Files: client/ngapp/images/jchptf/crossword/gval/V.png -> client/dist/images/jchptf/crossword/gval/V.png
+Files: client/ngapp/images/jchptf/crossword/gval/W.png -> client/dist/images/jchptf/crossword/gval/W.png
+Files: client/ngapp/images/jchptf/crossword/gval/X.png -> client/dist/images/jchptf/crossword/gval/X.png
+Files: client/ngapp/images/jchptf/crossword/gval/Y.png -> client/dist/images/jchptf/crossword/gval/Y.png
+Files: client/ngapp/images/jchptf/crossword/gval/Z.png -> client/dist/images/jchptf/crossword/gval/Z.png
+Files: client/ngapp/images/jchptf/crossword/val/10.png -> client/dist/images/jchptf/crossword/val/10.png
+Files: client/ngapp/images/jchptf/crossword/val/30.png -> client/dist/images/jchptf/crossword/val/30.png
+Files: client/ngapp/images/jchptf/crossword/val/4.png -> client/dist/images/jchptf/crossword/val/4.png
+Files: client/ngapp/images/jchptf/crossword/val/5.png -> client/dist/images/jchptf/crossword/val/5.png
+Files: client/ngapp/images/jchptf/crossword/val/A.png -> client/dist/images/jchptf/crossword/val/A.png
+Files: client/ngapp/images/jchptf/crossword/val/B.png -> client/dist/images/jchptf/crossword/val/B.png
+Files: client/ngapp/images/jchptf/crossword/val/C.png -> client/dist/images/jchptf/crossword/val/C.png
+Files: client/ngapp/images/jchptf/crossword/val/D.png -> client/dist/images/jchptf/crossword/val/D.png
+Files: client/ngapp/images/jchptf/crossword/val/E.png -> client/dist/images/jchptf/crossword/val/E.png
+Files: client/ngapp/images/jchptf/crossword/val/F.png -> client/dist/images/jchptf/crossword/val/F.png
+Files: client/ngapp/images/jchptf/crossword/val/G.png -> client/dist/images/jchptf/crossword/val/G.png
+Files: client/ngapp/images/jchptf/crossword/val/H.png -> client/dist/images/jchptf/crossword/val/H.png
+Files: client/ngapp/images/jchptf/crossword/val/I.png -> client/dist/images/jchptf/crossword/val/I.png
+Files: client/ngapp/images/jchptf/crossword/val/J.png -> client/dist/images/jchptf/crossword/val/J.png
+Files: client/ngapp/images/jchptf/crossword/val/K.png -> client/dist/images/jchptf/crossword/val/K.png
+Files: client/ngapp/images/jchptf/crossword/val/L.png -> client/dist/images/jchptf/crossword/val/L.png
+Files: client/ngapp/images/jchptf/crossword/val/M.png -> client/dist/images/jchptf/crossword/val/M.png
+Files: client/ngapp/images/jchptf/crossword/val/N.png -> client/dist/images/jchptf/crossword/val/N.png
+Files: client/ngapp/images/jchptf/crossword/val/O.png -> client/dist/images/jchptf/crossword/val/O.png
+Files: client/ngapp/images/jchptf/crossword/val/P.png -> client/dist/images/jchptf/crossword/val/P.png
+Files: client/ngapp/images/jchptf/crossword/val/Q.png -> client/dist/images/jchptf/crossword/val/Q.png
+Files: client/ngapp/images/jchptf/crossword/val/R.png -> client/dist/images/jchptf/crossword/val/R.png
+Files: client/ngapp/images/jchptf/crossword/val/S.png -> client/dist/images/jchptf/crossword/val/S.png
+Files: client/ngapp/images/jchptf/crossword/val/T.png -> client/dist/images/jchptf/crossword/val/T.png
+Files: client/ngapp/images/jchptf/crossword/val/U.png -> client/dist/images/jchptf/crossword/val/U.png
+Files: client/ngapp/images/jchptf/crossword/val/V.png -> client/dist/images/jchptf/crossword/val/V.png
+Files: client/ngapp/images/jchptf/crossword/val/W.png -> client/dist/images/jchptf/crossword/val/W.png
+Files: client/ngapp/images/jchptf/crossword/val/X.png -> client/dist/images/jchptf/crossword/val/X.png
+Files: client/ngapp/images/jchptf/crossword/val/Y.png -> client/dist/images/jchptf/crossword/val/Y.png
+Files: client/ngapp/images/jchptf/crossword/val/Z.png -> client/dist/images/jchptf/crossword/val/Z.png
+Files: client/ngapp/images/jchptf/crossword/val/blank.png -> client/dist/images/jchptf/crossword/val/blank.png
+Files: client/ngapp/images/jchptf/crossword/val/qm.png -> client/dist/images/jchptf/crossword/val/qm.png
+Files: client/ngapp/images/jchptf/crossword/val/unk.png -> client/dist/images/jchptf/crossword/val/unk.png
+Files: client/ngapp/test/spec/controllers/change.js -> .tmp/test/spec/controllers/change.js
+Files: client/ngapp/test/spec/controllers/home.js -> .tmp/test/spec/controllers/home.js
+Files: client/ngapp/test/spec/controllers/login.js -> .tmp/test/spec/controllers/login.js
+Files: client/ngapp/test/spec/controllers/register.js -> .tmp/test/spec/controllers/register.js
+Files: client/ngapp/test/spec/controllers/todo.js -> .tmp/test/spec/controllers/todo.js
+Files: client/ngapp/test/spec/controllers/user.js -> .tmp/test/spec/controllers/user.js
+Files: client/ngapp/test/spec/services/lbclient.js -> .tmp/test/spec/services/lbclient.js
+Options: encoding="utf8", processContent=false, processContentExclude=[], timestamp=false, mode=false
+Copying client/ngapp/images/jchptf/crossword/bootstrap/img/glyphicons-halflings-white.png -> client/dist/images/jchptf/crossword/bootstrap/img/glyphicons-halflings-white.png
+Reading client/ngapp/images/jchptf/crossword/bootstrap/img/glyphicons-halflings-white.png...OK
+Writing client/dist/images/jchptf/crossword/bootstrap/img/glyphicons-halflings-white.png...OK
+Copying client/ngapp/images/jchptf/crossword/bootstrap/img/glyphicons-halflings.png -> client/dist/images/jchptf/crossword/bootstrap/img/glyphicons-halflings.png
+Reading client/ngapp/images/jchptf/crossword/bootstrap/img/glyphicons-halflings.png...OK
+Writing client/dist/images/jchptf/crossword/bootstrap/img/glyphicons-halflings.png...OK
+Copying client/ngapp/images/jchptf/crossword/border/grid.png -> client/dist/images/jchptf/crossword/border/grid.png
+Reading client/ngapp/images/jchptf/crossword/border/grid.png...OK
+Writing client/dist/images/jchptf/crossword/border/grid.png...OK
+Copying client/ngapp/images/jchptf/crossword/border/hend.png -> client/dist/images/jchptf/crossword/border/hend.png
+Reading client/ngapp/images/jchptf/crossword/border/hend.png...OK
+Writing client/dist/images/jchptf/crossword/border/hend.png...OK
+Copying client/ngapp/images/jchptf/crossword/border/hmid.png -> client/dist/images/jchptf/crossword/border/hmid.png
+Reading client/ngapp/images/jchptf/crossword/border/hmid.png...OK
+Writing client/dist/images/jchptf/crossword/border/hmid.png...OK
+Copying client/ngapp/images/jchptf/crossword/border/htop.png -> client/dist/images/jchptf/crossword/border/htop.png
+Reading client/ngapp/images/jchptf/crossword/border/htop.png...OK
+Writing client/dist/images/jchptf/crossword/border/htop.png...OK
+Copying client/ngapp/images/jchptf/crossword/border/unit.png -> client/dist/images/jchptf/crossword/border/unit.png
+Reading client/ngapp/images/jchptf/crossword/border/unit.png...OK
+Writing client/dist/images/jchptf/crossword/border/unit.png...OK
+Copying client/ngapp/images/jchptf/crossword/border/vend.png -> client/dist/images/jchptf/crossword/border/vend.png
+Reading client/ngapp/images/jchptf/crossword/border/vend.png...OK
+Writing client/dist/images/jchptf/crossword/border/vend.png...OK
+Copying client/ngapp/images/jchptf/crossword/border/vmid.png -> client/dist/images/jchptf/crossword/border/vmid.png
+Reading client/ngapp/images/jchptf/crossword/border/vmid.png...OK
+Writing client/dist/images/jchptf/crossword/border/vmid.png...OK
+Copying client/ngapp/images/jchptf/crossword/border/vtop.png -> client/dist/images/jchptf/crossword/border/vtop.png
+Reading client/ngapp/images/jchptf/crossword/border/vtop.png...OK
+Writing client/dist/images/jchptf/crossword/border/vtop.png...OK
+Copying client/ngapp/images/jchptf/crossword/card/card.jpg -> client/dist/images/jchptf/crossword/card/card.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_00.jpg -> client/dist/images/jchptf/crossword/card/card_00.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_00.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_00.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_01.jpg -> client/dist/images/jchptf/crossword/card/card_01.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_01.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_01.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_02.jpg -> client/dist/images/jchptf/crossword/card/card_02.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_02.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_02.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_03.jpg -> client/dist/images/jchptf/crossword/card/card_03.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_03.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_03.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_04.jpg -> client/dist/images/jchptf/crossword/card/card_04.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_04.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_04.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_05.jpg -> client/dist/images/jchptf/crossword/card/card_05.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_05.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_05.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_06.jpg -> client/dist/images/jchptf/crossword/card/card_06.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_06.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_06.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_07.jpg -> client/dist/images/jchptf/crossword/card/card_07.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_07.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_07.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_08.jpg -> client/dist/images/jchptf/crossword/card/card_08.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_08.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_08.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_09.jpg -> client/dist/images/jchptf/crossword/card/card_09.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_09.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_09.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_10.jpg -> client/dist/images/jchptf/crossword/card/card_10.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_10.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_10.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_11.jpg -> client/dist/images/jchptf/crossword/card/card_11.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_11.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_11.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_12.jpg -> client/dist/images/jchptf/crossword/card/card_12.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_12.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_12.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_13.jpg -> client/dist/images/jchptf/crossword/card/card_13.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_13.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_13.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_14.jpg -> client/dist/images/jchptf/crossword/card/card_14.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_14.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_14.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/card/card_15.jpg -> client/dist/images/jchptf/crossword/card/card_15.jpg
+Reading client/ngapp/images/jchptf/crossword/card/card_15.jpg...OK
+Writing client/dist/images/jchptf/crossword/card/card_15.jpg...OK
+Copying client/ngapp/images/jchptf/crossword/fill/Medium Grey.png -> client/dist/images/jchptf/crossword/fill/Medium Grey.png
+Reading client/ngapp/images/jchptf/crossword/fill/Medium Grey.png...OK
+Writing client/dist/images/jchptf/crossword/fill/Medium Grey.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/Scratch1.png -> client/dist/images/jchptf/crossword/fill/Scratch1.png
+Reading client/ngapp/images/jchptf/crossword/fill/Scratch1.png...OK
+Writing client/dist/images/jchptf/crossword/fill/Scratch1.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/Scratch2.png -> client/dist/images/jchptf/crossword/fill/Scratch2.png
+Reading client/ngapp/images/jchptf/crossword/fill/Scratch2.png...OK
+Writing client/dist/images/jchptf/crossword/fill/Scratch2.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/Scratch3.png -> client/dist/images/jchptf/crossword/fill/Scratch3.png
+Reading client/ngapp/images/jchptf/crossword/fill/Scratch3.png...OK
+Writing client/dist/images/jchptf/crossword/fill/Scratch3.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/Scratch4.png -> client/dist/images/jchptf/crossword/fill/Scratch4.png
+Reading client/ngapp/images/jchptf/crossword/fill/Scratch4.png...OK
+Writing client/dist/images/jchptf/crossword/fill/Scratch4.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/Scratch5.png -> client/dist/images/jchptf/crossword/fill/Scratch5.png
+Reading client/ngapp/images/jchptf/crossword/fill/Scratch5.png...OK
+Writing client/dist/images/jchptf/crossword/fill/Scratch5.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/Scratch6.png -> client/dist/images/jchptf/crossword/fill/Scratch6.png
+Reading client/ngapp/images/jchptf/crossword/fill/Scratch6.png...OK
+Writing client/dist/images/jchptf/crossword/fill/Scratch6.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/SilverCover.png -> client/dist/images/jchptf/crossword/fill/SilverCover.png
+Reading client/ngapp/images/jchptf/crossword/fill/SilverCover.png...OK
+Writing client/dist/images/jchptf/crossword/fill/SilverCover.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/altPath.png -> client/dist/images/jchptf/crossword/fill/altPath.png
+Reading client/ngapp/images/jchptf/crossword/fill/altPath.png...OK
+Writing client/dist/images/jchptf/crossword/fill/altPath.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/altPath2.png -> client/dist/images/jchptf/crossword/fill/altPath2.png
+Reading client/ngapp/images/jchptf/crossword/fill/altPath2.png...OK
+Writing client/dist/images/jchptf/crossword/fill/altPath2.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/brite1.png -> client/dist/images/jchptf/crossword/fill/brite1.png
+Reading client/ngapp/images/jchptf/crossword/fill/brite1.png...OK
+Writing client/dist/images/jchptf/crossword/fill/brite1.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/briteblue.png -> client/dist/images/jchptf/crossword/fill/briteblue.png
+Reading client/ngapp/images/jchptf/crossword/fill/briteblue.png...OK
+Writing client/dist/images/jchptf/crossword/fill/briteblue.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/cornsilk.png -> client/dist/images/jchptf/crossword/fill/cornsilk.png
+Reading client/ngapp/images/jchptf/crossword/fill/cornsilk.png...OK
+Writing client/dist/images/jchptf/crossword/fill/cornsilk.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/darkGrey.png -> client/dist/images/jchptf/crossword/fill/darkGrey.png
+Reading client/ngapp/images/jchptf/crossword/fill/darkGrey.png...OK
+Writing client/dist/images/jchptf/crossword/fill/darkGrey.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/golden.png -> client/dist/images/jchptf/crossword/fill/golden.png
+Reading client/ngapp/images/jchptf/crossword/fill/golden.png...OK
+Writing client/dist/images/jchptf/crossword/fill/golden.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/imageSrc.png -> client/dist/images/jchptf/crossword/fill/imageSrc.png
+Reading client/ngapp/images/jchptf/crossword/fill/imageSrc.png...OK
+Writing client/dist/images/jchptf/crossword/fill/imageSrc.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/lightGrey.png -> client/dist/images/jchptf/crossword/fill/lightGrey.png
+Reading client/ngapp/images/jchptf/crossword/fill/lightGrey.png...OK
+Writing client/dist/images/jchptf/crossword/fill/lightGrey.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/locked.png -> client/dist/images/jchptf/crossword/fill/locked.png
+Reading client/ngapp/images/jchptf/crossword/fill/locked.png...OK
+Writing client/dist/images/jchptf/crossword/fill/locked.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/pink1.png -> client/dist/images/jchptf/crossword/fill/pink1.png
+Reading client/ngapp/images/jchptf/crossword/fill/pink1.png...OK
+Writing client/dist/images/jchptf/crossword/fill/pink1.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/pink2.png -> client/dist/images/jchptf/crossword/fill/pink2.png
+Reading client/ngapp/images/jchptf/crossword/fill/pink2.png...OK
+Writing client/dist/images/jchptf/crossword/fill/pink2.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/scratched.png -> client/dist/images/jchptf/crossword/fill/scratched.png
+Reading client/ngapp/images/jchptf/crossword/fill/scratched.png...OK
+Writing client/dist/images/jchptf/crossword/fill/scratched.png...OK
+Copying client/ngapp/images/jchptf/crossword/fill/selected1.png -> client/dist/images/jchptf/crossword/fill/selected1.png
+Reading client/ngapp/images/jchptf/crossword/fill/selected1.png...OK
+Writing client/dist/images/jchptf/crossword/fill/selected1.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/A.png -> client/dist/images/jchptf/crossword/gval/A.png
+Reading client/ngapp/images/jchptf/crossword/gval/A.png...OK
+Writing client/dist/images/jchptf/crossword/gval/A.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/B.png -> client/dist/images/jchptf/crossword/gval/B.png
+Reading client/ngapp/images/jchptf/crossword/gval/B.png...OK
+Writing client/dist/images/jchptf/crossword/gval/B.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/C.png -> client/dist/images/jchptf/crossword/gval/C.png
+Reading client/ngapp/images/jchptf/crossword/gval/C.png...OK
+Writing client/dist/images/jchptf/crossword/gval/C.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/D.png -> client/dist/images/jchptf/crossword/gval/D.png
+Reading client/ngapp/images/jchptf/crossword/gval/D.png...OK
+Writing client/dist/images/jchptf/crossword/gval/D.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/E.png -> client/dist/images/jchptf/crossword/gval/E.png
+Reading client/ngapp/images/jchptf/crossword/gval/E.png...OK
+Writing client/dist/images/jchptf/crossword/gval/E.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/F.png -> client/dist/images/jchptf/crossword/gval/F.png
+Reading client/ngapp/images/jchptf/crossword/gval/F.png...OK
+Writing client/dist/images/jchptf/crossword/gval/F.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/G.png -> client/dist/images/jchptf/crossword/gval/G.png
+Reading client/ngapp/images/jchptf/crossword/gval/G.png...OK
+Writing client/dist/images/jchptf/crossword/gval/G.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/H.png -> client/dist/images/jchptf/crossword/gval/H.png
+Reading client/ngapp/images/jchptf/crossword/gval/H.png...OK
+Writing client/dist/images/jchptf/crossword/gval/H.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/I.png -> client/dist/images/jchptf/crossword/gval/I.png
+Reading client/ngapp/images/jchptf/crossword/gval/I.png...OK
+Writing client/dist/images/jchptf/crossword/gval/I.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/J.png -> client/dist/images/jchptf/crossword/gval/J.png
+Reading client/ngapp/images/jchptf/crossword/gval/J.png...OK
+Writing client/dist/images/jchptf/crossword/gval/J.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/K.png -> client/dist/images/jchptf/crossword/gval/K.png
+Reading client/ngapp/images/jchptf/crossword/gval/K.png...OK
+Writing client/dist/images/jchptf/crossword/gval/K.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/L.png -> client/dist/images/jchptf/crossword/gval/L.png
+Reading client/ngapp/images/jchptf/crossword/gval/L.png...OK
+Writing client/dist/images/jchptf/crossword/gval/L.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/M.png -> client/dist/images/jchptf/crossword/gval/M.png
+Reading client/ngapp/images/jchptf/crossword/gval/M.png...OK
+Writing client/dist/images/jchptf/crossword/gval/M.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/N.png -> client/dist/images/jchptf/crossword/gval/N.png
+Reading client/ngapp/images/jchptf/crossword/gval/N.png...OK
+Writing client/dist/images/jchptf/crossword/gval/N.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/O.png -> client/dist/images/jchptf/crossword/gval/O.png
+Reading client/ngapp/images/jchptf/crossword/gval/O.png...OK
+Writing client/dist/images/jchptf/crossword/gval/O.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/P.png -> client/dist/images/jchptf/crossword/gval/P.png
+Reading client/ngapp/images/jchptf/crossword/gval/P.png...OK
+Writing client/dist/images/jchptf/crossword/gval/P.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/Q.png -> client/dist/images/jchptf/crossword/gval/Q.png
+Reading client/ngapp/images/jchptf/crossword/gval/Q.png...OK
+Writing client/dist/images/jchptf/crossword/gval/Q.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/R.png -> client/dist/images/jchptf/crossword/gval/R.png
+Reading client/ngapp/images/jchptf/crossword/gval/R.png...OK
+Writing client/dist/images/jchptf/crossword/gval/R.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/S.png -> client/dist/images/jchptf/crossword/gval/S.png
+Reading client/ngapp/images/jchptf/crossword/gval/S.png...OK
+Writing client/dist/images/jchptf/crossword/gval/S.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/T.png -> client/dist/images/jchptf/crossword/gval/T.png
+Reading client/ngapp/images/jchptf/crossword/gval/T.png...OK
+Writing client/dist/images/jchptf/crossword/gval/T.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/U.png -> client/dist/images/jchptf/crossword/gval/U.png
+Reading client/ngapp/images/jchptf/crossword/gval/U.png...OK
+Writing client/dist/images/jchptf/crossword/gval/U.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/V.png -> client/dist/images/jchptf/crossword/gval/V.png
+Reading client/ngapp/images/jchptf/crossword/gval/V.png...OK
+Writing client/dist/images/jchptf/crossword/gval/V.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/W.png -> client/dist/images/jchptf/crossword/gval/W.png
+Reading client/ngapp/images/jchptf/crossword/gval/W.png...OK
+Writing client/dist/images/jchptf/crossword/gval/W.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/X.png -> client/dist/images/jchptf/crossword/gval/X.png
+Reading client/ngapp/images/jchptf/crossword/gval/X.png...OK
+Writing client/dist/images/jchptf/crossword/gval/X.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/Y.png -> client/dist/images/jchptf/crossword/gval/Y.png
+Reading client/ngapp/images/jchptf/crossword/gval/Y.png...OK
+Writing client/dist/images/jchptf/crossword/gval/Y.png...OK
+Copying client/ngapp/images/jchptf/crossword/gval/Z.png -> client/dist/images/jchptf/crossword/gval/Z.png
+Reading client/ngapp/images/jchptf/crossword/gval/Z.png...OK
+Writing client/dist/images/jchptf/crossword/gval/Z.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/10.png -> client/dist/images/jchptf/crossword/val/10.png
+Reading client/ngapp/images/jchptf/crossword/val/10.png...OK
+Writing client/dist/images/jchptf/crossword/val/10.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/30.png -> client/dist/images/jchptf/crossword/val/30.png
+Reading client/ngapp/images/jchptf/crossword/val/30.png...OK
+Writing client/dist/images/jchptf/crossword/val/30.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/4.png -> client/dist/images/jchptf/crossword/val/4.png
+Reading client/ngapp/images/jchptf/crossword/val/4.png...OK
+Writing client/dist/images/jchptf/crossword/val/4.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/5.png -> client/dist/images/jchptf/crossword/val/5.png
+Reading client/ngapp/images/jchptf/crossword/val/5.png...OK
+Writing client/dist/images/jchptf/crossword/val/5.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/A.png -> client/dist/images/jchptf/crossword/val/A.png
+Reading client/ngapp/images/jchptf/crossword/val/A.png...OK
+Writing client/dist/images/jchptf/crossword/val/A.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/B.png -> client/dist/images/jchptf/crossword/val/B.png
+Reading client/ngapp/images/jchptf/crossword/val/B.png...OK
+Writing client/dist/images/jchptf/crossword/val/B.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/C.png -> client/dist/images/jchptf/crossword/val/C.png
+Reading client/ngapp/images/jchptf/crossword/val/C.png...OK
+Writing client/dist/images/jchptf/crossword/val/C.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/D.png -> client/dist/images/jchptf/crossword/val/D.png
+Reading client/ngapp/images/jchptf/crossword/val/D.png...OK
+Writing client/dist/images/jchptf/crossword/val/D.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/E.png -> client/dist/images/jchptf/crossword/val/E.png
+Reading client/ngapp/images/jchptf/crossword/val/E.png...OK
+Writing client/dist/images/jchptf/crossword/val/E.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/F.png -> client/dist/images/jchptf/crossword/val/F.png
+Reading client/ngapp/images/jchptf/crossword/val/F.png...OK
+Writing client/dist/images/jchptf/crossword/val/F.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/G.png -> client/dist/images/jchptf/crossword/val/G.png
+Reading client/ngapp/images/jchptf/crossword/val/G.png...OK
+Writing client/dist/images/jchptf/crossword/val/G.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/H.png -> client/dist/images/jchptf/crossword/val/H.png
+Reading client/ngapp/images/jchptf/crossword/val/H.png...OK
+Writing client/dist/images/jchptf/crossword/val/H.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/I.png -> client/dist/images/jchptf/crossword/val/I.png
+Reading client/ngapp/images/jchptf/crossword/val/I.png...OK
+Writing client/dist/images/jchptf/crossword/val/I.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/J.png -> client/dist/images/jchptf/crossword/val/J.png
+Reading client/ngapp/images/jchptf/crossword/val/J.png...OK
+Writing client/dist/images/jchptf/crossword/val/J.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/K.png -> client/dist/images/jchptf/crossword/val/K.png
+Reading client/ngapp/images/jchptf/crossword/val/K.png...OK
+Writing client/dist/images/jchptf/crossword/val/K.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/L.png -> client/dist/images/jchptf/crossword/val/L.png
+Reading client/ngapp/images/jchptf/crossword/val/L.png...OK
+Writing client/dist/images/jchptf/crossword/val/L.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/M.png -> client/dist/images/jchptf/crossword/val/M.png
+Reading client/ngapp/images/jchptf/crossword/val/M.png...OK
+Writing client/dist/images/jchptf/crossword/val/M.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/N.png -> client/dist/images/jchptf/crossword/val/N.png
+Reading client/ngapp/images/jchptf/crossword/val/N.png...OK
+Writing client/dist/images/jchptf/crossword/val/N.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/O.png -> client/dist/images/jchptf/crossword/val/O.png
+Reading client/ngapp/images/jchptf/crossword/val/O.png...OK
+Writing client/dist/images/jchptf/crossword/val/O.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/P.png -> client/dist/images/jchptf/crossword/val/P.png
+Reading client/ngapp/images/jchptf/crossword/val/P.png...OK
+Writing client/dist/images/jchptf/crossword/val/P.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/Q.png -> client/dist/images/jchptf/crossword/val/Q.png
+Reading client/ngapp/images/jchptf/crossword/val/Q.png...OK
+Writing client/dist/images/jchptf/crossword/val/Q.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/R.png -> client/dist/images/jchptf/crossword/val/R.png
+Reading client/ngapp/images/jchptf/crossword/val/R.png...OK
+Writing client/dist/images/jchptf/crossword/val/R.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/S.png -> client/dist/images/jchptf/crossword/val/S.png
+Reading client/ngapp/images/jchptf/crossword/val/S.png...OK
+Writing client/dist/images/jchptf/crossword/val/S.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/T.png -> client/dist/images/jchptf/crossword/val/T.png
+Reading client/ngapp/images/jchptf/crossword/val/T.png...OK
+Writing client/dist/images/jchptf/crossword/val/T.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/U.png -> client/dist/images/jchptf/crossword/val/U.png
+Reading client/ngapp/images/jchptf/crossword/val/U.png...OK
+Writing client/dist/images/jchptf/crossword/val/U.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/V.png -> client/dist/images/jchptf/crossword/val/V.png
+Reading client/ngapp/images/jchptf/crossword/val/V.png...OK
+Writing client/dist/images/jchptf/crossword/val/V.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/W.png -> client/dist/images/jchptf/crossword/val/W.png
+Reading client/ngapp/images/jchptf/crossword/val/W.png...OK
+Writing client/dist/images/jchptf/crossword/val/W.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/X.png -> client/dist/images/jchptf/crossword/val/X.png
+Reading client/ngapp/images/jchptf/crossword/val/X.png...OK
+Writing client/dist/images/jchptf/crossword/val/X.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/Y.png -> client/dist/images/jchptf/crossword/val/Y.png
+Reading client/ngapp/images/jchptf/crossword/val/Y.png...OK
+Writing client/dist/images/jchptf/crossword/val/Y.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/Z.png -> client/dist/images/jchptf/crossword/val/Z.png
+Reading client/ngapp/images/jchptf/crossword/val/Z.png...OK
+Writing client/dist/images/jchptf/crossword/val/Z.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/blank.png -> client/dist/images/jchptf/crossword/val/blank.png
+Reading client/ngapp/images/jchptf/crossword/val/blank.png...OK
+Writing client/dist/images/jchptf/crossword/val/blank.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/qm.png -> client/dist/images/jchptf/crossword/val/qm.png
+Reading client/ngapp/images/jchptf/crossword/val/qm.png...OK
+Writing client/dist/images/jchptf/crossword/val/qm.png...OK
+Copying client/ngapp/images/jchptf/crossword/val/unk.png -> client/dist/images/jchptf/crossword/val/unk.png
+Reading client/ngapp/images/jchptf/crossword/val/unk.png...OK
+Writing client/dist/images/jchptf/crossword/val/unk.png...OK
+Copying client/ngapp/test/spec/controllers/change.js -> .tmp/test/spec/controllers/change.js
+Reading client/ngapp/test/spec/controllers/change.js...OK
+Writing .tmp/test/spec/controllers/change.js...OK
+Copying client/ngapp/test/spec/controllers/home.js -> .tmp/test/spec/controllers/home.js
+Reading client/ngapp/test/spec/controllers/home.js...OK
+Writing .tmp/test/spec/controllers/home.js...OK
+Copying client/ngapp/test/spec/controllers/login.js -> .tmp/test/spec/controllers/login.js
+Reading client/ngapp/test/spec/controllers/login.js...OK
+Writing .tmp/test/spec/controllers/login.js...OK
+Copying client/ngapp/test/spec/controllers/register.js -> .tmp/test/spec/controllers/register.js
+Reading client/ngapp/test/spec/controllers/register.js...OK
+Writing .tmp/test/spec/controllers/register.js...OK
+Copying client/ngapp/test/spec/controllers/todo.js -> .tmp/test/spec/controllers/todo.js
+Reading client/ngapp/test/spec/controllers/todo.js...OK
+Writing .tmp/test/spec/controllers/todo.js...OK
+Copying client/ngapp/test/spec/controllers/user.js -> .tmp/test/spec/controllers/user.js
+Reading client/ngapp/test/spec/controllers/user.js...OK
+Writing .tmp/test/spec/controllers/user.js...OK
+Copying client/ngapp/test/spec/services/lbclient.js -> .tmp/test/spec/services/lbclient.js
+Reading client/ngapp/test/spec/services/lbclient.js...OK
+Writing .tmp/test/spec/services/lbclient.js...OK
+Copied 115 files
+
+Done, without errors.
+
+Running "useminPrepare" task
+
+Running "useminPrepare:html" (useminPrepare) task
+Verifying property useminPrepare.html exists in config...OK
+Files: client/ngapp/index.html, client/ngapp/views/changes.html, client/ngapp/views/jchptf/crossword/result/altPayoutReport.html, client/ngapp/views/jchptf/crossword/result/payoutItem.html, client/ngapp/views/jchptf/crossword/result/payoutReport.html, client/ngapp/views/jchptf/crossword/result/progressItem.html, client/ngapp/views/jchptf/crossword/result/progressReport.html, client/ngapp/views/jchptf/crossword/ticket/bonusValue.html, client/ngapp/views/jchptf/crossword/ticket/bonusWordCell.html, client/ngapp/views/jchptf/crossword/ticket/bonusWordGrid.html, client/ngapp/views/jchptf/crossword/ticket/crosswordCell.html, client/ngapp/views/jchptf/crossword/ticket/crosswordGrid.html, client/ngapp/views/jchptf/crossword/ticket/view.html, client/ngapp/views/jchptf/crossword/ticket/xwTicket.html, client/ngapp/views/jchptf/crossword/ticket/yourLettersCell.html, client/ngapp/views/jchptf/crossword/ticket/yourLettersGrid.html, client/ngapp/views/jchptf/home/view.html, client/ngapp/views/jchptf/poker/testGridOne.html, client/ngapp/views/jchptf/poker/view.html, client/ngapp/views/jchptf/uiTools/navBar/jchNavbar.html, client/ngapp/views/login.html, client/ngapp/views/register.html, client/ngapp/views/todos.html, client/ngapp/views/user.html, client/ngapp/views/welcome.html -> html
+Options: root="client/ngapp/", staging=".tmp2", dest="client/dist/", flow={"html":{"steps":{"js":["concat","uglifyjs"],"css":["concat","cssmin"]},"post":{}}}
+Going through client/ngapp/index.html, client/ngapp/views/changes.html, client/ngapp/views/jchptf/crossword/result/altPayoutReport.html, client/ngapp/views/jchptf/crossword/result/payoutItem.html, client/ngapp/views/jchptf/crossword/result/payoutReport.html, client/ngapp/views/jchptf/crossword/result/progressItem.html, client/ngapp/views/jchptf/crossword/result/progressReport.html, client/ngapp/views/jchptf/crossword/ticket/bonusValue.html, client/ngapp/views/jchptf/crossword/ticket/bonusWordCell.html, client/ngapp/views/jchptf/crossword/ticket/bonusWordGrid.html, client/ngapp/views/jchptf/crossword/ticket/crosswordCell.html, client/ngapp/views/jchptf/crossword/ticket/crosswordGrid.html, client/ngapp/views/jchptf/crossword/ticket/view.html, client/ngapp/views/jchptf/crossword/ticket/xwTicket.html, client/ngapp/views/jchptf/crossword/ticket/yourLettersCell.html, client/ngapp/views/jchptf/crossword/ticket/yourLettersGrid.html, client/ngapp/views/jchptf/home/view.html, client/ngapp/views/jchptf/poker/testGridOne.html, client/ngapp/views/jchptf/poker/view.html, client/ngapp/views/jchptf/uiTools/navBar/jchNavbar.html, client/ngapp/views/login.html, client/ngapp/views/register.html, client/ngapp/views/todos.html, client/ngapp/views/user.html, client/ngapp/views/welcome.html to update the config
+Looking for build script HTML comment blocks
+
+Configuration is now:
+
+  concat:
+  { generated: 
+   { files: 
+      [ { dest: [32m'.tmp2\\concat\\styles\\vendor.css'[39m,
+          src: 
+           [ [32m'{.,client\\ngapp}\\vendor\\nvd3\\build\\nv.d3.css'[39m,
+             [32m'{.,client\\ngapp}\\vendor\\leaflet\\dist\\leaflet.css'[39m,
+             [32m'{.,client\\ngapp}\\vendor\\font-awesome\\css\\font-awesome.css'[39m,
+             [32m'{.,client\\ngapp}\\vendor\\angular-ui-grid\\ui-grid.css'[39m,
+             [32m'{.,client\\ngapp}\\vendor\\bootstrap\\dist\\css\\bootstrap.css'[39m ] },
+        { dest: [32m'.tmp2\\concat\\styles\\main.css'[39m,
+          src: 
+           [ [32m'.tmp\\styles\\jchptf\\app.css'[39m,
+             [32m'.tmp\\styles\\jchptf\\crosswords\\crossword.css'[39m,
+             [32m'.tmp\\styles\\jchptf\\home\\home.css'[39m,
+             [32m'.tmp\\styles\\vendor\\angular-csp.css'[39m,
+             [32m'.tmp\\styles\\todo.css'[39m ] },
+        { dest: [32m'.tmp2\\concat\\scripts\\vendor.js'[39m,
+          src: 
+           [ [32m'client\\ngapp\\vendor\\jquery\\dist\\jquery.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular\\angular.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-cookies\\angular-cookies.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-resource\\angular-resource.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-sanitize\\angular-sanitize.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-animate\\angular-animate.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-touch\\angular-touch.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-http-auth\\src\\http-auth-interceptor.js'[39m,
+             [32m'client\\ngapp\\vendor\\d3\\d3.js'[39m,
+             [32m'client\\ngapp\\vendor\\nvd3\\build\\nv.d3.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-nvd3\\dist\\angular-nvd3.min.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-underscore\\angular-underscore.js'[39m,
+             [32m'client\\ngapp\\vendor\\leaflet\\dist\\leaflet.js'[39m,
+             [32m'client\\ngapp\\vendor\\leaflet\\dist\\leaflet-src.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-leaflet-directive\\dist\\angular-leaflet-directive.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-ui-grid\\ui-grid.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-bootstrap\\ui-bootstrap-tpls.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-ui-router\\release\\angular-ui-router.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-ui-utils\\ui-utils.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-strap\\dist\\angular-strap.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-strap\\dist\\angular-strap.tpl.js'[39m,
+             [32m'client\\ngapp\\vendor\\jquery-ui\\jquery-ui.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-dragdrop\\src\\angular-dragdrop.js'[39m,
+             [32m'client\\ngapp\\vendor\\angular-jwt\\dist\\angular-jwt.js'[39m,
+             [32m'client\\ngapp\\vendor\\gsap\\src\\uncompressed\\TweenMax.js'[39m,
+             [32m'client\\ngapp\\vendor\\ngFx\\dist\\ngFx.js'[39m,
+             [32m'client\\ngapp\\vendor\\async\\lib\\async.js'[39m,
+             [32m'client\\ngapp\\vendor\\bootstrap\\dist\\js\\bootstrap.js'[39m,
+             [32m'client\\ngapp\\vendor\\underscore\\underscore.js'[39m,
+             [32m'client\\ngapp\\vendor\\coffee-script\\lib\\coffee-script\\coffee-script.js'[39m,
+             [32m'client\\ngapp\\vendor\\sprintf.js\\src\\sprintf.js'[39m,
+             [32m'client\\ngapp\\vendor\\json3\\lib\\json3.js'[39m,
+             [32m'client\\ngapp\\vendor\\things-happened-util\\dist\\things-happened-util.js'[39m,
+             [32m'client\\ngapp\\vendor\\things-happened-angular\\dist\\things-happened-angular.js'[39m ] },
+        { dest: [32m'.tmp2\\concat\\scripts\\scripts.js'[39m,
+          src: 
+           [ [32m'.tmp\\config\\bundle.js'[39m,
+             [32m'.tmp\\lbclient\\browser.bundle.js'[39m,
+             [32m'.tmp\\scripts\\enum.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\authenticate\\authenticate.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\authenticate\\authenticate.routes.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\authenticate\\AuthToken.service.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\authenticate\\LoginController.controller.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\authenticate\\ptfLoginModal.directive.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\context\\context.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\context\\AuthTokenEventKind.constant.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\context\\IdentityContext.service.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\crosswords\\crosswords.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\crosswords\\crosswords.routes.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\crosswords\\xwModel.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\crosswords\\tickets\\tickets.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\crosswords\\tickets\\dynamic.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\crosswords\\results\\results.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\crosswords\\results\\xwReport.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\site\\notification\\notification.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\site\\navigation\\navigation.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\tools\\keyboard\\keyboard.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\tools\\keyboard\\keyboard.directive.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\app.configuration.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\app.run.js'[39m,
+             [32m'.tmp\\scripts\\jchptf\\app.js'[39m,
+             [32m'.tmp\\scripts\\services\\lbclient.js'[39m,
+             [32m'.tmp\\scripts\\controllers\\home.js'[39m,
+             [32m'.tmp\\scripts\\controllers\\user.js'[39m,
+             [32m'.tmp\\scripts\\controllers\\todo.js'[39m,
+             [32m'.tmp\\scripts\\controllers\\login.js'[39m,
+             [32m'.tmp\\scripts\\controllers\\register.js'[39m,
+             [32m'.tmp\\scripts\\controllers\\change.js'[39m ] } ] } }
+
+  uglify:
+  { generated: 
+   { files: 
+      [ { dest: [32m'client\\dist\\scripts\\vendor.js'[39m,
+          src: [ [32m'.tmp2\\concat\\scripts\\vendor.js'[39m ] },
+        { dest: [32m'client\\dist\\scripts\\scripts.js'[39m,
+          src: [ [32m'.tmp2\\concat\\scripts\\scripts.js'[39m ] } ] } }
+
+  cssmin:
+  { generated: 
+   { files: 
+      [ { dest: [32m'client\\dist\\styles\\vendor.css'[39m,
+          src: [ [32m'.tmp2\\concat\\styles\\vendor.css'[39m ] },
+        { dest: [32m'client\\dist\\styles\\main.css'[39m,
+          src: [ [32m'.tmp2\\concat\\styles\\main.css'[39m ] } ] } }
+
+Running "autoprefixer" task
+
+Running "autoprefixer:dist" (autoprefixer) task
+Verifying property autoprefixer.dist exists in config...OK
+Files: client/ngapp/styles/todo.css -> .tmp/styles/todo.css
+Files: client/ngapp/styles/vendor/angular-csp.css -> .tmp/styles/vendor/angular-csp.css
+Files: .tmp/less/jchptf/app.css -> .tmp/styles/jchptf/app.css
+Files: .tmp/less/jchptf/crosswords/crosswords.css -> .tmp/styles/jchptf/crosswords/crosswords.css
+Files: .tmp/less/jchptf/home/home.css -> .tmp/styles/jchptf/home/home.css
+Options: browsers=["last 1 version"], cascade, diff=false, map=false, remove, safe=false
+Reading client/ngapp/styles/todo.css...OK
+Writing .tmp/styles/todo.css...OK
+File .tmp/styles/todo.css created.
+Reading client/ngapp/styles/vendor/angular-csp.css...OK
+Writing .tmp/styles/vendor/angular-csp.css...OK
+File .tmp/styles/vendor/angular-csp.css created.
+Reading .tmp/less/jchptf/app.css...OK
+Writing .tmp/styles/jchptf/app.css...OK
+File .tmp/styles/jchptf/app.css created.
+Reading .tmp/less/jchptf/crosswords/crosswords.css...OK
+Writing .tmp/styles/jchptf/crosswords/crosswords.css...OK
+File .tmp/styles/jchptf/crosswords/crosswords.css created.
+Reading .tmp/less/jchptf/home/home.css...OK
+Writing .tmp/styles/jchptf/home/home.css...OK
+File .tmp/styles/jchptf/home/home.css created.
+>> 5 autoprefixed stylesheets created.
+
+Running "ngAnnotate" task
+
+Running "ngAnnotate:dist" (ngAnnotate) task
+Verifying property ngAnnotate.dist exists in config...OK
+Options: (none)
+>> No files provided to the ngAnnotate task.
+
+Running "copy:dist" (copy) task
+Verifying property copy.dist exists in config...OK
+Files: client/ngapp/favicon.ico -> client/dist/favicon.ico
+Files: client/ngapp/robots.txt -> client/dist/robots.txt
+Files: client/ngapp/views/changes.html -> client/dist/views/changes.html
+Files: client/ngapp/views/jchptf/crossword/result/altPayoutReport.html -> client/dist/views/jchptf/crossword/result/altPayoutReport.html
+Files: client/ngapp/views/jchptf/crossword/result/payoutItem.html -> client/dist/views/jchptf/crossword/result/payoutItem.html
+Files: client/ngapp/views/jchptf/crossword/result/payoutReport.html -> client/dist/views/jchptf/crossword/result/payoutReport.html
+Files: client/ngapp/views/jchptf/crossword/result/progressItem.html -> client/dist/views/jchptf/crossword/result/progressItem.html
+Files: client/ngapp/views/jchptf/crossword/result/progressReport.html -> client/dist/views/jchptf/crossword/result/progressReport.html
+Files: client/ngapp/views/jchptf/crossword/ticket/bonusValue.html -> client/dist/views/jchptf/crossword/ticket/bonusValue.html
+Files: client/ngapp/views/jchptf/crossword/ticket/bonusWordCell.html -> client/dist/views/jchptf/crossword/ticket/bonusWordCell.html
+Files: client/ngapp/views/jchptf/crossword/ticket/bonusWordGrid.html -> client/dist/views/jchptf/crossword/ticket/bonusWordGrid.html
+Files: client/ngapp/views/jchptf/crossword/ticket/crosswordCell.html -> client/dist/views/jchptf/crossword/ticket/crosswordCell.html
+Files: client/ngapp/views/jchptf/crossword/ticket/crosswordGrid.html -> client/dist/views/jchptf/crossword/ticket/crosswordGrid.html
+Files: client/ngapp/views/jchptf/crossword/ticket/view.html -> client/dist/views/jchptf/crossword/ticket/view.html
+Files: client/ngapp/views/jchptf/crossword/ticket/xwTicket.html -> client/dist/views/jchptf/crossword/ticket/xwTicket.html
+Files: client/ngapp/views/jchptf/crossword/ticket/yourLettersCell.html -> client/dist/views/jchptf/crossword/ticket/yourLettersCell.html
+Files: client/ngapp/views/jchptf/crossword/ticket/yourLettersGrid.html -> client/dist/views/jchptf/crossword/ticket/yourLettersGrid.html
+Files: client/ngapp/views/jchptf/home/view.html -> client/dist/views/jchptf/home/view.html
+Files: client/ngapp/views/jchptf/poker/testGridOne.html -> client/dist/views/jchptf/poker/testGridOne.html
+Files: client/ngapp/views/jchptf/poker/view.html -> client/dist/views/jchptf/poker/view.html
+Files: client/ngapp/views/jchptf/uiTools/navBar/jchNavbar.html -> client/dist/views/jchptf/uiTools/navBar/jchNavbar.html
+Files: client/ngapp/views/login.html -> client/dist/views/login.html
+Files: client/ngapp/views/register.html -> client/dist/views/register.html
+Files: client/ngapp/views/todos.html -> client/dist/views/todos.html
+Files: client/ngapp/views/user.html -> client/dist/views/user.html
+Files: client/ngapp/views/welcome.html -> client/dist/views/welcome.html
+Files: client/ngapp/index.html -> client/dist/index.html
+Options: encoding="utf8", processContent=false, processContentExclude=[], timestamp=false, mode=false
+Copying client/ngapp/favicon.ico -> client/dist/favicon.ico
+Reading client/ngapp/favicon.ico...OK
+Writing client/dist/favicon.ico...OK
+Copying client/ngapp/robots.txt -> client/dist/robots.txt
+Reading client/ngapp/robots.txt...OK
+Writing client/dist/robots.txt...OK
+Copying client/ngapp/views/changes.html -> client/dist/views/changes.html
+Reading client/ngapp/views/changes.html...OK
+Writing client/dist/views/changes.html...OK
+Copying client/ngapp/views/jchptf/crossword/result/altPayoutReport.html -> client/dist/views/jchptf/crossword/result/altPayoutReport.html
+Reading client/ngapp/views/jchptf/crossword/result/altPayoutReport.html...OK
+Writing client/dist/views/jchptf/crossword/result/altPayoutReport.html...OK
+Copying client/ngapp/views/jchptf/crossword/result/payoutItem.html -> client/dist/views/jchptf/crossword/result/payoutItem.html
+Reading client/ngapp/views/jchptf/crossword/result/payoutItem.html...OK
+Writing client/dist/views/jchptf/crossword/result/payoutItem.html...OK
+Copying client/ngapp/views/jchptf/crossword/result/payoutReport.html -> client/dist/views/jchptf/crossword/result/payoutReport.html
+Reading client/ngapp/views/jchptf/crossword/result/payoutReport.html...OK
+Writing client/dist/views/jchptf/crossword/result/payoutReport.html...OK
+Copying client/ngapp/views/jchptf/crossword/result/progressItem.html -> client/dist/views/jchptf/crossword/result/progressItem.html
+Reading client/ngapp/views/jchptf/crossword/result/progressItem.html...OK
+Writing client/dist/views/jchptf/crossword/result/progressItem.html...OK
+Copying client/ngapp/views/jchptf/crossword/result/progressReport.html -> client/dist/views/jchptf/crossword/result/progressReport.html
+Reading client/ngapp/views/jchptf/crossword/result/progressReport.html...OK
+Writing client/dist/views/jchptf/crossword/result/progressReport.html...OK
+Copying client/ngapp/views/jchptf/crossword/ticket/bonusValue.html -> client/dist/views/jchptf/crossword/ticket/bonusValue.html
+Reading client/ngapp/views/jchptf/crossword/ticket/bonusValue.html...OK
+Writing client/dist/views/jchptf/crossword/ticket/bonusValue.html...OK
+Copying client/ngapp/views/jchptf/crossword/ticket/bonusWordCell.html -> client/dist/views/jchptf/crossword/ticket/bonusWordCell.html
+Reading client/ngapp/views/jchptf/crossword/ticket/bonusWordCell.html...OK
+Writing client/dist/views/jchptf/crossword/ticket/bonusWordCell.html...OK
+Copying client/ngapp/views/jchptf/crossword/ticket/bonusWordGrid.html -> client/dist/views/jchptf/crossword/ticket/bonusWordGrid.html
+Reading client/ngapp/views/jchptf/crossword/ticket/bonusWordGrid.html...OK
+Writing client/dist/views/jchptf/crossword/ticket/bonusWordGrid.html...OK
+Copying client/ngapp/views/jchptf/crossword/ticket/crosswordCell.html -> client/dist/views/jchptf/crossword/ticket/crosswordCell.html
+Reading client/ngapp/views/jchptf/crossword/ticket/crosswordCell.html...OK
+Writing client/dist/views/jchptf/crossword/ticket/crosswordCell.html...OK
+Copying client/ngapp/views/jchptf/crossword/ticket/crosswordGrid.html -> client/dist/views/jchptf/crossword/ticket/crosswordGrid.html
+Reading client/ngapp/views/jchptf/crossword/ticket/crosswordGrid.html...OK
+Writing client/dist/views/jchptf/crossword/ticket/crosswordGrid.html...OK
+Copying client/ngapp/views/jchptf/crossword/ticket/view.html -> client/dist/views/jchptf/crossword/ticket/view.html
+Reading client/ngapp/views/jchptf/crossword/ticket/view.html...OK
+Writing client/dist/views/jchptf/crossword/ticket/view.html...OK
+Copying client/ngapp/views/jchptf/crossword/ticket/xwTicket.html -> client/dist/views/jchptf/crossword/ticket/xwTicket.html
+Reading client/ngapp/views/jchptf/crossword/ticket/xwTicket.html...OK
+Writing client/dist/views/jchptf/crossword/ticket/xwTicket.html...OK
+Copying client/ngapp/views/jchptf/crossword/ticket/yourLettersCell.html -> client/dist/views/jchptf/crossword/ticket/yourLettersCell.html
+Reading client/ngapp/views/jchptf/crossword/ticket/yourLettersCell.html...OK
+Writing client/dist/views/jchptf/crossword/ticket/yourLettersCell.html...OK
+Copying client/ngapp/views/jchptf/crossword/ticket/yourLettersGrid.html -> client/dist/views/jchptf/crossword/ticket/yourLettersGrid.html
+Reading client/ngapp/views/jchptf/crossword/ticket/yourLettersGrid.html...OK
+Writing client/dist/views/jchptf/crossword/ticket/yourLettersGrid.html...OK
+Copying client/ngapp/views/jchptf/home/view.html -> client/dist/views/jchptf/home/view.html
+Reading client/ngapp/views/jchptf/home/view.html...OK
+Writing client/dist/views/jchptf/home/view.html...OK
+Copying client/ngapp/views/jchptf/poker/testGridOne.html -> client/dist/views/jchptf/poker/testGridOne.html
+Reading client/ngapp/views/jchptf/poker/testGridOne.html...OK
+Writing client/dist/views/jchptf/poker/testGridOne.html...OK
+Copying client/ngapp/views/jchptf/poker/view.html -> client/dist/views/jchptf/poker/view.html
+Reading client/ngapp/views/jchptf/poker/view.html...OK
+Writing client/dist/views/jchptf/poker/view.html...OK
+Copying client/ngapp/views/jchptf/uiTools/navBar/jchNavbar.html -> client/dist/views/jchptf/uiTools/navBar/jchNavbar.html
+Reading client/ngapp/views/jchptf/uiTools/navBar/jchNavbar.html...OK
+Writing client/dist/views/jchptf/uiTools/navBar/jchNavbar.html...OK
+Copying client/ngapp/views/login.html -> client/dist/views/login.html
+Reading client/ngapp/views/login.html...OK
+Writing client/dist/views/login.html...OK
+Copying client/ngapp/views/register.html -> client/dist/views/register.html
+Reading client/ngapp/views/register.html...OK
+Writing client/dist/views/register.html...OK
+Copying client/ngapp/views/todos.html -> client/dist/views/todos.html
+Reading client/ngapp/views/todos.html...OK
+Writing client/dist/views/todos.html...OK
+Copying client/ngapp/views/user.html -> client/dist/views/user.html
+Reading client/ngapp/views/user.html...OK
+Writing client/dist/views/user.html...OK
+Copying client/ngapp/views/welcome.html -> client/dist/views/welcome.html
+Reading client/ngapp/views/welcome.html...OK
+Writing client/dist/views/welcome.html...OK
+Copying client/ngapp/index.html -> client/dist/index.html
+Reading client/ngapp/index.html...OK
+Writing client/dist/index.html...OK
+Copied 27 files
+
+Running "cdnify" task
+
+Running "cdnify:dist" (cdnify) task
+Verifying property cdnify.dist exists in config...OK
+File: [no files]
+Reading bower.json...OK
+Parsing bower.json...OK
+Options: cdn="google"
+Going through client/dist/index.html to update script refs
+Reading client/dist/index.html...OK
+✔ bower_components/angular/angular.js changed to //ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js
+✔ bower_components/angular-animate/angular-animate.js changed to //ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-animate.min.js
+✔ bower_components/angular-cookies/angular-cookies.js changed to //ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-cookies.min.js
+✔ bower_components/angular-resource/angular-resource.js changed to //ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-resource.min.js
+✔ bower_components/angular-sanitize/angular-sanitize.js changed to //ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-sanitize.min.js
+✔ bower_components/angular-touch/angular-touch.js changed to //ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-touch.min.js
+Writing client/dist/index.html...OK
+
+Running "concat:generated" (concat) task
+Verifying property concat.generated exists in config...OK
+Files: client/ngapp/vendor/nvd3/build/nv.d3.css, client/ngapp/vendor/leaflet/dist/leaflet.css, client/ngapp/vendor/font-awesome/css/font-awesome.css, client/ngapp/vendor/angular-ui-grid/ui-grid.css, client/ngapp/vendor/bootstrap/dist/css/bootstrap.css -> .tmp2\concat\styles\vendor.css
+Files: .tmp/styles/jchptf/app.css, .tmp/styles/jchptf/home/home.css, .tmp/styles/vendor/angular-csp.css, .tmp/styles/todo.css -> .tmp2\concat\styles\main.css
+Files: client/ngapp/vendor/jquery/dist/jquery.js, client/ngapp/vendor/angular/angular.js, client/ngapp/vendor/angular-cookies/angular-cookies.js, client/ngapp/vendor/angular-resource/angular-resource.js, client/ngapp/vendor/angular-sanitize/angular-sanitize.js, client/ngapp/vendor/angular-animate/angular-animate.js, client/ngapp/vendor/angular-touch/angular-touch.js, client/ngapp/vendor/angular-http-auth/src/http-auth-interceptor.js, client/ngapp/vendor/d3/d3.js, client/ngapp/vendor/nvd3/build/nv.d3.js, client/ngapp/vendor/angular-nvd3/dist/angular-nvd3.min.js, client/ngapp/vendor/angular-underscore/angular-underscore.js, client/ngapp/vendor/leaflet/dist/leaflet.js, client/ngapp/vendor/leaflet/dist/leaflet-src.js, client/ngapp/vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js, client/ngapp/vendor/angular-ui-grid/ui-grid.js, client/ngapp/vendor/angular-bootstrap/ui-bootstrap-tpls.js, client/ngapp/vendor/angular-ui-router/release/angular-ui-router.js, client/ngapp/vendor/angular-ui-utils/ui-utils.js, client/ngapp/vendor/angular-strap/dist/angular-strap.js, client/ngapp/vendor/angular-strap/dist/angular-strap.tpl.js, client/ngapp/vendor/jquery-ui/jquery-ui.js, client/ngapp/vendor/angular-dragdrop/src/angular-dragdrop.js, client/ngapp/vendor/angular-jwt/dist/angular-jwt.js, client/ngapp/vendor/gsap/src/uncompressed/TweenMax.js, client/ngapp/vendor/ngFx/dist/ngFx.js, client/ngapp/vendor/async/lib/async.js, client/ngapp/vendor/bootstrap/dist/js/bootstrap.js, client/ngapp/vendor/underscore/underscore.js, client/ngapp/vendor/coffee-script/lib/coffee-script/coffee-script.js, client/ngapp/vendor/sprintf.js/src/sprintf.js, client/ngapp/vendor/json3/lib/json3.js, client/ngapp/vendor/things-happened-util/dist/things-happened-util.js, client/ngapp/vendor/things-happened-angular/dist/things-happened-angular.js -> .tmp2\concat\scripts\vendor.js
+Files: .tmp/config/bundle.js, .tmp/lbclient/browser.bundle.js, .tmp/scripts/enum.js, .tmp/scripts/jchptf/authenticate/authenticate.js, .tmp/scripts/jchptf/authenticate/authenticate.routes.js, .tmp/scripts/jchptf/authenticate/AuthToken.service.js, .tmp/scripts/jchptf/authenticate/LoginController.controller.js, .tmp/scripts/jchptf/authenticate/ptfLoginModal.directive.js, .tmp/scripts/jchptf/context/context.js, .tmp/scripts/jchptf/context/AuthTokenEventKind.constant.js, .tmp/scripts/jchptf/context/IdentityContext.service.js, .tmp/scripts/jchptf/crosswords/crosswords.js, .tmp/scripts/jchptf/crosswords/crosswords.routes.js, .tmp/scripts/jchptf/crosswords/xwModel.js, .tmp/scripts/jchptf/crosswords/tickets/tickets.js, .tmp/scripts/jchptf/crosswords/tickets/dynamic.js, .tmp/scripts/jchptf/crosswords/results/results.js, .tmp/scripts/jchptf/crosswords/results/xwReport.js, .tmp/scripts/jchptf/site/notification/notification.js, .tmp/scripts/jchptf/site/navigation/navigation.js, .tmp/scripts/jchptf/tools/keyboard/keyboard.js, .tmp/scripts/jchptf/tools/keyboard/keyboard.directive.js, .tmp/scripts/jchptf/app.configuration.js, .tmp/scripts/jchptf/app.run.js, .tmp/scripts/jchptf/app.js, .tmp/scripts/services/lbclient.js, .tmp/scripts/controllers/home.js, .tmp/scripts/controllers/user.js, .tmp/scripts/controllers/todo.js, .tmp/scripts/controllers/login.js, .tmp/scripts/controllers/register.js, .tmp/scripts/controllers/change.js -> .tmp2\concat\scripts\scripts.js
+Options: separator="\r\n", banner="", footer="", stripBanners=false, process=false, sourceMap=false, sourceMapName=undefined, sourceMapStyle="embed"
+Reading client/ngapp/vendor/nvd3/build/nv.d3.css...OK
+Reading client/ngapp/vendor/leaflet/dist/leaflet.css...OK
+Reading client/ngapp/vendor/font-awesome/css/font-awesome.css...OK
+Reading client/ngapp/vendor/angular-ui-grid/ui-grid.css...OK
+Reading client/ngapp/vendor/bootstrap/dist/css/bootstrap.css...OK
+Writing .tmp2\concat\styles\vendor.css...OK
+File .tmp2\concat\styles\vendor.css created.
+Reading .tmp/styles/jchptf/app.css...OK
+Reading .tmp/styles/jchptf/home/home.css...OK
+Reading .tmp/styles/vendor/angular-csp.css...OK
+Reading .tmp/styles/todo.css...OK
+Writing .tmp2\concat\styles\main.css...OK
+File .tmp2\concat\styles\main.css created.
+Reading client/ngapp/vendor/jquery/dist/jquery.js...OK
+Reading client/ngapp/vendor/angular/angular.js...OK
+Reading client/ngapp/vendor/angular-cookies/angular-cookies.js...OK
+Reading client/ngapp/vendor/angular-resource/angular-resource.js...OK
+Reading client/ngapp/vendor/angular-sanitize/angular-sanitize.js...OK
+Reading client/ngapp/vendor/angular-animate/angular-animate.js...OK
+Reading client/ngapp/vendor/angular-touch/angular-touch.js...OK
+Reading client/ngapp/vendor/angular-http-auth/src/http-auth-interceptor.js...OK
+Reading client/ngapp/vendor/d3/d3.js...OK
+Reading client/ngapp/vendor/nvd3/build/nv.d3.js...OK
+Reading client/ngapp/vendor/angular-nvd3/dist/angular-nvd3.min.js...OK
+Reading client/ngapp/vendor/angular-underscore/angular-underscore.js...OK
+Reading client/ngapp/vendor/leaflet/dist/leaflet.js...OK
+Reading client/ngapp/vendor/leaflet/dist/leaflet-src.js...OK
+Reading client/ngapp/vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js...OK
+Reading client/ngapp/vendor/angular-ui-grid/ui-grid.js...OK
+Reading client/ngapp/vendor/angular-bootstrap/ui-bootstrap-tpls.js...OK
+Reading client/ngapp/vendor/angular-ui-router/release/angular-ui-router.js...OK
+Reading client/ngapp/vendor/angular-ui-utils/ui-utils.js...OK
+Reading client/ngapp/vendor/angular-strap/dist/angular-strap.js...OK
+Reading client/ngapp/vendor/angular-strap/dist/angular-strap.tpl.js...OK
+Reading client/ngapp/vendor/jquery-ui/jquery-ui.js...OK
+Reading client/ngapp/vendor/angular-dragdrop/src/angular-dragdrop.js...OK
+Reading client/ngapp/vendor/angular-jwt/dist/angular-jwt.js...OK
+Reading client/ngapp/vendor/gsap/src/uncompressed/TweenMax.js...OK
+Reading client/ngapp/vendor/ngFx/dist/ngFx.js...OK
+Reading client/ngapp/vendor/async/lib/async.js...OK
+Reading client/ngapp/vendor/bootstrap/dist/js/bootstrap.js...OK
+Reading client/ngapp/vendor/underscore/underscore.js...OK
+Reading client/ngapp/vendor/coffee-script/lib/coffee-script/coffee-script.js...OK
+Reading client/ngapp/vendor/sprintf.js/src/sprintf.js...OK
+Reading client/ngapp/vendor/json3/lib/json3.js...OK
+Reading client/ngapp/vendor/things-happened-util/dist/things-happened-util.js...OK
+Reading client/ngapp/vendor/things-happened-angular/dist/things-happened-angular.js...OK
+Writing .tmp2\concat\scripts\vendor.js...OK
+File .tmp2\concat\scripts\vendor.js created.
+Reading .tmp/config/bundle.js...OK
+Reading .tmp/lbclient/browser.bundle.js...OK
+Reading .tmp/scripts/enum.js...OK
+Reading .tmp/scripts/jchptf/authenticate/authenticate.js...OK
+Reading .tmp/scripts/jchptf/authenticate/authenticate.routes.js...OK
+Reading .tmp/scripts/jchptf/authenticate/AuthToken.service.js...OK
+Reading .tmp/scripts/jchptf/authenticate/LoginController.controller.js...OK
+Reading .tmp/scripts/jchptf/authenticate/ptfLoginModal.directive.js...OK
+Reading .tmp/scripts/jchptf/context/context.js...OK
+Reading .tmp/scripts/jchptf/context/AuthTokenEventKind.constant.js...OK
+Reading .tmp/scripts/jchptf/context/IdentityContext.service.js...OK
+Reading .tmp/scripts/jchptf/crosswords/crosswords.js...OK
+Reading .tmp/scripts/jchptf/crosswords/crosswords.routes.js...OK
+Reading .tmp/scripts/jchptf/crosswords/xwModel.js...OK
+Reading .tmp/scripts/jchptf/crosswords/tickets/tickets.js...OK
+Reading .tmp/scripts/jchptf/crosswords/tickets/dynamic.js...OK
+Reading .tmp/scripts/jchptf/crosswords/results/results.js...OK
+Reading .tmp/scripts/jchptf/crosswords/results/xwReport.js...OK
+Reading .tmp/scripts/jchptf/site/notification/notification.js...OK
+Reading .tmp/scripts/jchptf/site/navigation/navigation.js...OK
+Reading .tmp/scripts/jchptf/tools/keyboard/keyboard.js...OK
+Reading .tmp/scripts/jchptf/tools/keyboard/keyboard.directive.js...OK
+Reading .tmp/scripts/jchptf/app.configuration.js...OK
+Reading .tmp/scripts/jchptf/app.run.js...OK
+Reading .tmp/scripts/jchptf/app.js...OK
+Reading .tmp/scripts/services/lbclient.js...OK
+Reading .tmp/scripts/controllers/home.js...OK
+Reading .tmp/scripts/controllers/user.js...OK
+Reading .tmp/scripts/controllers/todo.js...OK
+Reading .tmp/scripts/controllers/login.js...OK
+Reading .tmp/scripts/controllers/register.js...OK
+Reading .tmp/scripts/controllers/change.js...OK
+Writing .tmp2\concat\scripts\scripts.js...OK
+File .tmp2\concat\scripts\scripts.js created.
+
+Running "cssmin:generated" (cssmin) task
+Verifying property cssmin.generated exists in config...OK
+Files: .tmp2/concat/styles/vendor.css -> client\dist\styles\vendor.css
+Files: .tmp2/concat/styles/main.css -> client\dist\styles\main.css
+Options: rebase=false, report="min", sourceMap=false
+Reading .tmp2/concat/styles/vendor.css...OK
+Writing client\dist\styles\vendor.css...OK
+File client\dist\styles\vendor.css created 227.68 kB → 174.53 kB
+Options: rebase=false, report="min", sourceMap=false
+Reading .tmp2/concat/styles/main.css...OK
+Writing client\dist\styles\main.css...OK
+File client\dist\styles\main.css created 150.03 kB → 117.71 kB
+
+Running "uglify:generated" (uglify) task
+Verifying property uglify.generated exists in config...OK
+Files: .tmp2/concat/scripts/vendor.js -> client\dist\scripts\vendor.js
+Files: .tmp2/concat/scripts/scripts.js -> client\dist\scripts\scripts.js
+Options: banner="", footer="", compress={"warnings":false}, mangle={}, beautify=false, report="min", expression=false, maxLineLen=32000, ASCIIOnly=false, screwIE8=false, quoteStyle=0
+Minifying with UglifyJS...Reading .tmp2/concat/scripts/vendor.js...OK
+OK
+Writing client\dist\scripts\vendor.js...OK
+File client\dist\scripts\vendor.js created: 5.3 MB → 1.8 MB
+Minifying with UglifyJS...Reading .tmp2/concat/scripts/scripts.js...OK
+OK
+Writing client\dist\scripts\scripts.js...OK
+File client\dist\scripts\scripts.js created: 6.42 MB → 1.12 MB
+>> 2 files created.
+
+Running "filerev" task
+
+Running "filerev:dist" (filerev) task
+Verifying property filerev.dist exists in config...OK
+Files: client/dist/images/jchptf/crossword/bootstrap/img/glyphicons-halflings-white.png, client/dist/images/jchptf/crossword/bootstrap/img/glyphicons-halflings.png, client/dist/images/jchptf/crossword/border/grid.png, client/dist/images/jchptf/crossword/border/hend.png, client/dist/images/jchptf/crossword/border/hmid.png, client/dist/images/jchptf/crossword/border/htop.png, client/dist/images/jchptf/crossword/border/unit.png, client/dist/images/jchptf/crossword/border/vend.png, client/dist/images/jchptf/crossword/border/vmid.png, client/dist/images/jchptf/crossword/border/vtop.png, client/dist/images/jchptf/crossword/card/card.jpg, client/dist/images/jchptf/crossword/card/card_00.jpg, client/dist/images/jchptf/crossword/card/card_01.jpg, client/dist/images/jchptf/crossword/card/card_02.jpg, client/dist/images/jchptf/crossword/card/card_03.jpg, client/dist/images/jchptf/crossword/card/card_04.jpg, client/dist/images/jchptf/crossword/card/card_05.jpg, client/dist/images/jchptf/crossword/card/card_06.jpg, client/dist/images/jchptf/crossword/card/card_07.jpg, client/dist/images/jchptf/crossword/card/card_08.jpg, client/dist/images/jchptf/crossword/card/card_09.jpg, client/dist/images/jchptf/crossword/card/card_10.jpg, client/dist/images/jchptf/crossword/card/card_11.jpg, client/dist/images/jchptf/crossword/card/card_12.jpg, client/dist/images/jchptf/crossword/card/card_13.jpg, client/dist/images/jchptf/crossword/card/card_14.jpg, client/dist/images/jchptf/crossword/card/card_15.jpg, client/dist/images/jchptf/crossword/fill/Medium Grey.png, client/dist/images/jchptf/crossword/fill/Scratch1.png, client/dist/images/jchptf/crossword/fill/Scratch2.png, client/dist/images/jchptf/crossword/fill/Scratch3.png, client/dist/images/jchptf/crossword/fill/Scratch4.png, client/dist/images/jchptf/crossword/fill/Scratch5.png, client/dist/images/jchptf/crossword/fill/Scratch6.png, client/dist/images/jchptf/crossword/fill/SilverCover.png, client/dist/images/jchptf/crossword/fill/altPath.png, client/dist/images/jchptf/crossword/fill/altPath2.png, client/dist/images/jchptf/crossword/fill/brite1.png, client/dist/images/jchptf/crossword/fill/briteblue.png, client/dist/images/jchptf/crossword/fill/cornsilk.png, client/dist/images/jchptf/crossword/fill/darkGrey.png, client/dist/images/jchptf/crossword/fill/golden.png, client/dist/images/jchptf/crossword/fill/imageSrc.png, client/dist/images/jchptf/crossword/fill/lightGrey.png, client/dist/images/jchptf/crossword/fill/locked.png, client/dist/images/jchptf/crossword/fill/pink1.png, client/dist/images/jchptf/crossword/fill/pink2.png, client/dist/images/jchptf/crossword/fill/scratched.png, client/dist/images/jchptf/crossword/fill/selected1.png, client/dist/images/jchptf/crossword/gval/A.png, client/dist/images/jchptf/crossword/gval/B.png, client/dist/images/jchptf/crossword/gval/C.png, client/dist/images/jchptf/crossword/gval/D.png, client/dist/images/jchptf/crossword/gval/E.png, client/dist/images/jchptf/crossword/gval/F.png, client/dist/images/jchptf/crossword/gval/G.png, client/dist/images/jchptf/crossword/gval/H.png, client/dist/images/jchptf/crossword/gval/I.png, client/dist/images/jchptf/crossword/gval/J.png, client/dist/images/jchptf/crossword/gval/K.png, client/dist/images/jchptf/crossword/gval/L.png, client/dist/images/jchptf/crossword/gval/M.png, client/dist/images/jchptf/crossword/gval/N.png, client/dist/images/jchptf/crossword/gval/O.png, client/dist/images/jchptf/crossword/gval/P.png, client/dist/images/jchptf/crossword/gval/Q.png, client/dist/images/jchptf/crossword/gval/R.png, client/dist/images/jchptf/crossword/gval/S.png, client/dist/images/jchptf/crossword/gval/T.png, client/dist/images/jchptf/crossword/gval/U.png, client/dist/images/jchptf/crossword/gval/V.png, client/dist/images/jchptf/crossword/gval/W.png, client/dist/images/jchptf/crossword/gval/X.png, client/dist/images/jchptf/crossword/gval/Y.png, client/dist/images/jchptf/crossword/gval/Z.png, client/dist/images/jchptf/crossword/val/10.png, client/dist/images/jchptf/crossword/val/30.png, client/dist/images/jchptf/crossword/val/4.png, client/dist/images/jchptf/crossword/val/5.png, client/dist/images/jchptf/crossword/val/A.png, client/dist/images/jchptf/crossword/val/B.png, client/dist/images/jchptf/crossword/val/C.png, client/dist/images/jchptf/crossword/val/D.png, client/dist/images/jchptf/crossword/val/E.png, client/dist/images/jchptf/crossword/val/F.png, client/dist/images/jchptf/crossword/val/G.png, client/dist/images/jchptf/crossword/val/H.png, client/dist/images/jchptf/crossword/val/I.png, client/dist/images/jchptf/crossword/val/J.png, client/dist/images/jchptf/crossword/val/K.png, client/dist/images/jchptf/crossword/val/L.png, client/dist/images/jchptf/crossword/val/M.png, client/dist/images/jchptf/crossword/val/N.png, client/dist/images/jchptf/crossword/val/O.png, client/dist/images/jchptf/crossword/val/P.png, client/dist/images/jchptf/crossword/val/Q.png, client/dist/images/jchptf/crossword/val/R.png, client/dist/images/jchptf/crossword/val/S.png, client/dist/images/jchptf/crossword/val/T.png, client/dist/images/jchptf/crossword/val/U.png, client/dist/images/jchptf/crossword/val/V.png, client/dist/images/jchptf/crossword/val/W.png, client/dist/images/jchptf/crossword/val/X.png, client/dist/images/jchptf/crossword/val/Y.png, client/dist/images/jchptf/crossword/val/Z.png, client/dist/images/jchptf/crossword/val/blank.png, client/dist/images/jchptf/crossword/val/qm.png, client/dist/images/jchptf/crossword/val/unk.png
+Options: algorithm="md5", length=8
+✔ client/dist/images/jchptf/crossword/bootstrap/img/glyphicons-halflings-white.png changed to glyphicons-halflings-white.9bbc6e96.png
+✔ client/dist/images/jchptf/crossword/bootstrap/img/glyphicons-halflings.png changed to glyphicons-halflings.25163399.png
+✔ client/dist/images/jchptf/crossword/border/grid.png changed to grid.b6948e3f.png
+✔ client/dist/images/jchptf/crossword/border/hend.png changed to hend.9705f52d.png
+✔ client/dist/images/jchptf/crossword/border/hmid.png changed to hmid.e559c7bf.png
+✔ client/dist/images/jchptf/crossword/border/htop.png changed to htop.808aa338.png
+✔ client/dist/images/jchptf/crossword/border/unit.png changed to unit.0d1bc994.png
+✔ client/dist/images/jchptf/crossword/border/vend.png changed to vend.347d8249.png
+✔ client/dist/images/jchptf/crossword/border/vmid.png changed to vmid.0da3e031.png
+✔ client/dist/images/jchptf/crossword/border/vtop.png changed to vtop.dc0723af.png
+✔ client/dist/images/jchptf/crossword/card/card.jpg changed to card.3ce4520a.jpg
+✔ client/dist/images/jchptf/crossword/card/card_00.jpg changed to card_00.7ee255fa.jpg
+✔ client/dist/images/jchptf/crossword/card/card_01.jpg changed to card_01.8955f8b1.jpg
+✔ client/dist/images/jchptf/crossword/card/card_02.jpg changed to card_02.582a531f.jpg
+✔ client/dist/images/jchptf/crossword/card/card_03.jpg changed to card_03.6d9311da.jpg
+✔ client/dist/images/jchptf/crossword/card/card_04.jpg changed to card_04.3d6afc3f.jpg
+✔ client/dist/images/jchptf/crossword/card/card_05.jpg changed to card_05.80e655cf.jpg
+✔ client/dist/images/jchptf/crossword/card/card_06.jpg changed to card_06.af799031.jpg
+✔ client/dist/images/jchptf/crossword/card/card_07.jpg changed to card_07.4bbf6958.jpg
+✔ client/dist/images/jchptf/crossword/card/card_08.jpg changed to card_08.defee122.jpg
+✔ client/dist/images/jchptf/crossword/card/card_09.jpg changed to card_09.c3883669.jpg
+✔ client/dist/images/jchptf/crossword/card/card_10.jpg changed to card_10.17deccb4.jpg
+✔ client/dist/images/jchptf/crossword/card/card_11.jpg changed to card_11.48326ec5.jpg
+✔ client/dist/images/jchptf/crossword/card/card_12.jpg changed to card_12.03386639.jpg
+✔ client/dist/images/jchptf/crossword/card/card_13.jpg changed to card_13.186795d4.jpg
+✔ client/dist/images/jchptf/crossword/card/card_14.jpg changed to card_14.51ff939f.jpg
+✔ client/dist/images/jchptf/crossword/card/card_15.jpg changed to card_15.e04b69b3.jpg
+✔ client/dist/images/jchptf/crossword/fill/Medium Grey.png changed to Medium Grey.0254abce.png
+✔ client/dist/images/jchptf/crossword/fill/Scratch1.png changed to Scratch1.21a9950f.png
+✔ client/dist/images/jchptf/crossword/fill/Scratch2.png changed to Scratch2.39b7fda6.png
+✔ client/dist/images/jchptf/crossword/fill/Scratch3.png changed to Scratch3.0754670c.png
+✔ client/dist/images/jchptf/crossword/fill/Scratch4.png changed to Scratch4.019e72e9.png
+✔ client/dist/images/jchptf/crossword/fill/Scratch5.png changed to Scratch5.e6f2c498.png
+✔ client/dist/images/jchptf/crossword/fill/Scratch6.png changed to Scratch6.9ddf6407.png
+✔ client/dist/images/jchptf/crossword/fill/SilverCover.png changed to SilverCover.ffbb71f2.png
+✔ client/dist/images/jchptf/crossword/fill/altPath.png changed to altPath.27ffc38f.png
+✔ client/dist/images/jchptf/crossword/fill/altPath2.png changed to altPath2.5b5f7764.png
+✔ client/dist/images/jchptf/crossword/fill/brite1.png changed to brite1.d79da49b.png
+✔ client/dist/images/jchptf/crossword/fill/briteblue.png changed to briteblue.ec192226.png
+✔ client/dist/images/jchptf/crossword/fill/cornsilk.png changed to cornsilk.566364ce.png
+✔ client/dist/images/jchptf/crossword/fill/darkGrey.png changed to darkGrey.f31cd249.png
+✔ client/dist/images/jchptf/crossword/fill/golden.png changed to golden.22942ea5.png
+✔ client/dist/images/jchptf/crossword/fill/imageSrc.png changed to imageSrc.47fbed79.png
+✔ client/dist/images/jchptf/crossword/fill/lightGrey.png changed to lightGrey.aeb54a2f.png
+✔ client/dist/images/jchptf/crossword/fill/locked.png changed to locked.a2c760e6.png
+✔ client/dist/images/jchptf/crossword/fill/pink1.png changed to pink1.7823e85c.png
+✔ client/dist/images/jchptf/crossword/fill/pink2.png changed to pink2.85c5e5b6.png
+✔ client/dist/images/jchptf/crossword/fill/scratched.png changed to scratched.31092940.png
+✔ client/dist/images/jchptf/crossword/fill/selected1.png changed to selected1.12de1fd3.png
+✔ client/dist/images/jchptf/crossword/gval/A.png changed to A.1d7ef07b.png
+✔ client/dist/images/jchptf/crossword/gval/B.png changed to B.d3c5d4b6.png
+✔ client/dist/images/jchptf/crossword/gval/C.png changed to C.dacbb6c8.png
+✔ client/dist/images/jchptf/crossword/gval/D.png changed to D.d1fd7c40.png
+✔ client/dist/images/jchptf/crossword/gval/E.png changed to E.0caf867f.png
+✔ client/dist/images/jchptf/crossword/gval/F.png changed to F.53c573b5.png
+✔ client/dist/images/jchptf/crossword/gval/G.png changed to G.28a28674.png
+✔ client/dist/images/jchptf/crossword/gval/H.png changed to H.97709074.png
+✔ client/dist/images/jchptf/crossword/gval/I.png changed to I.b379b51c.png
+✔ client/dist/images/jchptf/crossword/gval/J.png changed to J.5638086a.png
+✔ client/dist/images/jchptf/crossword/gval/K.png changed to K.dfc13a4b.png
+✔ client/dist/images/jchptf/crossword/gval/L.png changed to L.d278d4ea.png
+✔ client/dist/images/jchptf/crossword/gval/M.png changed to M.1b331515.png
+✔ client/dist/images/jchptf/crossword/gval/N.png changed to N.fbd652fd.png
+✔ client/dist/images/jchptf/crossword/gval/O.png changed to O.0e9947bf.png
+✔ client/dist/images/jchptf/crossword/gval/P.png changed to P.c61b4b86.png
+✔ client/dist/images/jchptf/crossword/gval/Q.png changed to Q.f771d5ae.png
+✔ client/dist/images/jchptf/crossword/gval/R.png changed to R.249fa1e6.png
+✔ client/dist/images/jchptf/crossword/gval/S.png changed to S.37faa1c0.png
+✔ client/dist/images/jchptf/crossword/gval/T.png changed to T.c92ffeff.png
+✔ client/dist/images/jchptf/crossword/gval/U.png changed to U.20330708.png
+✔ client/dist/images/jchptf/crossword/gval/V.png changed to V.8bdface5.png
+✔ client/dist/images/jchptf/crossword/gval/W.png changed to W.9fc38a7f.png
+✔ client/dist/images/jchptf/crossword/gval/X.png changed to X.b723c5a2.png
+✔ client/dist/images/jchptf/crossword/gval/Y.png changed to Y.b22dd6bf.png
+✔ client/dist/images/jchptf/crossword/gval/Z.png changed to Z.ed51c254.png
+✔ client/dist/images/jchptf/crossword/val/10.png changed to 10.e93796d2.png
+✔ client/dist/images/jchptf/crossword/val/30.png changed to 30.d11c8ab7.png
+✔ client/dist/images/jchptf/crossword/val/4.png changed to 4.d24152d5.png
+✔ client/dist/images/jchptf/crossword/val/5.png changed to 5.01a65dd4.png
+✔ client/dist/images/jchptf/crossword/val/A.png changed to A.39cf2517.png
+✔ client/dist/images/jchptf/crossword/val/B.png changed to B.eb46f4fc.png
+✔ client/dist/images/jchptf/crossword/val/C.png changed to C.04b9f463.png
+✔ client/dist/images/jchptf/crossword/val/D.png changed to D.b2c8c4b5.png
+✔ client/dist/images/jchptf/crossword/val/E.png changed to E.34595fc4.png
+✔ client/dist/images/jchptf/crossword/val/F.png changed to F.5a1dc220.png
+✔ client/dist/images/jchptf/crossword/val/G.png changed to G.bdabff08.png
+✔ client/dist/images/jchptf/crossword/val/H.png changed to H.59a66507.png
+✔ client/dist/images/jchptf/crossword/val/I.png changed to I.f9bafda9.png
+✔ client/dist/images/jchptf/crossword/val/J.png changed to J.c41ca95a.png
+✔ client/dist/images/jchptf/crossword/val/K.png changed to K.dd1b866b.png
+✔ client/dist/images/jchptf/crossword/val/L.png changed to L.14804c8e.png
+✔ client/dist/images/jchptf/crossword/val/M.png changed to M.cca39400.png
+✔ client/dist/images/jchptf/crossword/val/N.png changed to N.5c9ee2f4.png
+✔ client/dist/images/jchptf/crossword/val/O.png changed to O.29d64ef6.png
+✔ client/dist/images/jchptf/crossword/val/P.png changed to P.4cf55b11.png
+✔ client/dist/images/jchptf/crossword/val/Q.png changed to Q.3c3ebfaf.png
+✔ client/dist/images/jchptf/crossword/val/R.png changed to R.ff9db90d.png
+✔ client/dist/images/jchptf/crossword/val/S.png changed to S.8e7dbdf3.png
+✔ client/dist/images/jchptf/crossword/val/T.png changed to T.06330f35.png
+✔ client/dist/images/jchptf/crossword/val/U.png changed to U.158383b5.png
+✔ client/dist/images/jchptf/crossword/val/V.png changed to V.7ce337c0.png
+✔ client/dist/images/jchptf/crossword/val/W.png changed to W.145d7d2a.png
+✔ client/dist/images/jchptf/crossword/val/X.png changed to X.07bc166f.png
+✔ client/dist/images/jchptf/crossword/val/Y.png changed to Y.39ddbb59.png
+✔ client/dist/images/jchptf/crossword/val/Z.png changed to Z.d45e3b8e.png
+✔ client/dist/images/jchptf/crossword/val/blank.png changed to blank.a1c932b0.png
+✔ client/dist/images/jchptf/crossword/val/qm.png changed to qm.fcc01291.png
+✔ client/dist/images/jchptf/crossword/val/unk.png changed to unk.0a800f7a.png
+Revved 108 files
+
+Running "usemin" task
+
+Running "usemin:html" (usemin) task
+Verifying property usemin.html exists in config...OK
+Files: client/dist/index.html, client/dist/views/changes.html, client/dist/views/jchptf/crossword/result/altPayoutReport.html, client/dist/views/jchptf/crossword/result/payoutItem.html, client/dist/views/jchptf/crossword/result/payoutReport.html, client/dist/views/jchptf/crossword/result/progressItem.html, client/dist/views/jchptf/crossword/result/progressReport.html, client/dist/views/jchptf/crossword/ticket/bonusValue.html, client/dist/views/jchptf/crossword/ticket/bonusWordCell.html, client/dist/views/jchptf/crossword/ticket/bonusWordGrid.html, client/dist/views/jchptf/crossword/ticket/crosswordCell.html, client/dist/views/jchptf/crossword/ticket/crosswordGrid.html, client/dist/views/jchptf/crossword/ticket/view.html, client/dist/views/jchptf/crossword/ticket/xwTicket.html, client/dist/views/jchptf/crossword/ticket/yourLettersCell.html, client/dist/views/jchptf/crossword/ticket/yourLettersGrid.html, client/dist/views/jchptf/home/view.html, client/dist/views/jchptf/poker/testGridOne.html, client/dist/views/jchptf/poker/view.html, client/dist/views/jchptf/uiTools/navBar/jchNavbar.html, client/dist/views/login.html, client/dist/views/register.html, client/dist/views/todos.html, client/dist/views/user.html, client/dist/views/welcome.html -> html
+Options: type="html", assetsDirs=["client/dist/styles/fonts/","client/dist/fonts/","client/dist/images/"], patterns={"js":[[{},"Replacing reference to card image file"],[{},"Replacing border highlight image file"],[{},"Replacing gval letter file image file"],[{},"Replacing val letter image file"]]}
+Processing as HTML - client/dist/index.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/index.html...OK
+Processing as HTML - client/dist/views/changes.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/changes.html...OK
+Processing as HTML - client/dist/views/jchptf/crossword/result/altPayoutReport.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/crossword/result/altPayoutReport.html...OK
+Processing as HTML - client/dist/views/jchptf/crossword/result/payoutItem.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/crossword/result/payoutItem.html...OK
+Processing as HTML - client/dist/views/jchptf/crossword/result/payoutReport.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/crossword/result/payoutReport.html...OK
+Processing as HTML - client/dist/views/jchptf/crossword/result/progressItem.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/crossword/result/progressItem.html...OK
+Processing as HTML - client/dist/views/jchptf/crossword/result/progressReport.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/crossword/result/progressReport.html...OK
+Processing as HTML - client/dist/views/jchptf/crossword/ticket/bonusValue.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/crossword/ticket/bonusValue.html...OK
+Processing as HTML - client/dist/views/jchptf/crossword/ticket/bonusWordCell.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/crossword/ticket/bonusWordCell.html...OK
+Processing as HTML - client/dist/views/jchptf/crossword/ticket/bonusWordGrid.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/crossword/ticket/bonusWordGrid.html...OK
+Processing as HTML - client/dist/views/jchptf/crossword/ticket/crosswordCell.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/crossword/ticket/crosswordCell.html...OK
+Processing as HTML - client/dist/views/jchptf/crossword/ticket/crosswordGrid.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/crossword/ticket/crosswordGrid.html...OK
+Processing as HTML - client/dist/views/jchptf/crossword/ticket/view.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/crossword/ticket/view.html...OK
+Processing as HTML - client/dist/views/jchptf/crossword/ticket/xwTicket.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/crossword/ticket/xwTicket.html...OK
+Processing as HTML - client/dist/views/jchptf/crossword/ticket/yourLettersCell.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/crossword/ticket/yourLettersCell.html...OK
+Processing as HTML - client/dist/views/jchptf/crossword/ticket/yourLettersGrid.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/crossword/ticket/yourLettersGrid.html...OK
+Processing as HTML - client/dist/views/jchptf/home/view.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/home/view.html...OK
+Processing as HTML - client/dist/views/jchptf/poker/testGridOne.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/poker/testGridOne.html...OK
+Processing as HTML - client/dist/views/jchptf/poker/view.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/poker/view.html...OK
+Processing as HTML - client/dist/views/jchptf/uiTools/navBar/jchNavbar.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/jchptf/uiTools/navBar/jchNavbar.html...OK
+Processing as HTML - client/dist/views/login.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/login.html...OK
+Processing as HTML - client/dist/views/register.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/register.html...OK
+Processing as HTML - client/dist/views/todos.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/todos.html...OK
+Processing as HTML - client/dist/views/user.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/user.html...OK
+Processing as HTML - client/dist/views/welcome.html
+Update the HTML to reference our concat/min/revved script files
+Update the HTML with the new css filenames
+Update the HTML with the new img filenames
+Update the HTML with the new video filenames
+Update the HTML with the new poster filenames
+Update the HTML with the new source filenames
+Update the HTML with data-main tags
+Update the HTML with data-* tags
+Update the HTML with background imgs, case there is some inline style
+Update the HTML with anchors images
+Update the HTML with reference in input
+Update the HTML with the new img filenames in meta tags
+Update the HTML with the new object filenames
+Update the HTML with the new image filenames for svg xlink:href links
+Update the HTML with the new image filenames for src links
+Update the HTML with the new image filenames for srcset links
+Update the HTML within the <use> tag when referencing an external url with svg sprites as in svg4everybody
+Writing client/dist/views/welcome.html...OK
+Replaced 25 references to assets
+
+Running "usemin:css" (usemin) task
+Verifying property usemin.css exists in config...OK
+Files: client/dist/styles/main.css, client/dist/styles/vendor.css -> css
+Options: type="css", assetsDirs=["client/dist/styles/fonts/","client/dist/fonts/","client/dist/images/"], patterns={"js":[[{},"Replacing reference to card image file"],[{},"Replacing border highlight image file"],[{},"Replacing gval letter file image file"],[{},"Replacing val letter image file"]]}
+Processing as CSS - client/dist/styles/main.css
+Update the CSS to reference our revved images
+Writing client/dist/styles/main.css...OK
+Processing as CSS - client/dist/styles/vendor.css
+Update the CSS to reference our revved images
+Writing client/dist/styles/vendor.css...OK
+Replaced 2 references to assets
+
+Running "usemin:js" (usemin) task
+Verifying property usemin.js exists in config...OK
+Files: client/dist/scripts/scripts.js, client/dist/scripts/vendor.js -> js
+Options: type="js", assetsDirs=["client/dist/styles/fonts/","client/dist/fonts/","client/dist/images/"], patterns={"js":[[{},"Replacing reference to card image file"],[{},"Replacing border highlight image file"],[{},"Replacing gval letter file image file"],[{},"Replacing val letter image file"]]}
+Processing as JS - client/dist/scripts/scripts.js
+Replacing reference to card image file
+Replacing border highlight image file
+Replacing gval letter file image file
+Replacing val letter image file
+Writing client/dist/scripts/scripts.js...OK
+Processing as JS - client/dist/scripts/vendor.js
+Replacing reference to card image file
+Replacing border highlight image file
+Replacing gval letter file image file
+Replacing val letter image file
+Writing client/dist/scripts/vendor.js...OK
+Replaced 2 references to assets
+
+Done, without errors.
