@@ -130,12 +130,16 @@ env-install:
  - 'shell:npm-install'
  - 'shell:bower-install'
  - 'shell:protractor-install'
+ - 'shell:imagemin-jpg'
+ - 'shell:imagemin-png'
 
 env-update:
  - 'lint-for-build'
  - 'shell:npm-install'
  - 'shell:bower-update'
  - 'shell:protractor-update'
+ - 'shell:imagemin-jpg'
+ - 'shell:imagemin-png'
 
 env-clean:
  - 'clean:build'
@@ -146,8 +150,7 @@ env-clean:
 ##
 
 default:
- - 'htmlbuild:dev'
-# - 'build'
+ - 'build'
 
 
 build:

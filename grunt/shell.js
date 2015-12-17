@@ -19,6 +19,22 @@ module.exports = function shell(/*grunt, options*/) {
     'npm-install': {
       command: 'npm install'
     },
+    'imagemin-jpg': {
+      command: 'npm run postinstall',
+      options: {
+        execOptions: {
+          cwd: 'node_modules/jpegtran-bin'
+        }
+      }
+    },
+    'imagemin-png': {
+      command: 'npm run postinstall',
+      options: {
+        execOptions: {
+          cwd: 'node_modules/optipng-bin'
+        }
+      }
+    },
     examples: {
       command: 'node generate-examples.js'
     }

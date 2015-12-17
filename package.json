@@ -56,7 +56,7 @@
   "scripts": {
     "preinstall": "bower install",
     "postinstall": "echo create db for postinstall",
-    "build": "grunt build-fast --stack",
+    "build": "grunt build --stack",
     "pretest": "echo init db for pretest",
     "test": "grunt test",
     "start": "grunt serve"
@@ -117,6 +117,7 @@
     "grunt-wiredep": "^2.0.0",
     "imagemin": "^4.0.0",
     "jasmine-core": "^2.3.0",
+    "jpegtran-bin": "^3.0.6",
     "jshint-stylish": "^2.1.0",
     "karma": "^0.13.15",
     "karma-chrome-launcher": "^0.2.1",
@@ -128,6 +129,7 @@
     "loopback-swagger": "^2.2.3",
     "loopback-testing": "^1.2.0",
     "open": "^0.0.5",
+    "optipng-bin": "^3.0.4",
     "protractor": "^3.0.0",
     "remapify": "^2.1.0",
     "shelljs": "^0.5.3",
