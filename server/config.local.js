@@ -15,7 +15,5 @@ module.exports = {
 
   // TODO: For dev, the 'build/dev/client' should come from grunt-defined enviornment!
   // NOTE: For production, we can rely on an assumed directory structure created by the build.
-  indexFile: isDevEnv ? path.resolve(process.cwd(), './build/dev/client/index.html') : path.resolve(
-    __dirname, '../../client/index.html'
-  )
+  indexFile: isDevEnv ? 'build/dev/client/index.html' : 'build/dist/client/index.711e378d.html'
 };

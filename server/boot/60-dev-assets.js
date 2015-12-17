@@ -8,8 +8,14 @@
     // TODO: Use a config property that defines whether to serve assets or to run as API-only
     //       and use same to help loopback-angular-sdk locate apiUrlRoot.
     var path = require('path');
-    var assetDir = path.dirname(app.get('indexFile'));
-    console.log( 'Assets are in ', assetDir );
+    var indexFile = app.get('indexFile');
+    console.log('** Index file is at ' + indexFile);
+    var assetDir = path.dirname(indexFile);
+    console.log( '** Assets are in ', assetDir );
     app.use( app.loopback.static(assetDir) );
+    app.use( '/', app.loopback.static(indexFile);
+    app.use( '/index.html', app.loopback.static(indexFile);
+
+    console.log('boot 60 routes set');
   };
 }).call();
