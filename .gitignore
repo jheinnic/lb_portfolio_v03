@@ -23,7 +23,7 @@ client/vendor
 
 # A kitchen sink for project-associated files that are local notes not to be
 # committed to Git.
-junk
+/junk
 
 # Some unused subdirs
 client/ngapp/images/jchptf/bootstrap
