@@ -1,0 +1,32 @@
+{
+  "name": "TripSpotTicket",
+  "base": "XwTicket",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Timestamped": {},
+    "BonusWord": {
+      "yourLettersCount": 18,
+      "bonusWordLength": 5,
+      "prizeValues": [
+        0,
+        3,
+        4,
+        5,
+        10,
+        30
+      ]
+    },
+    "FastSpot": {
+      "winningValue": 20
+    }
+  },
+  "trackChanges": true,
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,57 @@
+[33m874634b[m HEAD@{0}: checkout: moving from loopback to lbFix-temp
+[33mccef6af[m HEAD@{1}: commit: Not sure if this is a keeper file or a temporary script yet
+[33mabfa0bc[m HEAD@{2}: commit: Pushing a premature commit so I can sync this work in a minute... USing this tag to identify and handle later
+[33ma6303a4[m HEAD@{3}: commit: Polishing up some loose ends from the NAv bar to have it cooperate with HTML5 mode. The bar will need to have its presentation UX twiddled not too far down the road, so good to get this out of the way.
+[33mb7f4f18[m HEAD@{4}: commit: Denmonstrating that it is now possible to have the client Javascript code base importing classes from the common components area. Wave a little flag for the win!
+[33maf5416b[m HEAD@{5}: commit: Got coffeify and remapify cooperating at last!
+[33m77af4df[m HEAD@{6}: commit: Improved Live Relooad functionality
+[33m7a8eacf[m HEAD@{7}: commit: Removing some Bootstrap files that should either come from the distribution resources or be generated client side. Setting up to use Bootstrap's intended configuration options to establish a site color theme at minimum
+[33md956fa9[m HEAD@{8}: commit: A few Crossword filess missed with the last checkin.
+[33mcd5d584[m HEAD@{9}: commit: Moving the Crosswords package content out of cold storage, and finding a home under common/components for metadata objects with pootentisl to serve as semantic adapters for Loopback objects.
+[33m045d4f8[m HEAD@{10}: commit: Fixed the build script so it works for both dist and dev and in neither case has empty Browseify or Usemin files.
+[33mb69239a[m HEAD@{11}: commit: Augmented the pre-existing intended catchall for Angular HTML5 routing with an additional middleware directive that works for the refresh page scenarios.
+[33mde61fc5[m HEAD@{12}: commit: Tuned datasources for MongoDB to where my dev installation is.
+[33mdc5e3b2[m HEAD@{13}: commit: Created draft models for Crosswords input phase artifacts and folders/documents. Added an auto-upgrade boot script. Modified the change-tracking script to detect what models are tracking changes.
+[33ma15914d[m HEAD@{14}: commit: Reacted to warning messages about identity property of existing todo/user models. Didn't seem to make a difference either way...
+[33m81afc6e[m HEAD@{15}: commit: Tuned a note-to-self comment in lbclient build script.
+[33mf3b933f[m HEAD@{16}: commit: Fixed a namespacing oddity on the root application package, and updated index.html to work in the project structure (usemin artifacts were coming back empty)
+[33mfdabd74[m HEAD@{17}: commit: Restored jchptf.tools.keyboard, jchptf.tools.navbar, jchptf.tools.iconPanel, jchptf.site.navigation, and jchptf.site.notification
+[33mf342e1a[m HEAD@{18}: commit: Set aside previous asset directory for scripts. Temporary/virtual reset.
+[33m6de7b45[m HEAD@{19}: commit: About to step back and rethink the Repository concept. Need to explore how this is going to interface with Loopback. Checkpoint where things are in case I abort and come back where I was.
+[33mde3ab14[m HEAD@{20}: commit: Remainder off the document model support refactoring that did not accidentally get comitted with one of the last few checkins.
+[33m4d08901[m HEAD@{21}: commit: Main app module refactoring for Browserify build change
+[33me1af72f[m HEAD@{22}: commit: This utility class belongs with the build system changes.
+[33mc6f10a3[m HEAD@{23}: commit: Refactored build system for Browserify based build, Less, Noidemon, and Coffee.
+[33meca6ab3[m HEAD@{24}: commit: Updated dependency lists to prune currently unused things and add a few new dependcies + upgrades
+[33me611852[m HEAD@{25}: commit: Miscellaneous tools, notification, and unimplemnted Poker module refactoring for modular loading through Browserify
+[33mee5eb00[m HEAD@{26}: commit: Crossword module partial refactoring to adapt to Document model
+[33m2d2e29b[m HEAD@{27}: commit: Putting back LB routes.json to defer fixing a build dependency.
+[33m70cf401[m HEAD@{28}: commit: Authentication and Login milestone progress
+[33m5acb28f[m HEAD@{29}: commit: NAvigation module progres towards milestone
+[33md84f5f0[m HEAD@{30}: commit: Shuffling files around to form better package boundaries, put views in their namespace,and move aside original lbapp scripts
+[33m91fb5df[m HEAD@{31}: commit: A handful of additional CSS/CoffeeScript fixes from when I noticed the inter wasn't running, fixed it, and then found a chunk of bugs to resolve.
+[33mbae722b[m HEAD@{32}: commit: Restoring more features
+[33md1c452c[m HEAD@{33}: commit: Fixed nodelint and found a chain of syntax issues to correct as well as file decomposition (legacy code base).
+[33md78a03b[m HEAD@{34}: commit: Disabling build of scrapped model attempts kept only for remporary reference.
+[33m60f3cf1[m HEAD@{35}: commit: Planning to experiment with "happened" event bus.
+[33m544e3a5[m HEAD@{36}: commit: Previopusly moved bundle.js to build into staging area.
+[33m64256b1[m HEAD@{37}: commit: Getting development index.html from staging area
+[33mdfa0982[m HEAD@{38}: commit: Using mongoDB in development too.
+[33m416cf6c[m HEAD@{39}: commit: Compensating for moving bower_components to /client/ngapp/vendor by routing /vendor there in a dev-assets boot script
+[33m00efd40[m HEAD@{40}: commit: Temporarily removing angular-based route configuration on server b/c this needs to be reworked with ui.router.
+[33m76c88d7[m HEAD@{41}: commit: Adjusting some HTML template files to use their new image path. This isn't all of them.
+[33m50489a0[m HEAD@{42}: commit: Tuning editorconfig to standardize on a smaller indent size of two spaces.
+[33m612dd61[m HEAD@{43}: commit: Coffee version of IdentityContext
+[33m5224bd8[m HEAD@{44}: commit: Client-side version of common/components/enum.js. Likely need this duplicated for now until browserification without LB client is figured out.
+[33m9103703[m HEAD@{45}: commit: Client side changes to adjust package names, remove syntax errors, and generally get compilable. Far far from functional tho'.
+[33mb4dcb37[m HEAD@{46}: commit: MAking same changes to common/components/enum.js as done in client/ngapp/enum.js
+[33m14f0cd9[m HEAD@{47}: commit: Server change, updating res.sendfile to res.sendFile as per console error log request.
+[33mac66122[m HEAD@{48}: commit: Fixing build scripts. I think this last one rounds it off.
+[33m2312722[m HEAD@{49}: commit: More build step refinements
+[33m3dd35fd[m HEAD@{50}: commit: HAve the build script running, but there are a few things not quite working right. But several things that are
+[33m59a03f8[m HEAD@{51}: commit: Migrating reusable widgets into new project structure
+[33mba75506[m HEAD@{52}: commit: Migrating the UI Feature components to new locations in the Loopback-inspired project structure
+[33m874634b[m HEAD@{53}: merge lbFix-temp: Fast-forward
+[33m5f76e2b[m HEAD@{54}: checkout: moving from lbFix-temp to loopback
+[33m874634b[m HEAD@{55}: checkout: moving from loopback to lbFix-temp
+[33m5f76e2b[m 

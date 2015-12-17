@@ -1,0 +1,24 @@
+{
+  "name": "PlayResult",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "yourLetters": {
+      "type": "string",
+      "required": true
+    },
+    "prizeOdds": {
+      "type": [
+        "number"
+      ],
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

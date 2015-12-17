@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$/client" libraries="{Bower Dependencies, HTML5 / EcmaScript 5, Node.js Globals, Node.js v0.10.38 Core Modules}" />
+    <file url="file://$PROJECT_DIR$/client/vendor" libraries="{Bower Dependencies, HTML5 / EcmaScript 5}" />
+    <file url="file://$PROJECT_DIR$/common/models" libraries="{HTML5 / EcmaScript 5, Node.js Globals, Node.js v0.10.38 Core Modules, lb_express common JS}" />
+    <file url="file://$PROJECT_DIR$/global-config.js" libraries="{HTML, HTML5 / EcmaScript 5, Node.js Globals, Node.js v0.10.38 Core Modules}" />
+    <file url="file://$PROJECT_DIR$/grunt" libraries="{HTML5 / EcmaScript 5, Installed Global node_modules, Node.js Globals, Node.js v0.10.38 Core Modules}" />
+    <file url="file://$PROJECT_DIR$/node_modules" libraries="{HTML5 / EcmaScript 5, Node.js Globals, Node.js v0.10.38 Core Modules, lb_express_sandbox node_modules}" />
+    <file url="file://$PROJECT_DIR$/server" libraries="{HTML5 / EcmaScript 5, Node.js Globals, Node.js v0.10.38 Core Modules, lb_express common JS, lb_express server JS, lb_express_sandbox node_modules}" />
+    <file url="file://$PROJECT_DIR$/test" libraries="{HTML5 / EcmaScript 5, Node.js Globals, Node.js v0.10.38 Core Modules, lb_express common JS, lb_express common tests, lb_express server JS, lb_express server tests, lb_express_sandbox node_modules}" />
+    <file url="file://$PROJECT_DIR$/test/client" libraries="{Bower Dependencies, HTML5 / EcmaScript 5, Node.js Globals, Node.js v0.10.38 Core Modules, lb_express client JS, lb_express client tests, lb_express common JS, lb_express common tests}" />
+    <file url="file://$PROJECT_DIR$/test/common" libraries="{HTML5 / EcmaScript 5, Node.js Globals, Node.js v0.10.38 Core Modules, lb_express common JS, lb_express common tests}" />
+    <excludedPredefinedLibrary name="HTML" />
+    <excludedPredefinedLibrary name="HTML5 / EcmaScript 5" />
+  </component>
+</project>

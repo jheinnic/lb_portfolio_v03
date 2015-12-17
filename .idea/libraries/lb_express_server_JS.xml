@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="lb_express server JS" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/server/routes" />
+        <item url="file://$PROJECT_DIR$/server/boot" />
+        <item url="file://$PROJECT_DIR$/server/lib" />
+        <item url="file://$PROJECT_DIR$/server" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/refJunk/server/routes" />
+      <root url="file://$PROJECT_DIR$/server/boot" />
+      <root url="file://$PROJECT_DIR$/refJunk/server/lib" />
+      <root url="file://$PROJECT_DIR$/server" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

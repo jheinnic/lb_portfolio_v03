@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="lb_express common JS" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/common/models" />
+        <item url="file://$PROJECT_DIR$/common/components" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/common/models" />
+      <root url="file://$PROJECT_DIR$/common/components" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,20 @@
+{
+  "db": {
+    "port": 27017,
+    "database": "portfolio",
+    "password": "abcd1234",
+    "name": "db",
+    "connector": "mongodb",
+    "hostname": "localhost",
+    "user": "jheinnic"
+  },
+  "memdb": {
+    "name": "memdb",
+    "connector": "Memory",
+    "file": "modelCache.json"
+  },
+  "transient": {
+    "name": "transient",
+    "connector": "transient"
+  }
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="lb_express_sandbox node_modules" level="project" />
+    <orderEntry type="library" name="Node.js v0.10.38 Core Modules" level="application" />
+    <orderEntry type="library" name="lb_express server JS" level="project" />
+    <orderEntry type="library" name="lb_express common JS" level="project" />
+    <orderEntry type="library" name="Bower Dependencies" level="project" />
+    <orderEntry type="library" name="lb_express client JS" level="project" />
+    <orderEntry type="library" name="lb_express common tests" level="project" />
+    <orderEntry type="library" name="lb_express client tests" level="project" />
+    <orderEntry type="library" name="lb_express server tests" level="project" />
+    <orderEntry type="library" name="Installed Global node_modules" level="project" />
+  </component>
+</module>

@@ -1,0 +1,326 @@
+##
+# One-time full test suite targets
+##
+
+test:
+ - 'lint-test'
+ - 'update-env'
+ - 'test-unit'
+ - 'test-e2e'
+
+
+##
+# One-time unit test targets
+##
+
+test-unit:
+ - 'lint-test'
+ - 'update-env'
+ - 'karma:unit'
+
+test-unit-chrome:
+ - 'lint-test'
+ - 'update-env'
+ - 'karma:unit-chrome'
+
+
+##
+# One-time unit test coverage targets
+##
+
+test-coverage:
+ - 'lint-test'
+ - 'update-env'
+ - 'karma:unit-coverage'
+
+coverage:
+ - 'test-coverage'
+ - 'open:coverage'
+ - 'connect:coverage'
+
+
+##
+# One-time end-to-end test targets
+##
+
+test-e2e:
+ - 'lint-test'
+ - 'update-env'
+ - 'connect:test'
+ - 'protractor:run'
+
+test-e2e-firefox:
+ - 'lint-test'
+ - 'update-env'
+ - 'connect:test'
+ - 'protractor:firefox'
+
+
+##
+# One-time lint targets
+##
+
+lint-build:
+ - 'jshint:build'
+ - 'coffeelint:build'
+
+lint-source:
+ - 'jshint:source'
+ - 'coffeelint:source'
+
+lint-test:
+ - 'jshint:test'
+ - 'coffeelint:test'
+
+lint-for-build:
+ - 'lint-source'
+ - 'lint-build'
+
+
+##
+# Continuous testing targets for developers
+##
+
+spec: # continuous running specs
+ - 'build-dev'
+ - 'concurrent:unit'
+
+spec-chrome:
+ - 'build-dev'
+ - 'concurrent:chrome'
+
+spec-mocha:
+ - 'build-dev'
+ - 'concurrent:unit-mocha'
+
+
+##
+# Continuous targets for developers (TODO: Watch target subsets not yet implemented!)
+##
+
+develop:
+ - 'build-dev'
+ - 'shell:node-inspector-install'
+ - 'concurrent:watchServe'
+
+develop-fast:
+ - 'build-dev-fast'
+ - 'shell:node-inspector-install'
+ - 'concurrent:watchServe'
+
+develop-serve:
+ - 'shell:node-inspector-install'
+ - 'concurrent:watchServe'
+
+dev-connect:
+ - 'connect:dev'
+ - 'open:dev'
+ - 'watch:source'
+
+dev-connect-chrome:
+ - 'connect:dev'
+ - 'open:dev'
+ - 'watch:chrome'
+
+
+##
+# One-time toolchain targets
+##
+
+# Node-inspector breaks slc build.  Uninstall it in general and make a special
+# case for the dependent 'developer-*' targets to reinstall it there only.
+env-install:
+ - 'lint-for-build'
+ - 'clean:dependencies'
+ - 'shell:npm-install'
+ - 'shell:bower-install'
+ - 'shell:protractor-install'
+ - 'shell:imagemin-jpg'
+ - 'shell:imagemin-png'
+ - 'shell:node-inspector-remove'
+
+env-update:
+ - 'lint-for-build'
+ - 'shell:npm-install'
+ - 'shell:bower-update'
+ - 'shell:protractor-update'
+ - 'shell:imagemin-jpg'
+ - 'shell:imagemin-png'
+ - 'shell:node-inspector-remove'
+
+env-clean:
+ - 'clean:build'
+ - 'mkdir'
+
+##
+# One-time build targets
+##
+
+default:
+ - 'build'
+
+
+build:
+ - 'env-update'
+ - 'build-fast'
+
+build-fast:
+ - 'env-clean'
+ - 'make-dev-build'
+ - 'cont-dist-build'
+
+
+build-dev:
+ - 'env-update'
+ - 'build-dev-fast'
+
+build-dev-fast:
+ - 'env-clean'
+ - 'make-dev-build'
+
+
+build-dist:
+ - 'env-update'
+ - 'build-dist-fast'
+
+build-dist-fast:
+ - 'env-clean'
+ - 'make-dist-build'
+
+
+build-both:
+ - 'env-update'
+ - 'build-both-fast'
+
+build-both-fast:
+ - 'env-clean'
+ - 'make-dist-build'
+ - 'make-dev-build'
+
+build-both-slow:
+ - 'env-install'
+ - 'build-both-fast'
+
+
+# NOTE: copy:build must precede jade:build to ensure index.html or index.jade remains optional.
+# NOTE: copy:build must precede autoprefixer:build to ensure less preprocessing is optional.
+make-dev-build:
+ - 'copy:dev'
+ - 'less:build'
+ - 'jade:build'
+ - 'autoprefixer:build'
+ - 'wiredep:build'
+ - 'fixIndexHtml'
+ - 'htmlbuild:dev'
+ - 'newer:copy:vendor'   # Try using middleware config?
+ - 'bundle-client'
+
+# NOTE: This build target is only valid after having evaluated 'dev-build'.  For CSS, it reuses
+#       less and autoprefix preprocessor outputs.  For HTML, it reuses jade output for templates,
+#       but rebuilds index.html from source.  It copies the Browserify bundle from the dev build,
+#       and all other files from source, then performs minification.
+cont-dist-build:
+ - 'copy:dist'
+ - 'htmlbuild:dist'
+ - 'minify'
+
+# NOTE: This will still populates some content under build/dev, but it will not include all
+#       files produced during a real dev build.  Optimizable image assets are populated as output
+#       of their appropriate optimizer from source (imagemin and svgmin), and non-optimizable
+#       images and fonts are only copied once from source to dist (copy:dist).  HTML processing for
+#       index.html, is performed once for dist (copy:dist, jade:dist, wiredep:dist, and htmlbuild:dist),
+#       but skipped for dev (Same plugins with :dev subtargets).
+# NOTE: copy:dist must precede jade:dist to ensure index.html or index.jade remains optional.
+# NOTE: copy:dist must precede autoprefixer:dist to ensure less preprocessing is optional.
+# make-dist-build:
+#  - 'less:build'
+#  - 'jade:build'
+#  - 'fixIndexHtml'
+#  - 'autoprefixer:build'
+#  - 'htmlbuild:dist'
+#  - 'wiredep:build'
+#  - 'bundle-client'
+#  - 'copy:dist'
+#  - 'minify'
+
+# NOTE: concat, uglify, and cssmin use the generated target populated by useminPrepare:index.
+minify:
+ - 'useminPrepare'
+ - 'concat'
+ - 'uglify'
+ - 'cssmin'
+ - 'svgmin'
+ - 'imagemin'
+ - 'htmlmin'
+ - 'filerev'
+ - 'usemin'
+
+
+##
+# Dependency environment bootstrapping tasks
+##
+
+##
+# Future/TBD
+##
+
+travis:
+ - 'shell:bower-install'
+ - 'dev-build'
+ - 'test-unit'
+
+bump-@:
+ - 'changelog:patch'
+ - 'build-release'
+ - 'bump-only'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-minor:
+ - 'changelog:minor'
+ - 'build-release'
+ - 'bump-only:minor'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-major:
+ - 'changelog:major'
+ - 'build-release'
+ - 'bump-only:major'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-pre:
+ - 'changelog:prerelease'
+ - 'build-release'
+ - 'bump-only:prerelease'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-prepatch:
+ - 'changelog:prepatch'
+ - 'build-release'
+ - 'bump-only:prepatch'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-preminor:
+ - 'changelog:preminor'
+ - 'build-release'
+ - 'bump-only:preminor'
+ - 'graph'
+ - 'bump-commit'
+
+bump-@-premajor:
+ - 'changelog:premajor'
+ - 'build-release'
+ - 'bump-only:premajor'
+ - 'graph'
+ - 'bump-commit'
+
+examples:
+ - 'shell:examples'
+ - 'concat:examples'
+
+graph:
+ - 'angular_architecture_graph'

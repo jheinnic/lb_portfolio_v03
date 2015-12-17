@@ -1,0 +1,8 @@
+<component name="libraryTable">
+  <library name="lb_express common tests" type="javaScript">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/test/common" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

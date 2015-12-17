@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="jchptf.app">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!--
+  The base allows us to use relative links to resources even when
+  this page was served from non-root URL, e.g. '/my/todos'
+  -->
+    <base href="/">
+
+    <title>John Heinnickel's Portfolio Website</title>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css(client/dist) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../../.tmp/vendor/nvd3/build/nv.d3.css" />
+    <link rel="stylesheet" href="../../.tmp/vendor/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="../../.tmp/vendor/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="../../.tmp/vendor/angular-ui-grid/ui-grid.css" />
+    <link rel="stylesheet" href="../../.tmp/vendor/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../.tmp/vendor/angular-notify/dist/angular-notify.css" />
+    <link rel="stylesheet" href="../../.tmp/vendor/angular-tree-control/css/tree-control.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css(client/dist) styles/main.css -->
+    <!-- hbuild:style bundle -->
+    <link rel="stylesheet" href="styles/jchptf/app.css">
+    <link rel="stylesheet" href="styles/jchptf/crosswords/crosswords.css">
+    <link rel="stylesheet" href="styles/jchptf/home/home.css">
+    <link rel="stylesheet" href="styles/vendor/angular-csp.css">
+    <link rel="stylesheet" href="styles/todo.css">
+    <!-- /hbuild -->
+    <!-- endbuild -->
+</head>
+
+<body>
+    <div class="container">
+        <nav-bar></nav-bar>
+        <div ui-view="/"></div>
+        <div class="row">
+            <div class="span12">
+                <footer>
+                    <!--div ng-include="viewNavBar.html"></div-->
+                    <p>&copy; John C. Heinnickel, 2015</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!--[if lt IE 9]>
+<script src="vendor/es5-shim/es5-shim.js"></script>
+<script src="vendor/json3/lib/json3.js"></script>
+<![endif]-->
+
+    <script src="vendor/angular-nvd3/dist/angular-nvd3.min.js"></script>
+    <!-- build:js(client/dist) scripts/vendor.js -->
+    <script src="vendor/underscore/underscore.js"></script>
+    <!-- bower:js -->
+
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js(client/dist) scripts/scripts.js -->
+    <!-- hbuild:script bundle-->
+    <!-- /hbuild -->
+    <!-- endbuild -->
+
+    <!-- dbuild:remove -->
+    <script src="scripts/livereload.js"></script>
+    <!-- /dbuild -->
+</body>
+
+</html>

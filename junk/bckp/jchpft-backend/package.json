@@ -1,0 +1,24 @@
+{
+  "name": "express-sandbox",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "badstart": "export NODE_PATH=./controllers;\nexport NODE_ENV=development;\n./node_modules/.bin/nodemon server.js",
+    "start": "node_modules\\.bin\\nodemon server.js",
+    "test": "echo 'TBD for running tests'",
+    "install": "node_modules\\.bin\\bower install"
+  },
+  "dependencies": {
+    "mongodb": ">= 1.3.20",
+    "express": "3.4.6",
+    "jade": "0.35.0",
+    "cookie": "~0.1.1",
+    "less-middleware": "~0.1.15",
+    "coffee-middleware": "~0.2.1"
+  },
+  "devDependencies": {
+    "bower": "~1.3.1",
+    "nodemon": "1.2.0",
+    "requirejs": "~2.1.11"
+  }
+}

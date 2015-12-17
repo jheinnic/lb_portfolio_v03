@@ -124,6 +124,8 @@ dev-connect-chrome:
 # One-time toolchain targets
 ##
 
+# Node-inspector breaks slc build.  Uninstall it in general and make a special
+# case for the dependent 'developer-*' targets to reinstall it there only.
 env-install:
  - 'lint-for-build'
  - 'clean:dependencies'

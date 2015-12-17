@@ -1,0 +1,23 @@
+{
+  "name": "FiveXTicket",
+  "base": "XwTicket",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Timestamped": {},
+    "MultiSpot": {
+      "maxMultiplier": 5
+    },
+    "FastSpot": {
+      "winningValue": 20
+    }
+  },
+  "trackChanges": true,
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

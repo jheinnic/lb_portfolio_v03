@@ -1,0 +1,62 @@
+{
+  "name": "EditorModel",
+  "base": "Model",
+  "idInjection": false,
+  "options": {},
+  "properties": {
+    "id": {
+      "id": true,
+      "type": "string",
+      "defaultFn": "guid",
+      "required": true
+    },
+    "isCursorActive": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "cursorColumn": {
+      "type": "number",
+      "required": false,
+      "default": -1,
+      "min": -1,
+      "max": 10
+    },
+    "cursorRow": {
+      "type": "number",
+      "required": false,
+      "default": -1,
+      "min": -1,
+      "max": 10
+    },
+    "cellContents": {
+      "type": ["string"],
+      "required": true,
+      "length": 1
+    }
+  },
+  "validations": [],
+  "relations": {
+    "_sourceTicket": {
+      "type": "belongsTo",
+      "model": "XwTicket",
+      "property": "sourceTicket",
+      "properties": ["gridContent"],
+      "foreignKey": "sourceTicketId"
+    },
+    "_horizontalModel": {
+      "type": "embedsOne",
+      "model": "OrientationModel",
+      "property": "horizontalModel",
+      "foreignKey": "rowEditModelId"
+    },
+    "_verticalModel": {
+      "type": "embedsOne",
+      "model": "OrientationModel",
+      "property": "verticalModel",
+      "foreignKey": "colEditModelId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

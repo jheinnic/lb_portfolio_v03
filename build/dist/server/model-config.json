@@ -1,0 +1,70 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "Todo": {
+    "dataSource": "db"
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "XwTicket": {
+    "dataSource": "db",
+    "public": true
+  },
+  "FiveXTicket": {
+    "dataSource": "db",
+    "public": true
+  },
+  "TripSpotTicket": {
+    "dataSource": "db",
+    "public": true
+  },
+  "TripOnlyTicket": {
+    "dataSource": "db",
+    "public": true
+  },
+  "PlayResult": {
+    "dataSource": "transient",
+    "public": false
+  },
+  "EditorModel": {
+    "dataSource": "transient",
+    "public": false
+  },
+  "OrientationModel": {
+    "dataSource": "transient",
+    "public": false
+  },
+  "CellOrientation": {
+    "dataSource": "transient",
+    "public": false
+  },
+  "GridRegion": {
+    "dataSource": "transient",
+    "public": false
+  },
+  "GridWord": {
+    "dataSource": "transient",
+    "public": false
+  },
+  "GridShort": {
+    "dataSource": "transient",
+    "public": false
+  },
+  "GridBlocked": {
+    "dataSource": "transient",
+    "public": false
+  }
+}

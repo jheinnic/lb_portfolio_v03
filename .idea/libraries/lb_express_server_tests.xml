@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="lb_express server tests" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/server/test" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/test" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

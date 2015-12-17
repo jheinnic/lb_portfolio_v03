@@ -1,0 +1,291 @@
+{ app: 'client/ngapp',
+  vendor: 'client/ngapp/vendor',
+  dist: 'client/dist',
+  tempfiles: '.tmp' }
+Running "clean:dist" (clean) task
+>> 43 paths cleaned.
+
+Running "coffee:dist" (coffee) task
+>> 15 files created.
+>> 15 source map files created.
+
+Running "coffee:test" (coffee) task
+>> 1 files created.
+>> 1 source map files created.
+
+Running "jshint:dist" (jshint) task
+
+√ No problems
+
+
+Running "jshint:test" (jshint) task
+
+√ No problems
+
+
+Running "less:dist" (less) task
+File .tmp/styles/jchptf/app.less created
+File .tmp/styles/jchptf/crosswords/crosswords.less created
+File .tmp/styles/jchptf/home/home.less created
+
+Running "build-lbclient" task
+
+Running "build-config" task
+
+Running "wiredep:app" (wiredep) task
+
+Running "useminPrepare:html" (useminPrepare) task
+Configuration changed for concat, uglify, cssmin
+
+Running "concurrent:dist" (concurrent) task
+    
+{ app: 'client/ngapp',
+  vendor: 'client/ngapp/vendor',
+  dist: 'client/dist',
+  tempfiles: '.tmp' }
+Running "copy:styles" (copy) task
+Copied 2 files
+
+Done, without errors.
+    
+{ app: 'client/ngapp',
+  vendor: 'client/ngapp/vendor',
+  dist: 'client/dist',
+  tempfiles: '.tmp' }
+Running "svgmin:dist" (svgmin) task
+Total saved: 0 B
+
+Done, without errors.
+    
+{ app: 'client/ngapp',
+  vendor: 'client/ngapp/vendor',
+  dist: 'client/dist',
+  tempfiles: '.tmp' }
+Running "imagemin:dist" (imagemin) task
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/bootstrap/img/glyphicons-halflings.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/bootstrap/img/glyphicons-halflings-white.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/grid.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/htop.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/unit.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/hend.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/hmid.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/vend.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/vmid.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/vtop.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/Medium Grey.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/Scratch2.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/Scratch3.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/Scratch1.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/Scratch4.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/Scratch5.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/Scratch6.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/SilverCover.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/brite1.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/altPath.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/altPath2.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/briteblue.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/cornsilk.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/darkGrey.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/golden.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/lightGrey.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/imageSrc.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/locked.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/pink1.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/pink2.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/scratched.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/selected1.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/B.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/C.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/D.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/A.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/E.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/F.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/G.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/H.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/I.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/J.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/K.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/L.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/M.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/N.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/O.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/P.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/R.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/S.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/Q.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/T.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/U.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/V.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/W.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/X.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/Z.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/Y.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/10.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/30.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/4.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/5.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/A.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/B.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/D.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/C.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/E.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/G.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/F.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/H.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/J.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/I.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/K.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/L.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/M.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/O.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/N.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/P.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/Q.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/S.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/R.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/T.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/U.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/V.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/W.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/X.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/Z.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/blank.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/Y.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/qm.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/unk.png Used --force, continuing.
+Minified 108 images (saved 18.96 kB)
+
+Done, but with warnings.
+
+Running "autoprefixer:dist" (autoprefixer) task
+
+Running "concat:generated" (concat) task
+File .tmp\concat\scripts\vendor.js created.
+File .tmp\concat\scripts\scripts.js created.
+
+Running "ngAnnotate:dist" (ngAnnotate) task
+>> 2 files successfully generated.
+
+Running "copy:dist" (copy) task
+Copied 2 files
+
+Running "cdnify:dist" (cdnify) task
+Going through  to update script refs
+
+Running "cssmin:dist" (cssmin) task
+
+Running "cssmin:generated" (cssmin) task
+
+Running "uglify:dist" (uglify) task
+>> 1 file created.
+
+Running "uglify:generated" (uglify) task
+>> 2 files created.
+
+Running "filerev:dist" (filerev) task
+Revved 21 files
+
+Running "usemin:html" (usemin) task
+Replaced 0 references to assets
+
+Running "usemin:css" (usemin) task
+Replaced 2 references to assets
+
+Running "htmlmin:dist" (htmlmin) task
+Minified 25 files
+
+Running "imagemin:dist" (imagemin) task
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/bootstrap/img/glyphicons-halflings.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/bootstrap/img/glyphicons-halflings-white.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/grid.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/hmid.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/hend.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/vend.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/unit.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/htop.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/vtop.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/vmid.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/Medium Grey.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/Scratch1.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/Scratch2.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/Scratch3.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/Scratch4.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/Scratch5.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/Scratch6.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/SilverCover.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/altPath2.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/altPath.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/brite1.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/briteblue.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/darkGrey.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/cornsilk.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/imageSrc.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/golden.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/lightGrey.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/locked.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/pink1.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/pink2.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/scratched.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/fill/selected1.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/A.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/B.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/C.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/D.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/E.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/F.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/J.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/I.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/G.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/H.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/K.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/L.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/M.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/N.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/O.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/P.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/Q.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/R.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/T.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/S.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/V.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/U.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/W.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/X.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/Y.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/gval/Z.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/10.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/30.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/4.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/5.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/A.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/B.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/D.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/C.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/F.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/E.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/G.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/H.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/I.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/J.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/K.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/L.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/M.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/N.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/O.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/P.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/R.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/Q.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/S.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/T.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/U.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/V.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/W.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/X.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/Y.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/blank.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/qm.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/Z.png Used --force, continuing.
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/val/unk.png Used --force, continuing.
+Minified 108 images (saved 18.96 kB)
+
+Done, but with warnings.

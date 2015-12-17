@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="jchptf">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="John Heinnickel's Portfolio Demo Project">
+    <meta name="description" content="This is a title from data">
+    <meta name="viewport" content="width=device-width">
+    <!-- The base allows us to use relative links to resources even when-->
+    <!-- this page was served from non-root URL, e.g. '/my/todos'-->
+    <base href="/">
+    <title>John Heinnickel's Portfolio Demo Project</title>
+    <title></title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(client) vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="vendor/angular-tree-control/css/tree-control.css" />
+    <link rel="stylesheet" href="vendor/angular-material/angular-material.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(build/dev/client) app.css -->
+<link type="text/css" rel="stylesheet" href="jchptf/jchptf.css" />
+    <!-- endbuild -->
+  </head>
+  <body>
+    <div class="container">
+      <nav-bar></nav-bar>
+      <div ui-view="" class="row"></div>
+      <div class="row">
+        <div class="span12">
+          <footer>
+            <p>
+              &copy; John C. Heinnickel, 2015
+              
+            </p>
+          </footer>
+        </div>
+      </div>
+    </div>
+<!--[if lt IE 9]>
+    <script src="vendor/es5-shim/es5-shim.js" type="text/javascript"></script>
+    <script src="vendor/json3/lib/json3.js" type="text/javascript"></script><![endif]-->
+    <!-- build:js(client) vendor.js -->
+    <!-- bower:js -->
+    <script src="vendor/jquery/dist/jquery.js"></script>
+    <script src="vendor/angular/angular.js"></script>
+    <script src="vendor/angular-cookies/angular-cookies.js"></script>
+    <script src="vendor/angular-messages/angular-messages.js"></script>
+    <script src="vendor/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="vendor/localforage/dist/localforage.js"></script>
+    <script src="vendor/angular-localForage/dist/angular-localForage.js"></script>
+    <script src="vendor/angular-tree-control/angular-tree-control.js"></script>
+    <script src="vendor/angular-modal-service/dst/angular-modal-service.js"></script>
+    <script src="vendor/angular-animate/angular-animate.js"></script>
+    <script src="vendor/angular-aria/angular-aria.js"></script>
+    <script src="vendor/angular-material/angular-material.js"></script>
+    <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="vendor/angular-resource/angular-resource.js"></script>
+    <script src="vendor/angular-hotkeys/angular-hotkeys.js"></script>
+    <script src="vendor/angular-hotkeys/angular-hotkeys.min.js"></script>
+    <script src="vendor/angular-live-set/dist/live-set.js"></script>
+    <script src="vendor/angular-css/angular-css.js"></script>
+    <script src="vendor/sprintf.js/src/sprintf.js"></script>
+    <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="vendor/lodash/lodash.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js(build/dev/client) app.js -->
+    <script src="app.js" type="text/javascript"></script>
+<!-- endbuild -->
+    <!-- distbuild:remove -->
+    <script src="lr_init.js" type="text/javascript"></script>
+<!-- /distbuild -->
+  </body>
+</html>

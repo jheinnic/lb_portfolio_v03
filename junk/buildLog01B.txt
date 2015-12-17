@@ -1,0 +1,110 @@
+{ app: 'client/ngapp',
+  vendor: 'client/ngapp/vendor',
+  dist: 'client/dist',
+  tempfiles: '.tmp' }
+Running "clean:dist" (clean) task
+>> 0 paths cleaned.
+
+Running "coffeelint:dist" (coffeelint) task
+>> 0 files lint free.
+
+Running "coffeelint:test" (coffeelint) task
+>> 0 files lint free.
+
+Running "jshint:dist" (jshint) task
+
+√ No problems
+
+
+Running "jshint:test" (jshint) task
+
+√ No problems
+
+
+Running "coffee:dist" (coffee) task
+>> 15 files created.
+>> 15 source map files created.
+
+Running "coffee:test" (coffee) task
+>> 1 files created.
+>> 1 source map files created.
+
+Running "less:dist" (less) task
+File .tmp/less/jchptf/app.css created
+File .tmp/less/jchptf/crosswords/crosswords.css created
+File .tmp/less/jchptf/home/home.css created
+
+Running "build-lbclient" task
+
+Running "build-config" task
+
+Running "copy:scripts" (copy) task
+Copied 31 files
+
+Running "wiredep:app" (wiredep) task
+
+Running "concurrent:dist" (concurrent) task
+    
+{ app: 'client/ngapp',
+  vendor: 'client/ngapp/vendor',
+  dist: 'client/dist',
+  tempfiles: '.tmp' }
+Running "copy:styles" (copy) task
+Copied 2 files
+
+Done, without errors.
+    
+{ app: 'client/ngapp',
+  vendor: 'client/ngapp/vendor',
+  dist: 'client/dist',
+  tempfiles: '.tmp' }
+Running "copy:images" (copy) task
+Copied 115 files
+
+Done, without errors.
+
+Running "useminPrepare:html" (useminPrepare) task
+Configuration changed for concat, uglify, cssmin
+
+Running "autoprefixer:dist" (autoprefixer) task
+>> 5 autoprefixed stylesheets created.
+
+Running "ngAnnotate:dist" (ngAnnotate) task
+>> No files provided to the ngAnnotate task.
+
+Running "copy:dist" (copy) task
+Copied 27 files
+
+Running "cdnify:dist" (cdnify) task
+Going through client/dist/index.html to update script refs
+✔ bower_components/angular/angular.js changed to //ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js
+✔ bower_components/angular-animate/angular-animate.js changed to //ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-animate.min.js
+✔ bower_components/angular-cookies/angular-cookies.js changed to //ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-cookies.min.js
+✔ bower_components/angular-resource/angular-resource.js changed to //ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-resource.min.js
+✔ bower_components/angular-sanitize/angular-sanitize.js changed to //ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-sanitize.min.js
+✔ bower_components/angular-touch/angular-touch.js changed to //ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-touch.min.js
+
+Running "concat:generated" (concat) task
+File .tmp2\concat\styles\vendor.css created.
+File .tmp2\concat\styles\main.css created.
+File .tmp2\concat\scripts\vendor.js created.
+File .tmp2\concat\scripts\scripts.js created.
+
+Running "cssmin:generated" (cssmin) task
+
+Running "uglify:generated" (uglify) task
+>> 2 files created.
+
+Running "filerev:dist" (filerev) task
+Revved 108 files
+
+Running "usemin:html" (usemin) task
+Replaced 25 references to assets
+
+Running "usemin:css" (usemin) task
+Replaced 2 references to assets
+
+Running "usemin:js" (usemin) task
+Replaced 2 references to assets
+
+Done, without errors.

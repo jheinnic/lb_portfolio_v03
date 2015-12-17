@@ -1,0 +1,25 @@
+{
+  "name": "XwTicket",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "ticketId": {
+      "id": true,
+      "type": "string",
+      "required": true,
+      "length": 12
+    },
+    "gridContent": {
+      "type": "string",
+      "required": true,
+      "length": 121
+    },
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

@@ -1,0 +1,183 @@
+2015-12-14T00:38:50.099-0800 I CONTROL  Hotfix KB2731284 or later update is not installed, will zero-out data files
+2015-12-14T00:38:50.109-0800 I JOURNAL  [initandlisten] journal dir=E:\temp\MongoDB\express_sandbox\journal
+2015-12-14T00:38:50.110-0800 I JOURNAL  [initandlisten] recover : no journal files present, no recovery needed
+2015-12-14T00:38:50.162-0800 I JOURNAL  [durability] Durability thread started
+2015-12-14T00:38:50.163-0800 I CONTROL  [initandlisten] MongoDB starting : pid=37432 port=27017 dbpath=E:\temp\MongoDB\express_sandbox 64-bit host=DEUSEXMACHINA
+2015-12-14T00:38:50.164-0800 I JOURNAL  [journal writer] Journal writer thread started
+2015-12-14T00:38:50.164-0800 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2015-12-14T00:38:50.164-0800 I CONTROL  [initandlisten] db version v3.0.2
+2015-12-14T00:38:50.164-0800 I CONTROL  [initandlisten] git version: 6201872043ecbbc0a4cc169b5482dcf385fc464f
+2015-12-14T00:38:50.164-0800 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1m-fips 19 Mar 2015
+2015-12-14T00:38:50.164-0800 I CONTROL  [initandlisten] build info: windows sys.getwindowsversion(major=6, minor=1, build=7601, platform=2, service_pack='Service Pack 1') BOOST_LIB_VERSION=1_49
+2015-12-14T00:38:50.164-0800 I CONTROL  [initandlisten] allocator: system
+2015-12-14T00:38:50.164-0800 I CONTROL  [initandlisten] options: { processManagement: { windowsService: { serviceName: "mongo-portfolio" } }, storage: { dbPath: "E:\temp\MongoDB\express_sandbox", mmapv1: { smallFiles: true } }, systemLog: { destination: "file", path: "E:\temp\MongoDB\Logs\express_sandbox" } }
+2015-12-14T00:38:50.228-0800 I NETWORK  [initandlisten] waiting for connections on port 27017
+2015-12-14T00:38:50.448-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:12754 #1 (1 connection now open)
+2015-12-14T00:38:50.449-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:12755 #2 (2 connections now open)
+2015-12-14T00:38:50.450-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:12756 #3 (3 connections now open)
+2015-12-14T00:38:50.450-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:12757 #4 (4 connections now open)
+2015-12-14T00:38:50.451-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:12758 #5 (5 connections now open)
+2015-12-14T00:38:50.452-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:12759 #6 (6 connections now open)
+2015-12-14T00:38:50.452-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:12760 #7 (7 connections now open)
+2015-12-14T00:38:50.454-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:12761 #8 (8 connections now open)
+2015-12-14T00:38:50.454-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:12762 #9 (9 connections now open)
+2015-12-14T00:38:50.934-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:12766 #10 (10 connections now open)
+2015-12-14T00:38:50.939-0800 I ACCESS   [conn2] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T00:38:50.939-0800 I ACCESS   [conn4] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T00:38:50.939-0800 I ACCESS   [conn5] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T00:38:50.939-0800 I ACCESS   [conn7] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T00:38:51.198-0800 I COMMAND  [conn1] command portfolio.$cmd command: saslContinue { saslContinue: 1, conversationId: 1, payload: BinData(0, 633D626977732C723D477A54625163704B3445516F75626642546257495A38336F5878343744424D7338303569623548774B5470734C357556625A536A663041643270443436...) } keyUpdates:0 writeConflicts:0 numYields:0 reslen:108 locks:{} 643ms
+2015-12-14T00:38:51.404-0800 I ACCESS   [conn3] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T00:38:51.404-0800 I ACCESS   [conn6] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T00:38:51.404-0800 I ACCESS   [conn1] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T00:38:51.404-0800 I ACCESS   [conn9] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T00:38:51.404-0800 I ACCESS   [conn8] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T00:38:51.404-0800 I ACCESS   [conn10] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T00:39:25.531-0800 I NETWORK  [conn10] end connection 127.0.0.1:12766 (9 connections now open)
+2015-12-14T00:39:25.531-0800 I NETWORK  [conn1] end connection 127.0.0.1:12754 (8 connections now open)
+2015-12-14T00:39:25.531-0800 I NETWORK  [conn2] end connection 127.0.0.1:12755 (8 connections now open)
+2015-12-14T00:39:25.531-0800 I NETWORK  [conn7] end connection 127.0.0.1:12760 (7 connections now open)
+2015-12-14T00:39:25.531-0800 I NETWORK  [conn5] end connection 127.0.0.1:12758 (8 connections now open)
+2015-12-14T00:39:25.531-0800 I NETWORK  [conn6] end connection 127.0.0.1:12759 (8 connections now open)
+2015-12-14T00:39:25.531-0800 I NETWORK  [conn8] end connection 127.0.0.1:12761 (7 connections now open)
+2015-12-14T00:39:25.531-0800 I NETWORK  [conn9] end connection 127.0.0.1:12762 (6 connections now open)
+2015-12-14T00:39:25.531-0800 I NETWORK  [conn4] end connection 127.0.0.1:12757 (5 connections now open)
+2015-12-14T00:39:25.531-0800 I NETWORK  [conn3] end connection 127.0.0.1:12756 (5 connections now open)
+2015-12-14T05:35:56.831-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13873 #11 (1 connection now open)
+2015-12-14T05:35:56.831-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13874 #12 (2 connections now open)
+2015-12-14T05:35:56.842-0800 I NETWORK  [conn11] end connection 127.0.0.1:13873 (1 connection now open)
+2015-12-14T05:35:56.847-0800 I NETWORK  [conn12] end connection 127.0.0.1:13874 (0 connections now open)
+2015-12-14T05:35:56.851-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13876 #13 (1 connection now open)
+2015-12-14T05:35:56.852-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13877 #14 (2 connections now open)
+2015-12-14T05:35:56.852-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13878 #15 (3 connections now open)
+2015-12-14T05:35:56.853-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13879 #16 (4 connections now open)
+2015-12-14T05:35:56.853-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13880 #17 (5 connections now open)
+2015-12-14T05:35:56.853-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13881 #18 (6 connections now open)
+2015-12-14T05:35:56.853-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13882 #19 (7 connections now open)
+2015-12-14T05:35:56.854-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13883 #20 (8 connections now open)
+2015-12-14T05:35:56.855-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13884 #21 (9 connections now open)
+2015-12-14T05:35:56.978-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13885 #22 (10 connections now open)
+2015-12-14T05:35:57.353-0800 I ACCESS   [conn13] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:35:57.353-0800 I ACCESS   [conn14] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:35:57.353-0800 I ACCESS   [conn15] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:35:57.353-0800 I ACCESS   [conn16] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:35:57.354-0800 I ACCESS   [conn18] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:35:57.826-0800 I ACCESS   [conn21] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:35:57.826-0800 I ACCESS   [conn17] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:35:57.827-0800 I ACCESS   [conn19] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:35:57.827-0800 I ACCESS   [conn20] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:35:57.827-0800 I ACCESS   [conn22] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:38:58.186-0800 I NETWORK  [conn21] end connection 127.0.0.1:13884 (9 connections now open)
+2015-12-14T05:38:58.186-0800 I NETWORK  [conn14] end connection 127.0.0.1:13877 (9 connections now open)
+2015-12-14T05:38:58.186-0800 I NETWORK  [conn15] end connection 127.0.0.1:13878 (9 connections now open)
+2015-12-14T05:38:58.187-0800 I NETWORK  [conn18] end connection 127.0.0.1:13881 (9 connections now open)
+2015-12-14T05:38:58.187-0800 I NETWORK  [conn13] end connection 127.0.0.1:13876 (9 connections now open)
+2015-12-14T05:38:58.187-0800 I NETWORK  [conn20] end connection 127.0.0.1:13883 (8 connections now open)
+2015-12-14T05:38:58.187-0800 I NETWORK  [conn22] end connection 127.0.0.1:13885 (8 connections now open)
+2015-12-14T05:38:58.187-0800 I NETWORK  [conn16] end connection 127.0.0.1:13879 (7 connections now open)
+2015-12-14T05:38:58.187-0800 I NETWORK  [conn17] end connection 127.0.0.1:13880 (7 connections now open)
+2015-12-14T05:38:58.187-0800 I NETWORK  [conn19] end connection 127.0.0.1:13882 (7 connections now open)
+2015-12-14T05:39:24.857-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13899 #23 (1 connection now open)
+2015-12-14T05:39:24.857-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13900 #24 (2 connections now open)
+2015-12-14T05:39:24.868-0800 I NETWORK  [conn23] end connection 127.0.0.1:13899 (1 connection now open)
+2015-12-14T05:39:24.872-0800 I NETWORK  [conn24] end connection 127.0.0.1:13900 (0 connections now open)
+2015-12-14T05:39:24.877-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13901 #25 (1 connection now open)
+2015-12-14T05:39:24.877-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13902 #26 (2 connections now open)
+2015-12-14T05:39:24.878-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13903 #27 (3 connections now open)
+2015-12-14T05:39:24.878-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13904 #28 (4 connections now open)
+2015-12-14T05:39:24.878-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13905 #29 (5 connections now open)
+2015-12-14T05:39:24.879-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13906 #30 (6 connections now open)
+2015-12-14T05:39:24.879-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13907 #31 (7 connections now open)
+2015-12-14T05:39:24.880-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13908 #32 (8 connections now open)
+2015-12-14T05:39:25.037-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13909 #33 (9 connections now open)
+2015-12-14T05:39:25.037-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:13910 #34 (10 connections now open)
+2015-12-14T05:39:25.448-0800 I ACCESS   [conn25] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:39:25.449-0800 I ACCESS   [conn26] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:39:25.449-0800 I ACCESS   [conn27] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:39:25.449-0800 I ACCESS   [conn28] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:39:25.449-0800 I ACCESS   [conn29] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:39:26.034-0800 I ACCESS   [conn30] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:39:26.034-0800 I ACCESS   [conn31] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:39:26.035-0800 I ACCESS   [conn32] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:39:26.035-0800 I ACCESS   [conn33] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:39:26.035-0800 I ACCESS   [conn34] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T05:43:34.668-0800 I NETWORK  [conn25] end connection 127.0.0.1:13901 (9 connections now open)
+2015-12-14T05:43:34.668-0800 I NETWORK  [conn33] end connection 127.0.0.1:13909 (8 connections now open)
+2015-12-14T05:43:34.668-0800 I NETWORK  [conn30] end connection 127.0.0.1:13906 (7 connections now open)
+2015-12-14T05:43:34.669-0800 I NETWORK  [conn27] end connection 127.0.0.1:13903 (6 connections now open)
+2015-12-14T05:43:34.669-0800 I NETWORK  [conn26] end connection 127.0.0.1:13902 (6 connections now open)
+2015-12-14T05:43:34.669-0800 I NETWORK  [conn28] end connection 127.0.0.1:13904 (5 connections now open)
+2015-12-14T05:43:34.669-0800 I NETWORK  [conn31] end connection 127.0.0.1:13907 (4 connections now open)
+2015-12-14T05:43:34.669-0800 I NETWORK  [conn32] end connection 127.0.0.1:13908 (5 connections now open)
+2015-12-14T05:43:34.669-0800 I NETWORK  [conn34] end connection 127.0.0.1:13910 (3 connections now open)
+2015-12-14T05:43:34.669-0800 I NETWORK  [conn29] end connection 127.0.0.1:13905 (3 connections now open)
+2015-12-14T06:25:55.903-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14261 #35 (1 connection now open)
+2015-12-14T06:25:55.904-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14262 #36 (2 connections now open)
+2015-12-14T06:25:55.914-0800 I NETWORK  [conn35] end connection 127.0.0.1:14261 (1 connection now open)
+2015-12-14T06:25:55.918-0800 I NETWORK  [conn36] end connection 127.0.0.1:14262 (0 connections now open)
+2015-12-14T06:25:55.930-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14263 #37 (1 connection now open)
+2015-12-14T06:25:55.930-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14264 #38 (2 connections now open)
+2015-12-14T06:25:55.931-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14265 #39 (3 connections now open)
+2015-12-14T06:25:55.931-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14266 #40 (4 connections now open)
+2015-12-14T06:25:55.932-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14267 #41 (5 connections now open)
+2015-12-14T06:25:55.932-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14268 #42 (6 connections now open)
+2015-12-14T06:25:55.932-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14269 #43 (7 connections now open)
+2015-12-14T06:25:55.932-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14270 #44 (8 connections now open)
+2015-12-14T06:25:55.933-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14271 #45 (9 connections now open)
+2015-12-14T06:25:56.050-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14273 #46 (10 connections now open)
+2015-12-14T06:25:56.431-0800 I ACCESS   [conn37] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T06:25:56.432-0800 I ACCESS   [conn38] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T06:25:56.432-0800 I ACCESS   [conn39] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T06:25:56.432-0800 I ACCESS   [conn40] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T06:25:56.432-0800 I ACCESS   [conn41] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T06:25:56.896-0800 I ACCESS   [conn42] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T06:25:56.897-0800 I ACCESS   [conn43] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T06:25:56.897-0800 I ACCESS   [conn44] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T06:25:56.897-0800 I ACCESS   [conn45] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T06:25:56.897-0800 I ACCESS   [conn46] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T13:32:06.362-0800 I COMMAND  [PeriodicTaskRunner] task: DBConnectionPool-cleaner took: 23ms
+2015-12-14T13:48:42.263-0800 I NETWORK  [conn41] end connection 127.0.0.1:14267 (9 connections now open)
+2015-12-14T13:48:42.263-0800 I NETWORK  [conn37] end connection 127.0.0.1:14263 (9 connections now open)
+2015-12-14T13:48:42.263-0800 I NETWORK  [conn42] end connection 127.0.0.1:14268 (9 connections now open)
+2015-12-14T13:48:42.263-0800 I NETWORK  [conn39] end connection 127.0.0.1:14265 (9 connections now open)
+2015-12-14T13:48:42.263-0800 I NETWORK  [conn43] end connection 127.0.0.1:14269 (9 connections now open)
+2015-12-14T13:48:42.263-0800 I NETWORK  [conn44] end connection 127.0.0.1:14270 (9 connections now open)
+2015-12-14T13:48:42.263-0800 I NETWORK  [conn45] end connection 127.0.0.1:14271 (9 connections now open)
+2015-12-14T13:48:42.263-0800 I NETWORK  [conn40] end connection 127.0.0.1:14266 (9 connections now open)
+2015-12-14T13:48:42.263-0800 I NETWORK  [conn38] end connection 127.0.0.1:14264 (9 connections now open)
+2015-12-14T13:48:42.263-0800 I NETWORK  [conn46] end connection 127.0.0.1:14273 (9 connections now open)
+2015-12-14T13:52:25.611-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14674 #47 (1 connection now open)
+2015-12-14T13:52:25.612-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14675 #48 (2 connections now open)
+2015-12-14T13:52:25.624-0800 I NETWORK  [conn48] end connection 127.0.0.1:14675 (1 connection now open)
+2015-12-14T13:52:25.628-0800 I NETWORK  [conn47] end connection 127.0.0.1:14674 (0 connections now open)
+2015-12-14T13:52:25.632-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14676 #49 (1 connection now open)
+2015-12-14T13:52:25.632-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14677 #50 (2 connections now open)
+2015-12-14T13:52:25.633-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14678 #51 (3 connections now open)
+2015-12-14T13:52:25.634-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14679 #52 (4 connections now open)
+2015-12-14T13:52:25.634-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14680 #53 (5 connections now open)
+2015-12-14T13:52:25.634-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14681 #54 (6 connections now open)
+2015-12-14T13:52:25.634-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14682 #55 (7 connections now open)
+2015-12-14T13:52:25.635-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14683 #56 (8 connections now open)
+2015-12-14T13:52:25.639-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14684 #57 (9 connections now open)
+2015-12-14T13:52:25.640-0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:14685 #58 (10 connections now open)
+2015-12-14T13:52:26.809-0800 I ACCESS   [conn54] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T13:52:26.809-0800 I ACCESS   [conn55] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T13:52:26.809-0800 I ACCESS   [conn58] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T13:52:26.810-0800 I ACCESS   [conn53] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T13:52:26.810-0800 I ACCESS   [conn49] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T13:52:26.810-0800 I ACCESS   [conn56] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T13:52:26.810-0800 I ACCESS   [conn57] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T13:52:26.811-0800 I ACCESS   [conn51] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T13:52:26.811-0800 I ACCESS   [conn50] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T13:52:26.811-0800 I ACCESS   [conn52] Successfully authenticated as principal jheinnic on portfolio
+2015-12-14T16:00:18.404-0800 I NETWORK  [conn53] end connection 127.0.0.1:14680 (9 connections now open)
+2015-12-14T16:00:18.405-0800 I NETWORK  [conn54] end connection 127.0.0.1:14681 (8 connections now open)
+2015-12-14T16:00:18.406-0800 I NETWORK  [conn57] end connection 127.0.0.1:14684 (7 connections now open)
+2015-12-14T16:00:18.406-0800 I NETWORK  [conn49] end connection 127.0.0.1:14676 (6 connections now open)
+2015-12-14T16:00:18.406-0800 I NETWORK  [conn52] end connection 127.0.0.1:14679 (5 connections now open)
+2015-12-14T16:00:18.406-0800 I NETWORK  [conn51] end connection 127.0.0.1:14678 (4 connections now open)
+2015-12-14T16:00:18.406-0800 I NETWORK  [conn56] end connection 127.0.0.1:14683 (3 connections now open)
+2015-12-14T16:00:18.406-0800 I NETWORK  [conn50] end connection 127.0.0.1:14677 (2 connections now open)
+2015-12-14T16:00:18.406-0800 I NETWORK  [conn55] end connection 127.0.0.1:14682 (1 connection now open)
+2015-12-14T16:00:18.406-0800 I NETWORK  [conn58] end connection 127.0.0.1:14685 (1 connection now open)
+2015-12-15T03:02:39.478-0800 I COMMAND  [PeriodicTaskRunner] task: DBConnectionPool-cleaner took: 23ms

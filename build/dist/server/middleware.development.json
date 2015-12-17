@@ -1,0 +1,7 @@
+{
+  "initial:after": {
+    "connect-livereload": {
+      "port": 32769
+    }
+  }
+}

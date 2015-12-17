@@ -1,0 +1,101 @@
+{ app: 'client/ngapp',
+  vendor: 'client/ngapp/vendor',
+  dist: 'client/dist',
+  tempfiles: '.tmp' }
+Running "clean:dist" (clean) task
+>> 81 paths cleaned.
+
+Running "coffee:dist" (coffee) task
+>> 15 files created.
+>> 15 source map files created.
+
+Running "coffee:test" (coffee) task
+>> 1 files created.
+>> 1 source map files created.
+
+Running "jshint:dist" (jshint) task
+
+√ No problems
+
+
+Running "jshint:test" (jshint) task
+
+√ No problems
+
+
+Running "less:dist" (less) task
+File .tmp/styles/jchptf/app.less created
+File .tmp/styles/jchptf/crosswords/crosswords.less created
+File .tmp/styles/jchptf/home/home.less created
+
+Running "build-lbclient" task
+
+Running "build-config" task
+
+Running "wiredep:app" (wiredep) task
+
+Running "useminPrepare:html" (useminPrepare) task
+Configuration changed for concat, uglify, cssmin
+
+Running "concurrent:dist" (concurrent) task
+    
+{ app: 'client/ngapp',
+  vendor: 'client/ngapp/vendor',
+  dist: 'client/dist',
+  tempfiles: '.tmp' }
+Running "copy:styles" (copy) task
+Copied 2 files
+
+Done, without errors.
+    Warning: { app: 'client/ngapp',
+  vendor: 'client/ngapp/vendor',
+  dist: 'client/dist',
+  tempfiles: '.tmp' }
+Running "imagemin:dist" (imagemin) task
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/bootstrap/img/glyphicons-halflings-white.png Use --force to continue.
+
+Aborted due to warnings. Use --force to continue.
+    
+    Aborted due to warnings.
+    
+Running "autoprefixer:dist" (autoprefixer) task
+
+Running "concat:generated" (concat) task
+File .tmp\concat\scripts\vendor.js created.
+File .tmp\concat\scripts\scripts.js created.
+
+Running "ngAnnotate:dist" (ngAnnotate) task
+>> 2 files successfully generated.
+
+Running "copy:dist" (copy) task
+Copied 2 files
+
+Running "cdnify:dist" (cdnify) task
+Going through  to update script refs
+
+Running "cssmin:dist" (cssmin) task
+
+Running "cssmin:generated" (cssmin) task
+
+Running "uglify:dist" (uglify) task
+>> 1 file created.
+
+Running "uglify:generated" (uglify) task
+>> 2 files created.
+
+Running "filerev:dist" (filerev) task
+Revved 4 files
+
+Running "usemin:html" (usemin) task
+Replaced 0 references to assets
+
+Running "usemin:css" (usemin) task
+Replaced 2 references to assets
+
+Running "htmlmin:dist" (htmlmin) task
+Minified 25 files
+
+Running "imagemin:dist" (imagemin) task
+Warning: Error: spawn ENOENT in file client/ngapp/images/jchptf/crossword/border/grid.png Use --force to continue.
+
+Aborted due to warnings.

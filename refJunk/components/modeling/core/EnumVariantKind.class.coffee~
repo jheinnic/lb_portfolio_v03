@@ -1,0 +1,14 @@
+class EnumVariantKind
+  constructor: (name) ->
+    @name = name
+    Object.seal(@)
+    Object.freeze(@)
+
+  STATIC: new Foo('STATIC')
+  DYNAMIC: new Foo('DYNAMIC')
+
+Object.seal(EnumVariantKind)
+Object.freeze(EnumVariantKind)
+
+module.exports = EnumVariantKind
+

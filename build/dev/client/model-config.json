@@ -1,0 +1,51 @@
+{
+  "_meta": {
+    "sources": ["../../common/models", "./models"],
+    "mixins": ["../../common/mixins", "./mixins"]
+  },
+  "Todo": {
+    "dataSource": "remote"
+  },
+  "LocalTodo": {
+    "dataSource": "local"
+  },
+  "FiveXTicket": {
+    "dataSource": "remote"
+  },
+  "LocalFiveXTicket": {
+    "dataSource": "local"
+  },
+  "TripOnlyTicket": {
+    "dataSource": "remote"
+  },
+  "LocalTripOnlyTicket": {
+    "dataSource": "local"
+  },
+  "TripSpotTicket": {
+    "dataSource": "remote"
+  },
+  "LocalTripSpotTicket": {
+    "dataSource": "local"
+  },
+  "EditorModel": {
+    "dataSource": "local"
+  },
+  "OrientationModel": {
+    "dataSource": "local"
+  },
+  "CellOrientation": {
+    "dataSource": "local"
+  },
+  "GridRegion": {
+    "dataSource": "local"
+  },
+  "GridWord": {
+    "dataSource": "local"
+  },
+  "GridShort": {
+    "dataSource": "local"
+  },
+  "GridBlocked": {
+    "dataSource": "local"
+  }
+}

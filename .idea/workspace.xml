@@ -1,0 +1,1602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+    <option name="ANALYSIS_IN_BACKGROUND" value="true" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ce66efd9-20b6-40ad-be08-cea910b89a9e" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gruntfile.js" afterPath="$PROJECT_DIR$/Gruntfile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grunt/aliases.yaml" afterPath="$PROJECT_DIR$/grunt/aliases.yaml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grunt/autoprefixer.js" afterPath="$PROJECT_DIR$/grunt/autoprefixer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grunt/utils/buildBundle.js" afterPath="$PROJECT_DIR$/grunt/utils/buildBundle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grunt/copy.js" afterPath="$PROJECT_DIR$/grunt/copy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grunt/utils/customTasks.js" afterPath="$PROJECT_DIR$/grunt/utils/customTasks.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grunt/htmlbuild.js" afterPath="$PROJECT_DIR$/grunt/htmlbuild.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grunt/htmlmin.js" afterPath="$PROJECT_DIR$/grunt/htmlmin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grunt/imagemin.js" afterPath="$PROJECT_DIR$/grunt/imagemin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/index.html" afterPath="$PROJECT_DIR$/client/src/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/index.jade" afterPath="$PROJECT_DIR$/client/src/index.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grunt/jade.js" afterPath="$PROJECT_DIR$/grunt/jade.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/jchptf/jchptf.less" afterPath="$PROJECT_DIR$/client/src/jchptf/jchptf.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grunt/less.js" afterPath="$PROJECT_DIR$/grunt/less.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grunt/mkdir.js" afterPath="$PROJECT_DIR$/grunt/mkdir.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grunt/svgmin.js" afterPath="$PROJECT_DIR$/grunt/svgmin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grunt/usemin.js" afterPath="$PROJECT_DIR$/grunt/usemin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grunt/useminPrepare.js" afterPath="$PROJECT_DIR$/grunt/useminPrepare.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grunt/wiredep.js" afterPath="$PROJECT_DIR$/grunt/wiredep.js" />
+      <change type="MOVED" beforePath="D:\DevProj\Git\lb_express_sandbox\client\lr_init.js" afterPath="$PROJECT_DIR$/client/src/lr_init.js" />
+    </list>
+    <ignored path="lb_express_sandbox.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="lb_express_sandbox" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="aliases.yaml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grunt/aliases.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="214" column="10" selection-start-line="214" selection-start-column="10" selection-end-line="214" selection-end-column="10" />
+              <folding>
+                <marker date="1450293753634" expanded="true" signature="2618:3197" placeholder="make-dev-build:" />
+                <marker date="1450293753634" expanded="true" signature="3197:3253" placeholder="cont-dist-build:" />
+                <marker date="1450293753634" expanded="true" signature="3197:4198" placeholder="cont-dist-build:" />
+                <marker date="1450293753634" expanded="true" signature="4300:4492" placeholder="minify:" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="useminPrepare.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grunt/useminPrepare.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="usemin.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grunt/usemin.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="copy.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grunt/copy.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+              <folding>
+                <marker date="1450292966574" expanded="true" signature="402:3594" placeholder="{...}" />
+                <marker date="1450292966574" expanded="true" signature="874:1462" placeholder="[...]" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jade.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grunt/jade.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.54545456">
+              <caret line="35" column="40" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
+              <folding>
+                <marker date="1450293020991" expanded="true" signature="233:387" placeholder="{...}" />
+                <marker date="1450293020991" expanded="true" signature="387:394" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="less.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grunt/less.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.8">
+              <caret line="54" column="9" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="buildBundle.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grunt/utils/buildBundle.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="113" column="43" selection-start-line="113" selection-start-column="43" selection-end-line="113" selection-end-column="43" />
+              <folding>
+                <marker date="1450293538483" expanded="true" signature="285:1745" placeholder="/** Applies the alias name transformation rule for angular application scripts using this project's file layout ...*/" />
+                <marker date="1450293538483" expanded="true" signature="4032:7082" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="htmlbuild.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grunt/htmlbuild.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+              <folding>
+                <marker date="1450295157918" expanded="true" signature="1016:1023" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wiredep.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grunt/wiredep.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="19" column="47" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
+              <folding>
+                <marker date="1450295170867" expanded="true" signature="594:599" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CoffeeScript Model Class" />
+        <option value="CoffeeScript File" />
+        <option value="CoffeeScript Model" />
+        <option value="JavaScript File" />
+        <option value="Safe JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/client/src/jchptf/context/module.js" />
+        <option value="$PROJECT_DIR$/client/src/jchptf/crosswords/browse/module.js" />
+        <option value="$PROJECT_DIR$/client/src/jchptf/crosswords/module.js" />
+        <option value="$PROJECT_DIR$/client/src/jchptf/crosswords/results/module.js" />
+        <option value="$PROJECT_DIR$/client/src/jchptf/crosswords/tickets/module.js" />
+        <option value="$PROJECT_DIR$/client/src/jchptf/lbclient/module.js" />
+        <option value="$PROJECT_DIR$/client/src/jchptf/modeling/core/module.js" />
+        <option value="$PROJECT_DIR$/client/src/jchptf/module.js" />
+        <option value="$PROJECT_DIR$/client/src/jchptf/site/branding/module.js" />
+        <option value="$PROJECT_DIR$/client/src/jchptf/site/navigation/module.js" />
+        <option value="$PROJECT_DIR$/client/src/jchptf/site/notification/module.js" />
+        <option value="$PROJECT_DIR$/client/src/jchptf/tools/keyboard/module.js" />
+        <option value="$PROJECT_DIR$/client/src/jchptf/site/navigation/config.js" />
+        <option value="$PROJECT_DIR$/client/src/jchptf/context/IdentityContext.service.coffee" />
+        <option value="$PROJECT_DIR$/grunt/nodemon.js" />
+        <option value="$PROJECT_DIR$/grunt/concurrent.js" />
+        <option value="$PROJECT_DIR$/server/boot/03-dev-assets.js" />
+        <option value="$PROJECT_DIR$/server/config.local.js" />
+        <option value="$PROJECT_DIR$/server/middleware.development.json" />
+        <option value="$PROJECT_DIR$/server/middleware.json" />
+        <option value="$PROJECT_DIR$/global-config.js" />
+        <option value="$PROJECT_DIR$/server/server.js" />
+        <option value="$PROJECT_DIR$/server/boot/70-angular-routes.js" />
+        <option value="$PROJECT_DIR$/server/boot/60-dev-assets.js" />
+        <option value="$PROJECT_DIR$/grunt/watch.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/grunt/imagemin.js" />
+        <option value="$PROJECT_DIR$/grunt/svgmin.js" />
+        <option value="$PROJECT_DIR$/client/src/jchptf/jchptf.less" />
+        <option value="$PROJECT_DIR$/grunt/mkdir.js" />
+        <option value="$PROJECT_DIR$/build/dist/client/index.html" />
+        <option value="$PROJECT_DIR$/build/dist/client/index.f1f26ab4.html" />
+        <option value="$PROJECT_DIR$/grunt/htmlmin.js" />
+        <option value="$PROJECT_DIR$/grunt/autoprefixer.js" />
+        <option value="$PROJECT_DIR$/node_modules/load-grunt-tasks/index.js" />
+        <option value="$PROJECT_DIR$/Gruntfile.js" />
+        <option value="$PROJECT_DIR$/build/dev/client/index.html" />
+        <option value="$PROJECT_DIR$/node_modules/grunt-html-build/tasks/build-html.js" />
+        <option value="$PROJECT_DIR$/build/temp/client/index.html" />
+        <option value="$PROJECT_DIR$/client/src/index.jade" />
+        <option value="$PROJECT_DIR$/grunt/jade.js" />
+        <option value="$PROJECT_DIR$/grunt/less.js" />
+        <option value="$PROJECT_DIR$/grunt/copy.js" />
+        <option value="$PROJECT_DIR$/client/src/index.html" />
+        <option value="$PROJECT_DIR$/grunt/useminPrepare.js" />
+        <option value="$PROJECT_DIR$/grunt/usemin.js" />
+        <option value="$PROJECT_DIR$/grunt/utils/buildBundle.js" />
+        <option value="$PROJECT_DIR$/grunt/aliases.yaml" />
+        <option value="$PROJECT_DIR$/grunt/utils/customTasks.js" />
+        <option value="$PROJECT_DIR$/grunt/htmlbuild.js" />
+        <option value="$PROJECT_DIR$/grunt/wiredep.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBowerSettings">
+    <exe-path>C:\Program Files\nodejs\bower.cmd</exe-path>
+    <config-path>D:\DevProj\Git\lb_express_sandbox\bower.json</config-path>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true">
+    <gruntfile path="$PROJECT_DIR$/Gruntfile.js">
+      <alias-task name="build" info="Alias for &quot;reset&quot;, &quot;dev-build&quot;, &quot;contd-dist-build&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="reset" />
+        <dependency value="dev-build" />
+        <dependency value="contd-dist-build" />
+      </alias-task>
+      <alias-task name="bump-@" info="Alias for &quot;changelog&quot;, &quot;bump-only&quot;, &quot;default&quot;, &quot;graph&quot;, &quot;bump-commit&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="changelog" />
+        <dependency value="bump-only" />
+        <dependency value="default" />
+        <dependency value="graph" />
+        <dependency value="bump-commit" />
+      </alias-task>
+      <alias-task name="bump-@-major" info="Alias for &quot;changelog&quot;, &quot;bump-only:major&quot;, &quot;default&quot;, &quot;graph&quot;, &quot;bump-commit&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="changelog" />
+        <dependency value="bump-only:major" />
+        <dependency value="default" />
+        <dependency value="graph" />
+        <dependency value="bump-commit" />
+      </alias-task>
+      <alias-task name="bump-@-minor" info="Alias for &quot;changelog&quot;, &quot;bump-only:minor&quot;, &quot;default&quot;, &quot;graph&quot;, &quot;bump-commit&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="changelog" />
+        <dependency value="bump-only:minor" />
+        <dependency value="default" />
+        <dependency value="graph" />
+        <dependency value="bump-commit" />
+      </alias-task>
+      <alias-task name="candidate" info="Alias for &quot;init&quot;, &quot;full-dist-build&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="init" />
+        <dependency value="full-dist-build" />
+      </alias-task>
+      <alias-task name="contd-dist-build" info="Alias for &quot;copy:dist&quot;, &quot;jade:dist&quot;, &quot;wiredep:dist&quot;, &quot;htmlbuild:dist&quot;, &quot;minify-dist&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="copy:dist" />
+        <dependency value="jade:dist" />
+        <dependency value="wiredep:dist" />
+        <dependency value="htmlbuild:dist" />
+        <dependency value="minify-dist" />
+      </alias-task>
+      <alias-task name="coverage" info="Alias for &quot;karma:unit-coverage&quot;, &quot;open:coverage&quot;, &quot;connect:coverage&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="karma:unit-coverage" />
+        <dependency value="open:coverage" />
+        <dependency value="connect:coverage" />
+      </alias-task>
+      <alias-task name="default" info="Alias for &quot;build&quot; task." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="build" />
+      </alias-task>
+      <alias-task name="dev" info="Alias for &quot;connect:dev&quot;, &quot;open:devserver&quot;, &quot;watch:source&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="connect:dev" />
+        <dependency value="open:devserver" />
+        <dependency value="watch:source" />
+      </alias-task>
+      <alias-task name="dev-bootstrap" info="Alias for &quot;shell:npm-install&quot;, &quot;bower:install&quot;, &quot;shell:protractor-install&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="shell:npm-install" />
+        <dependency value="bower:install" />
+        <dependency value="shell:protractor-install" />
+      </alias-task>
+      <alias-task name="dev-build" info="Alias for &quot;copy:dev&quot;, &quot;less&quot;, &quot;autoprefixer:dev&quot;, &quot;jade:dev&quot;, &quot;wiredep:dev&quot;, &quot;htmlbuild:dev&quot;, &quot;bundle-client&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="copy:dev" />
+        <dependency value="less" />
+        <dependency value="autoprefixer:dev" />
+        <dependency value="jade:dev" />
+        <dependency value="wiredep:dev" />
+        <dependency value="htmlbuild:dev" />
+        <dependency value="bundle-client" />
+      </alias-task>
+      <alias-task name="dev-chrome" info="Alias for &quot;connect:dev&quot;, &quot;open:devserver&quot;, &quot;watch:chrome&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="connect:dev" />
+        <dependency value="open:devserver" />
+        <dependency value="watch:chrome" />
+      </alias-task>
+      <alias-task name="dev-test-unit" info="Alias for &quot;clean:build&quot;, &quot;dev-build&quot;, &quot;concurrent:unit&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="clean:build" />
+        <dependency value="dev-build" />
+        <dependency value="concurrent:unit" />
+      </alias-task>
+      <alias-task name="dev-update" info="Alias for &quot;shell:npm-update&quot;, &quot;bower:install&quot;, &quot;shell:protractor-update&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="shell:npm-update" />
+        <dependency value="bower:install" />
+        <dependency value="shell:protractor-update" />
+      </alias-task>
+      <alias-task name="examples" info="Alias for &quot;shell:examples&quot;, &quot;concat:examples&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="shell:examples" />
+        <dependency value="concat:examples" />
+      </alias-task>
+      <alias-task name="full-dist-build" info="Alias for &quot;copy:dist&quot;, &quot;less&quot;, &quot;autoprefixer:dist&quot;, &quot;jade:dist&quot;, &quot;wiredep:dist&quot;, &quot;htmlbuild:dist&quot;, &quot;bundle-client&quot;, &quot;minify-dist&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="copy:dist" />
+        <dependency value="less" />
+        <dependency value="autoprefixer:dist" />
+        <dependency value="jade:dist" />
+        <dependency value="wiredep:dist" />
+        <dependency value="htmlbuild:dist" />
+        <dependency value="bundle-client" />
+        <dependency value="minify-dist" />
+      </alias-task>
+      <alias-task name="graph" info="Alias for &quot;angular_architecture_graph&quot; task." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="angular_architecture_graph" />
+      </alias-task>
+      <alias-task name="init" info="Alias for &quot;clean:all&quot;, &quot;mkdir&quot;, &quot;dev-bootstrap&quot;, &quot;lint&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="clean:all" />
+        <dependency value="mkdir" />
+        <dependency value="dev-bootstrap" />
+        <dependency value="lint" />
+      </alias-task>
+      <alias-task name="lint" info="Alias for &quot;jshint:build&quot;, &quot;coffeelint:build&quot;, &quot;jshint:source&quot;, &quot;coffeelint:source&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="jshint:build" />
+        <dependency value="coffeelint:build" />
+        <dependency value="jshint:source" />
+        <dependency value="coffeelint:source" />
+      </alias-task>
+      <alias-task name="minify-dist" info="Alias for &quot;ngAnnotate&quot;, &quot;useminPrepare:views&quot;, &quot;usemin&quot;, &quot;useminPrepare:index&quot;, &quot;concat&quot;, &quot;uglify&quot;, &quot;cssmin&quot;, &quot;imagemin&quot;, &quot;svgmin&quot;, &quot;filerev&quot;, &quot;usemin&quot;, &quot;htmlmin&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="ngAnnotate" />
+        <dependency value="useminPrepare:views" />
+        <dependency value="usemin" />
+        <dependency value="useminPrepare:index" />
+        <dependency value="concat" />
+        <dependency value="uglify" />
+        <dependency value="cssmin" />
+        <dependency value="imagemin" />
+        <dependency value="svgmin" />
+        <dependency value="filerev" />
+        <dependency value="usemin" />
+        <dependency value="htmlmin" />
+      </alias-task>
+      <alias-task name="reset" info="Alias for &quot;clean:build&quot;, &quot;mkdir&quot;, &quot;dev-update&quot;, &quot;lint&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="clean:build" />
+        <dependency value="mkdir" />
+        <dependency value="dev-update" />
+        <dependency value="lint" />
+      </alias-task>
+      <alias-task name="serve" info="Alias for &quot;concurrent:watchServe&quot; task." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="concurrent:watchServe" />
+      </alias-task>
+      <alias-task name="spec" info="Alias for &quot;clean:build&quot;, &quot;dev-build&quot;, &quot;concurrent:unit-mocha&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="clean:build" />
+        <dependency value="dev-build" />
+        <dependency value="concurrent:unit-mocha" />
+      </alias-task>
+      <alias-task name="spec-chrome" info="Alias for &quot;clean:build&quot;, &quot;dev-build&quot;, &quot;concurrent:chrome&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="clean:build" />
+        <dependency value="dev-build" />
+        <dependency value="concurrent:chrome" />
+      </alias-task>
+      <alias-task name="test" info="Alias for &quot;jshint&quot;, &quot;test-unit&quot;, &quot;test-e2e&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="jshint" />
+        <dependency value="test-unit" />
+        <dependency value="test-e2e" />
+      </alias-task>
+      <alias-task name="test-coverage" info="Alias for &quot;karma:unit-coverage&quot; task." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="karma:unit-coverage" />
+      </alias-task>
+      <alias-task name="test-e2e" info="Alias for &quot;shell:protractor-update&quot;, &quot;connect:test&quot;, &quot;protractor:run&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="shell:protractor-update" />
+        <dependency value="connect:test" />
+        <dependency value="protractor:run" />
+      </alias-task>
+      <alias-task name="test-e2e-firefox" info="Alias for &quot;shell:protractor-update&quot;, &quot;connect:testserver&quot;, &quot;protractor:firefox&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="shell:protractor-update" />
+        <dependency value="connect:testserver" />
+        <dependency value="protractor:firefox" />
+      </alias-task>
+      <alias-task name="test-unit" info="Alias for &quot;karma:unit&quot; task." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="karma:unit" />
+      </alias-task>
+      <alias-task name="test-unit-chrome" info="Alias for &quot;karma:unit-chrome&quot; task." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="karma:unit-chrome" />
+      </alias-task>
+      <alias-task name="travis" info="Alias for &quot;bower:install&quot;, &quot;dev-build&quot;, &quot;test-unit&quot; tasks." file-path="$PROJECT_DIR$/Gruntfile.js">
+        <dependency value="bower:install" />
+        <dependency value="dev-build" />
+        <dependency value="test-unit" />
+      </alias-task>
+      <core-task name="any-newer" info="DEPRECATED TASK.  Use the &quot;newer&quot; task instead" file-path="$PROJECT_DIR$/node_modules/grunt-newer/tasks/newer.js" multi="false" />
+      <core-task name="autoprefixer" info="Prefix CSS files." file-path="$PROJECT_DIR$/node_modules/grunt-autoprefixer/tasks/autoprefixer.js" multi="true">
+        <target value="dev" />
+      </core-task>
+      <core-task name="bundle-client" info="Build browserify bundle including loopback client and angular application code" file-path="$PROJECT_DIR$/Gruntfile.js" multi="false" />
+      <core-task name="clean" info="Clean files and folders." file-path="$PROJECT_DIR$/node_modules/grunt-contrib-clean/tasks/clean.js" multi="true">
+        <target value="all" />
+        <target value="build" />
+        <target value="dist" />
+        <target value="dev" />
+        <target value="temp" />
+        <target value="vendor" />
+      </core-task>
+      <core-task name="coffeelint" info="Validate files with CoffeeLint" file-path="$PROJECT_DIR$/node_modules/grunt-coffeelint/tasks/coffeelint.js" multi="true">
+        <target value="source" />
+        <target value="client-source" />
+        <target value="common-source" />
+        <target value="server-source" />
+        <target value="test" />
+      </core-task>
+      <core-task name="concat" info="Concatenate files." file-path="$PROJECT_DIR$/node_modules/grunt-contrib-concat/tasks/concat.js" multi="true">
+        <target value="generated" />
+      </core-task>
+      <core-task name="concurrent" info="Run grunt tasks concurrently" file-path="$PROJECT_DIR$/node_modules/grunt-concurrent/tasks/concurrent.js" multi="true">
+        <target value="watchServe" />
+        <target value="watchConnect" />
+        <target value="chrome" />
+        <target value="unit" />
+        <target value="unit-mocha" />
+      </core-task>
+      <core-task name="connect" info="Start a connect web server." file-path="$PROJECT_DIR$/node_modules/grunt-contrib-connect/tasks/connect.js" multi="true">
+        <target value="serve" />
+        <target value="test" />
+        <target value="coverage" />
+      </core-task>
+      <core-task name="copy" info="Copy files." file-path="$PROJECT_DIR$/node_modules/grunt-contrib-copy/tasks/copy.js" multi="true">
+        <target value="dev" />
+        <target value="dist" />
+      </core-task>
+      <core-task name="cssmin" info="Minify CSS" file-path="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/tasks/cssmin.js" multi="true">
+        <target value="generated" />
+      </core-task>
+      <core-task name="dispatch" info="Custom task." file-path="$PROJECT_DIR$/node_modules/grunt-dispatch/tasks/dispatch.js" multi="true" />
+      <core-task name="filerev" info="File revisioning based on content hashing" file-path="$PROJECT_DIR$/node_modules/grunt-filerev/tasks/filerev.js" multi="true">
+        <target value="dist" />
+      </core-task>
+      <core-task name="htmlbuild" info="Grunt HTML Builder - Replace scripts and styles, Removes debug parts, append html partials, Template options" file-path="$PROJECT_DIR$/node_modules/grunt-html-build/tasks/build-html.js" multi="true">
+        <target value="dev" />
+        <target value="dist" />
+      </core-task>
+      <core-task name="htmlmin" info="Minify HTML" file-path="$PROJECT_DIR$/node_modules/grunt-contrib-htmlmin/tasks/htmlmin.js" multi="true">
+        <target value="dist" />
+      </core-task>
+      <core-task name="imagemin" info="Minify PNG, JPEG, GIF and SVG images" file-path="$PROJECT_DIR$/node_modules/grunt-contrib-imagemin/tasks/imagemin.js" multi="true">
+        <target value="dist" />
+      </core-task>
+      <core-task name="jade" info="Compile jade templates." file-path="$PROJECT_DIR$/node_modules/grunt-contrib-jade/tasks/jade.js" multi="true">
+        <target value="dev" />
+        <target value="dist" />
+      </core-task>
+      <core-task name="jshint" info="Validate files with JSHint." file-path="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/tasks/jshint.js" multi="true">
+        <target value="build" />
+        <target value="source" />
+        <target value="client-source" />
+        <target value="common-source" />
+        <target value="server-source" />
+        <target value="test" />
+      </core-task>
+      <core-task name="less" info="Compile LESS files to CSS" file-path="$PROJECT_DIR$/node_modules/grunt-contrib-less/tasks/less.js" multi="true">
+        <target value="build" />
+      </core-task>
+      <core-task name="mkdir" info="Make directories." file-path="$PROJECT_DIR$/node_modules/grunt-mkdir/tasks/mkdir.js" multi="true">
+        <target value="build" />
+      </core-task>
+      <core-task name="newer" info="Run a task with only those source files that have been modified since the last successful run." file-path="$PROJECT_DIR$/node_modules/grunt-newer/tasks/newer.js" multi="false" />
+      <core-task name="newer-clean" info="Remove cached timestamps." file-path="$PROJECT_DIR$/node_modules/grunt-newer/tasks/newer.js" multi="false" />
+      <core-task name="newer-postrun" info="Internal task." file-path="$PROJECT_DIR$/node_modules/grunt-newer/tasks/newer.js" multi="false" />
+      <core-task name="ngAnnotate" info="Add, remove and rebuild AngularJS dependency injection annotations" file-path="$PROJECT_DIR$/node_modules/grunt-ng-annotate/tasks/ng-annotate.js" multi="true" />
+      <core-task name="node-inspector" info="Runs node-inspector to debug your node.js JavaScripts" file-path="$PROJECT_DIR$/node_modules/grunt-node-inspector/tasks/inspector.js" multi="true">
+        <target value="serve" />
+      </core-task>
+      <core-task name="nodemon" info="Runs a nodemon monitor of your node.js server." file-path="$PROJECT_DIR$/node_modules/grunt-nodemon/tasks/nodemon.js" multi="true">
+        <target value="serve" />
+      </core-task>
+      <core-task name="reload-assets" info="Signal nodemon through its watch file that a change in the assets directory has occurred" file-path="$PROJECT_DIR$/Gruntfile.js" multi="false" />
+      <core-task name="restart-server" info="Signal nodemon through its watch file that a change in the server code base has occurred" file-path="$PROJECT_DIR$/Gruntfile.js" multi="false" />
+      <core-task name="shell" info="Run shell commands" file-path="$PROJECT_DIR$/node_modules/grunt-shell/tasks/shell.js" multi="true">
+        <target value="protractor-install" />
+        <target value="protractor-update" />
+        <target value="npm-install" />
+        <target value="examples" />
+      </core-task>
+      <core-task name="svgmin" info="Minify SVG" file-path="$PROJECT_DIR$/node_modules/grunt-svgmin/tasks/svgmin.js" multi="true">
+        <target value="dist" />
+      </core-task>
+      <core-task name="uglify" info="Minify files with UglifyJS." file-path="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/tasks/uglify.js" multi="true">
+        <target value="generated" />
+      </core-task>
+      <core-task name="usemin" info="Replaces references to non-minified scripts / stylesheets" file-path="$PROJECT_DIR$/node_modules/grunt-usemin/tasks/usemin.js" multi="true">
+        <target value="html" />
+        <target value="css" />
+      </core-task>
+      <core-task name="useminPrepare" info="Using HTML markup as the primary source of information" file-path="$PROJECT_DIR$/node_modules/grunt-usemin/tasks/usemin.js" multi="true" />
+      <core-task name="watch" info="Run predefined tasks whenever watched files change." file-path="$PROJECT_DIR$/node_modules/grunt-contrib-watch/tasks/watch.js" multi="false">
+        <target value="bower" />
+        <target value="grunt" />
+        <target value="clientScripts" />
+        <target value="serverScripts" />
+        <target value="testScripts" />
+        <target value="indexJade" />
+        <target value="indexHtml" />
+        <target value="templatesJade" />
+        <target value="templatesHtml" />
+        <target value="styles" />
+        <target value="fonts" />
+        <target value="images" />
+        <target value="nodemon" />
+      </core-task>
+      <core-task name="wiredep" info="Inject Bower components into your source code." file-path="$PROJECT_DIR$/node_modules/grunt-wiredep/tasks/wiredep.js" multi="true">
+        <target value="dev" />
+        <target value="dist" />
+      </core-task>
+    </gruntfile>
+  </component>
+  <component name="JsGruntFileManager">
+    <gruntfiles>
+      <GruntfileState>
+        <alias-tasks>
+          <alias-task value="build" />
+          <alias-task value="default" />
+          <alias-task value="test" />
+          <alias-task value="test:client" />
+          <alias-task value="test:common" />
+          <alias-task value="test:server" />
+        </alias-tasks>
+        <multi-tasks>
+          <GruntMultiTaskState>
+            <name>build-config</name>
+          </GruntMultiTaskState>
+          <GruntMultiTaskState>
+            <name>build-lbclient</name>
+          </GruntMultiTaskState>
+          <GruntMultiTaskState>
+            <name>run</name>
+          </GruntMultiTaskState>
+          <GruntMultiTaskState>
+            <name>serve</name>
+          </GruntMultiTaskState>
+          <GruntMultiTaskState>
+            <name>server</name>
+          </GruntMultiTaskState>
+        </multi-tasks>
+        <gruntfile-path>$PROJECT_DIR$/Gruntfile.js</gruntfile-path>
+      </GruntfileState>
+    </gruntfiles>
+    <initial>false</initial>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="Grunt" pattern="file[lb_express_sandbox]:grunt//*" />
+    <order />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-4" />
+    <option name="y" value="-4" />
+    <option name="width" value="1928" />
+    <option name="height" value="1004" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>CSS</id>
+          </State>
+          <State>
+            <id>CoffeeScript</id>
+          </State>
+          <State>
+            <id>Control flow issuesCoffeeScript</id>
+          </State>
+          <State>
+            <id>Dart</id>
+          </State>
+          <State>
+            <id>File Watchers</id>
+          </State>
+          <State>
+            <id>General</id>
+          </State>
+          <State>
+            <id>GeneralCoffeeScript</id>
+          </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>Internationalization issues</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>Probable bugsCoffeeScript</id>
+          </State>
+          <State>
+            <id>Sass/SCSS</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Control flow issuesCoffeeScript</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grunt-usemin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grunt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grunt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="build" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="temp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="build" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dist" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lb_express_sandbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="build" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="editorconfig.notification" value="Applied .editorconfig settings" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="97" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="112" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="112" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="597" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="101" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="111" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="111" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="595" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="options.lastSelected" value="editing.templates" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="FullScreen" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="LayoutCode.rearrangeEntriesCoffeeScript" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/DevProj/Git/lb_express_sandbox/Gruntfile.js&#10;src=&quot;scriptFile&quot;)&#9;null&#9;null" />
+    <property name="TODO_SCOPE" value="Current File" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Language Defaults" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="js.buildTools.grunt.node_interpreter" value="C:\Program Files\nodejs\node.exe" />
+    <property name="js.buildTools.grunt.grunt-cli.package" value="C:\Program Files\nodejs\node_modules\grunt-cli" />
+    <property name="editor.config.accepted" value="true" />
+    <property name="last.edited.regexp" value="Sample Text" />
+    <property name="full.screen.before.presentation.mode" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\DevProj\Git\lb_express_sandbox\grunt\waste" />
+      <recent name="D:\DevProj\Git\lb_express_sandbox\client\src\jchptf\modeling\core" />
+      <recent name="D:\DevProj\Git\lb_express_sandbox\common\models" />
+      <recent name="D:\DevProj\Git\lb_express_sandbox\client\test\" />
+      <recent name="D:\DevProj\Git\lb_express_sandbox\examples" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\DevProj\Git\lb_express_sandbox\client\src" />
+      <recent name="D:\DevProj\Git\lb_express_sandbox\server" />
+      <recent name="D:\DevProj\Git\lb_express_sandbox\grunt\waste" />
+      <recent name="D:\DevProj\Git\lb_express_sandbox\grunt" />
+      <recent name="D:\DevProj\Git\lb_express_sandbox\refJunk" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Node.js Remote Debug.Grunt Remote Debug">
+    <configuration default="false" name="test_traverse.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="$PROJECT_DIR$/test/grunt/test_traverse.js" working-dir="$PROJECT_DIR$/common/components/fsutil">
+      <RunnerSettings RunnerId="Basic" />
+      <ConfigurationWrapper RunnerId="Basic" />
+      <method />
+    </configuration>
+    <configuration default="false" name="manual_build.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="$PROJECT_DIR$/manual_build.js" working-dir="$PROJECT_DIR$">
+      <method />
+    </configuration>
+    <configuration default="false" name="check.coffee" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="check.coffee" working-dir="$PROJECT_DIR$/refJunk/components/modeling/core" coffeescript-run="true">
+      <method />
+    </configuration>
+    <configuration default="false" name="Enum.class.coffee" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="Enum.class.coffee" working-dir="$PROJECT_DIR$/refJunk/components/modeling/core" coffeescript-run="true">
+      <method />
+    </configuration>
+    <configuration default="false" name="doham.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="$PROJECT_DIR$/refJunk/doham.js" working-dir="$PROJECT_DIR$/client/src">
+      <method />
+    </configuration>
+    <configuration default="true" type="ChromiumRemoteDebugType" factoryName="Chromium Remote">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <method />
+    </configuration>
+    <configuration default="true" type="FirefoxRemoteDebugType" factoryName="Firefox Remote">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="JsTestDriver-test-runner" factoryName="JsTestDriver">
+      <setting name="configLocationType" value="CONFIG_FILE" />
+      <setting name="settingsFile" value="" />
+      <setting name="serverType" value="INTERNAL" />
+      <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSRemoteDebug" factoryName="Node.js Remote Debug">
+      <node-js-remote-debug />
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" value="D:\DevProj\Git\lb_express_sandbox\client\ngapp\scripts\jchptf\features" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.grunt" factoryName="Grunt.js">
+      <pass-parent-env-vars value="true" />
+      <force value="false" />
+      <verbose value="false" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="serve:dist" type="js.build_tools.grunt" factoryName="Grunt.js">
+      <gruntfile value="D:\DevProj\Git\lb_express_sandbox\Gruntfile.js" />
+      <tasks>
+        <task value="serve:dist" />
+      </tasks>
+      <pass-parent-env-vars value="true" />
+      <force value="false" />
+      <verbose value="false" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="serve:dev" type="js.build_tools.grunt" factoryName="Grunt.js" singleton="false">
+      <gruntfile value="D:\DevProj\Git\lb_express_sandbox\Gruntfile.js" />
+      <tasks>
+        <task value="serve:dev" />
+      </tasks>
+      <pass-parent-env-vars value="true" />
+      <force value="false" />
+      <verbose value="false" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="build" type="js.build_tools.grunt" factoryName="Grunt.js" singleton="false">
+      <gruntfile value="D:\DevProj\Git\lb_express_sandbox\Gruntfile.js" />
+      <tasks>
+        <task value="build" />
+      </tasks>
+      <pass-parent-env-vars value="true" />
+      <force value="false" />
+      <verbose value="false" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="browserify" type="js.build_tools.grunt" factoryName="Grunt.js" singleton="false">
+      <gruntfile value="D:\DevProj\Git\lb_express_sandbox\Gruntfile.js" />
+      <tasks>
+        <task value="browserify" />
+      </tasks>
+      <pass-parent-env-vars value="true" />
+      <force value="false" />
+      <verbose value="false" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="enum.js" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="enum.js" working-dir="$PROJECT_DIR$/junk/enumeration/enum" coffeescript-path="C:\Program Files\nodejs\node_modules\coffee-script\bin\coffee">
+      <RunnerSettings RunnerId="Basic" />
+      <ConfigurationWrapper RunnerId="Basic" />
+      <method />
+    </configuration>
+    <configuration default="false" name="foo.js" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="foo.js" working-dir="$PROJECT_DIR$/junk/enumeration/enum" coffeescript-path="C:\Program Files\nodejs\node_modules\coffee-script\bin\coffee">
+      <RunnerSettings RunnerId="Basic" />
+      <RunnerSettings RunnerId="debuggableProgram" />
+      <ConfigurationWrapper RunnerId="Basic" />
+      <ConfigurationWrapper RunnerId="debuggableProgram" />
+      <method />
+    </configuration>
+    <configuration default="false" name="doRun.js" type="NodeJSConfigurationType" factoryName="Node.js" singleton="false" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="doRun.js" working-dir="$PROJECT_DIR$/junk/enumeration/enum" coffeescript-path="C:\Program Files\nodejs\node_modules\coffee-script\bin\coffee">
+      <RunnerSettings RunnerId="debuggableProgram" />
+      <ConfigurationWrapper RunnerId="debuggableProgram" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Grunt Remote Debug" type="NodeJSRemoteDebug" factoryName="Node.js Remote Debug">
+      <node-js-remote-debug />
+      <method />
+    </configuration>
+    <list size="13">
+      <item index="0" class="java.lang.String" itemvalue="Grunt.js.serve:dist" />
+      <item index="1" class="java.lang.String" itemvalue="Grunt.js.serve:dev" />
+      <item index="2" class="java.lang.String" itemvalue="Grunt.js.build" />
+      <item index="3" class="java.lang.String" itemvalue="Grunt.js.browserify" />
+      <item index="4" class="java.lang.String" itemvalue="Node.js.enum.js" />
+      <item index="5" class="java.lang.String" itemvalue="Node.js.foo.js" />
+      <item index="6" class="java.lang.String" itemvalue="Node.js.doRun.js" />
+      <item index="7" class="java.lang.String" itemvalue="Node.js.test_traverse.js" />
+      <item index="8" class="java.lang.String" itemvalue="Node.js.manual_build.js" />
+      <item index="9" class="java.lang.String" itemvalue="Node.js.check.coffee" />
+      <item index="10" class="java.lang.String" itemvalue="Node.js.Enum.class.coffee" />
+      <item index="11" class="java.lang.String" itemvalue="Node.js.doham.js" />
+      <item index="12" class="java.lang.String" itemvalue="Node.js Remote Debug.Grunt Remote Debug" />
+    </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Node.js.doham.js" />
+        <item index="1" class="java.lang.String" itemvalue="Node.js.Enum.class.coffee" />
+        <item index="2" class="java.lang.String" itemvalue="Node.js.check.coffee" />
+        <item index="3" class="java.lang.String" itemvalue="Node.js.manual_build.js" />
+        <item index="4" class="java.lang.String" itemvalue="Node.js.test_traverse.js" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ce66efd9-20b6-40ad-be08-cea910b89a9e" name="Default" comment="" />
+      <created>1430535077372</created>
+      <option name="number" value="Default" />
+      <updated>1430535077372</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView" selected-index="2" />
+  <component name="ToolWindowManager">
+    <frame x="-4" y="-4" width="1928" height="1004" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1849315" sideWeight="0.91639346" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928178" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Grunt " active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.35879874" sideWeight="0.083606556" order="2" side_tool="true" content_ui="tabs" x="266" y="155" width="1171" height="502" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44922736" sideWeight="0.31243414" order="13" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32486188" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32707182" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.45288754" sideWeight="0.47207588" order="6" side_tool="false" content_ui="tabs" x="463" y="496" width="1225" height="409" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973656" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49723756" sideWeight="0.68756586" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6265193" sideWeight="0.58848614" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32955715" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39889503" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2745694" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/client/ngapp/scripts/jchptf/context/ContextModelPackage.factory.coffee</url>
+          <line>21</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/client/src/jchptf/modeling/core/CoreModelPackage.service.js</url>
+          <line>1</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/node_modules/remapify/lib/remapify.js</url>
+          <line>97</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/Gruntfile.js</url>
+          <line>16</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/node_modules/grunt-html-build/tasks/build-html.js</url>
+          <line>65</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="26" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/grunt/imagemin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt/svgmin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/grunt-html-build/docs/remove.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/grunt-html-build/docs/reuse.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.266667">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/grunt-html-build/docs/process.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.2">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/grunt-html-build/docs/sections.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="6.366667">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/vendor/bootstrap/grunt/bs-commonjs-generator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/vendor/bootstrap/dist/js/bootstrap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.409836">
+          <caret line="7" column="50" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="50" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/vendor/bootstrap/dist/js/npm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/vendor/bootstrap/less/responsive-embed.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/jchptf/jchptf.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.7118644">
+          <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/vendor/bootstrap/dist/css/bootstrap-theme.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="18" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/vendor/bootstrap/less/responsive-utilities.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.0845587">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/vendor/bootstrap/less/theme.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/vendor/bootstrap/less/bootstrap.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07720588">
+          <caret line="3" column="35" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/vendor/bootstrap/dist/css/bootstrap-theme.css.map">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt/mkdir.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="52" selection-start-line="12" selection-start-column="52" selection-end-line="12" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt/autoprefixer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding>
+            <marker date="1450265712876" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1450265712876" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1450265712876" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1450265712876" expanded="true" signature="-1:-1" placeholder="[...]" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/load-grunt-config/lib/readfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/load-grunt-config/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="21" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/load-grunt-tasks/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/grunt-html-build/samples/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="42.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/grunt-html-build/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0677966">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/grunt-html-build/docs/options.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="33.666668">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/grunt-html-build/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.8">
+          <caret line="68" column="65" selection-start-line="68" selection-start-column="62" selection-end-line="68" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/grunt-html-build/docs/scripts_styles_link.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="24.916666">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/grunt-html-build/Gruntfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gruntfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+          <folding>
+            <marker date="1450279689141" expanded="true" signature="-1:-1" placeholder="{&quot;init&quot;: true...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/grunt-contrib-jade/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.129032">
+          <caret line="98" column="40" selection-start-line="98" selection-start-column="40" selection-end-line="98" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt/htmlmin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="106.933334">
+          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/grunt-wiredep/readme.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.903226">
+          <caret line="52" column="60" selection-start-line="52" selection-start-column="60" selection-end-line="52" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/grunt-html-build/tasks/build-html.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="341" column="42" selection-start-line="341" selection-start-column="42" selection-end-line="341" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/grunt-usemin/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="217.32259">
+          <caret line="305" column="0" selection-start-line="305" selection-start-column="0" selection-end-line="305" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/index.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="26" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt/utils/appConfig.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt/less.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt/copy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+          <folding>
+            <marker date="1450292966574" expanded="true" signature="402:3594" placeholder="{...}" />
+            <marker date="1450292966574" expanded="true" signature="874:1462" placeholder="[...]" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt/usemin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.8">
+          <caret line="54" column="9" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt/useminPrepare.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt/aliases.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="214" column="10" selection-start-line="214" selection-start-column="10" selection-end-line="214" selection-end-column="10" />
+          <folding>
+            <marker date="1450293753634" expanded="true" signature="2618:3197" placeholder="make-dev-build:" />
+            <marker date="1450293753634" expanded="true" signature="3197:3253" placeholder="cont-dist-build:" />
+            <marker date="1450293753634" expanded="true" signature="3197:4198" placeholder="cont-dist-build:" />
+            <marker date="1450293753634" expanded="true" signature="4300:4492" placeholder="minify:" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt/utils/customTasks.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="41" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
+          <folding>
+            <marker date="1450294753138" expanded="true" signature="86:2055" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt/utils/buildBundle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="113" column="43" selection-start-line="113" selection-start-column="43" selection-end-line="113" selection-end-column="43" />
+          <folding>
+            <marker date="1450293538483" expanded="true" signature="285:1745" placeholder="/** Applies the alias name transformation rule for angular application scripts using this project's file layout ...*/" />
+            <marker date="1450293538483" expanded="true" signature="4032:7082" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt/htmlbuild.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+          <folding>
+            <marker date="1450295157918" expanded="true" signature="1016:1023" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt/wiredep.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="47" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
+          <folding>
+            <marker date="1450295170867" expanded="true" signature="594:599" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt/jade.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.54545456">
+          <caret line="35" column="40" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
+          <folding>
+            <marker date="1450293020991" expanded="true" signature="233:387" placeholder="{...}" />
+            <marker date="1450293020991" expanded="true" signature="387:394" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <last-edited>Grunt</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+          <order>
+            <scope name="Grunt" />
+          </order>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
