@@ -1,4 +1,0 @@
-var obj = require('./cons');
-var e = obj.makeE();
-
-var contentString = 'cheap__worku_p_each__es_i_n__ahoytactical_d_o___n__e_d_majesty_e_s__a_u_o_c_asew_l_n_h_no__landlordalso__e___ar__g__rural';

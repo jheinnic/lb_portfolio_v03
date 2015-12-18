@@ -1,8 +1,0 @@
-{ app: 'client/ngapp',
-  vendor: 'client/ngapp/vendor',
-  dist: 'client/dist',
-  tempfiles: '.tmp' }
-Running "clean:all" (clean) task
->> 162 paths cleaned.
-
-Done, without errors.

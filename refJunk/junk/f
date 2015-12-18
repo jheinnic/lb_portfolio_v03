@@ -1,3 +1,0 @@
-function( db ) {
-  db.restaurants.find();
-}
