@@ -5,7 +5,9 @@
   "options": { },
   "properties": {
     "kind": {
-      "default": "short"
+      "type": "string",
+      "default": "short",
+      "pattern": "/^short$/"
     }
   },
   "validations": [],

@@ -14,12 +14,12 @@
     "kind": {
       "type": "string",
       "required": false,
-      "pattern": "/open|word|short|blocked/"
+      "pattern": "/^(open|word|short|blocked)$/"
     },
     "orientation": {
       "type": "string",
       "required": true,
-      "pattern": "/horizontal|vertical/"
+      "pattern": "/^horizontal$|^vertical$/"
     }
   },
   "validations": [],

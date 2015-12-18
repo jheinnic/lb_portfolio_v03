@@ -5,7 +5,9 @@
   "options": { },
   "properties": {
     "kind": {
-      "default": "blocked"
+      "type": "string",
+      "default": "blocked",
+      "pattern": "/^blocked$/"
     }
   },
   "validations": [],

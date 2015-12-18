@@ -5,7 +5,9 @@
   "options": { },
   "properties": {
     "kind": {
-      "default": "word"
+      "type": "string",
+      "default": "word",
+      "pattern": "^word$"
     },
     "forDisplay": {
       "type": "string",
