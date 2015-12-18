@@ -46,8 +46,7 @@
               console.log(data.utf8Slice(0));
               fs.writeFile(
                 indexHtml,
-                grunt.util.normalizelf(
-                  data.utf8Slice(0)
+                grunt.util.normalizelf(data.utf8Slice(0)
                 ).replace(/><!--/g, '>' + grunt.util.linefeed + '<!--'
                 ).replace(/--></g, '-->' + grunt.util.linefeed + '<'
                 ),

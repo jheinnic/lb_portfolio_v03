@@ -10,7 +10,8 @@ module.exports = function mkdir(grunt, options) {
         create: [
           appConfig.vendor, appConfig.node, 'bower_components', 'node_modules',
           appConfig.dist.client, appConfig.dist.common, appConfig.dist.server,
-          appConfig.dev.client, appConfig.temp.client
+          appConfig.dev.client, appConfig.dev.common,
+	  appConfig.temp.client, appConfig.temp.server
         ]
       }
     }

@@ -32,9 +32,9 @@ module.exports = function copy(grunt, options) {
     dev: {
       files: [
         {
-          // NOTE: Jade trumps static HTML when names collide.  By copying the static
-          //       files before resolving Jade, we ensure that Jade overwrites any name
-          //       conflicts without excluding non-conflicting static HTML.
+          // NOTE: Jade trumps static HTML when names collide.  By copying
+          //       static files before resolving Jade templates, Jade will
+	  //       win name conflicts as designed.
           expand: true,
           dot: true,
           cwd: appConfig.source.client,
@@ -43,7 +43,13 @@ module.exports = function copy(grunt, options) {
             appConfig.app + '/' + devAssetsPattern, '**/*.json', 'lr_init.js'
           ],
           dest: appConfig.dev.client
-        }
+        }, {
+	  expand: true,
+	  dot: true,
+	  cwd: appConfig.source.common,
+	  src: ['**/*'],
+          dest: appConfig.dev.common
+	}
       ]
     },
     dist: {
@@ -74,14 +80,14 @@ module.exports = function copy(grunt, options) {
             appConfig.app + '/.htaccess',
             appConfig.app + '/*.{ico,txt}',
             appConfig.app + '/**/*.{webp,eot,ttf,woff,woff2}',
-            '**/*.json'
+            '{,models/}*.json'
           ],
           dest: appConfig.dist.client
         }, {
           dot: true,
           expand: true,
           cwd: appConfig.dev.client,
-          src: ['app.js', '**/_*.css', '**/*.html', '!index.html'],
+          src: ['app.js', appConfig.app + '**/_*.css', appConfig.app + '**/*.html'],
           dest: appConfig.dist.client
         }, {
           dot: true,

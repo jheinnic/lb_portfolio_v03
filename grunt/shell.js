@@ -19,6 +19,12 @@ module.exports = function shell(/*grunt, options*/) {
     'npm-install': {
       command: 'npm install'
     },
+    'node-inspector-install': {
+      command: 'npm install node-inspector'
+    },
+    'node-inspector-remove': {
+      command: 'npm remove node-inspector'
+    },
     'imagemin-jpg': {
       command: 'npm run postinstall',
       options: {
