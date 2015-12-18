@@ -1,7 +1,7 @@
 {
-  "initial:after": {
+  "routes": {
     "connect-livereload": {
-      "port": 32769
+      "port": 35729
     }
   }
 }
