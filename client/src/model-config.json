@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "sources": ["../../common/models", "./models"],
-    "mixins": ["../../common/mixins", "./mixins"]
+    "sources": ["../../common/models", "../common/models", "./models"],
+    "mixins": ["../../common/mixins", "../common/mixins", "./mixins"]
   },
   "Todo": {
     "dataSource": "remote"
