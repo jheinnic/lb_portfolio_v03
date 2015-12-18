@@ -1,29 +1,29 @@
 (function() {
   'use strict';
 
-  module.exports = navigationConfig;
-  navigationConfig.$inject=['$stateProvider'];
+  module.exports = brandingConfig;
+  brandingConfig.$inject = []; // ['$stateProvider'];
 
   /**
    * @ngdoc method
-   * @name jchptf.site.navigation:config
+   * @name jchptf.site.branding:config
    *
    * @description
-   * Routing configuration for portfolio application's navigation module.
+   * Routing configuration for portfolio application's branding module.
    * Defines the landing page, /home.
    */
-  function navigationConfig ($stateProvider) {
-    $stateProvider.state(
-      'home',
-      {
-        url: '/home',
-        templateUrl: 'views/jchptf/site/navigation/home.view.html',
-        controller: 'HomeController',
-        controllerAs: 'home',
-        abstract: false,
-        authenticate: true
-      }
-    );
+  function brandingConfig (/*$stateProvider*/) {
+    //$stateProvider.state(
+    //  'home',
+    //  {
+    //    url: '/home',
+    //    templateUrl: 'views/jchptf/site/branding/home.view.html',
+    //    controller: 'Home',
+    //    controllerAs: 'home',
+    //    abstract: false,
+    //    authenticate: true
+    //  }
+    //);
   }
 
     /*

@@ -36,11 +36,11 @@
 
       index: {
         files: [appConfig.source.client + '/index.{html,jade}'],
-        tasks: ['newer:copy:dev', 'newer:jade:dev', 'wiredep:dev', 'htmlbuild:dev', 'reload-assets']
+        tasks: ['newer:copy:dev', 'newer:jade:build', 'wiredep:dev', 'htmlbuild:dev', 'reload-assets']
       },
       templates: {
         files: [appModRoot + '/**/*.{html,jade}'],
-        tasks: ['newer:copy:dev', 'newer:jade:templates', 'reload-assets']
+        tasks: ['newer:copy:dev', 'newer:jade:build', 'reload-assets']
       },
 
       styles: {

@@ -1,18 +1,22 @@
 (function() {
   'use strict';
 
-  module.exports = navigationConfig;
-  navigationConfig.$inject=['$stateProvider'];
+  module.exports = siteNavigationConfig;
+  siteNavigationConfig.$inject=['$stateProvider'];
+
+  console.log('Loading site config');
 
   /**
    * @ngdoc method
-   * @name jchptf.site.navigation:config
+   * @name jchptf.site.navigation.siteNavigation:config
    *
    * @description
-   * Routing configuration for portfolio application's navigation module.
+   * Routing configuration for portfolio application's siteNavigation module.
    * Defines the landing page, /home.
    */
-  function navigationConfig ($stateProvider) {
+  function siteNavigationConfig ($stateProvider) {
+    console.log('Running site config');
+    console.log('Defining home');
     $stateProvider.state(
       'home',
       {

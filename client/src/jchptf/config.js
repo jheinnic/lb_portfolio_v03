@@ -1,6 +1,7 @@
 (function() {
   'use strict';
 
+  console.log('Loading jchptf config');
   module.exports = portfolioModuleConfig;
   portfolioModuleConfig.$inject=['$locationProvider'];
   // portfolioModuleConfig.$inject=['$locationProvider', '$repositoryProvider'];
@@ -11,14 +12,16 @@
   // altPortfolioModuleConfig.$inject=['$locationProvider', '$repositoryProvider', '$urlRouterProvider'];
   altPortfolioModuleConfig.$inject=['$locationProvider', '$urlRouterProvider'];
 
-  function portfolioModuleConfig($locationProvider, $repositoryProvider) {
+  function portfolioModuleConfig($locationProvider) {
+    console.log('Running jchptf config');
+
     // Enable HTML5 URL mode
     $locationProvider.html5Mode(true);
 
     // $repositoryProvider.setLocalRootDirectory('D:\\DevProj\\Git\\lb_express_sandbox\\junk\\repository\\');
     // TBD
     // console.log($repositoryProvider);
-    if ($repositoryProvider) { $repositoryProvider = undefined; }
+    // if ($repositoryProvider) { $repositoryProvider = undefined; }
   }
 
   function altPortfolioModuleConfig($locationProvider, $repositoryProvider, $urlRouterProvider) {

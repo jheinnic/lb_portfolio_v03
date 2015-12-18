@@ -3,7 +3,7 @@
 ModelObject = require('./ModelObject.class')
 _ = require('lodash')
 
-module.exports = class Enum extends ModelObject
+class Enum extends ModelObject
   @$inject = []
 
   _name: undefined
@@ -89,3 +89,5 @@ module.exports = class Enum extends ModelObject
   ordinal: () -> return @ordinal
   compareTo: (other) -> return if @getType() == other.getType() then @ordinal - other.ordinal else undefined
   toString: () -> return "#{@getType().name}::#{@name}(#{@ordinal})"
+
+module.exports = Enum

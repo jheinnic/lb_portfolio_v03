@@ -1,12 +1,10 @@
 'use strict'
 
-module.exports = ModelObject
-
 ###*
 # Base class to help Documents keep track of their contained objects and to help Objects find their
 # immediate parent and root ancestor DataObject containers.
 ###
-class ModelObject
+module.exports = class ModelObject
   @getSuperType: ->
     retVal = undefined
     if @ != ModelObject then retVal = @__super__.constructor

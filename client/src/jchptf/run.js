@@ -3,22 +3,14 @@
 
   module.exports = portfolioAppLauncher;
 
+  console.log('Loading jchptf run');
   // require('jchptf').run(portfolioAppLauncher);
   // angular.module('jchptf').run(portfolioAppLauncher);
 
-  portfolioAppLauncher.$inject=['$rootScope', '$state'];
+  portfolioAppLauncher.$inject=['$state'];
 
-  function portfolioAppLauncher ($rootScope, $state) {
-    // var latestEvent = IdentityContext.getAuthTokenStatus();
-
-    // var eventType = latestEvent.getEventType();
-    var eventType = true;
-    if (eventType) {
-      $state.go('home', {reload: false});
-    } else {
-      // $state.go('loginForm.showForm', {reload: false});
-      $state.go('loginForm', {reload: false});
-    }
+  function portfolioAppLauncher ($state) {
+    console.log('Running jchptf run: ', $state);
   }
 
 }).call(window);

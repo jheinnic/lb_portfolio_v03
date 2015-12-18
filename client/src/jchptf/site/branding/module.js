@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  module.exports = 'jchptf.site.navigation';
+  module.exports = 'jchptf.site.branding';
 
   /**
    * @ngdoc overview
@@ -9,7 +9,7 @@
    * @description TODO
    */
   angular.module(
-    'jchptf.site.navigation',
+    module.exports,
     [
       'ui.router',
       /*

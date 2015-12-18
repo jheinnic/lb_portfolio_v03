@@ -13,9 +13,9 @@
    * from places where events trigger.
    */
   angular.module(
-    'jchptf.site.notification',
-    ['ng', /*'ui.bootstrap',*/ 'toastr'],
-    require('./config')
+    module.exports,
+    ['ng', /*'ui.bootstrap', 'toastr'*/] //,
+    // require('./config')
   )
   ;
 }).call(window, angular);

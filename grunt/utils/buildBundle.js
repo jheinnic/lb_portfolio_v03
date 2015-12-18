@@ -33,22 +33,24 @@
    * @param {string} A glob-returned file path to add a browserify registration for.
    */
   function registerFileByModuleAlias(b, appConfig, fileGlobPath) {
-    var registeredFilePath = path.relative(appConfig.source.client, fileGlobPath).replace(/\\/g, '/');
-    var moduleFQN = path.dirname(registeredFilePath).replace(/\//g, '.');
-    var baseName = path.basename(registeredFilePath).replace(/\.coffee$|\.js$/, '');
-    var exposedName;
+    if (fileGlobPath !== appConfig.app + '/module.js' || fileGlobPath !== appConfig.app + '/module.coffee') {
+      var registeredFilePath = path.relative(appConfig.source.client, fileGlobPath).replace(/\\/g, '/');
+      var moduleFQN = path.dirname(registeredFilePath).replace(/\//g, '.');
+      var baseName = path.basename(registeredFilePath).replace(/\.coffee$|\.js$/, '');
+      var exposedName;
 
-    // For module.{js|coffee} (module descriptor file), omit '/module' and use FQN alone for file name.
-    if (baseName === 'module') {
-      exposedName = moduleFQN;
-    } else {
-      exposedName = moduleFQN + '/' + baseName;
+      // For module.{js|coffee} (module descriptor file), omit '/module' and use FQN alone for file name.
+      if (baseName === 'module') {
+        exposedName = moduleFQN;
+      } else {
+        exposedName = moduleFQN + '/' + baseName;
+      }
+
+      registeredFilePath = './' + registeredFilePath;
+      // console.log(fileGlobPath, registeredFilePath, moduleFQN, exposedName);
+
+      b.add(registeredFilePath, {expose: exposedName});
     }
-
-    registeredFilePath = './' + registeredFilePath;
-    // console.log(fileGlobPath, registeredFilePath, moduleFQN, exposedName);
-
-    b.add(registeredFilePath, {expose: exposedName});
   }
 
 
@@ -88,8 +90,6 @@
 
     // Configure browserify to load Loopback and Main Angular Application Module to bootstrap bundle activation on load.
     b.add( './lbclient.js', { expose: 'lbclient' } );
-    // b.add( 'boot/replication.js', { expose: 'boot/replication' } );
-    // b.add( 'datasources.local.js', { expose: 'datasources.local' } );
     b.require(sprintf('./%s/module.js', appConfig.app), { expose: appConfig.app });
 
     var clientSrcDir  = path.normalize(

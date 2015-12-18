@@ -18,14 +18,14 @@
    * their services.
    */
   angular.module(
-    'jchptf',
+    module.exports,
     [
       'ng',
       'ui.router',
       /* require('jchptf.context'),
        require('jchptf.site.notification'),
-       require('jchptf.authenticate'),*/
-      require('jchptf.lbclient'),
+       require('jchptf.authenticate'),
+      require('jchptf.lbclient'),*/
       require('jchptf.site.navigation')
     ],
     require('./config')
