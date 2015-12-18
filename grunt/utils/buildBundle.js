@@ -32,27 +32,21 @@
    * @param {Browserify} Browserify runtime object
    * @param {string} A glob-returned file path to add a browserify registration for.
    */
-  function registerFileByModuleAlias(b, appConfig, relativeCommon, fileGlobPath) {
+  function registerFileByModuleAlias(b, appConfig, fileGlobPath) {
     var registeredFilePath = path.relative(appConfig.source.client, fileGlobPath).replace(/\\/g, '/');
+    var moduleFQN = path.dirname(registeredFilePath).replace(/\//g, '.');
+    var baseName = path.basename(registeredFilePath).replace(/\.coffee$|\.js$/, '');
     var exposedName;
 
-    if (/^common/.test(fileGlobPath)) {
-      exposedName = registeredFilePath.replace('^common', relativeCommon);
-      console.log(fileGlobPath, registeredFilePath, exposedName);
+    // For module.{js|coffee} (module descriptor file), omit '/module' and use FQN alone for file name.
+    if (baseName === 'module') {
+      exposedName = moduleFQN;
     } else {
-      var moduleFQN = path.dirname(registeredFilePath).replace(/\//g, '.');
-      var baseName = path.basename(registeredFilePath).replace(/\.coffee$|\.js$/, '');
-
-      // For module.{js|coffee} (module descriptor file), omit '/module' and use FQN alone for file name.
-      if (baseName === 'module') {
-        exposedName = moduleFQN;
-      } else {
-        exposedName = moduleFQN + '/' + baseName;
-      }
-
-      registeredFilePath = './' + registeredFilePath;
-      // console.log(fileGlobPath, registeredFilePath, moduleFQN, exposedName);
+      exposedName = moduleFQN + '/' + baseName;
     }
+
+    registeredFilePath = './' + registeredFilePath;
+    // console.log(fileGlobPath, registeredFilePath, moduleFQN, exposedName);
 
     b.add(registeredFilePath, {expose: exposedName});
   }
@@ -80,9 +74,6 @@
     b.transform(require('coffeeify'));
     b._extensions.push('.coffee');
 
-    var relativeCommon = path.relative(appConfig.source.client, appConfig.source.common).replace(/\\/g, '\/');
-    var globPathHandler = _.partial(registerFileByModuleAlias, b, appConfig, relativeCommon);
-
     // Construct file glob and normalized absolute path for use with grunt and browserify here.
     // Register source files using the moduleFQN/fileName convention described in function comment block.
     var sourceGlob    = appConfig.source.client + '/' + appConfig.app + '/**/*.{js,coffee,json}';
@@ -92,17 +83,7 @@
         { sync: true, strict: true, stat: false, dot: true,
           nonull: false, nosort: true, nounique: true, nodir: true }
       ),
-      globPathHandler
-    );
-
-    sourceGlob = appConfig.source.common + '/**/*.{js,coffee,json}';
-    _.forEach(
-      grunt.file.glob(
-        sourceGlob,
-        { sync: true, strict: true, stat: false, dot: true,
-          nonull: false, nosort: true, nounique: true, nodir: true }
-      ),
-      globPathHandler
+      _.partial(registerFileByModuleAlias, b, appConfig)
     );
 
     // Configure browserify to load Loopback and Main Angular Application Module to bootstrap bundle activation on load.
