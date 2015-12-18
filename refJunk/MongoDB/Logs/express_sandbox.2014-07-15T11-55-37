@@ -1,0 +1,31 @@
+Mon Jul 14 15:15:37.902 Trying to start Windows service 'MongoDB'
+Mon Jul 14 15:15:37.908 Service running
+Mon Jul 14 15:15:37.937 [initandlisten] MongoDB starting : pid=2668 port=27017 dbpath=E:\temp\MongoDB\express_sandbox 64-bit host=DEUSEXMACHINA
+Mon Jul 14 15:15:37.937 [initandlisten] db version v2.4.8
+Mon Jul 14 15:15:37.937 [initandlisten] git version: a350fc38922fbda2cec8d5dd842237b904eafc14
+Mon Jul 14 15:15:37.937 [initandlisten] build info: windows sys.getwindowsversion(major=6, minor=1, build=7601, platform=2, service_pack='Service Pack 1') BOOST_LIB_VERSION=1_49
+Mon Jul 14 15:15:37.937 [initandlisten] allocator: system
+Mon Jul 14 15:15:37.937 [initandlisten] options: { dbpath: "E:\temp\MongoDB\express_sandbox", logpath: "E:\temp\MongoDB\Logs\express_sandbox", service: true, smallfiles: true }
+Mon Jul 14 15:15:37.976 [initandlisten] journal dir=E:\temp\MongoDB\express_sandbox\journal
+Mon Jul 14 15:15:37.977 [initandlisten] recover : no journal files present, no recovery needed
+Mon Jul 14 15:15:38.155 [initandlisten] waiting for connections on port 27017
+Mon Jul 14 15:15:38.254 [websvr] admin web console waiting for connections on port 28017
+Tue Jul 15 04:52:37.178 CTRL_SHUTDOWN_EVENT signal
+Tue Jul 15 04:52:37.178 [consoleTerminate] got CTRL_SHUTDOWN_EVENT, will terminate after current cmd ends
+Tue Jul 15 04:52:37.178 [consoleTerminate] now exiting
+Tue Jul 15 04:52:37.178 dbexit: 
+Tue Jul 15 04:52:37.178 [consoleTerminate] shutdown: going to close listening sockets...
+Tue Jul 15 04:52:37.179 [consoleTerminate] closing listening socket: 552
+Tue Jul 15 04:52:37.179 [consoleTerminate] closing listening socket: 564
+Tue Jul 15 04:52:37.179 [consoleTerminate] shutdown: going to flush diaglog...
+Tue Jul 15 04:52:37.179 [consoleTerminate] shutdown: going to close sockets...
+Tue Jul 15 04:52:37.179 [consoleTerminate] shutdown: waiting for fs preallocator...
+Tue Jul 15 04:52:37.179 [consoleTerminate] shutdown: lock for final commit...
+Tue Jul 15 04:52:37.179 [consoleTerminate] shutdown: final commit...
+Tue Jul 15 04:52:37.179 [consoleTerminate] shutdown: closing all files...
+Tue Jul 15 04:52:37.179 [consoleTerminate] closeAllFiles() finished
+Tue Jul 15 04:52:37.179 [consoleTerminate] journalCleanup...
+Tue Jul 15 04:52:38.001 [DataFileSync] ERROR: Client::shutdown not called: DataFileSync
+Tue Jul 15 04:52:40.748 [consoleTerminate] removeJournalFiles
+Tue Jul 15 04:52:40.749 [consoleTerminate] shutdown: removing fs lock...
+Tue Jul 15 04:52:40.750 dbexit: really exiting now

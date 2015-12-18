@@ -1,0 +1,30 @@
+###*
+# Base class to help Documents keep track of their contained objects and to help Objects find their
+# immediate parent and root ancestor DataObject containers.
+###
+class ModelObject
+  @getSuperType: ->
+    retVal = undefined
+    if @ != DomainObject then retVal = @__super__.constructor
+    return undefined
+  @isSuperTypeOf: (target) ->
+    throw new Error("target argument must be defined") unless target?
+    throw new Error("target argument must be a ModelObject subtype") unless ModelObject.isSuperTypeOf(target)
+    return @::.isPrototypeOf(target::)
+  @isSubTypeOf: (target) ->
+    throw new Error("target argument must be defined") unless target?
+    throw new Error("target argument must be a ModelObject subtype") unless ModelObject.isSuperTypeOf(target)
+    return target::.isPrototypeOf(@::)
+
+  getType: -> return @constructor
+  getSuperType: -> return @getType().getSuperType()
+  hasSuperTypeOf: (target) -> return @getType().isSuperTypeOf(target)
+  hasSubTypeOf: (target) -> return @getType().isSubTypeOf(target)
+
+  equals: (other) -> return this == other
+
+module.exports = ModelObject
+console.log('a')
+console.log(module.exports)
+console.log('b')
+

@@ -1,0 +1,34 @@
+Sat Jun 28 19:56:57.564 Trying to start Windows service 'MongoDB'
+Sat Jun 28 19:56:57.567 Service running
+Sat Jun 28 19:56:57.587 [initandlisten] MongoDB starting : pid=2956 port=27017 dbpath=E:\temp\MongoDB\express_sandbox 64-bit host=DEUSEXMACHINA
+Sat Jun 28 19:56:57.587 [initandlisten] db version v2.4.8
+Sat Jun 28 19:56:57.587 [initandlisten] git version: a350fc38922fbda2cec8d5dd842237b904eafc14
+Sat Jun 28 19:56:57.587 [initandlisten] build info: windows sys.getwindowsversion(major=6, minor=1, build=7601, platform=2, service_pack='Service Pack 1') BOOST_LIB_VERSION=1_49
+Sat Jun 28 19:56:57.587 [initandlisten] allocator: system
+Sat Jun 28 19:56:57.587 [initandlisten] options: { dbpath: "E:\temp\MongoDB\express_sandbox", logpath: "E:\temp\MongoDB\Logs\express_sandbox", service: true, smallfiles: true }
+Sat Jun 28 19:56:57.627 [initandlisten] journal dir=E:\temp\MongoDB\express_sandbox\journal
+Sat Jun 28 19:56:57.628 [initandlisten] recover : no journal files present, no recovery needed
+Sat Jun 28 19:56:57.817 [initandlisten] waiting for connections on port 27017
+Sat Jun 28 19:56:57.917 [websvr] admin web console waiting for connections on port 28017
+Thu Jul 03 07:39:01.058 [DataFileSync] flushing mmaps took 11471ms  for 2 files
+Thu Jul 03 08:39:00.996 [DataFileSync] flushing mmaps took 11084ms  for 2 files
+Thu Jul 03 09:39:01.085 [DataFileSync] flushing mmaps took 11165ms  for 2 files
+Thu Jul 03 13:39:01.103 [DataFileSync] flushing mmaps took 11148ms  for 2 files
+Tue Jul 08 16:57:04.620 [serviceShutdown] got SERVICE_CONTROL_STOP request from Windows Service Control Manager, will terminate after current cmd ends
+Tue Jul 08 16:57:04.632 [serviceShutdown] now exiting
+Tue Jul 08 16:57:04.632 dbexit: 
+Tue Jul 08 16:57:04.633 [serviceShutdown] shutdown: going to close listening sockets...
+Tue Jul 08 16:57:04.633 [serviceShutdown] closing listening socket: 552
+Tue Jul 08 16:57:04.633 [serviceShutdown] closing listening socket: 564
+Tue Jul 08 16:57:04.633 [serviceShutdown] shutdown: going to flush diaglog...
+Tue Jul 08 16:57:04.633 [serviceShutdown] shutdown: going to close sockets...
+Tue Jul 08 16:57:04.633 [serviceShutdown] shutdown: waiting for fs preallocator...
+Tue Jul 08 16:57:04.634 [serviceShutdown] shutdown: lock for final commit...
+Tue Jul 08 16:57:04.634 [serviceShutdown] shutdown: final commit...
+Tue Jul 08 16:57:04.634 [serviceShutdown] shutdown: closing all files...
+Tue Jul 08 16:57:04.636 [serviceShutdown] closeAllFiles() finished
+Tue Jul 08 16:57:04.637 [serviceShutdown] journalCleanup...
+Tue Jul 08 16:57:04.637 [serviceShutdown] removeJournalFiles
+Tue Jul 08 16:57:04.650 [serviceShutdown] shutdown: removing fs lock...
+Tue Jul 08 16:57:04.650 [initandlisten] now exiting
+Tue Jul 08 16:57:04.651 dbexit: ; exiting immediately

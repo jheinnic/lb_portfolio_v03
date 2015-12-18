@@ -1,0 +1,30 @@
+Fri Jun 27 15:44:46.868 Trying to start Windows service 'MongoDB'
+Fri Jun 27 15:44:46.870 Service running
+Fri Jun 27 15:44:46.890 [initandlisten] MongoDB starting : pid=2824 port=27017 dbpath=E:\temp\MongoDB\express_sandbox 64-bit host=DEUSEXMACHINA
+Fri Jun 27 15:44:46.890 [initandlisten] db version v2.4.8
+Fri Jun 27 15:44:46.890 [initandlisten] git version: a350fc38922fbda2cec8d5dd842237b904eafc14
+Fri Jun 27 15:44:46.890 [initandlisten] build info: windows sys.getwindowsversion(major=6, minor=1, build=7601, platform=2, service_pack='Service Pack 1') BOOST_LIB_VERSION=1_49
+Fri Jun 27 15:44:46.890 [initandlisten] allocator: system
+Fri Jun 27 15:44:46.890 [initandlisten] options: { dbpath: "E:\temp\MongoDB\express_sandbox", logpath: "E:\temp\MongoDB\Logs\express_sandbox", service: true, smallfiles: true }
+Fri Jun 27 15:44:46.935 [initandlisten] journal dir=E:\temp\MongoDB\express_sandbox\journal
+Fri Jun 27 15:44:46.936 [initandlisten] recover : no journal files present, no recovery needed
+Fri Jun 27 15:44:47.119 [initandlisten] waiting for connections on port 27017
+Fri Jun 27 15:44:47.219 [websvr] admin web console waiting for connections on port 28017
+Sat Jun 28 16:25:17.589 CTRL_SHUTDOWN_EVENT signal
+Sat Jun 28 16:25:17.589 [consoleTerminate] got CTRL_SHUTDOWN_EVENT, will terminate after current cmd ends
+Sat Jun 28 16:25:17.589 [consoleTerminate] now exiting
+Sat Jun 28 16:25:17.589 dbexit: 
+Sat Jun 28 16:25:17.589 [consoleTerminate] shutdown: going to close listening sockets...
+Sat Jun 28 16:25:17.589 [consoleTerminate] closing listening socket: 552
+Sat Jun 28 16:25:17.589 [consoleTerminate] closing listening socket: 564
+Sat Jun 28 16:25:17.589 [consoleTerminate] shutdown: going to flush diaglog...
+Sat Jun 28 16:25:17.589 [consoleTerminate] shutdown: going to close sockets...
+Sat Jun 28 16:25:17.589 [consoleTerminate] shutdown: waiting for fs preallocator...
+Sat Jun 28 16:25:17.589 [consoleTerminate] shutdown: lock for final commit...
+Sat Jun 28 16:25:17.589 [consoleTerminate] shutdown: final commit...
+Sat Jun 28 16:25:17.589 [consoleTerminate] shutdown: closing all files...
+Sat Jun 28 16:25:17.590 [consoleTerminate] closeAllFiles() finished
+Sat Jun 28 16:25:17.590 [consoleTerminate] journalCleanup...
+Sat Jun 28 16:25:17.590 [consoleTerminate] removeJournalFiles
+Sat Jun 28 16:25:17.590 [consoleTerminate] shutdown: removing fs lock...
+Sat Jun 28 16:25:17.591 dbexit: really exiting now
