@@ -32,21 +32,28 @@
    * @param {Browserify} Browserify runtime object
    * @param {string} A glob-returned file path to add a browserify registration for.
    */
-  function registerFileByModuleAlias(b, appConfig, fileGlobPath) {
+  function registerFileByModuleAlias(b, appConfig, relativeCommon, fileGlobPath) {
     var registeredFilePath = path.relative(appConfig.source.client, fileGlobPath).replace(/\\/g, '/');
-    var moduleFQN = path.dirname(registeredFilePath).replace(/\//g, '.');
-    var baseName = path.basename(registeredFilePath).replace(/\.coffee$|\.js$/, '');
-
-    // For module.{js|coffee} (module descriptor file), omit '/module' and use FQN alone for file name.
     var exposedName;
-    if (baseName === 'module') {
-      exposedName = moduleFQN;
+
+    if (/^common/.test(fileGlobPath)) {
+      exposedName = registeredFilePath.replace('^common', relativeCommon);
+      console.log(fileGlobPath, registeredFilePath, exposedName);
     } else {
-      exposedName = moduleFQN + '/' + baseName;
+      var moduleFQN = path.dirname(registeredFilePath).replace(/\//g, '.');
+      var baseName = path.basename(registeredFilePath).replace(/\.coffee$|\.js$/, '');
+
+      // For module.{js|coffee} (module descriptor file), omit '/module' and use FQN alone for file name.
+      if (baseName === 'module') {
+        exposedName = moduleFQN;
+      } else {
+        exposedName = moduleFQN + '/' + baseName;
+      }
+
+      registeredFilePath = './' + registeredFilePath;
+      // console.log(fileGlobPath, registeredFilePath, moduleFQN, exposedName);
     }
 
-    registeredFilePath = './' + registeredFilePath;
-    // console.log(fileGlobPath, registeredFilePath, moduleFQN, exposedName);
     b.add(registeredFilePath, {expose: exposedName});
   }
 
@@ -73,30 +80,36 @@
     b.transform(require('coffeeify'));
     b._extensions.push('.coffee');
 
+    var relativeCommon = path.relative(appConfig.source.client, appConfig.source.common).replace(/\\/g, '\/');
+    var globPathHandler = _.partial(registerFileByModuleAlias, b, appConfig, relativeCommon);
+
     // Construct file glob and normalized absolute path for use with grunt and browserify here.
     // Register source files using the moduleFQN/fileName convention described in function comment block.
-    console.log('Pre-Glob client-bundle', new Date());
-    var sourceGlob    = appConfig.source.client + '/' + appConfig.app + '/**/*.{js,coffee}';
+    var sourceGlob    = appConfig.source.client + '/' + appConfig.app + '/**/*.{js,coffee,json}';
     _.forEach(
       grunt.file.glob(
         sourceGlob,
-        {
-          sync: true, strict: true, stat: false, dot: true,
-          nonull: false, nosort: true, nounique: true, nodir: true
-        }
+        { sync: true, strict: true, stat: false, dot: true,
+          nonull: false, nosort: true, nounique: true, nodir: true }
       ),
-      _.partial(registerFileByModuleAlias, b, appConfig)
+      globPathHandler
     );
-    console.log('Post-Glob client-bundle', new Date());
+
+    sourceGlob = appConfig.source.common + '/**/*.{js,coffee,json}';
+    _.forEach(
+      grunt.file.glob(
+        sourceGlob,
+        { sync: true, strict: true, stat: false, dot: true,
+          nonull: false, nosort: true, nounique: true, nodir: true }
+      ),
+      globPathHandler
+    );
 
     // Configure browserify to load Loopback and Main Angular Application Module to bootstrap bundle activation on load.
     b.add( './lbclient.js', { expose: 'lbclient' } );
     // b.add( 'boot/replication.js', { expose: 'boot/replication' } );
     // b.add( 'datasources.local.js', { expose: 'datasources.local' } );
-    b.require(
-      sprintf('./%s/module.js', appConfig.app),
-      { expose: appConfig.app }
-    );
+    b.require(sprintf('./%s/module.js', appConfig.app), { expose: appConfig.app });
 
     var clientSrcDir  = path.normalize(
       path.join(appConfig.cwd, appConfig.source.client));
@@ -142,7 +155,6 @@
     console.log('Activating the bundle pipeline', new Date());
     try {
       b.bundle().on('error', callback).pipe(out);
-      console.log('Finished buildBundle()', new Date());
     } catch(err) {
       console.error('Failed buildBundle()', new Date(), err);
 
