@@ -2,15 +2,35 @@
   "name": "lb_express_sandbox",
   "version": "0.0.4-SNAPSHOT",
   "license": "MIT",
-  "authors": ["John Heinnickel <jheinnic@hotmail.com>"],
+  "authors": [
+    "John Heinnickel <jheinnic@hotmail.com>"
+  ],
   "description": "Crosswords Portfolio Project",
-  "keywords": ["crosswords", "portfolio", "jheinnic", "angularJS", "loopback", "mongoDB", "nodeJS"],
+  "keywords": [
+    "crosswords",
+    "portfolio",
+    "jheinnic",
+    "angularJS",
+    "loopback",
+    "mongoDB",
+    "nodeJS"
+  ],
   "homepage": "http://portfolio.jchein.us/xw/",
   "origHomepage": "http://www.jchein.info/portfolio/",
-  "moduleType": ["commonjs"],
+  "moduleType": [
+    "commonjs"
+  ],
   "appModule": "jchptf",
-  "build": { "dev": "build/dev", "dist": "build/dist", "temp": "build/temp" },
-  "ignore": ["node_modules", "client/vendor", "bower_components"],
+  "build": {
+    "dev": "build/dev",
+    "dist": "build/dist",
+    "temp": "build/temp"
+  },
+  "ignore": [
+    "node_modules",
+    "client/vendor",
+    "bower_components"
+  ],
   "dependencies": {
     "angular-cookies": "~1.4.8",
     "angular-messages": "~1.4.8",
@@ -22,17 +42,19 @@
     "angular-bootstrap": "~0.14.3",
     "angular-resource": "~1.4.8",
     "angular-hotkeys": "~0.2.2",
+    "angular-toastr": "~1.6.0",
     "font-awesome": "~4.5.0",
     "angular-live-set": "*",
     "angular-css": "~1.0.7",
-    "localforage": "~1.2.4",
+    "localforage": "~1.2.10",
     "sprintf.js": "~1.0.3",
     "bootstrap": "~3.3.6",
-    "es5-shim": "~3.1.0",
+    "es5-shim": "~4.4.1",
     "angular": "~1.4.8",
     "lodash": "~3.10.1",
     "jquery": "~2.1.4",
-    "json3": "~3.3.2"
+    "json3": "~3.3.2",
+    "angular-strap": "~2.3.6"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.8",
@@ -45,7 +67,6 @@
     "leaflet": "~0.7.7",
     "angular-nvd3": "~1.0.4",
     "angular-strap": "~2.3.6",
-    "angular-toastr": "~1.6.0",
     "angular-animate": "~1.4.8",
     "angular-ui-grid": "~3.0.7",
     "angular-sanitize": "~1.4.8",
@@ -64,5 +85,8 @@
     "underscore": "~1.8.3",
     "ngFx": "~1.1.0",
     "rang": "*"
+  },
+  "resolutions": {
+    "localforage": "1.2.10"
   }
 }
