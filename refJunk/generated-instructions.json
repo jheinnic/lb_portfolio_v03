@@ -1,0 +1,614 @@
+{
+  "env": "development",
+  "config": {},
+  "dataSources": {
+    "remote": {
+      "connector": "remote"
+    },
+    "local": {
+      "connector": "memory",
+      "localStorage": "todo-db"
+    }
+  },
+  "models": [
+    {
+      "name": "Todo",
+      "config": {
+        "dataSource": "remote"
+      },
+      "definition": {
+        "name": "Todo",
+        "base": "PersistedModel",
+        "trackChanges": true,
+        "properties": {
+          "id": {
+            "type": "string",
+            "id": true,
+            "defaultFn": "guid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "completed": {
+            "type": "boolean",
+            "default": false
+          },
+          "created": {
+            "type": "number"
+          }
+        },
+        "validations": [],
+        "relations": {},
+        "acls": [],
+        "methods": {}
+      },
+      "sourceFile": "loopback-boot#models#todo.js"
+    },
+    {
+      "name": "LocalTodo",
+      "config": {
+        "dataSource": "local"
+      },
+      "definition": {
+        "name": "LocalTodo",
+        "base": "Todo"
+      }
+    },
+    {
+      "name": "XwTicket",
+      "definition": {
+        "name": "XwTicket",
+        "base": "PersistedModel",
+        "idInjection": false,
+        "options": {
+          "abstract": true,
+          "validateUpsert": true
+        },
+        "trackChanges": true,
+        "abstract": true,
+        "properties": {
+          "id": {
+            "type": "string",
+            "id": true,
+            "required": true,
+            "defaultFn": "guid"
+          },
+          "ticketId": {
+            "type": "string",
+            "required": true,
+            "index": true,
+            "length": 12
+          },
+          "gridContent": {
+            "type": "string",
+            "required": true,
+            "length": 121,
+            "default": "_________________________________________________________________________________________________________________________",
+            "pattern": "/[A-Za-z_]{121}/"
+          },
+          "yourLetters": {
+            "type": "string",
+            "required": true,
+            "length": 18,
+            "default": "__________________",
+            "pattern": "/([a-z]{18})|([a-z]{17}_)|([a-z]{16}_{2})|([a-z]{15}_{3})|([a-z]{14}_{4})|([a-z]{13}_{5})|([a-z]{12}_{6})|([a-z]{11}_{7})|([a-z]{10}_{8})|([a-z]{9}_{9})|([a-z]{8}_{10})|([a-z]{7}_{11})|([a-z]{6}_{12})|([a-z]{5}_{13})|([a-z]{4}_{14})|([a-z]{3}_{15})|([a-z]{2}_{16})|([a-z]{1}_{17})|(_{18})/"
+          },
+          "finalPayout": {
+            "type": "number",
+            "required": false,
+            "min": -1,
+            "max": 17
+          },
+          "pendingComputation": {
+            "type": "PlayResult",
+            "required": false
+          },
+          "latestComputation": {
+            "type": "PlayResult",
+            "required": false
+          }
+        },
+        "validations": [],
+        "relations": {},
+        "acls": [],
+        "methods": {}
+      },
+      "sourceFile": "loopback-boot#models#xw-ticket.js"
+    },
+    {
+      "name": "FiveXTicket",
+      "config": {
+        "dataSource": "remote"
+      },
+      "definition": {
+        "name": "FiveXTicket",
+        "base": "XwTicket",
+        "idInjection": false,
+        "options": {
+          "validateUpsert": true
+        },
+        "mixins": {
+          "Timestamped": {},
+          "MultiSpot": {
+            "maxMultiplier": 5
+          },
+          "FastSpot": {
+            "winningValue": 20
+          }
+        },
+        "trackChanges": true,
+        "properties": {},
+        "validations": [],
+        "relations": {},
+        "acls": [],
+        "methods": {}
+      },
+      "sourceFile": "loopback-boot#models#five-x-ticket.js"
+    },
+    {
+      "name": "LocalFiveXTicket",
+      "config": {
+        "dataSource": "local"
+      },
+      "definition": {
+        "name": "LocalFiveXTicket",
+        "base": "FiveXTicket"
+      }
+    },
+    {
+      "name": "TripOnlyTicket",
+      "config": {
+        "dataSource": "remote"
+      },
+      "definition": {
+        "name": "TripOnlyTicket",
+        "base": "XwTicket",
+        "idInjection": false,
+        "options": {
+          "validateUpsert": true
+        },
+        "mixins": {
+          "Timestamped": {},
+          "BonusWord": {
+            "yourLettersCount": 18,
+            "bonusWordLength": 5,
+            "prizeValues": [
+              0,
+              3,
+              4,
+              5,
+              10,
+              30
+            ]
+          }
+        },
+        "trackChanges": true,
+        "properties": {},
+        "validations": [],
+        "relations": {},
+        "acls": [],
+        "methods": {}
+      },
+      "sourceFile": "loopback-boot#models#trip-only-ticket.js"
+    },
+    {
+      "name": "LocalTripOnlyTicket",
+      "config": {
+        "dataSource": "local"
+      },
+      "definition": {
+        "name": "LocalTripOnlyTicket",
+        "base": "TripOnlyTicket"
+      }
+    },
+    {
+      "name": "TripSpotTicket",
+      "config": {
+        "dataSource": "remote"
+      },
+      "definition": {
+        "name": "TripSpotTicket",
+        "base": "XwTicket",
+        "idInjection": false,
+        "options": {
+          "validateUpsert": true
+        },
+        "mixins": {
+          "Timestamped": {},
+          "BonusWord": {
+            "yourLettersCount": 18,
+            "bonusWordLength": 5,
+            "prizeValues": [
+              0,
+              3,
+              4,
+              5,
+              10,
+              30
+            ]
+          },
+          "FastSpot": {
+            "winningValue": 20
+          }
+        },
+        "trackChanges": true,
+        "properties": {},
+        "validations": [],
+        "relations": {},
+        "acls": [],
+        "methods": {}
+      },
+      "sourceFile": "loopback-boot#models#trip-spot-ticket.js"
+    },
+    {
+      "name": "LocalTripSpotTicket",
+      "config": {
+        "dataSource": "local"
+      },
+      "definition": {
+        "name": "LocalTripSpotTicket",
+        "base": "TripSpotTicket"
+      }
+    },
+    {
+      "name": "EditorModel",
+      "config": {
+        "dataSource": "local"
+      },
+      "definition": {
+        "name": "EditorModel",
+        "base": "Model",
+        "idInjection": false,
+        "options": {},
+        "properties": {
+          "id": {
+            "id": true,
+            "type": "string",
+            "defaultFn": "guid",
+            "required": true
+          },
+          "isCursorActive": {
+            "type": "boolean",
+            "required": true,
+            "default": false
+          },
+          "cursorColumn": {
+            "type": "number",
+            "required": false,
+            "default": -1,
+            "min": -1,
+            "max": 10
+          },
+          "cursorRow": {
+            "type": "number",
+            "required": false,
+            "default": -1,
+            "min": -1,
+            "max": 10
+          },
+          "cellContents": {
+            "type": [
+              "string"
+            ],
+            "required": true,
+            "length": 1
+          }
+        },
+        "validations": [],
+        "relations": {
+          "_sourceTicket": {
+            "type": "belongsTo",
+            "model": "XwTicket",
+            "property": "sourceTicket",
+            "properties": [
+              "gridContent"
+            ],
+            "foreignKey": "sourceTicketId"
+          },
+          "_horizontalModel": {
+            "type": "embedsOne",
+            "model": "OrientationModel",
+            "property": "horizontalModel",
+            "foreignKey": "rowEditModelId"
+          },
+          "_verticalModel": {
+            "type": "embedsOne",
+            "model": "OrientationModel",
+            "property": "verticalModel",
+            "foreignKey": "colEditModelId"
+          }
+        },
+        "acls": [],
+        "methods": {}
+      },
+      "sourceFile": "loopback-boot#models#editor-model.js"
+    },
+    {
+      "name": "OrientationModel",
+      "config": {
+        "dataSource": "local"
+      },
+      "definition": {
+        "name": "OrientationModel",
+        "base": "Model",
+        "idInjection": false,
+        "options": {},
+        "properties": {
+          "id": {
+            "id": true,
+            "type": "string",
+            "defaultFn": "guid",
+            "required": true
+          },
+          "orientation": {
+            "type": "string",
+            "required": true,
+            "pattern": "/horizontal|vertical/"
+          }
+        },
+        "validations": [],
+        "relations": {
+          "rowEditModel": {
+            "type": "belongsTo",
+            "model": "EditorModel",
+            "foreignKey": "rowEditModelId"
+          },
+          "colEditModel": {
+            "type": "belongsTo",
+            "model": "EditorModel",
+            "foreignKey": "colEditModelId"
+          },
+          "_cells": {
+            "type": "embedsMany",
+            "model": "CellOrientation",
+            "property": "cells",
+            "foreignKey": "alignModelId"
+          },
+          "_regions": {
+            "type": "embedsMany",
+            "model": "GridRegion",
+            "property": "regions",
+            "foreignKey": "alignModelId"
+          }
+        },
+        "acls": [],
+        "methods": {}
+      },
+      "sourceFile": "loopback-boot#models#orientation-model.js"
+    },
+    {
+      "name": "CellOrientation",
+      "config": {
+        "dataSource": "local"
+      },
+      "definition": {
+        "name": "CellOrientation",
+        "base": "Model",
+        "idInjection": false,
+        "options": {},
+        "properties": {
+          "index": {
+            "id": true,
+            "type": "number",
+            "required": true,
+            "min": 0,
+            "max": 110
+          },
+          "colId": {
+            "type": "number",
+            "required": true,
+            "min": 0,
+            "max": 10
+          },
+          "rowId": {
+            "type": "number",
+            "required": true,
+            "min": 0,
+            "max": 10
+          },
+          "orientation": {
+            "type": "string",
+            "required": true,
+            "pattern": "/horizontal|vertical/"
+          }
+        },
+        "validations": [],
+        "relations": {
+          "alignModelId": {
+            "type": "belongsTo",
+            "model": "OrientationModel",
+            "foreignKey": "alignModelId"
+          },
+          "previous": {
+            "type": "belongsTo",
+            "model": "CellOrientation",
+            "foreignKey": "previousId"
+          },
+          "next": {
+            "type": "belongsTo",
+            "model": "CellOrientation",
+            "foreignKey": "nextId"
+          },
+          "mirror": {
+            "type": "belongsTo",
+            "model": "CellOrientation",
+            "foreignKey": "mirrorId"
+          },
+          "region": {
+            "type": "belongsTo",
+            "model": "GridRegion",
+            "foreignKey": "regionId"
+          }
+        },
+        "acls": [],
+        "methods": {}
+      },
+      "sourceFile": "loopback-boot#models#cell-orientation.js"
+    },
+    {
+      "name": "GridRegion",
+      "config": {
+        "dataSource": "local"
+      },
+      "definition": {
+        "name": "GridRegion",
+        "base": "Model",
+        "idInjection": false,
+        "abstract": true,
+        "options": {},
+        "properties": {
+          "id": {
+            "id": true,
+            "type": "string",
+            "defaultFn": "guid",
+            "required": false
+          },
+          "kind": {
+            "type": "string",
+            "required": false,
+            "pattern": "/^(open|word|short|blocked)$/"
+          },
+          "orientation": {
+            "type": "string",
+            "required": true,
+            "pattern": "/^horizontal$|^vertical$/"
+          }
+        },
+        "validations": [],
+        "relations": {
+          "head": {
+            "type": "belongsTo",
+            "model": "CellOrientation",
+            "foreignKey": "headId"
+          },
+          "tail": {
+            "type": "belongsTo",
+            "model": "CellOrientation",
+            "foreignKey": "tailId"
+          },
+          "cells": {
+            "type": "hasMany",
+            "model": "CellOrientation",
+            "foreignKey": "regionId"
+          }
+        },
+        "acls": [],
+        "methods": {}
+      },
+      "sourceFile": "loopback-boot#models#grid-region.js"
+    },
+    {
+      "name": "GridWord",
+      "config": {
+        "dataSource": "local"
+      },
+      "definition": {
+        "name": "GridWord",
+        "base": "GridRegion",
+        "idInjection": false,
+        "options": {},
+        "properties": {
+          "kind": {
+            "type": "string",
+            "default": "word",
+            "pattern": "^word$"
+          },
+          "forDisplay": {
+            "type": "string",
+            "required": false,
+            "length": 11
+          },
+          "charsRequired": {
+            "type": [
+              "string"
+            ],
+            "required": false,
+            "length": 1
+          },
+          "lengthStatus": {
+            "type": "string",
+            "required": false,
+            "pattern": "/valid|short|long/"
+          },
+          "hasMulti": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "validations": [],
+        "relations": {},
+        "acls": [],
+        "methods": {}
+      },
+      "sourceFile": "loopback-boot#models#grid-word.js"
+    },
+    {
+      "name": "GridShort",
+      "config": {
+        "dataSource": "local"
+      },
+      "definition": {
+        "name": "GridShort",
+        "base": "GridRegion",
+        "idInjection": false,
+        "options": {},
+        "properties": {
+          "kind": {
+            "type": "string",
+            "default": "short",
+            "pattern": "/^short$/"
+          }
+        },
+        "validations": [],
+        "relations": {},
+        "acls": [],
+        "methods": {}
+      },
+      "sourceFile": "loopback-boot#models#grid-short.js"
+    },
+    {
+      "name": "GridBlocked",
+      "config": {
+        "dataSource": "local"
+      },
+      "definition": {
+        "name": "GridBlocked",
+        "base": "GridRegion",
+        "idInjection": false,
+        "options": {},
+        "properties": {
+          "kind": {
+            "type": "string",
+            "default": "blocked",
+            "pattern": "/^blocked$/"
+          }
+        },
+        "validations": [],
+        "relations": {},
+        "acls": [],
+        "methods": {}
+      },
+      "sourceFile": "loopback-boot#models#grid-blocked.js"
+    }
+  ],
+  "components": [],
+  "mixins": [
+    {
+      "name": "BonusWord",
+      "sourceFile": "loopback-boot#mixins#bonus-word.js"
+    },
+    {
+      "name": "FastSpot",
+      "sourceFile": "loopback-boot#mixins#fast-spot.js"
+    },
+    {
+      "name": "MultiSpot",
+      "sourceFile": "loopback-boot#mixins#multi-spot.js"
+    }
+  ],
+  "files": {
+    "boot": [
+      "loopback-boot#boot#replication.js"
+    ]
+  }
+}
