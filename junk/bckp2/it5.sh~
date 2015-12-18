@@ -1,8 +1,0 @@
-mv "jchpft-ui/features/poker/main.coffee~parent"* junk/bckp/
-mv "jchpft-ui/features/xw-model/main.coffee~parent"* junk/bckp/
-mv "jchpft-ui/features/xw-report/partials/payoutReport.html~parent"* junk/bckp/
-mv "jchpft-ui/features/xw-report/partials/progressReport.html~parent"* junk/bckp/
-mv "jchpft-ui/features/xw-ticket/crosswords.less~parent"* junk/bckp/
-mv "jchpft-ui/features/xw-ticket/main.coffee~parent"* junk/bckp/
-mv "jchpft-ui/features/xw-ticket/partials/crosswordCell.html~parent"* junk/bckp/
-mv "jchpft-ui/features/xw-ticket/partials/view.html~parent"* junk/bckp/
