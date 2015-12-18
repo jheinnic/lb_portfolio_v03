@@ -1,12 +1,14 @@
 'use strict'
 
-module.exports = class Enum extends (ModelObject = require('./ModelObject.class.coffee'))
-  Enum.$inject = ['foo', 'bar']
+ModelObject = require('./ModelObject.class')
+_ = require('lodash')
+
+module.exports = class Enum extends ModelObject
+  @$inject = []
 
   _name: undefined
   _ordinal: undefined
 
-  _ = require('lodash')
   constructor: (name) ->
     throw new Error "name must be defined" unless name?
     throw new Error "name may not be blank" if _.isEmpty(name)

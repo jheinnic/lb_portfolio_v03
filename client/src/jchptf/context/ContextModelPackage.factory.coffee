@@ -11,7 +11,7 @@ module.exports = ContextModelPackage =
         @isLoggedInState = isLoggedInState
         super(stateName)
 
-      isLoggedIn: () => @isLoggedInState
+      isLoggedIn: () -> @isLoggedInState
 
     new AuthTokenEventKind('NEW_TOKEN_IS_VALID', true)
     new AuthTokenEventKind('TOKEN_WAS_REFRESHED', true)
@@ -49,7 +49,7 @@ module.exports = ContextModelPackage =
         {@eventType, @uuid, @displayName, @loginId, @tokenExpiration, @tokenTimeout, @authToken, @nextPromise} = params
         Object.seal(@)
 
-      isLoggedIn: () => @eventType.isLoggedIn()
+      isLoggedIn: () -> @eventType.isLoggedIn()
 
 
     ###*

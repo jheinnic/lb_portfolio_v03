@@ -40,9 +40,9 @@ module.exports = class IdentityContext
       value: {}
     )
 
-  isLoggedIn: () => @identityContextInternals.isLoggedIn()
+  isLoggedIn: () -> @identityContextInternals.isLoggedIn()
 
-  logout: () => @identityContextInternals.logout()
+  logout: () -> @identityContextInternals.logout()
 
   ###*
   # Provides access to the authentication token service's information model.
@@ -74,13 +74,13 @@ module.exports = class IdentityContext
   #  state changes, which is because it is returning old state about the
   #  most recent known state change.
   ###
-  getLatestTokenEvent: () => @identityContextInternals.latestTokenEvent
+  getLatestTokenEvent: () -> @identityContextInternals.latestTokenEvent
 
-  verifyAuthTokenStatus: () => @identityContextInternals.verifyAuthTokenStatus()
+  verifyAuthTokenStatus: () -> @identityContextInternals.verifyAuthTokenStatus()
 
-  getNextTokenEvent: () => @identityContextInternals.nextEventDefer.promise
+  getNextTokenEvent: () -> @identityContextInternals.nextEventDefer.promise
 
-  addTokenEventListener: (eventHandler) =>
+  addTokenEventListener: (eventHandler) ->
     if @tokenEventListeners[eventHandler]
       throw new Error 'Cannot register an event handler twice'
 
@@ -95,7 +95,7 @@ module.exports = class IdentityContext
           console.log(e)
     wrappedListener(@identityContextInternals.latestTokenEvent)
 
-  dropTokenEventListener: (eventHandler) =>
+  dropTokenEventListener: (eventHandler) ->
     if ! delete @tokenEventListener[eventHandler]
       throw new Error 'Cannot de-register an unregistered event handler'
 
@@ -123,9 +123,9 @@ class IdentityContextInternals
       authToken: authToken
       eventType: AuthTokenEventKind.NEW_TOKEN_IS_VALID
 
-  isLoggedIn: @latestTokenEvent.eventType.isLoggedIn
+  isLoggedIn: () -> @latestTokenEvent.eventType.isLoggedIn()
 
-  verifyAuthTokenStatus: () =>
+  verifyAuthTokenStatus: () ->
     retVal = @latestTokenEvent
 
     # TODO: Get a real token from the cookie environment
@@ -147,7 +147,7 @@ class IdentityContextInternals
       retVal = @decodeAuthToken authToken
       @fireTokenEvent retVal
 
-  fireTokenEvent: (newEvent) =>
+  fireTokenEvent: (newEvent) ->
     @latestTokenEvent = newEvent
     previousPromise = @nextEventDefer.promise
 
@@ -156,7 +156,7 @@ class IdentityContextInternals
 
     previousPromise.resolve newEvent
 
-  logout: () =>
+  logout: () ->
     @fireTokenEvent new AuthTokenEvent
       eventType: AuthTokenEventKind.NO_TOKEN_AVAILABLE
 
