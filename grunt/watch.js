@@ -9,17 +9,17 @@
       bower: {
         // TODO: This cannot yet handle a change to the app directory in bower.json on appConfig!!!
         files: ['bower.json', 'bowerrc'],
-        tasks: ['clean:vendor', 'shell:bower-update', 'newer:copy:vendor', 'wiredep:dev', 'reload-assets'],
+        tasks: ['clean:vendor', 'shell:bower-update', 'newer:copy:vendor', 'wiredep:dev', 'reloadAssets'],
         options: {reload: true}
       },
       nodeModules: {
         files: ['package.json', '.npmrc'],
-        tasks: ['shell:npm-install', 'bundle-client', 'reload-assets'],
+        tasks: ['shell:npm-install', 'bundleClient', 'reloadAssets'],
         options: {reload: true}
       },
       grunt: {
         files: ['Gruntfile.js', appConfig.source.build + '/**/*.{js,coffee}'],
-        tasks: ['newer:jshint:build', 'newer:coffeelint:build', 'build-dev-fast', 'reload-assets'],
+        tasks: ['newer:jshint:build', 'newer:coffeelint:build', 'build-dev-fast', 'reloadAssets'],
         options: {reload: true}
       },
 
@@ -29,18 +29,16 @@
           appConfig.source.common + '/**/*.{js,coffee,json}',
           appConfig.source.server + '/**/*.{js,coffee,json}'
         ],
-        tasks: [
-          'newer:jshint:source', 'newer:coffeelint:source', 'bundle-client', 'reload-assets'
-        ]
+        tasks: ['newer:jshint:source', 'newer:coffeelint:source', 'bundleClient', 'reloadAssets']
       },
 
       index: {
         files: [appConfig.source.client + '/index.{html,jade}'],
-        tasks: ['newer:copy:dev', 'newer:jade:build', 'wiredep:dev', 'htmlbuild:dev', 'reload-assets']
+        tasks: ['newer:copy:dev', 'newer:jade:build', 'wiredep:dev', 'htmlbuild:dev', 'reloadAssets']
       },
       templates: {
         files: [appModRoot + '/**/*.{html,jade}'],
-        tasks: ['newer:copy:dev', 'newer:jade:build', 'reload-assets']
+        tasks: ['newer:copy:dev', 'newer:jade:build', 'reloadAssets']
       },
 
       styles: {
@@ -50,11 +48,11 @@
         // NOTE: We invoke autoprefixer and htmlbuild only because we have to propagate result of having called less
         //       to account for font references.
         files: [appModRoot + '/**/*.{css,less}', appModRoot + '/**/*.{svg,eot,ttf,woff,woff2}'],
-        tasks: ['newer:copy:dev', 'less', 'newer:autoprefixer', 'htmlbuild:dev', 'reload-assets']
+        tasks: ['newer:copy:dev', 'less', 'newer:autoprefixer', 'htmlbuild:dev', 'reloadAssets']
       },
       images: {
         files: [appModRoot + '/**/*.{bmp,png,jpg,jpeg,gif,webp}'],
-        tasks: ['newer:copy:dev', 'reload-assets']
+        tasks: ['newer:copy:dev', 'reloadAssets']
       },
 
       nodemon: {

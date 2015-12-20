@@ -208,7 +208,7 @@ make-dev-build:
  - 'fixIndexHtml'
  - 'htmlbuild:dev'
  - 'newer:copy:vendor'   # Try using middleware config?
- - 'bundle-client'
+ - 'bundleClient'
 
 # NOTE: This build target is only valid after having evaluated 'dev-build'.  For CSS, it reuses
 #       less and autoprefix preprocessor outputs.  For HTML, it reuses jade output for templates,
@@ -234,7 +234,7 @@ cont-dist-build:
 #  - 'autoprefixer:build'
 #  - 'htmlbuild:dist'
 #  - 'wiredep:build'
-#  - 'bundle-client'
+#  - 'bundleClient'
 #  - 'copy:dist'
 #  - 'minify'
 
