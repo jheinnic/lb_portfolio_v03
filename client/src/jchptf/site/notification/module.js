@@ -14,7 +14,7 @@
    */
   angular.module(
     module.exports,
-    ['ng', /*'ui.bootstrap', 'toastr'*/] //,
+    ['ng', 'toastr', 'ngMessages'/*'ui.bootstrap', 'toastr'*/] //,
     // require('./config')
   )
   ;

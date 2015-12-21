@@ -1,9 +1,8 @@
-module.exports = jchNavBar =
-  # (JchNavData, NavBarModelPackage) ->
-  #   jchNavBar.$inject = ['JchNavData', 'NavBarModelPackage']
-  #   {NavBarModel, TabModel} = NavBarModelPackage
+'use strict'
+
+module.exports = [
+  'JchNavData',
   (JchNavData) ->
-    jchNavBar.$inject = ['JchNavData']
     _ = require('lodash')
 
     return {
@@ -17,3 +16,4 @@ module.exports = jchNavBar =
 
         updateModel(JchNavData.getNavBarModel())
     }
+]

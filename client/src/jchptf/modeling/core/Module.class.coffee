@@ -28,7 +28,7 @@ module.exports = class Module
       @[key] = value
 
     obj.extended?.apply(@)
-    return this
+    @
 
   @include: (obj) ->
     for key, value of obj when key not in moduleKeywords
@@ -36,4 +36,4 @@ module.exports = class Module
       @::[key] = value
 
     obj.included?.apply(@)
-    return this
+    @

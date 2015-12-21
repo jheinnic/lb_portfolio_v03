@@ -1,5 +1,5 @@
 body {
-  background-color: #fff;
+  background-color: #ddd;
   color: #333;
 //  padding: 60px;
 }
@@ -17,7 +17,7 @@ footer {
 //  display: table;
 //}
 
-div.tikList-header {
+div.xwList.header {
   background: #a8ee8a;
   p {
     text-align:center
@@ -30,7 +30,7 @@ div.tikList-header {
   }
 }
 
-div.tikList-body {
+div.xwList.body {
   margin-top: 139px;
   height: 600px;
   overflow-y: scroll;
@@ -59,6 +59,10 @@ div#ticketView {
   height: 660px;
   img.ticketView {
     position: absolute;
+    top: 0px;
+    left: 0px;
+    // height: 660px;
+    // width: 440px;
   }
 }
 
@@ -94,7 +98,7 @@ div.xw-layered {
 //               word of length 3 or greater.
 // -- Short Tripled: Not reachable for active edit, has a triple score modifier,
 //                   and is not connected to any word of length 3 or greater.
-// -- Illegal Triple: Not reachable for active edit, has a triple score 
+// -- Illegal Triple: Not reachable for active edit, has a triple score
 //                    modifier, and is also the intersection of two words.
 // -- Blocked: Not reachable for active edit, and incapable of taking on a
 //             letter value without violating the minimum of one cell between
@@ -105,7 +109,7 @@ div.xw-layered {
 // These mark the head, middle, and tail of a region either horizontally or
 // vertically.
 
-// A second layer hosts the cell grid (xw-grid).  This could have been done 
+// A second layer hosts the cell grid (xw-grid).  This could have been done
 // with style markup, but an image of a 1-pixel border around a transparent
 // center was used instead to enable a marbled effect by varying the color of
 // each border pixel within a narrow but perceivable range.
@@ -123,9 +127,12 @@ div.xw-layered {
 // anchor for layering the images used to compose the crossword grid's graphical
 // elements using a combination of absolute position at (0,0) and layer-specific
 // z-layer values.
-div#letterGrid {
+div#crosswordGrid {
+  position:absolute;
   width: 308px;
   height: 308px;
+  top: 308px;
+  left: 108px;
   background-color: #19D919;
 //  &.xw-horizontal div.xw-cell {
 //    &.xw-wordhead img.xw-border.xw-htop, &.xw-midword img.xw-border.xw-hmid, &.xw-wordtail img.xw-border.xw-hend {
@@ -163,6 +170,9 @@ div#letterGrid {
 }
 
 div#bonusWordGrid {
+  position: absolute;
+  top: 234px;
+  left: 248px;
   height: 28px;
   width: 140px;
 //  &.xw-inactive div.xw-cell {
@@ -184,6 +194,8 @@ div#bonusWordGrid {
 }
 
 div#yourLettersGrid {
+  top: 178px;
+  left: 52px;
   height: 84px;
   width: 168px;
 //  &.xw-inactive div.xw-cell {

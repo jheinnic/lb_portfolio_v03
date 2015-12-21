@@ -1,20 +1,18 @@
-module.exports = jhGridDirective = ($parse) ->
-  jhGridDirective.$inject = ['$parse']
+module.exports = [
+  '$parse', ($parse) ->
+    domElementGrid = null
+    clickHandlerStates = {}
+    currentClickHandler = null
 
-  domElementGrid = null
-  clickHandlerStates = {}
-  currentClickHandler = null
+    numRows = -1
+    numCols = -1
+    canvasCtrl = undefined
+    gridCtrl = undefined
 
-  numRows = -1
-  numCols = -1
-  canvasCtrl = undefined
-  gridCtrl = undefined
+    sizeAttrRegEx = /^\s*([\d]+)\s*x\s*([\d]+)\s*$/
+    gridCellOrgRegEx = /^\s*(?:(1D|2D)\s*,\s*(RowCol|ColRow))|(1D|2D)|(RowCol|ColRow)\s*$/
 
-  sizeAttrRegEx = /^\s*([\d]+)\s*x\s*([\d]+)\s*$/
-  gridCellOrgRegEx = /^\s*(?:(1D|2D)\s*,\s*(RowCol|ColRow))|(1D|2D)|(RowCol|ColRow)\s*$/
-
-  return {
-    restrict: 'E'
+    return { restrict: 'E'
     require: ['jhGrid', 'ngModel']
     scope:
       sourceGridModel: '=gridModel'
@@ -27,56 +25,50 @@ module.exports = jhGridDirective = ($parse) ->
       srcDimOrder: '@srcDimOrder'
     transclude: 'element'
     controller: [
-      '$scope', '$element', '$parse', (
-        $scope, $element, $parse
-      ) ->
-        retVal = {}
+      # TODO: Turn this into the constructor for an equivalent Controller Class.
+      '$scope', '$element', '$parse', ($scope, $element, $parse) ->
+        @ = {}
 
-        retVal.parseControlStates = (
-          controlStatesDef
-        ) ->
+        @parseControlStates = (controlStatesDef) ->
           controlStates = {}
-          Object.keys(controlStatesDef).forEach (
-            stateName
-          ) ->
-            controlState =
-              stateName: stateName
-              onEnter: $parse controlStatesDef[stateName].onEnter || null
-              onExit: $parse controlStatesDef[stateName].onExit || null
+          Object.keys(controlStatesDef).forEach(
+            (stateName) ->
+              controlState =
+                stateName: stateName
+                onEnter: $parse controlStatesDef[stateName].onEnter || null
+                onExit: $parse controlStatesDef[stateName].onExit || null
 
-            if controlStatesDef[stateName].eventHandler?
-              parsedEventHandler = $parse controlStatesDef[stateName].eventHandler
-              controlState.eventHandler = (
-                $event
-              ) ->
-                $scope.$apply () -> parsedEventHandler($scope, { '$event': $event })
-            else
-              controlState.eventHandler = undefined
+              if controlStatesDef[stateName].eventHandler?
+                parsedEventHandler = $parse controlStatesDef[stateName].eventHandler
+                controlState.eventHandler = ($event) ->
+                  $scope.$apply () -> parsedEventHandler($scope, { '$event': $event })
+              else
+                controlState.eventHandler = undefined
 
-            controlStates[stateName] = controlState
-          return controlStates
+              controlStates[stateName] = controlState
+          )
 
-        retVal.handleStateChange = (
-          newState, oldState
-        ) ->
-          if oldState?.onExit?
-            $scope.$apply oldState.onExit
+          controlStates
 
-          if oldState?.eventHandler?
-            if newState?.eventHandler?
+        @handleStateChange = (newState, oldState) ->
+          if oldState?.onExit
+            $scope.$apply(oldState.onExit)
+
+          if oldState?.eventHandler
+            if newState?.eventHandler
               cellEventFn = (domElementCell) ->
                 domElementCell.unbind('click', oldState.eventHandler)
                 domElementCell.on('click', newState.eventHandler)
             else
               cellEventFn = (domElementCell) ->
                 domElementCell.unbind('click', oldState.eventHandler)
-          else if newState?.eventHandler?
+          else if newState?.eventHandler
             cellEventFn = (domElementCell) ->
               domElementCell.on('click', newState.eventHandler)
           else
             cellEventFn = null
 
-          if cellEventFn != null
+          if cellEventFn isnt null
             for ii in [0...numRows]
               domElementRow = domElementGrid[ii]
               for jj in [0...numCols]
@@ -85,10 +77,8 @@ module.exports = jhGridDirective = ($parse) ->
           if newState?.onEnter?
             $scope.$apply newState.onEnter
 
-        retVal.getScopeByCoordinates = (
-          rowId, colId
-        ) ->
-          if domElementGrid == null
+        @getScopeByCoordinates = (rowId, colId) ->
+          if domElementGrid is null
             throw new Error "cannot retrieve cells by coordinates until after grid has been populated"
           if rowId < 0 || rowId >= numRows
             throw new Error "rowId must be a value between 0 and #{numRows - 1}.  rowId = #{rowId}"
@@ -97,21 +87,15 @@ module.exports = jhGridDirective = ($parse) ->
 
           return domElementGrid[rowId][colId].scope()
 
-        retVal.setClickState = (
-          nextStateName, rowId = -1.colId = -1
-        ) ->
+        @setClickState = (nextStateName, rowId = -1, colId = -1) ->
           canvasCtrl.setElementControlState($element, 'click', nextStateName)
 
-        retVal.moveCursorTo = (
-          rowId, colId
-        ) ->
+        @moveCursorTo = (rowId, colId) ->
           console.log('tbd')
 
-        return retVal
+        return this
     ]
-    link: (
-      $scope, $element, $attrs, controllers, $transcludeFn
-    ) ->
+    link: ($scope, $element, $attrs, controllers, $transcludeFn) ->
       if $scope.srcDimCount != '2D' && $scope.srcDimCount != '1D' && angular.isDefined $scope.srcDimCount
         throw new Error "srcDimCount must be '2D' or '1D', not #{$scope.srcDimCount}"
       if $scope.srcDimOrder != 'RowMajor' && $scope.srcDimOrder != 'ColMajor' && angular.isDefined $scope.srcDimOrder
@@ -135,18 +119,18 @@ module.exports = jhGridDirective = ($parse) ->
       numCols = $scope.numCols
 
       switch
-        when ! (sourceGridModel && angular.isArray sourceGridModel)
+        when not (sourceGridModel and angular.isArray sourceGridModel)
           throw new Error "sourceGridModel must be an array, not #{sourceGridModel}."
-        when srcDimCount == '1D'
-          unless sourceGridModel.length == numCells
+        when srcDimCount is '1D'
+          unless sourceGridModel.length is numCells
             throw new Error "sourceGridModel length must be #{numCells}, but was #{sourceGridModel.length}."
         when srcDimOrder = 'RowMajor'
-          unless sourceGridModel.length == numRows
+          unless sourceGridModel.length is numRows
             throw new Error "sourceGridModel's first dimension must be #{numRows}, but was #{srcDimOrder.length}."
           unless _.every(sourceGridModel, 'length', numCols)
             throw new Error "sourceGridModel's 2nd dimension must be #{numCols}, but was not so for every row."
         else
-          unless sourceGridModel.length == numCols
+          unless sourceGridModel.length is numCols
             throw new Error "sourceGridModel's first dimension must be #{numCols}, but was #{srcDimOrder.length}."
           unless _.every(sourceGridModel, 'length', numRows)
             throw new Error "sourceGridModel's 2nd dimension must be #{numRows}, but was not so for every row."
@@ -154,17 +138,13 @@ module.exports = jhGridDirective = ($parse) ->
       # cellTemplateFn = $compile pseudoElem.html()
       cellHeightStr = cellHeight + 'px'
       cellWidthStr = cellWidth + 'px'
-      linkCellFn = (
-        ii, jj, cellModel
-      ) ->
+      linkCellFn = (ii, jj, cellModel) ->
         scope = $scope.$new false
         scope.cellModel = cellModel
         scope.rowId = ii
         scope.colId = jj
 
-        return $transcludeFn scope, (
-          cloneCellElm
-        ) ->
+        return $transcludeFn scope, (cloneCellElm) ->
           $element.append cloneCellElm
 
           cloneCellElm.on '$destroy', () ->
@@ -183,29 +163,25 @@ module.exports = jhGridDirective = ($parse) ->
           return cloneCellElm
 
       switch
-        when srcDimCount == '2D' && srcDimOrder == 'RowMajor'
-          domElementGrid =
-            for ii in [0...numRows]
-              for jj in [0...numCols]
-                linkCellFn ii, jj, sourceGridModel[ii][jj]
-        when srcDimCount == '2D' && srcDimOrder == 'ColMajor'
-          domElementGrid =
-            for ii in [0...numRows]
-              for jj in [0...numCols]
-                linkCellFn ii, jj, sourceGridModel[jj][ii]
-        when srcDimCount == '1D' && srcDimOrder == 'RowMajor'
-          domElementGrid =
-            for ii in [0...numRows]
-              rowOffset = ii * numCols
-              for jj in [0...numCols]
-                linkCellFn ii, jj, sourceGridModel[rowOffset + jj]
-        when srcDimCount == '1D' && srcDimOrder == 'ColMajor'
-          domElementGrid =
-            for ii in [0...numRows]
-              colOffset = 0
-              for jj in [0...numCols]
-                linkCellFn ii, jj, sourceGridModel[colOffset + ii]
-                colOffset = colOffset + numRows
+        when srcDimCount is '2D' && srcDimOrder is 'RowMajor'
+          domElementGrid = for ii in [0...numRows]
+            for jj in [0...numCols]
+              linkCellFn ii, jj, sourceGridModel[ii][jj]
+        when srcDimCount is '2D' && srcDimOrder is 'ColMajor'
+          domElementGrid = for ii in [0...numRows]
+            for jj in [0...numCols]
+              linkCellFn ii, jj, sourceGridModel[jj][ii]
+        when srcDimCount is '1D' && srcDimOrder is 'RowMajor'
+          domElementGrid = for ii in [0...numRows]
+            rowOffset = ii * numCols
+            for jj in [0...numCols]
+              linkCellFn ii, jj, sourceGridModel[rowOffset + jj]
+        when srcDimCount is '1D' && srcDimOrder is 'ColMajor'
+          domElementGrid = for ii in [0...numRows]
+            colOffset = 0
+            for jj in [0...numCols]
+              linkCellFn ii, jj, sourceGridModel[colOffset + ii]
+              colOffset = colOffset + numRows
         else
           throw new Error(
             "srcDimCount (#{srcDimCount} must be '1D' or '2D', and srcDimOrder (#{srcDimOrder} must be 'RowMajor' or 'ColMajor'"
@@ -215,12 +191,9 @@ module.exports = jhGridDirective = ($parse) ->
       if clickStatesFn.constant
         clickHandlerStates = parseClickStates(clickStatesFn($scope), $scope)
       else
-        $scope.$watchCollection clickStatesFn, (
-          newClickHandlerStates
-        ) ->
+        $scope.$watchCollection clickStatesFn, (newClickHandlerStates) ->
           oldClickHandlerStates = clickHandlerStates
           clickHandlerStates = parseClickStates(newClickHandlerStates($scope), $scope)
 
       [gridCtrl, canvasCtrl] = controllers
-      canvasCtrl.watchElementControl $element, 'click', clickHandlerStates, gridCtrl
-    }
+      canvasCtrl.watchElementControl $element, 'click', clickHandlerStates, gridCtrl }

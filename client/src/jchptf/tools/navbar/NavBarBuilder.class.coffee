@@ -1,51 +1,10 @@
 'use strict'
 
-module.exports = class NavBarModelPackage
-  $inject: []
-
+module.exports = class NavBarBuilder
+  NavBarModel = require('./NavBarModel.class')
+  TabModel = require('./TabModel.class')
   _ = require('lodash')
-  url = require('url')
 
-  constructor: () ->
-    Object.freeze NavBarModel: NavBarModel, TabModel: TabModel, NavBarBuilder: NavBarBuilder
-
-class NavBarModel
-  constructor: (params) ->
-    {@brandName, @tabModels, @refreshPromise} = params
-
-    @brandName ?= ''
-    unless @tabModels? then @tabModels = []
-
-    # TODO: What if @refreshPromise is null/undefined?
-    Object.freeze(@tabModels)
-    Object.freeze(@)
-
-class TabModel
-  constructor: (params) ->
-    {@displayLabel, @clickRoute, @matchRoute} = params
-
-    parsedRoute = url.parse(clickRoute)
-    switch
-      when parsedRoute.query?.match(/\?/)?
-        throw new Error "clickRoute (#{@clickRoute}) has multiple query string separators"
-      when parsedRoute.hash?.match(/^#.*#/)?
-        throw new Error "clickRoute (#{@clickRoute}) has multiple hash tags"
-      when @clickRoute.match(/:/)?
-        throw new Error "clickRoute (#{@clickRoute}) must supply path variable values, not bindings."
-      when @clickRoute != parsedRoute.href
-        throw new Error "clickRoute (#{@clickRoute}) does not match parsed href (#{parsedRoute.href})"
-
-    if @matchRoute?
-      unless @clickRoute.match(@matchRoute)?
-        throw new Error "When given, matchRoute (#{@matchRoute}) must match clickRoute (#{@clickRoute})"
-    else
-      # TODO: Slash escaping?
-      @matchRoute = new RegExp("^#{@clickRoute.replace(/\//,'\\\/')}$")
-
-    Object.freeze @
-
-
-class NavBarBuilder
   constructor: (model) ->
     changed = false
     brandName = if model? then model.brandName else ''
@@ -112,3 +71,5 @@ class NavBarBuilder
       self._tabModels[index] = newTab
 
     self._changed = true
+
+

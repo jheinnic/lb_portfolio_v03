@@ -11,10 +11,10 @@ module.exports = class ModelObject
     return retVal
   @isSuperTypeOf: (target) ->
     throw new Error("target argument must be defined") unless target?
-    return @::.isPrototypeOf(target::)
+    return @::isPrototypeOf(target::)
   @isSubTypeOf: (target) ->
     throw new Error("target argument must be defined") unless target?
-    return target::.isPrototypeOf(@::)
+    return target::isPrototypeOf(@::)
 
   getType: -> return @constructor
   getSuperType: -> return @getType().getSuperType()

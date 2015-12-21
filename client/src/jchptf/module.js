@@ -27,9 +27,9 @@
        require('jchptf.authenticate'),
       require('jchptf.lbclient'),*/
       require('jchptf.site.navigation')
-    ],
-    require('./config')
+    ]
   )
+    .config(require('./router.config'))
     .run(require('./run'))
   ;
 }).call(window, angular);

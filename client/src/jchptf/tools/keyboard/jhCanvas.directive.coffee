@@ -7,25 +7,24 @@ module.exports = [
       controller: [
         '$scope', '$element', '$attrs', 'keypressHelper', '$parse', ($scope, $element, $attrs, keypressHelper, $parse) ->
           defaultKeyboardControlState =
-            stateName: 'default'
+            stateName: 'notControlled'
             onEnter: angular.noop
             onExit: angular.noop
             eventHandler: null
+          registeredElementControlStates =
+            default: defaultKeyboardControlState
           currentKeyboardControlState = defaultKeyboardControlState
 
-          eventControlStates =
-            keyboard:
-              default: defaultKeyboardControlState
-            click: {}
-          eventControllers =
-            keyboard: @
-
+          ###
+          Watch the enable/disable expr on the grid/cell scope.  When enabled, connect eventCallbackFn to
+          ngKeyPress/ngKeyDown/ngTextInput as appropriate, using prepared $keypressHelper methods as filters.
+          ###
           @parseElementControlState = (controlElement, controlStateDef) ->
             thisKeyboardControlState =
               eventName: controlElement.id
               onEnter: $parse(controlStateDef.onEnter)
               onExit: $parse(controlStateDef.onExit)
-              eventHandler: null
+              eventHandler: keypressHelper(thisElementScope, 'keydown', controlStateDef)
 
             thisElementScope = controlElement.scope()
 
@@ -34,10 +33,21 @@ module.exports = [
               controlStateDef,
               (newKeyBindings) ->
                 newKeyDownFn = keypressHelper(thisElementScope, 'keydown', newKeyBindings)
-                if currentKeyboardControlState.eventName is controlElement.id
+
+                # TODO: Let there be no need for rebinding.  Let jh-canvas own the continually bound handler,
+                #       and just use it to call the relevant & bindings in the active jh-grid element's isolated scope.
+
+                # If the changed element is currently in control, re-bind its new keydown handler method before
+                # changing the registration entries.
+                if thisKeyboardControlState is currentKeyboardControlState
                   controlElement.unbind('keydown', thisKeyboardControlState.eventHandler)
                   controlElement.on('keydown', newKeyDownFn)
-                thisKeyboardControlState.eventHandler = newKeyDownFn # TODO: Handle enterExpr/exitExpr changes too
+
+                # Now modify the registry entry so the next time this element becomes active, it uses the new behavior
+                # as specified.
+                thisKeyboardControlState.eventHandler = newKeyDownFn
+                thisKeyboardControlState.onEnter = newKeyBindings.onEnter
+                thisKeyboardControlState.onExit = newKeyBindings.onExit
             )
 
             # Remove the watch handler we've created from the argument scope's watch list when it gets destroyed.
@@ -54,28 +64,20 @@ module.exports = [
           ###
           @updateElementControlState = null
 
+          # TODO: jh-grid replacement will have already populated element's scope with '&' bindings.  We do not
+          #       have any need to drive $parse ourselves, just use cross-directive communication via $attr and $scope
+          #       from the given sub-element with jh-grid on it.
           @addKeyboardControlElement = (element, controlStateDef) ->
             elementId = element.id
-            if angular.isDefined(eventControlStates[elementId])
-              throw new Error(
-                "Key binding, onEnter, and onExit expressions already registered for #{elementId}"
-              )
-            thisCanvasStateData = eventControllers.keyboard.parseElementControlState(element, controlStateDef)
-            eventControlStates.keyboard[elementId] = thisCanvasStateData
-
-          ###
-          Watch the enable/disable expr on the grid/cell scope.  When enabled, connect eventCallbackFn to
-          ngKeyPress/ngKeyDown/ngTextInput as appropriate, using prepared $keypressHelper methods as filters.
-          ###
-          # if angular.isObject keyBindings
-          #   thisCanvasStateData.eventHandler = keypressHelper(thisElementScope, 'keydown', keyBindings)
-          # else if angular.isString keyBindings
-          # If key binding is given as an expression itself, parse and watch it.
+            if angular.isDefined(registeredElementControlStates[elementId])
+              throw new Error("Element-specific keyboard control expressions already bound and registered for #{elementId}")
+            thisElementControlState = @parseElementControlState(element, controlStateDef)
+            registeredElementControlStates[elementId] = thisElementControlState
 
           keyActiveWatch = $scope.$watch(
             'controlModel.activeCanvasElement', (newElementId) ->
             oldStateData = currentKeyboardControlState
-            newStateData = eventControlStates[newElementId] || defaultKeyboardControlState
+            newStateData = registeredElementControlStates[newElementId] || defaultKeyboardControlState
 
             if newStateData == defaultKeyboardControlState
               console.warning("Canvas element set #{newElementId} not registered.  Reverting to initial state.")

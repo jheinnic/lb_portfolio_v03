@@ -13,11 +13,14 @@
   angular.module(
     module.exports,
     [
-      'ng', 'ng-animate', 'angularModalService', 'localForage',
+      'ng', 'ng-animate', 'angularModalService', 'toastr',
       require('jchptf.site.notification')
     ]
   )
-    .config('./')
+    .config(require('./states.config'))
+    .config(require('./checkIdentity.config'))
+    .factory('IdentityCheckResult', require('./IdentityCheckResult.factory'))
+    .provider('UserIdentityServiceProvider', require('./UserIdentityServiceProvider.provider'))
     .controller('LoginController', require('./LoginController.controller'))
     .directive('ptfLoginModal', require('./ptfLoginModal.directive'));
 }).call(window, angular);
