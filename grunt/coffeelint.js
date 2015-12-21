@@ -8,26 +8,19 @@ module.exports = function coffeelint(grunt, options) {
       configFile: 'coffeelint.json',
       reporter: require('jshint-stylish')
     },
-    build: {
-      src: ['grunt/**/*.coffee']
-    },
-    source: {
-      src: [
-        'client/src/' + appConfig.app + '/**/*.coffee',
-        '{common,server}/**/*.coffee',
-        '!{common,server}/{test}/**/*.coffee']
-    },
-    'client-source': {
-      src: ['client/src/' + appConfig.app + '/**/*.coffee']
-    },
-    'common-source': {
-      src: ['common/**/*.coffee', '!common/test/**/*.coffee']
-    },
-    'server-source': {
-      src: ['server/**/*.coffee', '!server/test/**/*.coffee']
-    },
-    test: {
-      src: ['client/test/{spec,e2e}/**/*.coffee', '{common,server}/test/**/*.coffee']
-    }
+    build: [appConfig.source.build + '/**/*.coffee'],
+    source: [
+      appConfig.source.client + '/**/*.coffee',
+      appConfig.source.common + '/**/*.coffee',
+      appConfig.source.server + '/**/*.coffee'
+    ],
+    'client-source': [appConfig.source.client + '/**/*.coffee'],
+    'common-source': [appConfig.source.common + '/**/*.coffee'],
+    'server-source': [appConfig.source.server + '/**/*.coffee'],
+    test: [
+      appConfig.test.client + '/**/*.coffee',
+      appConfig.test.common + '/**/*.coffee',
+      appConfig.test.server + '/**/*.coffee'
+    ]
   };
 };

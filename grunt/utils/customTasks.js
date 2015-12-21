@@ -32,7 +32,7 @@
 
       grunt.registerTask(
         'fixIndexHtml', function fixIndexHtml() {
-          var indexHtml = path.join(process.cwd(), appConfig.dev.client, 'index.html');
+          var indexHtml = path.join(process.cwd(), appConfig.temp.client, 'index.html');
           var done = this.async();
 
           fs.readFile(

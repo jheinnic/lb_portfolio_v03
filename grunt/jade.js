@@ -2,7 +2,6 @@
   'use strict';
 
   module.exports = function jade(grunt, options) {
-    console.log('Config jade', new Date());
     var appConfig = options.appConfig;
     var _ = require('lodash');
 
@@ -36,7 +35,6 @@
       configObj.build.files[appConfig.dev.client + relPath] = nextSrcPath;
     }
 
-    console.log('Pre-Glob jade', new Date());
     var globFound =
       grunt.file.glob(
         appConfig.source.client + '/**/*.jade',
@@ -46,7 +44,6 @@
         }
       );
     _.forEach(globFound, addJadeFile);
-    console.log('Post-Glob jade', new Date());
 
     return configObj;
   };

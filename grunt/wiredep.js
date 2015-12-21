@@ -16,8 +16,8 @@ module.exports = function wiredep(grunt, options) {
     build: {
       bowerJson: appConfig.bowerJson,
       directory: appConfig.vendor,
-      src: appConfig.dev.client + '/index.html',
-      ignorePath: deriveIgnorePath(appConfig.dev.client, appConfig.vendor)
+      src: appConfig.temp.client + '/index.html',
+      ignorePath: deriveIgnorePath(appConfig.temp.client, appConfig.vendor)
     }
   };
 };

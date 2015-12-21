@@ -143,7 +143,7 @@ env-update:
  - 'shell:imagemin-jpg'
  - 'shell:imagemin-png'
 
-env-clean:
+env-build:
  - 'clean:build'
  - 'mkdir'
 
@@ -160,7 +160,7 @@ build:
  - 'build-fast'
 
 build-fast:
- - 'env-clean'
+ - 'env-build'
  - 'make-dev-build'
  - 'cont-dist-build'
 
@@ -170,7 +170,7 @@ build-dev:
  - 'build-dev-fast'
 
 build-dev-fast:
- - 'env-clean'
+ - 'env-build'
  - 'make-dev-build'
 
 
@@ -179,7 +179,7 @@ build-dist:
  - 'build-dist-fast'
 
 build-dist-fast:
- - 'env-clean'
+ - 'env-build'
  - 'make-dist-build'
 
 
@@ -188,7 +188,7 @@ build-both:
  - 'build-both-fast'
 
 build-both-fast:
- - 'env-clean'
+ - 'env-build'
  - 'make-dist-build'
  - 'make-dev-build'
 
@@ -200,15 +200,15 @@ build-both-slow:
 # NOTE: copy:build must precede jade:build to ensure index.html or index.jade remains optional.
 # NOTE: copy:build must precede autoprefixer:build to ensure less preprocessing is optional.
 make-dev-build:
- - 'copy:dev'
  - 'less:build'
  - 'jade:build'
  - 'autoprefixer:build'
  - 'wiredep:build'
  - 'fixIndexHtml'
+ - 'copy:dev'
  - 'htmlbuild:dev'
- - 'newer:copy:vendor'   # Try using middleware config?
  - 'bundleClient'
+ - 'newer:copy:vendor'   # Try using middleware config?
 
 # NOTE: This build target is only valid after having evaluated 'dev-build'.  For CSS, it reuses
 #       less and autoprefix preprocessor outputs.  For HTML, it reuses jade output for templates,
@@ -218,25 +218,6 @@ cont-dist-build:
  - 'copy:dist'
  - 'htmlbuild:dist'
  - 'minify'
-
-# NOTE: This will still populates some content under build/dev, but it will not include all
-#       files produced during a real dev build.  Optimizable image assets are populated as output
-#       of their appropriate optimizer from source (imagemin and svgmin), and non-optimizable
-#       images and fonts are only copied once from source to dist (copy:dist).  HTML processing for
-#       index.html, is performed once for dist (copy:dist, jade:dist, wiredep:dist, and htmlbuild:dist),
-#       but skipped for dev (Same plugins with :dev subtargets).
-# NOTE: copy:dist must precede jade:dist to ensure index.html or index.jade remains optional.
-# NOTE: copy:dist must precede autoprefixer:dist to ensure less preprocessing is optional.
-# make-dist-build:
-#  - 'less:build'
-#  - 'jade:build'
-#  - 'fixIndexHtml'
-#  - 'autoprefixer:build'
-#  - 'htmlbuild:dist'
-#  - 'wiredep:build'
-#  - 'bundleClient'
-#  - 'copy:dist'
-#  - 'minify'
 
 # NOTE: concat, uglify, and cssmin use the generated target populated by useminPrepare:index.
 minify:

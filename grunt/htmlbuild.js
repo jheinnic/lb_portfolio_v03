@@ -10,7 +10,7 @@
     //       the target changes from 'dev' to 'dist'.
     return {
       dev: {
-        src: appConfig.dev.client + '/index.html',
+        src: appConfig.temp.client + '/index.html',
         dest: appConfig.dev.client + '/index.html',
         options: {
           relative: true,

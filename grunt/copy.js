@@ -4,13 +4,13 @@
 // TODO: There is one more recurring file suffix for font graphics that I'm missing below!
 module.exports = function copy(grunt, options) {
   var appConfig = options.appConfig;
-  var devAssetsPattern =
-    '**/*.{html,css,bmp,jpg,jpeg,gif,png,webp,svg,eot,ttf,woff,woff2}';
+  var devAssetsPattern = '**/*.@(css|bmp|jpg|jpeg|gif|png|webp|svg|eot|ttf|woff|woff2)';
 
   return {
     vendor: {
       files: [
         {
+          dot: true,
           expand: true,
           cwd: appConfig.vendor,
           src: '**/*',
@@ -22,8 +22,8 @@ module.exports = function copy(grunt, options) {
       files: [
         {
           // TODO: This is what the slc deploy commands are for!!
-          expand: true,
           dot: true,
+          expand: true,
           src: ['node_modules/**/*'],
           dest: appConfig.dist.root
         }
@@ -34,22 +34,28 @@ module.exports = function copy(grunt, options) {
         {
           // NOTE: Jade trumps static HTML when names collide.  By copying
           //       static files before resolving Jade templates, Jade will
-	  //       win name conflicts as designed.
-          expand: true,
+          //       win name conflicts as designed.
           dot: true,
+          expand: true,
           cwd: appConfig.source.client,
           src: [
-            appConfig.app + '/.htaccess', appConfig.app + '/*.{png,txt,ico}',
-            appConfig.app + '/' + devAssetsPattern, '**/*.json', 'lr_init.js'
+            appConfig.app + '/.htaccess', appConfig.app + '/*.@(png|txt|ico)',
+            appConfig.app + '/' + devAssetsPattern, '{,models/}*.json', 'lr_init.js'
           ],
           dest: appConfig.dev.client
         }, {
-	  expand: true,
-	  dot: true,
-	  cwd: appConfig.source.common,
-	  src: ['**/*'],
+          dot: true,
+          expand: true,
+          cwd: appConfig.source.client,
+          src: [appConfig.app + '/**/*.html', 'index.html'],
+          dest: appConfig.temp.client
+        }, {
+          dot: true,
+          expand: true,
+          cwd: appConfig.source.common,
+          src: ['**/*'],
           dest: appConfig.dev.common
-	}
+        }
       ]
     },
     dist: {
@@ -64,8 +70,8 @@ module.exports = function copy(grunt, options) {
       //       (htmlbuild) and 'isDevelopment: false' data attribute (jade).
       files: [
         {
-          expand: true,
           dot: true,
+          expand: true,
           src: ['global-config.js', 'package.json', 'bower.json', '.npmrc', '.bowerrc', 'README.md'],
           dest: appConfig.dist.root
         }, {
@@ -77,9 +83,7 @@ module.exports = function copy(grunt, options) {
           expand: true,
           cwd: appConfig.source.client,
           src: [
-            appConfig.app + '/.htaccess',
-            appConfig.app + '/*.{ico,txt}',
-            appConfig.app + '/**/*.{webp,eot,ttf,woff,woff2}',
+            appConfig.app + '/.htaccess', appConfig.app + '/*.@(ico|txt)', appConfig.app + '/**/*.@(webp|eot|ttf|woff|woff2}',
             '{,models/}*.json'
           ],
           dest: appConfig.dist.client
@@ -105,16 +109,5 @@ module.exports = function copy(grunt, options) {
       ]
     }
   };
-
-  // Account for the renamed index.html due to linefeed compensation.
-  //var devIndexCopy = {};
-  //devIndexCopy[appConfig.dev.client + '/index.html'] = appConfig.temp.client + '/fixedIndex.html';
-  //configObj.dev.files.push(devIndexCopy);
-  //
-  //var distIndexCopy = {};
-  //distIndexCopy[appConfig.dist.client + '/index.html'] = appConfig.temp.client + '/fixedIndex.html';
-  //configObj.dist.files.push(distIndexCopy);
-  //
-  //return configObj;
 };
 
