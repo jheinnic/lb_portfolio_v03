@@ -27,22 +27,26 @@ module.exports = class IdentityContext
   constructor: ($q, ContextModelPackage) ->
     {AuthTokenEventKind,AuthTokenEvent} = ContextModelPackage
 
-    Object.defineProperty(@, 'identityContextInternals',
-      configurable: false
-      enumerable: false
-      editable: false
-      value: new IdentityContextInternals($q)
+    Object.defineProperty(
+      @,
+      { 'identityContextInternals',
+        configurable: false
+        enumerable: false
+        editable: false
+        value: new IdentityContextInternals($q) }
     )
-    Object.defineProperty(@, 'tokenEventListeners',
+    Object.defineProperty(
+      @,
+      'tokenEventListeners',
       configurable: false
       enumerable: false
       editable: false
       value: {}
     )
 
-  isLoggedIn: () -> @identityContextInternals.isLoggedIn()
+  isLoggedIn: -> @identityContextInternals.isLoggedIn()
 
-  logout: () -> @identityContextInternals.logout()
+  logout: -> @identityContextInternals.logout()
 
   ###*
   # Provides access to the authentication token service's information model.
@@ -74,11 +78,11 @@ module.exports = class IdentityContext
   #  state changes, which is because it is returning old state about the
   #  most recent known state change.
   ###
-  getLatestTokenEvent: () -> @identityContextInternals.latestTokenEvent
+  getLatestTokenEvent: -> @identityContextInternals.latestTokenEvent
 
-  verifyAuthTokenStatus: () -> @identityContextInternals.verifyAuthTokenStatus()
+  verifyAuthTokenStatus: -> @identityContextInternals.verifyAuthTokenStatus()
 
-  getNextTokenEvent: () -> @identityContextInternals.nextEventDefer.promise
+  getNextTokenEvent: -> @identityContextInternals.nextEventDefer.promise
 
   addTokenEventListener: (eventHandler) ->
     if @tokenEventListeners[eventHandler]
@@ -91,37 +95,38 @@ module.exports = class IdentityContext
         try
           eventHandler(event)
         catch e
-          # TODO: Error handling
+        # TODO: Error handling
           console.log(e)
     wrappedListener(@identityContextInternals.latestTokenEvent)
 
   dropTokenEventListener: (eventHandler) ->
-    if ! delete @tokenEventListener[eventHandler]
+    unless delete @tokenEventListener[eventHandler]
       throw new Error 'Cannot de-register an unregistered event handler'
 
-class IdentityContextInternals
-  # AuthTokenEventKind = require('./AuthTokenEventKind.enum').AuthTokenEventKind
+class IdentityContextInternals # AuthTokenEventKind = require('./AuthTokenEventKind.enum').AuthTokenEventKind
 
   constructor: ($q) ->
     # TODO: Add JWT token handling utilities, and tools for accepting
     #       delegated authentication tokens (e.g. OAuth2)
     @promiseService = $q
     @nextEventDefer = $q.defer
-    @latestTokenEvent = new AuthTokenEvent
-      eventType: AuthTokenEventKind.NO_TOKEN_AVAILABLE
-      nextPromise: @nextEventDefer.promise
+    @latestTokenEvent = new AuthTokenEvent(
+      { eventType: AuthTokenEventKind.NO_TOKEN_AVAILABLE
+        nextPromise: @nextEventDefer.promise }
+    )
 
   decodeAuthToken = (authToken) ->
     # TODO: Add JWT token decoder
     # TODO: Add a current timestamp to the token deltas and set timers
-    return new AuthTokenEvent
-      uuid: 'fakeUuid',
-      loginId: 'jheinnic'
-      displayName: 'John'
-      tokenExpiration: 3600000  # one hour
-      tokenTimeout: 600000      # 10 minutes
-      authToken: authToken
-      eventType: AuthTokenEventKind.NEW_TOKEN_IS_VALID
+    return new AuthTokenEvent(
+      { uuid: 'fakeUuid'
+        loginId: 'jheinnic'
+        displayName: 'John'
+        tokenExpiration: 3600000  # one hour
+        tokenTimeout: 600000      # 10 minutes
+        authToken: authToken
+        eventType: AuthTokenEventKind.NEW_TOKEN_IS_VALID }
+    )
 
   isLoggedIn: () -> @latestTokenEvent.eventType.isLoggedIn()
 
@@ -132,15 +137,16 @@ class IdentityContextInternals
     authToken = "mockToken"
 
     if @isUserLoggedIn()
-      if authToken && authToken != @latestTokenEvent.authToken
+      if authToken and authToken isnt @latestTokenEvent.authToken
         # TODO: Check validity of new token
         retVal = @decodeAuthToken authToken
 
-        if retVal.eventType == AuthTokenEventKind.TOKEN_WAS_REFRESHED
+        if retVal.eventType is AuthTokenEventKind.TOKEN_WAS_REFRESHED
           @fireTokenEvent retVal
         else
-          logoutTokenEvent = new AuthTokenEvent
+          logoutTokenEvent = new AuthTokenEvent(
             eventType: AuthTokenEventKind.NO_TOKEN_AVAILABLE
+          )
           @fireTokenEvent logoutTokenEvent
           @fireTokenEvent retVal
     else if authToken

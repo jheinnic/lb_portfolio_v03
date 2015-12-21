@@ -3,6 +3,7 @@
 module.exports = class PrizeCalculator
   @$inject = []
 
-  constructor: () ->
+  constructor: ->
 
-  getResultsModel: () ->
+  getResultsModel: ->
+

@@ -14,17 +14,16 @@
   angular.module(
     module.exports,
     [
-      'ui.router',
-      'drahak.hotkeys',
-      'angularModalService',
+      'cgnotify', 'ui.router', 'tree.control', 'drahak.hotkeys', 'angularModalService',
       require('jchptf.context'),
       require('jchptf.authenticate'),
-      require('jchptf.tools.iconPanel'),
-      require('jchptf.site.notification'),
-      require('jchptf.crosswords.tickets')
+      require('jchptf.tools.iconPanel')
     ]
   )
-    .controller('ResultController', require('./ResultController.controller'))
+    .service('XWInventoryCanvas', require('./XWInventoryCanvas.service'))
     .service('PrizeCalculator', require('./PrizeCalculator.service.coffee'))
+    .controller('XWInventoryController', require('./XWInventoryController.controller'))
+    .controller('ResultController', require('./ResultController.controller'))
+    .controller('BonusPrizeModalController', require('./BonusPrizeModalController.controller'))
   ;
 }).call(window, angular);

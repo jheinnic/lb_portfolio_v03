@@ -13,17 +13,15 @@
   angular.module(
     module.exports,
     [
-      'ui.router',
-      'cgnotify',
-      'drahak.hotkeys',
-      'tree.control',
+      'ui.router', 'cgnotify', 'drahak.hotkeys', 'tree.control',
       /*require('jchptf.context'),
-      require('jchptf.authenticate'),*/
+      require('jchptf.authenticate'),
+      require('jchptf.site.navigation'),*/
       require('jchptf.site.notification')
     ],
     require('./config')
   )
-    // .service('XWInventoryCanvas', require('./XWInventoryCanvas.service'))
+    .service('XWInventoryCanvas', require('./XWInventoryCanvas.service'))
     .controller('XWInventoryController', require('./XWInventoryController.controller'))
   ;
 }).call(window, angular);

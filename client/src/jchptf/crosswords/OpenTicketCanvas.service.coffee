@@ -1,10 +1,7 @@
 'use strict'
 
-doExport = () ->
-  module.exports = OpenTicketCanvas
-
-class OpenTicketCanvas
-  @$inject: ['XwTicketModelPackage']
+module.exports = class OpenTicketCanvas
+  @$inject = ['XwTicketModelPackage']
 
   @AbstractTicket: null
 
@@ -18,4 +15,3 @@ class OpenTicketCanvas
   setBonusWord: (bonusWord) =>
     @ticketModel.setBonusWord(bonusWord)
 
-doExport()

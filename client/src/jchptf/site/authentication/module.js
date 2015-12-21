@@ -1,7 +1,7 @@
 (function(angular) {
   'use strict';
 
-  module.exports = 'jchptf.authenticate';
+  module.exports = 'jchptf.site.authenticate';
 
   /**
    * @ngdoc overview
@@ -12,9 +12,12 @@
    */
   angular.module(
     module.exports,
-    ['ng', 'ng-animate', 'angularModalService', 'toastr', require('jchptf.context')],
-    require('./config')
+    [
+      'ng', 'ng-animate', 'angularModalService', 'localForage',
+      require('jchptf.site.notification')
+    ]
   )
+    .config('./')
     .controller('LoginController', require('./LoginController.controller'))
     .directive('ptfLoginModal', require('./ptfLoginModal.directive'));
 }).call(window, angular);

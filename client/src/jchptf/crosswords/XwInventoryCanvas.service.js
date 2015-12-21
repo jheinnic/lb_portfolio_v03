@@ -1,18 +1,18 @@
-(function() {
+(function () {
   'use strict';
 
   module.exports = XwInventoryCanvas;
-  XwInventoryCanvas.$inject = ['Studio', 'RepositoryDomainPackage'];
+  XwInventoryCanvas.$inject = ['Studio'];
 
-  function XwInventoryCanvas(Studio, RepositoryDomainPackage) {
+  function XwInventoryCanvas(Studio) {
     // var Folder = RepositoryDomainPackage.Folder;
-    var RootFolder = Studio.getRootFolder();
+    // var RootFolder = Studio.getRootFolder();
     // var someFolder = Studio.getFolderByPath('/a/b/c');
-    RootFolder = RepositoryDomainPackage.RootFolder;
+    // var RootFolder = RepositoryDomainPackage.RootFolder;
 
     // this.documentCacheManager = Studio;
-    this.rootFolder = RootFolder;
     // this.rootFolder = documentCacheManager.getRootFolder();
+    this.rootFolder = Studio.getRootFolder();
     this.rootFolder.traverse().then(
       function (data) {
         console.log(data);
@@ -25,8 +25,8 @@
           do {
             item = children.next();
             console.log('-- Item:', item.value);
-          } while (! item.done);
-        } while (! namespace.done);
+          } while (!item.done);
+        } while (!namespace.done);
       }
     );
   }

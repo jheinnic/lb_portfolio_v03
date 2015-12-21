@@ -1,0 +1,20 @@
+# 'use strict'
+
+module.exports = [
+  'CoreModelPackage',
+  'DocumentModelPackage',
+  'RepositoryModelPackage',
+  (CoreModelPackage, DocumentModelPackage, RepositoryModelPackage) ->
+    retVal = { Enum: CoreModelPackage.Enum,
+      AbstractDocument: RepositoryModelPackage.AbstractDocument,
+      DocumentKind: RepositoryModelPackage.DocumentKind,
+      ExportRoleKind: RepositoryModelPackage.ExportRoleKind
+      ModelObject: RepositoryModelPackage.ModelObject
+      Canvas: DocumentModelPackage.Canvas
+      Folder: DocumentModelPackage.Folder
+      Document: DocumentModelPackage.Document }
+
+    retVal
+]
+
+

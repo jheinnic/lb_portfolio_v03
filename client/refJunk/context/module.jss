@@ -12,7 +12,7 @@
     module.exports,
     ['ng', 'ui.router', 'ngEventAggregator']
   )
-    .service('IdentityContext', require('./IdentityContext.service.coffee'))
-    .factory('ContextModelPackage', require('./ContextModelPackage.factory.coffee'))
+    .service('IdentityContext', require('./IdentityContext.service'))
+    .factory('ContextModelPackage', require('./ContextModelPackage.factory'))
   ;
 }).call(window, angular);
