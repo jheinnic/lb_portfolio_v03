@@ -164,6 +164,11 @@ build-fast:
  - 'make-dev-build'
  - 'cont-dist-build'
 
+build-slow:
+ - 'env-install'
+ - 'make-dev-build'
+ - 'cont-dist-build'
+
 
 build-dev:
  - 'env-update'
@@ -173,39 +178,20 @@ build-dev-fast:
  - 'env-build'
  - 'make-dev-build'
 
-
-build-dist:
- - 'env-update'
- - 'build-dist-fast'
-
-build-dist-fast:
- - 'env-build'
- - 'make-dist-build'
-
-
-build-both:
- - 'env-update'
- - 'build-both-fast'
-
-build-both-fast:
- - 'env-build'
- - 'make-dist-build'
- - 'make-dev-build'
-
-build-both-slow:
+build-dev-slow:
  - 'env-install'
- - 'build-both-fast'
+ - 'make-dev-build'
 
 
 # NOTE: copy:build must precede jade:build to ensure index.html or index.jade remains optional.
 # NOTE: copy:build must precede autoprefixer:build to ensure less preprocessing is optional.
 make-dev-build:
  - 'less:build'
- - 'jade:build'
  - 'autoprefixer:build'
+ - 'copy:dev'
+ - 'jade:build'
  - 'wiredep:build'
  - 'fixIndexHtml'
- - 'copy:dev'
  - 'htmlbuild:dev'
  - 'bundleClient'
  - 'newer:copy:vendor'   # Try using middleware config?
