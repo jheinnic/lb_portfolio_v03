@@ -11,6 +11,7 @@ module.exports = [
       templateUrl: 'views/jchptf/tools/navbar/jch_navbar.html'
       link: ($scope) ->
         updateModel = (data) ->
+          console.log(data);
           data.refreshPromise.then(updateModel)
           $scope.navDataModel = _.omit(data, 'refreshPromise')
 

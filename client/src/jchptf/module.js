@@ -20,13 +20,14 @@
   angular.module(
     module.exports,
     [
-      'ng',
-      'ui.router',
       /* require('jchptf.context'),
-       require('jchptf.site.notification'),
-       require('jchptf.authenticate'),
-      require('jchptf.lbclient'),*/
-      require('jchptf.site.navigation')
+       'ng',
+       require('jchptf.authenticate'),*/
+      'ui.router',
+      require('jchptf.site.notification'),
+      require('jchptf.site.navigation'),
+      require('jchptf.crosswords'),
+      require('jchptf.lbclient')
     ]
   )
     .config(require('./router.config'))

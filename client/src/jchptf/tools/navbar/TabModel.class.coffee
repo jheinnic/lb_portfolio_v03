@@ -31,3 +31,4 @@ module.exports = class TabModel
       throw new Error("When given, matchRoute (#{@matchRoute}) must match clickRoute (#{@clickRoute})")
 
     Object.freeze(this)
+

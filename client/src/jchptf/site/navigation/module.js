@@ -12,7 +12,12 @@
    */
   angular.module(
     module.exports,
-    ['ng', 'ui.router'],
+    [
+      'ng', 'ui.router',
+      require('jchptf.site.branding'),
+      require('jchptf.site.notification'),
+      require('jchptf.tools.navbar')
+    ],
     require('./config')
   )
     .run(require('./run'))

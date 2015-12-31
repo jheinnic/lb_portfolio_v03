@@ -15,9 +15,10 @@
   angular.module(
     module.exports,
     [
-      'cgnotify', 'ui.router', 'tree.control', 'drahak.hotkeys', 'angularModalService',
+      'ng', 'ui.router', 'treeControl', 'angularModalService',
       // require('jchptf.context'),
       // require('jchptf.authenticate'),
+      require('jchptf.lbclient'),
       require('jchptf.tools.iconPanel')
     ],
     require('./config')

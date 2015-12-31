@@ -10,9 +10,9 @@ module.exports = class NavBarModel
     # {@brandName, @tabModels, @refreshPromise} = params
 
     # TODO: Type validation
-    @brandName = params.brandName or ''
-    @tabModels = params.tabModels or []
-    @refreshPromise = params.refreshPromise or null
+    this.brandName = params.brandName or ''
+    this.tabModels = params.tabModels or []
+    this.refreshPromise = params.refreshPromise or null
 
-    Object.freeze(@tabModels)
+    Object.freeze(this.tabModels)
     return Object.freeze(this)

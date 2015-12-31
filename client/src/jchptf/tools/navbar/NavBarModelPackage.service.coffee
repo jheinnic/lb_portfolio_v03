@@ -8,6 +8,6 @@ module.exports = class NavBarModelPackage
 
   constructor: ->
     Object.freeze
-      NavBarModel: require('./NavBarModel')
-      TabModel: require('./TabModel')
-      NavBarBuilder: require('./NavBarBuilder')
+      NavBarModel: require('./NavBarModel.class')
+      TabModel: require('./TabModel.class')
+      NavBarBuilder: require('./NavBarBuilder.class')

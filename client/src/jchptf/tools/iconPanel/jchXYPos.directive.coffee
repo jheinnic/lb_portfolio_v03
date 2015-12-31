@@ -2,7 +2,7 @@
 
 module.exports = jchXyPosDirective = [
   '$parse', ($parse) ->
-    retVal = {
+    retVal =
       restrict: 'A'
       scope: false
       link: ($scope, $elem, $attr) ->
@@ -58,30 +58,29 @@ module.exports = jchXyPosDirective = [
 
         $attr.$observe(
           'jchXyPos', (expression) ->
-          match = expression.match(attrRegEx)
-          if match
-            match[1] = 'cellModel.rowId' if angular.isUndefined(match[1])
-            match[2] = 'cellModel.colId' if angular.isUndefined(match[2])
+            match = expression.match(attrRegEx)
+            if match
+              match[1] = 'cellModel.rowId' if angular.isUndefined(match[1])
+              match[2] = 'cellModel.colId' if angular.isUndefined(match[2])
 
-            if (colIdExpr isnt match[2])
-              colIdExpr = match[2]
-              cellWidth = match[3]
-              handleLeftFn()
-              handleWidthFn()
-            else if (cellWidth isnt match[3])
-              cellWidth = match[3]
-              handleWidthFn()
+              if (colIdExpr isnt match[2])
+                colIdExpr = match[2]
+                cellWidth = match[3]
+                handleLeftFn()
+                handleWidthFn()
+              else if (cellWidth isnt match[3])
+                cellWidth = match[3]
+                handleWidthFn()
 
-            if (rowIdExpr isnt match[1])
-              rowIdExpr = match[1]
-              cellHeight = match[4]
-              handleTopFn()
-              handleHeightFn()
-            else if (cellHeight isnt match[4])
-              cellHeight = match[4]
-              handleHeightFn()
+              if (rowIdExpr isnt match[1])
+                rowIdExpr = match[1]
+                cellHeight = match[4]
+                handleTopFn()
+                handleHeightFn()
+              else if (cellHeight isnt match[4])
+                cellHeight = match[4]
+                handleHeightFn()
         )
-    }
 
     return retVal
 ]
