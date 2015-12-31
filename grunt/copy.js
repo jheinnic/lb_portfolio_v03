@@ -4,7 +4,7 @@
 // TODO: There is one more recurring file suffix for font graphics that I'm missing below!
 module.exports = function copy(grunt, options) {
   var appConfig = options.appConfig;
-  var devAssetsPattern = '**/*.@(css|bmp|jpg|jpeg|gif|png|webp|svg|eot|ttf|woff|woff2)';
+  var devAssetsPattern = '**/*.@(html|css|bmp|jpg|jpeg|gif|png|webp|svg|eot|ttf|woff|woff2)';
 
   return {
     vendor: {
@@ -47,7 +47,7 @@ module.exports = function copy(grunt, options) {
           dot: true,
           expand: true,
           cwd: appConfig.source.client,
-          src: [appConfig.app + '/**/*.html', 'index.html'],
+          src: ['index.html'],
           dest: appConfig.temp.client
         }, {
           dot: true,
@@ -91,7 +91,7 @@ module.exports = function copy(grunt, options) {
           dot: true,
           expand: true,
           cwd: appConfig.dev.client,
-          src: ['app.js', appConfig.app + '**/_*.css', appConfig.app + '**/*.html'],
+          src: ['app.js', appConfig.app + '/**/_*.css', appConfig.app + '/**/*.html'],
           dest: appConfig.dist.client
         }, {
           dot: true,

@@ -33,8 +33,10 @@
    * @param {string} A glob-returned file path to add a browserify registration for.
    */
   function registerFileByModuleAlias(b, appConfig, fileGlobPath) {
+    var registeredFilePath = path.relative(appConfig.source.client, fileGlobPath).replace(/\\/g, '/');
+    console.log(fileGlobPath);
+    console.log(registeredFilePath);
     if (fileGlobPath !== appConfig.app + '/module.js' || fileGlobPath !== appConfig.app + '/module.coffee') {
-      var registeredFilePath = path.relative(appConfig.source.client, fileGlobPath).replace(/\\/g, '/');
       var moduleFQN = path.dirname(registeredFilePath).replace(/\//g, '.');
       var baseName = path.basename(registeredFilePath).replace(/\.coffee$|\.js$/, '');
       var exposedName;
