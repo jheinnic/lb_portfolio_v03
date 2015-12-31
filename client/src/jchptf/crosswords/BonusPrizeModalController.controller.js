@@ -14,6 +14,6 @@
   }
 
   angular.extend(
-    BonusPrizezModalController.prototype, {}
+    BonusPrizeModalController.prototype, {}
   );
 }).call(window, angular);

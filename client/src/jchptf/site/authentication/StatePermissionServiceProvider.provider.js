@@ -1,8 +1,8 @@
 (function () {
   'use strict';
 
-  module.exports = RoleAuthorizationProvider;
-  RoleAuthorizationProvider.$inject = [];
+  module.exports = StatePermissionServiceProvider;
+  StatePermissionServiceProvider.$inject = [];
 
   var _ = require('lodash');
   var privilegedStates = [];
@@ -10,22 +10,22 @@
     created: false
   };
 
-  function RoleAuthorizationProvider() {
+  function StatePermissionServiceProvider() {
     return Object.freeze(this);
   }
 
   // TODO: Copy only minimal subset needed to identity state during intercept rather than
   //       cloning the whole darn thing
-  RoleAuthorizationProvider.requiresIdentity = function requiresIdentity($stateConfig) {
+  StatePermissionServiceProvider.authorize = function authorize($stateConfig, role) {
     privilegedStates.push(Object.freeze(_.cloneDeep($stateConfig)));
   }
 
-  RoleAuthorizationProvider.prototype.$get = function $get() {
+  StatePermissionServiceProvider.prototype.$get = function $get() {
     var retVal;
     if (providerState.created === false) {
       providerState.created = true;
       Object.freeze(providerState);
-      retVal = ['IdentityCheckResult', RoleAuthorization];
+      retVal = ['IdentityCheckResult', StatePermissionService];
     }
 
     return retVal;
@@ -69,7 +69,7 @@
 // TODO: Adopt identity token decoding algorithm
 // TODO: Add logic for delegating credential check
 // TODO: Use localForage instead of variables to store identity info
-function RoleAuthorization(_IdentityCheckResult) {
+function StatePermissionService(_IdentityCheckResult) {
   IdentityCheckResult = _IdentityCheckResult;
   userCookieStatus = IdentityCheckResult.NO_KEY;
   guestCookieStatus = IdentityCheckResult.NO_KEY;
@@ -112,7 +112,7 @@ function RoleAuthorization(_IdentityCheckResult) {
 
 
 // TODO: Get the semantics of privilege checking down right.
-RoleAuthorization.prototype.isIdentitySufficient = function isIdentitySufficient(candidateState) {
+StatePermissionService.prototype.isIdentitySufficient = function isIdentitySufficient(candidateState) {
   var result = false;
   if (privilegedStates.contains(candidateState)) {
     if (userCookieStatus === IdentityCheckResult.IDENTIFIED_USER) {
@@ -129,7 +129,7 @@ RoleAuthorization.prototype.isIdentitySufficient = function isIdentitySufficient
 };
 
 
-RoleAuthorization.prototype.handleServiceAuthFailure = function handleServiceAuthFailure() {
+StatePermissionService.prototype.handleServiceAuthFailure = function handleServiceAuthFailure() {
   userCookieStatus = IdentityCheckResult.EXPIRED;
   decodedIdentity = {
     expired: true,
@@ -199,7 +199,7 @@ function validateUserIdentityCookie(identityCookie) {
 
 // TODO: Prefer to let a request object be passed in and populated
 //       rather than returning the token into the wild.
-RoleAuthorization.prototype.getAuthToken = function getAuthToken() {
+StatePermissionService.prototype.getAuthToken = function getAuthToken() {
   var bestToken = null;
   if (angular.isObject(decodedIdentity)) {
     bestToken = decodedIdentity.user.session.authToken;
@@ -243,8 +243,8 @@ function checkUserIdentityExpiry() {
     return retVal;
   }
 
-  Object.freeze(RoleAuthorization);
-  Object.freeze(RoleAuthorizationProvider);
+  Object.freeze(StatePermissionService);
+  Object.freeze(StatePermissionServiceProvider);
 }
 ).
 call(window, angular);
