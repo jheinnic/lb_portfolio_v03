@@ -2,7 +2,8 @@
 
 module.exports = jchXyPosDirective = [
   '$parse', ($parse) ->
-    retVal = { restrict: 'A'
+    retVal = {
+      restrict: 'A'
       scope: false
       link: ($scope, $elem, $attr) ->
         attrRegEx = /^\s*(?:\(\s*([\S]+)\s*,\s*([\S]+)\s*\)\s+at\s+)?([\d]+)\s+by\s+([\d]+)\s*$/
@@ -20,7 +21,7 @@ module.exports = jchXyPosDirective = [
         handleLeftFn = ->
           watchLeftFn() if watchLeftFn?
           leftFn = $parse(colIdExpr + ' * ' + cellWidth + ' + "px"')
-          if !leftFn.constant
+          unless leftFn.constant
             watchLeftFn = $scope.$watch(leftFn, (value) -> $elem.css 'left', value)
           else
             watchLeftFn = null
@@ -29,7 +30,7 @@ module.exports = jchXyPosDirective = [
         handleWidthFn = ->
           watchWidthFn() if watchWidthFn?
           widthFn = $parse(cellWidth + ' + "px"')
-          if !widthFn.constant
+          unless widthFn.constant
             watchWidthFn = $scope.$watch(widthFn, (value) -> $elem.css 'width', value)
           else
             watchWidthFn = null
@@ -39,7 +40,7 @@ module.exports = jchXyPosDirective = [
         handleTopFn = ->
           watchTopFn() if watchTopFn?
           topFn = $parse(rowIdExpr + ' * ' + cellHeight + ' + "px"')
-          if !topFn.constant
+          unless topFn.constant
             watchTopFn = $scope.$watch(topFn, (value) -> $elem.css 'top', value)
           else
             watchTopFn = null
@@ -48,7 +49,7 @@ module.exports = jchXyPosDirective = [
         handleHeightFn = ->
           watchHeightFn() if watchHeightFn?
           heightFn = $parse(cellHeight + ' + "px"')
-          if !heightFn.constant
+          unless heightFn.constant
             watchHeightFn = $scope.$watch(heightFn, (value) -> $elem.css 'height', value)
           else
             watchHeightFn = null

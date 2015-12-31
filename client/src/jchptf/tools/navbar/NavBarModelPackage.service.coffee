@@ -6,7 +6,7 @@ module.exports = class NavBarModelPackage
   _ = require('lodash')
   url = require('url')
 
-  constructor: () ->
+  constructor: ->
     Object.freeze
       NavBarModel: require('./NavBarModel')
       TabModel: require('./TabModel')

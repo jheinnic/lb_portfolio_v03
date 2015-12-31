@@ -79,15 +79,11 @@
     "strict": false,
     "level": "warn"
   },
-  "no_implicit_parens": {
-    "strict": true,
-    "level": "info"
-  },
   "no_interpolation_in_single_quotes": {
     "level": "error"
   },
   "no_plusplus": {
-    "strict": false
+    "strict": false,
     "level": "warn"
   },
   "no_stand_alone_at": {

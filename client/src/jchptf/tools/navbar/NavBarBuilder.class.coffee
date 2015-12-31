@@ -7,60 +7,64 @@ module.exports = class NavBarBuilder
 
   constructor: (model) ->
     changed = false
-    brandName = if model? then model.brandName else ''
+    aBrandName = if model? then model.brandName else ''
     tabModels = if model? then _.clone(model.tabModels) else []
 
-    Object.defineProperties @, {
+    Object.defineProperties(this, {
       brandName:
         enumerable: true
         setter: (nextName) ->
-          if brandName != nextName
-            brandName = nextName
+          if (aBrandName isnt nextName)
             changed = true
+            aBrandName = nextName
       _changed:
-        getter: () -> changed
+        getter: -> changed
         setter: (nextValue) -> changed = nextValue
       _brandName:
-        getter: () -> brandName
+        getter: -> brandName
       _tabCount:
-        getter: () -> tabModels.length
+        getter: -> tabModels.length
       _tabModels:
-        getter: () -> tabModels
-    }
+        getter: -> tabModels
+    })
 
   removeTabByName: (displayName) ->
     matchDisplayName = _.matchesProperty('displayName', displayName)
-    removed = _.remove @_tabModels, matchDisplayName
+    removed = _.remove(this._tabModels, matchDisplayName)
 
-    if removed.length > 0
-      @_changed = true
+    if (removed.length > 0)
+      this._changed = true
     else
-      throw new Error "No such tab named #{displayName}"
-    @
+      throw new Error("No such tab named #{displayName}")
+
+    return this
 
   addTab: (index, displayName, clickRoute, matchRoute) ->
-    if index > @_tabCount
-      throw new Error "Index (#{index}) is beyond the end of the current tab list.  Max index = #{@_tabCount}"
+    if index > this._tabCount
+      throw new Error("Index (#{index}) is beyond the end of the current tab list.  Max index = #{this._tabCount}")
     else if index < 0
-      throw new Error "Index (#{index}) must be non-negative."
+      throw new Error("Index (#{index}) must be non-negative.")
 
     # TODO: Make sure displayName is unique
-    _addTab @, index, displayName, clickRoute, matchRoute
-    @
+    _addTab(this, index, displayName, clickRoute, matchRoute)
+
+    this
 
   appendTab: (displayName, clickRoute, matchRoute) ->
     # TODO: Make sure displayName is unique
-    _addTab @, @_tabCount, displayName, clickRoute, matchRoute
-    @
+    _addTab(@, sthis._tabCount, displayName, clickRoute, matchRoute)
+
+    this
 
   prependTab: (displayName, clickRoute, matchRoute) ->
     # TODO: Make sure displayName is unique
-    _addTab @, 0, displayName, clickRoute, matchRoute
-    @
+    _addTab(this, 0, displayName, clickRoute, matchRoute)
 
-  hasChanges: () -> @_changed
+    this
 
-  build: (refreshPromise) -> new NavBarModel(@_brandName, @_tabModels, refreshPromise)
+  hasChanges: -> this._changed
+
+  build: (refreshPromise) -> new NavBarModel(this._brandName, this._tabModels, refreshPromise)
 
   _addTab = (self, index, displayName, clickRoute, matchRoute) ->
     newTab = new TabModel(displayName, clickRoute, matchRoute)

@@ -2,11 +2,9 @@
   'use strict';
 
   module.exports = XwInventoryController;
-  XwInventoryController.$inject = ['$scope', '$state', 'XwInventoryCanvas', 'Studio', 'RepositoryDomainPackage', 'eventAggregator'];
+  XwInventoryController.$inject = ['$scope', '$state', 'XwInventoryCanvas', 'Studio', 'eventAggregator'];
 
-  function XwInventoryController($scope, $state, XwInventoryCanvas, Studio, RepositoryDomainPackage, eventAggregator) {
-    var DocumentKind = RepositoryDomainPackage.DocumentKind;
-
+  function XwInventoryController($scope, $state, XwInventoryCanvas, Studio, eventAggregator) {
     $scope.treeOptions = {
       nodeChildren: 'contents',
       dirSelectable: false,

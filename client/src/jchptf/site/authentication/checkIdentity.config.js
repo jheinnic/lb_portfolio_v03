@@ -18,14 +18,14 @@
       // action if its found.  Remove the key if its found, since its is not
       // meant for consumption directly by UI controllers.
       if (angular.isObject(data) && data.requiresIdentity === true) {
-        RoleAuthorizationProvider.requiresIdentity($stateConfig)
-        delete(data.requiresIdentity)
+        RoleAuthorizationProvider.requiresIdentity($stateConfig);
+        delete(data.requiresIdentity);
       }
 
       // Return all other data otherwise untouched as though nothing
       // even happened...
       return data;
-    };
+    });
   }
 }).call(window, angular);
 

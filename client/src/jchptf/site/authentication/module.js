@@ -20,7 +20,7 @@
     .config(require('./states.config'))
     .config(require('./checkIdentity.config'))
     .factory('IdentityCheckResult', require('./IdentityCheckResult.factory'))
-    .provider('UserIdentityServiceProvider', require('./UserIdentityServiceProvider.provider'))
+    //.provider('UserIdentityServiceProvider', require('./UserIdentityServiceProvider.provider'))
     .controller('LoginController', require('./LoginController.controller'))
     .directive('ptfLoginModal', require('./ptfLoginModal.directive'));
 }).call(window, angular);

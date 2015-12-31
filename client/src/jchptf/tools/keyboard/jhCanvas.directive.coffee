@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = [
-  () ->
+  ->
     retVal =
       restrict: 'A'
       controller: [
@@ -14,6 +14,8 @@ module.exports = [
           registeredElementControlStates =
             default: defaultKeyboardControlState
           currentKeyboardControlState = defaultKeyboardControlState
+
+          $scope.controlModel = {}
 
           ###
           Watch the enable/disable expr on the grid/cell scope.  When enabled, connect eventCallbackFn to
@@ -77,12 +79,12 @@ module.exports = [
           keyActiveWatch = $scope.$watch(
             'controlModel.activeCanvasElement', (newElementId) ->
             oldStateData = currentKeyboardControlState
-            newStateData = registeredElementControlStates[newElementId] || defaultKeyboardControlState
+            newStateData = registeredElementControlStates[newElementId] or defaultKeyboardControlState
 
-            if newStateData == defaultKeyboardControlState
+            if newStateData is defaultKeyboardControlState
               console.warning("Canvas element set #{newElementId} not registered.  Reverting to initial state.")
 
-            if oldStateData != newStateData
+            if oldStateData isnt newStateData
               $element.unbind('keydown', oldStateData.onKeyDown) if oldStateData.onKeyDown
 
               oldStateData.onExit()
@@ -100,11 +102,12 @@ module.exports = [
             $scope.controlModel.activeCanvasElement = element.id
 
           @watchEventControl = (element, eventType, handlerStates, eventCtrl) ->
+            console.log(element, eventType, handlerStates, eventCtrl, 'TBD')
 
           $element.on(
             '$destroy', ->
             if currentKeyboardControlState.onKeyDown?
-              $element.unbind 'keydown', currentKeyboardControlState.onKeyDown
+              $element.unbind('keydown', currentKeyboardControlState.onKeyDown)
           )
           $scope.$on('$destroy', keyActiveWatch)
       ]

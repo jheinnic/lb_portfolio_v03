@@ -53,3 +53,4 @@ module.exports = ['CoreModelPackage', (CoreModelPackage) ->
   ###
   return { AuthTokenEvent: AuthTokenEvent,
   AuthTokenEventKind: AuthTokenEventKind }
+]

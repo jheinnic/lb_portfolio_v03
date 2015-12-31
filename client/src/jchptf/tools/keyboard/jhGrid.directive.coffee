@@ -35,11 +35,11 @@ module.exports = [
             (stateName) ->
               controlState =
                 stateName: stateName
-                onEnter: $parse controlStatesDef[stateName].onEnter || null
-                onExit: $parse controlStatesDef[stateName].onExit || null
+                onEnter: $parse(controlStatesDef[stateName].onEnter or null)
+                onExit: $parse(controlStatesDef[stateName].onExit or null)
 
               if controlStatesDef[stateName].eventHandler?
-                parsedEventHandler = $parse controlStatesDef[stateName].eventHandler
+                parsedEventHandler = $parse(controlStatesDef[stateName].eventHandler)
                 controlState.eventHandler = ($event) ->
                   $scope.$apply () -> parsedEventHandler($scope, { '$event': $event })
               else
@@ -79,35 +79,34 @@ module.exports = [
 
         @getScopeByCoordinates = (rowId, colId) ->
           if domElementGrid is null
-            throw new Error "cannot retrieve cells by coordinates until after grid has been populated"
-          if rowId < 0 || rowId >= numRows
-            throw new Error "rowId must be a value between 0 and #{numRows - 1}.  rowId = #{rowId}"
-          if colId < 0 || colId >= numCols
-            throw new Error "rowId must be a value between 0 and #{numCols - 1}.  colId = #{colId}"
+            throw new Error("cannot retrieve cells by coordinates until after grid has been populated")
+          if rowId < 0 or rowId >= numRows
+            throw new Error("rowId must be a value between 0 and #{numRows - 1}.  rowId = #{rowId}")
+          if colId < 0 or colId >= numCols
+            throw new Error("rowId must be a value between 0 and #{numCols - 1}.  colId = #{colId}")
 
           return domElementGrid[rowId][colId].scope()
 
         @setClickState = (nextStateName, rowId = -1, colId = -1) ->
-          canvasCtrl.setElementControlState($element, 'click', nextStateName)
+          console.log(nextStateName, 'click', rowId, colId) # canvasCtrl.setElementControlState($element, 'click', nextStateName)
 
-        @moveCursorTo = (rowId, colId) ->
-          console.log('tbd')
+        @moveCursorTo = (rowId, colId) -> console.log('tbd', rowId, colId)
 
         return this
     ]
     link: ($scope, $element, $attrs, controllers, $transcludeFn) ->
       if $scope.srcDimCount != '2D' && $scope.srcDimCount != '1D' && angular.isDefined $scope.srcDimCount
-        throw new Error "srcDimCount must be '2D' or '1D', not #{$scope.srcDimCount}"
+        throw new Error("srcDimCount must be '2D' or '1D', not #{$scope.srcDimCount}")
       if $scope.srcDimOrder != 'RowMajor' && $scope.srcDimOrder != 'ColMajor' && angular.isDefined $scope.srcDimOrder
-        throw new Error "srcDimOrder must be 'RowMajor' or 'ColMajor', not #{srcDimOrder}"
+        throw new Error("srcDimOrder must be 'RowMajor' or 'ColMajor', not #{srcDimOrder}")
       if $scope.numRows < 1
-        throw new Error "numRows must be a positive value.  numRows = #{$scope.numRows}"
+        throw new Error("numRows must be a positive value.  numRows = #{$scope.numRows}")
       if $scope.numCols < 1
-        throw new Error "numCols must be a positive value.  numCols = #{$scope.numRows}"
+        throw new Error("numCols must be a positive value.  numCols = #{$scope.numRows}")
       if $scope.cellWidth < 1
-        throw new Error "cellWidth must be a positive value.  cellWidth = #{$scope.cellWidth}"
+        throw new Error("cellWidth must be a positive value.  cellWidth = #{$scope.cellWidth}")
       if $scope.cellHeight < 1
-        throw new Error "cellHeight must be a positive value.  cellHeight = #{$scope.cellHeight}"
+        throw new Error("cellHeight must be a positive value.  cellHeight = #{$scope.cellHeight}")
 
       sourceGridModel = $scope.sourceGridModel
       numCells = $scope.numRows * $scope.numCols
@@ -120,45 +119,48 @@ module.exports = [
 
       switch
         when not (sourceGridModel and angular.isArray sourceGridModel)
-          throw new Error "sourceGridModel must be an array, not #{sourceGridModel}."
+          throw new Error("sourceGridModel must be an array, not #{sourceGridModel}")
         when srcDimCount is '1D'
           unless sourceGridModel.length is numCells
-            throw new Error "sourceGridModel length must be #{numCells}, but was #{sourceGridModel.length}."
+            throw new Error("sourceGridModel length must be #{numCells}, but was #{sourceGridModel.length}")
         when srcDimOrder = 'RowMajor'
           unless sourceGridModel.length is numRows
-            throw new Error "sourceGridModel's first dimension must be #{numRows}, but was #{srcDimOrder.length}."
+            throw new Error("sourceGridModel's first dimension must be #{numRows}, but was #{srcDimOrder.length}")
           unless _.every(sourceGridModel, 'length', numCols)
-            throw new Error "sourceGridModel's 2nd dimension must be #{numCols}, but was not so for every row."
+            throw new Error("sourceGridModel's 2nd dimension must be #{numCols}, but was not so for every row")
         else
           unless sourceGridModel.length is numCols
-            throw new Error "sourceGridModel's first dimension must be #{numCols}, but was #{srcDimOrder.length}."
+            throw new Error("sourceGridModel's first dimension must be #{numCols}, but was #{srcDimOrder.length}")
           unless _.every(sourceGridModel, 'length', numRows)
-            throw new Error "sourceGridModel's 2nd dimension must be #{numRows}, but was not so for every row."
+            throw new Error("sourceGridModel's 2nd dimension must be #{numRows}, but was not so for every row")
 
       # cellTemplateFn = $compile pseudoElem.html()
       cellHeightStr = cellHeight + 'px'
       cellWidthStr = cellWidth + 'px'
       linkCellFn = (ii, jj, cellModel) ->
-        scope = $scope.$new false
+        scope = $scope.$new(false)
         scope.cellModel = cellModel
         scope.rowId = ii
         scope.colId = jj
 
         return $transcludeFn scope, (cloneCellElm) ->
-          $element.append cloneCellElm
+          $element.append(cloneCellElm)
 
-          cloneCellElm.on '$destroy', () ->
-            if currentClickHandler?
-              for ii in [0...numRows]
-                domElementRow = domElementGrid[ii]
-                for jj in [0...numCols]
-                  domElementRow[jj].unbind('click', currentClickHandler)
+          cloneCellElm.on(
+            '$destroy', ->
+              if (currentClickHandler?)
+                for ii in [0...numRows]
+                  domElementRow = domElementGrid[ii]
+                  for jj in [0...numCols]
+                    domElementRow[jj].unbind('click', currentClickHandler)
+          );
 
-          cloneCellElm.css
+          cloneCellElm.css(
             top: (ii * cellHeight) + 'px'
             left: (jj * cellWidth) + 'px'
             height: cellHeightStr
             width: cellWidthStr
+          );
 
           return cloneCellElm
 
@@ -166,34 +168,37 @@ module.exports = [
         when srcDimCount is '2D' && srcDimOrder is 'RowMajor'
           domElementGrid = for ii in [0...numRows]
             for jj in [0...numCols]
-              linkCellFn ii, jj, sourceGridModel[ii][jj]
+              linkCellFn(ii, jj, sourceGridModel[ii][jj])
         when srcDimCount is '2D' && srcDimOrder is 'ColMajor'
           domElementGrid = for ii in [0...numRows]
             for jj in [0...numCols]
-              linkCellFn ii, jj, sourceGridModel[jj][ii]
+              linkCellFn(ii, jj, sourceGridModel[jj][ii])
         when srcDimCount is '1D' && srcDimOrder is 'RowMajor'
           domElementGrid = for ii in [0...numRows]
             rowOffset = ii * numCols
             for jj in [0...numCols]
-              linkCellFn ii, jj, sourceGridModel[rowOffset + jj]
+              linkCellFn(ii, jj, sourceGridModel[rowOffset + jj])
         when srcDimCount is '1D' && srcDimOrder is 'ColMajor'
           domElementGrid = for ii in [0...numRows]
             colOffset = 0
             for jj in [0...numCols]
-              linkCellFn ii, jj, sourceGridModel[colOffset + ii]
+              linkCellFn(ii, jj, sourceGridModel[colOffset + ii])
               colOffset = colOffset + numRows
         else
           throw new Error(
             "srcDimCount (#{srcDimCount} must be '1D' or '2D', and srcDimOrder (#{srcDimOrder} must be 'RowMajor' or 'ColMajor'"
-          )
+          );
 
-      clickStatesFn = $parse($scope.clickStates)
-      if clickStatesFn.constant
-        clickHandlerStates = parseClickStates(clickStatesFn($scope), $scope)
-      else
-        $scope.$watchCollection clickStatesFn, (newClickHandlerStates) ->
-          oldClickHandlerStates = clickHandlerStates
-          clickHandlerStates = parseClickStates(newClickHandlerStates($scope), $scope)
 
-      [gridCtrl, canvasCtrl] = controllers
-      canvasCtrl.watchElementControl $element, 'click', clickHandlerStates, gridCtrl }
+#      clickStatesFn = $parse($scope.clickStates)
+#      if clickStatesFn.constant
+#        clickHandlerStates = @parseControlStates(clickStatesFn($scope), $scope)
+#      else
+#        $scope.$watchCollection(clickStatesFn, (newClickHandlerStates) ->
+#          clickHandlerStates = @parseControlStates(newClickHandlerStates($scope), $scope);
+#          # oldClickHandlerStates = clickHandlerStates
+#
+#      [gridCtrl, canvasCtrl] = controllers
+#      canvasCtrl.watchEventControl($element, 'click', clickHandlerStates, gridCtrl)
+    }
+  ]

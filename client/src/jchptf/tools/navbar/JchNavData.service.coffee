@@ -56,25 +56,24 @@ module.exports =
       nbDataModel = new NavBarModel(
         brandName: 'John Heinnickel',
         tabModels: [
-          new TabModel displayLabel: 'Home', matchRoute: /^\/home$/, clickRoute: '/home'
-          new TabModel displayLabel: 'Crosswords', matchRoute: /^\/crosswords$/, clickRoute: '/crosswords'
-          new TabModel displayLabel: 'Poker', matchRoute: /^\/poker\/odds$/, clickRoute: '/poker/odds'
-          new TabModel displayLabel: 'Videos', matchRoute: /^\/videos$/, clickRoute: '/videos'
+          new TabModel(displayLabel: 'Home', matchRoute: /^\/home$/, clickRoute: '/home')
+          new TabModel(displayLabel: 'Crosswords', matchRoute: /^\/crosswords$/, clickRoute: '/crosswords')
+          new TabModel(displayLabel: 'Poker', matchRoute: /^\/poker\/odds$/, clickRoute: '/poker/odds')
+          new TabModel(displayLabel: 'Videos', matchRoute: /^\/videos$/, clickRoute: '/videos')
         ]
       )
 
-      Object.defineProperties @,
+      Object.defineProperties(@,
         _nbDataModel:
-          getter: () -> nbDataModel
+          getter: -> nbDataModel
           setter: (newModel) -> nbDataModel = newModel
         _updateHandle:
-          getter: () -> updateHandle,
+          getter: -> updateHandle,
           setter:(newHandle) -> updateHandle = newHandle
+      )
+      Object.seal(this)
 
-
-      Object.seal @
-
-    getNavBarModel: () -> @_nbDataModel
+    getNavBarModel: -> @_nbDataModel
 
     changeNavBarModel: (changeDirector) ->
       navBarBuilder = new NavBarBuilder(@_nbDataModel)
