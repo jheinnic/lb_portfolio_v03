@@ -12,9 +12,15 @@
       }
     }
   },
-  "session": {},
-  "auth": {},
-  "parse": {},
+  "session": {
+
+  },
+  "auth": {
+
+  },
+  "parse": {
+
+  },
   "routes": {
     "loopback#rest": {
       "paths": [
@@ -22,10 +28,12 @@
       ]
     },
     "connect-livereload": {
-      "params": { }
+      "params": {
+        "hostname": "localhost",
+        "port": 35729
+      }
     }
   },
-  "files": {},
   "final": {
     "loopback#urlNotFound": {}
   },

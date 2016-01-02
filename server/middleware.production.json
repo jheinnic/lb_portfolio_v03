@@ -1,9 +1,5 @@
 {
-  "final:after": {
-    "loopback#errorHandler": {
-      "params": {
-        "includeStack": false
-      }
-    }
+  "routes": {
+    "connect-livereload": null
   }
 }

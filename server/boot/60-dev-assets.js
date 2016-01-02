@@ -10,7 +10,12 @@
     //       rootApiUrl.
     var path = require('path');
     var indexFile = app.get('indexFile');
-    var assetDir = path.dirname(indexFile);
+    var assetDir = path.normalize(
+        path.join(
+            process.cwd(),
+            path.dirname(indexFile)
+        )
+    );
 
     console.log('** Assets are in ', assetDir);
 
