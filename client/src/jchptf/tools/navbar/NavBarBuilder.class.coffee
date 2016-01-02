@@ -7,73 +7,87 @@ module.exports = class NavBarBuilder
 
   constructor: (model) ->
     changed = false
-    aBrandName = if model? then model.brandName else ''
-    tabModels = if model? then _.clone(model.tabModels) else []
+    brandName = if model? then model._brandName else ''
+    tabModels = if model? then _.clone(model._tabModels) else []
 
-    Object.defineProperties(this, {
-      brandName:
-        enumerable: true
-        setter: (nextName) ->
-          if (aBrandName isnt nextName)
-            changed = true
-            aBrandName = nextName
-      _changed:
-        getter: -> changed
-        setter: (nextValue) -> changed = nextValue
-      _brandName:
-        getter: -> brandName
-      _tabCount:
-        getter: -> tabModels.length
-      _tabModels:
-        getter: -> tabModels
-    })
+    Object.defineProperties(
+      this, {
+        _changed:
+          get: -> changed
+          set: (nextValue) -> changed = nextValue
+        _brandName:
+          get: -> brandName
+          set: (nextName) ->
+            if (brandName isnt nextName)
+              changed = true
+              brandName = nextName
+        _tabCount:
+          get: -> tabModels.length
+        _tabModels:
+          get: -> tabModels }
+    )
 
-  removeTabByName: (displayName) ->
-    matchDisplayName = _.matchesProperty('displayName', displayName)
-    removed = _.remove(this._tabModels, matchDisplayName)
+  brandName: (nextName) ->
+    console.log(this)
+    return if (nextName isnt undefined)
+      @_brandName = nextName
+      this
+    else
+
+
+  removeTabByName: (displayLabel) ->
+    matchDisplayName = _.matchesProperty('displayLabel', displayLabel)
+    removed = _.remove(@_tabModels, matchDisplayName)
 
     if (removed.length > 0)
-      this._changed = true
+      @_changed = true
     else
-      throw new Error("No such tab named #{displayName}")
+      throw new Error("No such tab named #{displayLabel}")
 
     return this
 
-  addTab: (index, displayName, clickRoute, matchRoute) ->
-    if (index > this._tabCount)
-      throw new Error("Index (#{index}) is beyond the end of the current tab list.  Max index = #{this._tabCount}")
+  addTab: (index, displayLabel, clickRoute, matchRoute) ->
+    if (index > @_tabCount)
+      throw new Error("Index (#{index}) is beyond the end of the current tab list.  Max index = #{@_tabCount}")
     else if (index < 0)
       throw new Error("Index (#{index}) must be non-negative.")
 
-    # TODO: Make sure displayName is unique
-    _addTab(this, index, displayName, clickRoute, matchRoute)
+    # TODO: Make sure displayLabel is unique
+    _addTab(this, index, displayLabel, clickRoute, matchRoute)
 
-    this
+    return this
 
-  appendTab: (displayName, clickRoute, matchRoute) ->
-    # TODO: Make sure displayName is unique
-    _addTab(this, sthis._tabCount, displayName, clickRoute, matchRoute)
+  appendTab: (displayLabel, clickRoute, matchRoute) ->
+    # TODO: Make sure displayLabel is unique
+    _addTab(this, @_tabCount, displayLabel, clickRoute, matchRoute)
 
-    this
+    return this
 
-  prependTab: (displayName, clickRoute, matchRoute) ->
-    # TODO: Make sure displayName is unique
-    _addTab(this, 0, displayName, clickRoute, matchRoute)
+  prependTab: (displayLabel, clickRoute, matchRoute) ->
+    # TODO: Make sure displayLabel is unique
+    _addTab(this, 0, displayLabel, clickRoute, matchRoute)
 
-    this
+    return this
 
-  hasChanges: -> this._changed
-
-  build: (refreshPromise) -> new NavBarModel(this._brandName, this._tabModels, refreshPromise)
-
-  _addTab = (self, index, displayName, clickRoute, matchRoute) ->
-    newTab = new TabModel(displayName, clickRoute, matchRoute)
+  _addTab = (self, index, displayLabel, clickRoute, matchRoute) ->
+    newTab = new TabModel(
+      displayLabel: displayLabel
+      clickRoute: clickRoute
+      matchRoute: matchRoute
+    )
     self._tabModels.push(newTab)
 
     if (index < self._tabCount)
-      self._tabModels.copyWithin(index, index - 1)
+      self._tabModels.copyWithin(index + 1, index)
       self._tabModels[index] = newTab
 
     self._changed = true
 
+  hasChanges: -> @_changed
+
+  build: (refreshPromise) -> new NavBarModel(
+    brandName: @_brandName
+    tabModels: @_tabModels
+    refreshPromise: refreshPromise
+  )
 

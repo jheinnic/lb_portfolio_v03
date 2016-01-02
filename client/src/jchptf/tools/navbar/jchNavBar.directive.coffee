@@ -1,20 +1,23 @@
 'use strict'
 
 module.exports = [
-  'JchNavData',
-  (JchNavData) ->
+  'JchNavData', (JchNavData) ->
     _ = require('lodash')
 
-    return {
+    return(
       restrict: 'E'
-      scope: { }
-      templateUrl: 'views/jchptf/tools/navbar/jch_navbar.html'
+      scope: {}
+      templateUrl: 'jchptf/tools/navbar/jch_navbar.html'
       link: ($scope) ->
         updateModel = (data) ->
-          console.log(data);
+          console.log(data)
+
+          # Deep clone the immutable data object so ng-repeat can iterate over its tabs.
+          $scope.navDataModel = _.omit(
+            _.cloneDeep(data), 'refreshPromise'
+          );
           data.refreshPromise.then(updateModel)
-          $scope.navDataModel = _.omit(data, 'refreshPromise')
 
         updateModel(JchNavData.getNavBarModel())
-    }
+    )
 ]

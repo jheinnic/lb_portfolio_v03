@@ -1,5 +1,5 @@
-module.exports = class JchNavData
-  @$inject = ['$q', 'NavBarModel', 'TabModel', 'NavBarBuilder']
+module.exports = class JchNavData # @$inject = ['$q', 'NavBarModel', 'TabModel', 'NavBarBuilder']
+  @$inject = ['$q']
 
   ###*
   # @type {lodash}
@@ -14,27 +14,17 @@ module.exports = class JchNavData
   ###*
   # @constructor
   ###
-  TabModel = undefined
+  TabModel = require('./TabModel.class')
 
   ###*
   # @constructor
   ###
-  NavBarModel = undefined
+  NavBarModel = require('./NavBarModel.class')
 
   ###*
   # @constructor
   ###
-  NavBarBuilder = undefined
-
-  ###*
-  # @type {Defer}
-  ###
-  updateHandle = undefined
-
-  ###*
-  # @type {NavBarModel}
-i ###
-  nbDataModel = undefined
+  NavBarBuilder = require('./NavBarBuilder.class')
 
 
   ###*
@@ -45,61 +35,78 @@ i ###
   #
   # @constructor
   ###
-  constructor: (_$q, _NavBarModel, _TabModel, _NavBarBuilder) ->
+  constructor: (_$q) ->
     $q = _$q
-    NavBarModel = _NavBarModel
-    TabModel = _TabModel
-    NavBarBuilder = _NavBarBuilder
+    NavBarModel = require('./NavBarModel.class')
+    TabModel = require('./TabModel.class')
+    NavBarBuilder = require('./NavBarBuilder.class')
 
     updateHandle = $q.defer()
-    nbDataModel = new NavBarModel(
-      brandName: 'John Heinnickel'
-      tabModels: [
-        new TabModel(
-          displayLabel: 'Home'
-          matchRoute: /^\/home$/
-          clickRoute: '/home'
-        )
-        new TabModel(
-          displayLabel: 'Crosswords'
-          matchRoute: /^\/crosswords$/
-          clickRoute: '/crosswords'
-        )
-        new TabModel(
-          displayLabel: 'Poker'
-          matchRoute: /^\/poker\/odds$/
-          clickRoute: '/poker/odds'
-        )
-        new TabModel(
-          displayLabel: 'Videos'
-          matchRoute: /^\/videos$/
-          clickRoute: '/videos'
-        )
-      ]
-    )
+
+    nbDataModel = new NavBarBuilder(
+      undefined
+    ).brandName(
+      'John Heinnickel'
+    ).appendTab(
+      'Home', '/home', /^\/home$/
+    ).appendTab(
+      'Crosswords', '/crosswords', /^\/crosswords$/
+    ).appendTab(
+      'Poker', '/poker/odds', /^\/poker\/odds$/
+    ).build(updateHandle.promise)
+#    nbDataModel = new NavBarModel(
+#      refreshPromise: updateHandle.promise
+#      brandName: 'John Heinnickel'
+#      tabModels: [
+#        new TabModel(
+#          displayLabel: 'Home'
+#          matchRoute: /^\/home$/
+#          clickRoute: '/home'
+#        )
+#        new TabModel(
+#          displayLabel: 'Crosswords'
+#          matchRoute: /^\/crosswords$/
+#          clickRoute: '/crosswords'
+#        )
+#        new TabModel(
+#          displayLabel: 'Poker'
+#          matchRoute: /^\/poker\/odds$/
+#          clickRoute: '/poker/odds'
+#        )
+#        new TabModel(
+#          displayLabel: 'Videos'
+#          matchRoute: /^\/videos$/
+#          clickRoute: '/videos'
+#        )
+#      ]
+#    )
 
     Object.defineProperties(
       this,
       _nbDataModel:
-        getter: -> nbDataModel
-        setter: (newModel) -> nbDataModel = newModel
+        get: -> nbDataModel
+        set: (newModel) -> nbDataModel = newModel
       _updateHandle:
-        getter: -> updateHandle
-        setter: (newHandle) -> updateHandle = newHandle
+        get: -> updateHandle
+        set: (newHandle) -> updateHandle = newHandle
     )
-    Object.seal(this)
+    Object.freeze(this)
 
   getNavBarModel: ->
-    console.log("getNBModel", this)
-    this._nbDataModel
+    console.log('getNBModel', this)
+    @_nbDataModel
 
   changeNavBarModel: (changeDirector) ->
-    navBarBuilder = new NavBarBuilder(this._nbDataModel)
+    unless (_.isFunction(changeDirector))
+      msg = ("changeDirector argument must be a function, but got #{changeDirector} instead")
+      console.err(msg)
+      throw new Error(msg)
+
+    navBarBuilder = new NavBarBuilder(@_nbDataModel)
     changeDirector(navBarBuilder)
 
-    if navBarBuilder.hasChanges?
-      lastDefer = this._updateHandle
-      this._updateHandle = $q.defer()
-
-      this._nbDataModel = navBarBuilder.build(this._updateHandle.promise)
-      lastDefer.resolve(this._nbDataModel)
+    if navBarBuilder.hasChanges()
+      lastDefer = @_updateHandle
+      @_updateHandle = $q.defer()
+      @_nbDataModel = navBarBuilder.build(@_updateHandle.promise)
+      lastDefer.resolve(@_nbDataModel)
