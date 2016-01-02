@@ -193,7 +193,7 @@ make-dev-build:
  - 'wiredep:build'
  - 'fixIndexHtml'
  - 'htmlbuild:dev'
- - 'bundleClient'
+ - 'bundleClient:dev'
  - 'newer:copy:vendor'   # Try using middleware config?
 
 # NOTE: This build target is only valid after having evaluated 'dev-build'.  For CSS, it reuses

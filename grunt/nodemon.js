@@ -18,7 +18,7 @@
       }
     }
 
-    var lastAssetReload, PORT = 3000;
+    var PORT = 3000;
     var openToRootPageFn = _.partial(
       setTimeout,
       _.partial(
@@ -34,23 +34,37 @@
 
     // Signal .rebooted, but only if the reason for restart was because .reloadAssets was new, not
     // .restartServer.
+    var lastAssetReload = -1;
+    var reloadAssetsFile = appConfig.temp.server + '/.reloadAssets';
     var afterRestartFn = _.partial(
       setTimeout,
       function onServerRestart() {
-        console.log('Handling after restart');
         fs.exists(
-          'build/.reloadAssets',
+          reloadAssetsFile,
           function checkForAssetsReloadRequest(exists) {
             if (exists) {
               fs.stat(
-                'build/.reloadAssets',
+                reloadAssetsFile,
                 function signalIfAssetsReloadRequested(stat) {
-                  if (lastAssetReload !== stat.mtime) {
-                    lastAssetReload = stat.mtime;
-                    fs.writeFile(appConfig.temp.server + '/.rebooted', lastAssetReload);
+                  if (_.isObject(stat)) {
+                    if (lastAssetReload !== stat.mtime) {
+                      lastAssetReload = stat.mtime;
+                      fs.writeFile(appConfig.temp.server + '/.rebooted', lastAssetReload);
+                      console.log('Server signals it restarted for an asset reload');
+                    } else {
+                      console.log(
+                        'Server was restarted without need for asset reload.  (lastReload=%s, mtime=%s)', lastAssetReload, stat.mtim
+                      );
+                    }
+                  } else {
+                    console.log(
+                      'Server was restarted, asset reload request file exists but its last modification could not be determined'
+                    );
                   }
                 }
               );
+            } else {
+              console.log('Server was restarted, but asset reload request file does not even exist yet.');
             }
           }
         );
@@ -68,7 +82,11 @@
             LIVE_RELOAD: appConfig.ports.liveReload
           },
           delay: 1250, // omit delay if you aren't serving HTML files and don't want to open a browser tab on start
-          watch: [appConfig.temp.server + '/.restartServer', appConfig.temp.server + '/.reloadAssets'],
+          watch: [
+            appConfig.temp.server + '/.restartServer',
+            appConfig.temp.server + '/.reloadAssets',
+            appConfig.source.server + '/**/*'
+          ],
           // ignore: [''],
           // ext: 'js,coffee,json,css,bmp,png,jpg,gif,svg,ttf,woff,woff2',
           callback: function (nodemon) {

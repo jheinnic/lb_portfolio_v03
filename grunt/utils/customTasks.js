@@ -30,6 +30,11 @@
         }
       );
 
+      /**
+       * Normalizes linefeeds for htmlbuild by ensuring linefeeds are injected such that HTML
+       * comment tags begin and end on distinct lines and do not share those lines with any
+       * real document hypertext.
+       */
       grunt.registerTask(
         'fixIndexHtml', function fixIndexHtml() {
           var indexHtml = path.join(process.cwd(), appConfig.temp.client, 'index.html');
@@ -42,15 +47,14 @@
                 throw err;
               }
 
-              console.error(err);
-              console.log(data.utf8Slice(0));
               fs.writeFile(
-                indexHtml,
-                grunt.util.normalizelf(data.utf8Slice(0)
-                ).replace(/><!--/g, '>' + grunt.util.linefeed + '<!--'
-                ).replace(/--></g, '-->' + grunt.util.linefeed + '<'
-                ),
-                done
+                indexHtml, grunt.util.normalizelf(
+                  data.utf8Slice(0)
+                ).replace(
+                  /><!--/g, '>' + grunt.util.linefeed + '<!--'
+                ).replace(
+                  /--></g, '-->' + grunt.util.linefeed + '<'
+                ), done
               );
             }
           );

@@ -27,12 +27,11 @@
 
     // TODO: Store with "grunt.task.config(key,value);" instead of "process.env.key = value;"
     var lrPort = process.env.LIVE_RELOAD || getAvailPort(35729);
-    process.env.LIVE_RELOAD = lrPort;
-
     var restApiPort = process.env.REST_API_PORT || getAvailPort(3000);
-    process.env.REST_API_PORT = restApiPort;
-
     var assetsPort = process.env.ASSETS_PORT || getAvailPort(8888);
+
+    process.env.LIVE_RELOAD = lrPort;
+    process.env.REST_API_PORT = restApiPort;
     process.env.ASSETS_PORT = assetsPort;
 
     return Object.freeze(
@@ -50,6 +49,7 @@
         vendor: bowerRc.directory,
         node: 'node_modules',
         source: {
+          app: 'client/src/' + bowerJson.appModule,
           build: 'grunt',
           client: 'client/src',
           common: 'common',

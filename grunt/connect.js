@@ -7,6 +7,12 @@
     // TODO: See that vendor gets copied to appConfig.dev and then drop the
     //       connect.use() calls for '/vendor'.
     return {
+      livereload: {
+        options: {
+          livereload: appConfig.ports.liveReload,
+          keepalive: true
+        }
+      },
       serve: {
         options: {
           // hostname: 'localhost',
@@ -17,7 +23,7 @@
           keepalive: true,
           directory: appConfig.dev.client,
           environment: {
-            REST_API_URL: 'http://localhost:3000/api',
+            REST_API_URL: 'http://localhost:3000/api'
           }
           //middleware: function (connect) {
           //  return [

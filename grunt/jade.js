@@ -22,17 +22,22 @@
     var srcDirLength = appConfig.source.client.length;
 
     function addJadeFile(nextSrcPath) {
-      // Use the length of normalized appModRoot to trim it away from normalized nextSrcPath,
-      // leaving the common relative path info, then undo normalization for the sake of
-      // matching grunt's expectations.
+      // Denormalize glob's output as expected by grunt file mapping
       nextSrcPath = nextSrcPath.replace(/\\/g, '\/');
 
-      // Change file suffix for relative output files from .jade to .html.
+      // Use the length of appConfig.source.client to trim it away from 
+      // nextSrcPath, leaving the common relative path info, then change
+      // file suffix for relative output file from .jade to .html.
       var relPath = nextSrcPath.slice(srcDirLength).replace(/\.jade$/, '.html');
 
-      // Create the dev and dist map entries by appending the `
-      // directory with each of both dev and dist root directories.
-      configObj.build.files[appConfig.dev.client + relPath] = nextSrcPath;
+      // Create file map entry by appending the common path suffix to the
+      // temp or dev build roots.  Use temp for index.html because it has
+      // additional pre-processing before it reaches dev.
+      if (relPath === '/index.html') {
+        configObj.build.files[appConfig.temp.client + relPath] = nextSrcPath;
+      } else {
+        configObj.build.files[appConfig.dev.client + relPath] = nextSrcPath;
+      }
     }
 
     var globFound =
