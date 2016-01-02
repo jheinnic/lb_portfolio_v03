@@ -21,7 +21,11 @@ module.exports = ['CoreModelPackage', (CoreModelPackage) ->
   new AuthTokenEventKind('INTERNAL_ERROR', false)
   AuthTokenEventKind.finalize()
 
-  # TODO: Try to do token attachment to requests by way of a before #       advising interceptor, transparently to the calling service, #       negating any need to expose the AUTH_TOKEN via service API.
+  ###
+  # TODO: Try to do token attachment to requests by way of a before
+  #       advising interceptor, transparently to the calling service,
+  #       negating any need to expose the AUTH_TOKEN via service API.
+  ###
 
   ###*
   # An immutable object used to communicate user session status state changes.  Constructed by
@@ -33,17 +37,17 @@ module.exports = ['CoreModelPackage', (CoreModelPackage) ->
   ###
   class AuthTokenEvent
     constructor: (params) ->
-      #       @eventType = 0
-      #       @uuid = 0
-      #       @displayName = 0
-      #       @loginId = 0
-      #       @tokenExpiration = 0
-      #       @tokenTimeout = 0
-      #       @authToken = 0
-      #       @nextPromise = 0
+      @uuid = params.uuid
+      @loginId = params.loginId
+      @authToken = params.authToken
+      @displayName = params.displayName
+      @tokenExpiration = params.tokenExpiration
+      @tokenTimeout = params.tokenTimeout
+      @nextPromise = params.nextPromise
+      @eventType = params.eventType
+      # { @eventType, @uuid, @displayName, @loginId, @tokenExpiration, @tokenTimeout, @authToken, @nextPromise } = params
 
-      { @eventType, @uuid, @displayName, @loginId, @tokenExpiration, @tokenTimeout, @authToken, @nextPromise } = params
-      Object.seal(@)
+      Object.seal(this)
 
     isLoggedIn: -> @eventType.isLoggedIn()
 
