@@ -1,7 +1,10 @@
-{
-  "routes": {
-    "connect-livereload": {
-      "port": 35729
+module.exports = {
+  'routes': {
+    'connect-livereload': {
+      'params': {
+        'hostname': 'localhost',
+        'port': process.env.LIVE_RELOAD || 35729
+      }
     }
   }
-}
+};
