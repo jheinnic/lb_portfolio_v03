@@ -4,10 +4,10 @@
 // generator-karma 0.8.2
 
 module.exports = function(config) {
-  var appConfig      = require('../../grunt/utils/appConfig'),
-      testPrefix     = path.relative(appConfig.clientSrc, appConfig.test.client).replace(/\\/g, '\/');
-      vendorPrefix   = path.relative(appConfig.clientSrc, appConfig.vendor).replace(/\\/g, '\/'),
-      buildDevPrefix = path.relative(appConfig.clientSrc, appConfig.dev.client).replace(/\\/g, '\/');
+  var appConfig      = require('../../grunt/utils/appConfig');
+  var testPrefix     = path.relative(appConfig.clientSrc, appConfig.test.client).replace(/\\/g, '\/');
+  var vendorPrefix   = path.relative(appConfig.clientSrc, appConfig.vendor).replace(/\\/g, '\/');
+  var buildDevPrefix = path.relative(appConfig.clientSrc, appConfig.dev.client).replace(/\\/g, '\/');
 
   config.set({
     // enable / disable watching file and executing tests whenever any file changes
@@ -19,7 +19,7 @@ module.exports = function(config) {
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
 
-    // list of files / patterns to load in the browser
+    // list of files / patterns to load in the browsers
     files: [
       buildDevPrefix + '/vendor.js',
       // vendorPrefix + '/es5-shim/es5-shim.js',
