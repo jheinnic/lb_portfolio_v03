@@ -1,1 +1,2 @@
-"C:\Program Files\mongodb-win32-x86_64-2008plus-2.4.8\bin\mongod.exe" --dbpath E:\temp\MongoDB\express_sandbox --journal --smallfiles --logpathE:\temp\MongoDB\Logs\express_sandbox --install --serviceName mongo-portfolio --serviceDisplayName "Mongo Portfolio" --serviceUser "MongoOwner" --servicePassword "fd37Hpnu"
+mongod --dbpath /var/lib/mongodb/express_sandbox --journal --smallfiles --logpath /var/log/mongodb/express_sandbox --install
+--serviceName mongo-portfolio --serviceDisplayName "Mongo Portfolio" --serviceUser "mongo" --servicePassword "password"

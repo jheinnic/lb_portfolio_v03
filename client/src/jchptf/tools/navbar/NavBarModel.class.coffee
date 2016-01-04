@@ -11,3 +11,4 @@ module.exports = class NavBarModel
     @refreshPromise = params.refreshPromise or null
 
     return Object.freeze(this)
+

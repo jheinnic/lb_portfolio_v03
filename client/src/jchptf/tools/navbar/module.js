@@ -12,12 +12,9 @@
    */
   angular.module(
     module.exports,
-    ['ng', 'mgcrea.ngStrap.navbar']
+    ['ng', 'mgcrea.ngStrap.navbar', 'ui.router']
   )
-    // .value('NavBarModel', require('./NavBarModel.class'))
-    // .value('TabModel', require('./TabModel.class'))
-    // .value('NavBarBuilder', require('./NavBarBuilder.class'))
-    .service('JchNavData', require('./JchNavData.service.coffee'))
-    .directive('jchNavBar', require('./jchNavBar.directive.coffee'))
+    .service('JchNavData', require('./JchNavData.service'))
+    .directive('jchNavBar', require('./jchNavBar.directive'))
   ;
 }).call(window, angular);

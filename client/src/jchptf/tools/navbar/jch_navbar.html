@@ -3,8 +3,8 @@
         <a class="navbar-brand" href="#">{{navDataModel.brandName}}</a>
     </div>
     <ul class="nav navbar-nav navbar-left" role="navigation" bs-navbar>
-        <li ng-repeat="tabModel in navDataModel.tabModels" data-match-route="{{tabModel.matchRoute}}">
+        <li ng-repeat="tabModel in navDataModel.tabModels track by tabModel.displayLabel" data-match-route="{{tabModel.matchRoute.source}}">
             <a href="{{tabModel.clickRoute}}">{{tabModel.displayLabel}}</a>
         </li>
-    </ul>
+    </ul
 </div>
