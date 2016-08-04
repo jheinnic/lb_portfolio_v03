@@ -6,7 +6,7 @@ module.exports = function mkdir(grunt, options) {
   return {
     build: {
       options: {
-        mode: 755,
+        mode: "755",
         create: [
           appConfig.vendor, appConfig.node, 'bower_components', 'node_modules',
           appConfig.dist.client, appConfig.dist.common, appConfig.dist.server,
