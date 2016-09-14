@@ -3,6 +3,8 @@
 
   module.exports = 'jchptf';
 
+  console.log('Loading module definition for jchptf');
+
   /**
    * @ngdoc overview
    * @name loopbackExampleFullStackApp

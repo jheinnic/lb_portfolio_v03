@@ -1,10 +1,10 @@
 (function() {
   'use strict';
 
-  console.log('Loading jchptf config');
   module.exports = portfolioModuleConfig;
-
   portfolioModuleConfig.$inject=['$locationProvider', '$urlRouterProvider'];
+
+  console.log('Loading jchptf config');
 
   function portfolioModuleConfig($locationProvider, $urlRouterProvider) {
     console.log('Running jchptf config');

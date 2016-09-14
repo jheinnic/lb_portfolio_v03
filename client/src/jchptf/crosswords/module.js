@@ -3,6 +3,8 @@
 
   module.exports = 'jchptf.crosswords';
 
+  console.log('Loading module definition for jchptf.crosswords');
+
   /**
    * @ngdoc overview
    * @name "jchptf.crosswords"
