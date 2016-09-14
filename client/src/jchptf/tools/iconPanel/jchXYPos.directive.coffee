@@ -22,7 +22,7 @@ module.exports = jchXyPosDirective = [
           watchLeftFn() if watchLeftFn?
           leftFn = $parse(colIdExpr + ' * ' + cellWidth + ' + "px"')
           unless leftFn.constant
-            watchLeftFn = $scope.$watch(leftFn, (value) -> $elem.css 'left', value)
+            watchLeftFn = $scope.$watch(leftFn, (value) -> $elem.css('left', value))
           else
             watchLeftFn = null
             $elem.css('left', leftFn($scope))
@@ -31,7 +31,7 @@ module.exports = jchXyPosDirective = [
           watchWidthFn() if watchWidthFn?
           widthFn = $parse(cellWidth + ' + "px"')
           unless widthFn.constant
-            watchWidthFn = $scope.$watch(widthFn, (value) -> $elem.css 'width', value)
+            watchWidthFn = $scope.$watch(widthFn, (value) -> $elem.css('width', value))
           else
             watchWidthFn = null
             $elem.css('width', widthFn($scope))
@@ -41,7 +41,7 @@ module.exports = jchXyPosDirective = [
           watchTopFn() if watchTopFn?
           topFn = $parse(rowIdExpr + ' * ' + cellHeight + ' + "px"')
           unless topFn.constant
-            watchTopFn = $scope.$watch(topFn, (value) -> $elem.css 'top', value)
+            watchTopFn = $scope.$watch(topFn, (value) -> $elem.css('top', value))
           else
             watchTopFn = null
             $elem.css('top', topFn($scope))
@@ -50,7 +50,7 @@ module.exports = jchXyPosDirective = [
           watchHeightFn() if watchHeightFn?
           heightFn = $parse(cellHeight + ' + "px"')
           unless heightFn.constant
-            watchHeightFn = $scope.$watch(heightFn, (value) -> $elem.css 'height', value)
+            watchHeightFn = $scope.$watch(heightFn, (value) -> $elem.css('height', value))
           else
             watchHeightFn = null
             $elem.css('height', heightFn($scope))
@@ -63,22 +63,16 @@ module.exports = jchXyPosDirective = [
               match[1] = 'cellModel.rowId' if angular.isUndefined(match[1])
               match[2] = 'cellModel.colId' if angular.isUndefined(match[2])
 
-              if (colIdExpr isnt match[2])
+              if ((colIdExpr isnt match[2]) or (cellWidth isnt match[3]))
                 colIdExpr = match[2]
                 cellWidth = match[3]
                 handleLeftFn()
                 handleWidthFn()
-              else if (cellWidth isnt match[3])
-                cellWidth = match[3]
-                handleWidthFn()
 
-              if (rowIdExpr isnt match[1])
+              if ((rowIdExpr isnt match[1]) or (cellHeight isnt match[3]))
                 rowIdExpr = match[1]
                 cellHeight = match[4]
                 handleTopFn()
-                handleHeightFn()
-              else if (cellHeight isnt match[4])
-                cellHeight = match[4]
                 handleHeightFn()
         )
 
