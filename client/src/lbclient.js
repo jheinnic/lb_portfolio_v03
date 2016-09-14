@@ -1,6 +1,10 @@
-var loopback = require('loopback');
-var boot = require('loopback-boot');
+(function(){
+  'use strict';
 
-var client = module.exports = loopback();
-boot(client);
+  var loopback = require('loopback');
+  var boot = require('loopback-boot');
+
+  module.exports = loopback();
+  boot(module.exports);
+}).call(window);
 
