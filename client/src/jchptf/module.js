@@ -28,6 +28,7 @@
       'ui.router',
       require('jchptf.site.notification'),
       require('jchptf.site.navigation'),
+      require('jchptf.site.context'),
       require('jchptf.crosswords'),
       require('jchptf.lbclient')
     ]
