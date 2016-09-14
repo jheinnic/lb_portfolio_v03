@@ -32,6 +32,7 @@
       require('jchptf.lbclient')
     ]
   )
+    .controller('RootController', require('./RootController.controller'))
     .config(require('./router.config'))
     .config(require('./layout.config'))
     .run(require('./run'))

@@ -31,6 +31,7 @@
     //.service('OpenTicketCanvas', require('./OpenTicketCanvas.service'))
     .service('PrizeCalculator', require('./PrizeCalculator.service.coffee'))
     .controller('XWInventoryController', require('./XWInventoryController.controller'))
+    .controller('CrosswordController', require('./CrosswordController.controller'))
     .controller('TicketController', require('./TicketController.controller'))
     .controller('ResultController', require('./ResultController.controller'))
     .controller('BonusPrizeModalController', require('./BonusPrizeModalController.controller'))
