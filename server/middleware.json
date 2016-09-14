@@ -21,11 +21,8 @@
         "${restApiRoot}"
       ]
     },
-    "connect-livereload": {
-      "params": {
-        "hostname": "localhost",
-        "port": 35729
-      }
+    "connect-livereload": {}
+  },
   "files": {
     "loopback#static": {
       "params": "$!../client"
