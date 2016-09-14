@@ -26,12 +26,15 @@
         "hostname": "localhost",
         "port": 35729
       }
+  "files": {
+    "loopback#static": {
+      "params": "$!../client"
     }
   },
   "final": {
     "loopback#urlNotFound": {}
   },
   "final:after": {
-    "loopback#errorHandler": {}
+    "strong-error-handler": {}
   }
 }
