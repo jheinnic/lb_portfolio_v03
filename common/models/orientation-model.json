@@ -5,10 +5,10 @@
   "options": {},
   "properties": {
     "id": {
-      "id": true,
       "type": "string",
-      "defaultFn": "guid",
-      "required": true
+      "id": true,
+      "required": true,
+      "defaultFn": "guid"
     },
     "orientation": {
       "type": "string",
@@ -31,14 +31,14 @@
     "_cells": {
       "type": "embedsMany",
       "model": "CellOrientation",
-      "property": "cells",
-      "foreignKey": "alignModelId"
+      "foreignKey": "alignModelId",
+      "property": "cells"
     },
     "_regions": {
       "type": "embedsMany",
       "model": "GridRegion",
-      "property": "regions",
-      "foreignKey": "alignModelId"
+      "foreignKey": "alignModelId",
+      "property": "regions"
     }
   },
   "acls": [],

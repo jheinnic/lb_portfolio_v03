@@ -5,8 +5,8 @@
   "options": {},
   "properties": {
     "index": {
-      "id": true,
       "type": "number",
+      "id": true,
       "required": true,
       "min": 0,
       "max": 110

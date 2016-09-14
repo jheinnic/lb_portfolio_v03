@@ -6,8 +6,8 @@
     "abstract": true,
     "validateUpsert": true
   },
-  "trackChanges": true,
   "abstract": true,
+  "trackChanges": true,
   "properties": {
     "id": {
       "type": "string",

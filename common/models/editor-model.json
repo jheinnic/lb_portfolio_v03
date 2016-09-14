@@ -5,10 +5,10 @@
   "options": {},
   "properties": {
     "id": {
-      "id": true,
       "type": "string",
-      "defaultFn": "guid",
-      "required": true
+      "id": true,
+      "required": true,
+      "defaultFn": "guid"
     },
     "isCursorActive": {
       "type": "boolean",
@@ -30,7 +30,9 @@
       "max": 10
     },
     "cellContents": {
-      "type": ["string"],
+      "type": [
+        "string"
+      ],
       "required": true,
       "length": 1
     }
@@ -40,21 +42,23 @@
     "_sourceTicket": {
       "type": "belongsTo",
       "model": "XwTicket",
+      "foreignKey": "sourceTicketId",
       "property": "sourceTicket",
-      "properties": ["gridContent"],
-      "foreignKey": "sourceTicketId"
+      "properties": [
+        "gridContent"
+      ]
     },
     "_horizontalModel": {
       "type": "embedsOne",
       "model": "OrientationModel",
-      "property": "horizontalModel",
-      "foreignKey": "rowEditModelId"
+      "foreignKey": "rowEditModelId",
+      "property": "horizontalModel"
     },
     "_verticalModel": {
       "type": "embedsOne",
       "model": "OrientationModel",
-      "property": "verticalModel",
-      "foreignKey": "colEditModelId"
+      "foreignKey": "colEditModelId",
+      "property": "verticalModel"
     }
   },
   "acls": [],

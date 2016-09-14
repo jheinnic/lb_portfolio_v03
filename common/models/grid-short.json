@@ -2,7 +2,7 @@
   "name": "GridShort",
   "base": "GridRegion",
   "idInjection": false,
-  "options": { },
+  "options": {},
   "properties": {
     "kind": {
       "type": "string",

@@ -2,7 +2,7 @@
   "name": "GridWord",
   "base": "GridRegion",
   "idInjection": false,
-  "options": { },
+  "options": {},
   "properties": {
     "kind": {
       "type": "string",
@@ -15,7 +15,9 @@
       "length": 11
     },
     "charsRequired": {
-      "type": ["string"],
+      "type": [
+        "string"
+      ],
       "required": false,
       "length": 1
     },

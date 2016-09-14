@@ -2,14 +2,14 @@
   "name": "GridRegion",
   "base": "Model",
   "idInjection": false,
+  "options": {},
   "abstract": true,
-  "options": { },
   "properties": {
     "id": {
-      "id": true,
       "type": "string",
-      "defaultFn": "guid",
-      "required": false
+      "id": true,
+      "required": false,
+      "defaultFn": "guid"
     },
     "kind": {
       "type": "string",
