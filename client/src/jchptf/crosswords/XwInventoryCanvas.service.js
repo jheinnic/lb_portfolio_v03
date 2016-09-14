@@ -25,7 +25,7 @@
           do {
             item = children.next();
             console.log('-- Item:', item.value);
-          } while (!item.done);
+          } while (!children.done);
         } while (!namespace.done);
       }
     );
