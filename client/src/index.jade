@@ -11,7 +11,7 @@ html(lang="en", ng-app="jchptf")
     base(href="/")
 
     title John Heinnickel's Portfolio Demo Project
-    title. titleStr
+    title(titleStr)
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
@@ -26,14 +26,7 @@ html(lang="en", ng-app="jchptf")
     <!-- endbuild -->
 
   body
-    .container
-      nav-bar
-      .row(ui-view="")
-      .row
-        .span12
-          footer
-            p.
-              &copy; John C. Heinnickel, 2015
+    .container(ui-view="")
 
     <!--[if lt IE 9]>
     script(src="vendor/es5-shim/es5-shim.js", type="text/javascript")

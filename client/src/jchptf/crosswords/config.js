@@ -7,37 +7,42 @@
   // TODO: Make sure IdentityContext is wired in to the authenticate check
   function crosswordsRoutes($stateProvider) {
     $stateProvider.state(
-      'crosswords', {
-        templateUrl: 'jchptf/crosswords/crosswordsFeature.view.html',
-        controllerAs: 'crossword',
-        abstract: false,
-        authenticate: true
+      'site.crosswords', {
+         url: '/crosswords',
+         abstract: false,
+         views: {
+           'sidePanel@defaultLayout': {
+             templateUrl: 'jchptf/crosswords/catalogTree.html',
+             controller: 'CrosswordController as vm'
+           },
+           'appCanvas@defaultLayout': {
+             templateUrl: 'jchptf/crosswords/xwTicket.view.html',
+             controller: 'CrosswordController as vm'
+           }
+         }
       }
     );
 
     $stateProvider.state(
-      'crosswords.catalog', {
-        url: '/crosswords/browse',
+      'site.crosswords.catalog', {
+        url: '/browse',
         templateUrl: 'jchptf/crosswords/catalogTree.view.html',
-        controller: 'XwInventoryController',
-        controllerAs: 'inventory',
+        controller: 'XwInventoryController as inventory',
         resolve: {
           traverseRoot: traverseRoot
         },
         abstract: false,
-        authenticate: true
       }
     );
 
     $stateProvider.state(
-      'crossword.ticket', {
-        url: '/crosswords/tickets/:ticketId',
+      'site.crosswords.ticket', {
+        url: '/tickets/:ticketId',
         controller: 'TicketController',
         resolve: {
           documentCanvas: documentCanvas
         },
         abstract: false,
-        authenticate: true
       }
     );
   }

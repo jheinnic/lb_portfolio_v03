@@ -31,6 +31,7 @@
     ]
   )
     .config(require('./router.config'))
+    .config(require('./layout.config'))
     .run(require('./run'))
   ;
 }).call(window, angular);
