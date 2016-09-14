@@ -19,7 +19,8 @@
       // require('jchptf.context'),
       // require('jchptf.authenticate'),
       require('jchptf.lbclient'),
-      require('jchptf.tools.iconPanel')
+      require('jchptf.tools.iconPanel'),
+      require('jchptf.tools.navbar')
     ],
     require('./config')
   )
@@ -32,5 +33,6 @@
     .controller('ResultController', require('./ResultController.controller'))
     .controller('BonusPrizeModalController', require('./BonusPrizeModalController.controller'))
     .controller('BonusWordModalController', require('./BonusWordModalController.controller'))
+    .run(require('./run'))
   ;
 }).call(window, window.angular);

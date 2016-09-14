@@ -3,15 +3,22 @@
 
   module.exports = NavBarBuilder;
 
-  var NavBarModel = require('./NavBarModel.class');
-  var TabModel = require('./TabModel.class.coffee');
   var _ = require('lodash');
+  var NavBarModel = require('./NavBarModel.class');
+  var StateTabModel = require('./StateTabModel.class');
+  var RouteTabModel = require('./RouteTabModel.class');
 
-  function NavBarBuilder(model) {
+  function NavBarBuilder(model, _state) {
     var brandName, changed, tabModels;
+    var $state = _state;
     changed = false;
-    brandName = _.isObject(model) ? model._brandName : '';
-    tabModels = _.isObject(model) ? _.clone(model._tabModels) : [];
+    if (_.isObject(model)) {
+      brandName = model.brandName || '';
+      tabModels = _.isObject(model.tabModels) ? _.clone(model.tabModels) : [];
+    } else {
+      brandName = '';
+      tabModels = [];
+    }
 
     Object.defineProperties(this, {
       _changed: {
@@ -38,6 +45,11 @@
       _tabModels: {
         get: function getTabModels() {
           return tabModels;
+        }
+      },
+      _state: {
+        get: function getState() {
+          return $state;
         }
       }
     });
@@ -107,7 +119,7 @@
   };
 
   function _addRouteTab(self, index, displayLabel, clickRoute, matchRoute) {
-    var newTab = new TabModel({
+    var newTab = new RouteTabModel({
       displayLabel: displayLabel,
       clickRoute: clickRoute,
       matchRoute: matchRoute
@@ -116,11 +128,11 @@
     _addTab(self, index, newTab);
   }
 
-  function _addStateTab(self, index, displayLabel, clickState, matchRoute) {
-    var newTab = new TabModel({
+  function _addStateTab(self, index, displayLabel, clickState) {
+    var newTab = new StateTabModel({
       displayLabel: displayLabel,
       clickState: clickState,
-      matchRoute: matchRoute
+      $state: self._state
     });
 
     _addTab(self, index, newTab);

@@ -2,7 +2,7 @@
   'use strict';
 
   module.exports = JchNavData;
-  JchNavData.$inject = ['$q'];
+  JchNavData.$inject = ['$q', '$state'];
 
 
   /**
@@ -29,37 +29,40 @@
    *
    * @constructor
    */
-  function JchNavData(_$q) {
-    $q = _$q;
-
-    var updateHandle = $q.defer();
-    var nbDataModel = new NavBarBuilder(
-    ).brandName(
-      'John Heinnickel'
-    ).appendRouteTab(
-      'Home', '/home', /^\/home$/
-    ).appendRouteTab(
-      'Crosswords', '/crosswords', /^\/crosswords$/
-    ).appendRouteTab(
-      'Poker', '/poker/odds', /^\/poker\/odds$/
+  function JchNavData(_$q, _$state ) {
+    /**
+     * @type {$state}
+     */
+    var $state = _$state;
+    var updateHandle = _$q.defer();
+    var nbDataModel = new NavBarBuilder( {}, _$state
+    //).appendRouteTab(
+    //  'Poker', '/poker/odds', /^\/poker\/odds$/
     ).build(updateHandle.promise);
+
+    $q = _$q;
 
     Object.defineProperties(
       this, {
         _nbDataModel: {
-          get: function () {
+          get: function getDataModel() {
             return nbDataModel;
           },
-          set: function (newModel) {
+          set: function setDataModel(newModel) {
             nbDataModel = newModel;
           }
         },
         _updateHandle: {
-          get: function () {
+          get: function getUpdateHandle() {
             return updateHandle;
           },
-          set: function (newHandle) {
+          set: function setUpdateHandle(newHandle) {
             updateHandle = newHandle;
+          }
+        },
+        _state: {
+          get: function getState() {
+            return $state;
           }
         }
       }
@@ -80,7 +83,7 @@
       throw new Error(msg);
     }
 
-    var navBarBuilder = new NavBarBuilder(this._nbDataModel);
+    var navBarBuilder = new NavBarBuilder(this._nbDataModel, this._state);
     changeDirector(navBarBuilder);
 
     if (navBarBuilder.hasChanges()) {
@@ -90,4 +93,4 @@
       return lastDefer.resolve(this._nbDataModel);
     }
   };
-}).call(this);
+}).call(window);
