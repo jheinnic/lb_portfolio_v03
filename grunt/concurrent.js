@@ -1,4 +1,4 @@
-(function () {
+(function (module) {
   'use strict';
 
   module.exports = function concurrent(/*grunt, options*/) {
@@ -6,6 +6,15 @@
       options: {logConcurrentOutput: true},
       watchServe: {
         tasks: ['watch', 'nodemon:serve', 'node-inspector:serve']
+      },
+      temp1: {
+        tasks: ['nodemon:serve', 'node-inspector:serve']
+      },
+      temp2: {
+        tasks: ['nodemon:serve', 'watch']
+      },
+      temp3: {
+        tasks: ['exec:watch', 'node-inspector:serve']
       },
 
       // Inherited targets:
@@ -24,4 +33,4 @@
       }
     };
   };
-}).call();
+}).call(this, module);

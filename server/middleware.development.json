@@ -1,0 +1,16 @@
+{
+  "routes": {
+    "connect-livereload": {
+      "hostname": "${hostnane}",
+      "port": "${livereload}"
+    }
+  },
+  "final:after": {
+    "strong-error-handler": {
+      "params": {
+        "debug": true,
+        "log": true
+      }
+    }
+  }
+}

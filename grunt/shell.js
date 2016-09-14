@@ -19,6 +19,9 @@ module.exports = function shell(/*grunt, options*/) {
     'npm-install': {
       command: 'npm install'
     },
+    'npm-prune': {
+      command: 'npm prune'
+    },
     'node-inspector-install': {
       command: 'npm install node-inspector'
     },

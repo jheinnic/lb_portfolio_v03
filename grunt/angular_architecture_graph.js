@@ -1,4 +1,4 @@
-(function () {
+(function (module) {
   'use strict';
 
   module.exports = function angularArchitectureGraph(grunt, options) {
@@ -14,4 +14,4 @@
 
     return retVal;
   };
-}).call();
+}).call(this, module);

@@ -1,8 +1,17 @@
-(function () {
+(function (module) {
   'use strict';
 
   module.exports = function watch(grunt, options) {
     var appConfig = options.appConfig;
+    // Acquire appConfig by requiring it if the options lacked a non-null object.
+    // This triggers when watch is launched as a task from
+    // grunt-contrib-concurrent
+    // TODO: Beware the possibility of switching ports in process.env if this
+    //       triggers...
+    if ((appConfig === null) || (typeof appConfig !== 'object')) {
+      appConfig = require('.,/utils/appConfig')(grunt);
+      options.appConfig = appConfig;
+    }
 
     return {
       bower: {
@@ -33,11 +42,11 @@
 
       index: {
         files: [appConfig.source.client + '/index.@(html|jade)'],
-        tasks: ['newer:copy:dev', 'newer:jade:build', 'wiredep:build', 'fixIndexHtml', 'htmlbuild:dev', 'reloadAssets']
+        tasks: ['newer:copy:dev', 'newer:pug:build', 'wiredep:build', 'fixIndexHtml', 'htmlbuild:dev', 'reloadAssets']
       },
       templates: {
         files: [appConfig.source.app + '/**/*.@(html|jade)'],
-        tasks: ['newer:copy:dev', 'newer:jade:build', 'reloadAssets']
+        tasks: ['newer:copy:dev', 'newer:pug:build', 'reloadAssets']
       },
 
       css: {
@@ -90,4 +99,4 @@
       }
     };
   };
-}).call();
+}).call(this, module);

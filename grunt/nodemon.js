@@ -6,30 +6,31 @@
     var _ = require('lodash');
     var fs = require('fs');
 
+    console.log(setTimeout);
+
     function onEventFn(event) {
       console.log(event.colour);
     }
 
     function onErrorFn(err) {
       if (err.code === 'EADDRINUSE') {
-        grunt.fatal('Port ' + PORT + ' is already in use by another process.', err);
+        grunt.fatal('Port ' + appConfig.ports.restApi + ' is already in use by another process.', err);
       } else {
         grunt.fatal('Unexpected error with code ' + err.code, err);
       }
     }
 
-    var PORT = 3000;
     var openToRootPageFn = _.partial(
       setTimeout,
       _.partial(
         require('open'),
-        'http://localhost:' + PORT + '/',
+        'http://localhost:' + appConfig.ports.restApi + '/',
         function(err) {
           if (err) {
-            console.error('Failed to open http://localhost:' + PORT + '/', err);
+            console.error('Failed to open http://localhost:' + appConfig.ports.restApi + '/', err);
           }
         }
-      ), 3750
+      ), 7500
     );
 
     // Signal .rebooted, but only if the reason for restart was because .reloadAssets was new, not
@@ -71,17 +72,17 @@
       }, 1750   // Delay before signal file to grunt watch is touched
     );
 
-    return {
+    var retVal = {
       serve: {
         script: appConfig.source.server + '/server.js',
         options: {
           cwd: process.cwd(),
           nodeArgs: ['--debug'],
           env: {
-            PORT: PORT,
-            LIVE_RELOAD: appConfig.ports.liveReload
+            REST_API_PORT: Number(appConfig.ports.restApi),
+            LIVE_RELOAD: Number(appConfig.ports.liveReload)
           },
-          delay: 1250, // omit delay if you aren't serving HTML files and don't want to open a browser tab on start
+          delay: 3250, // omit delay if you aren't serving HTML files and don't want to open a browser tab on start
           watch: [
             appConfig.temp.server + '/.restartServer',
             appConfig.temp.server + '/.reloadAssets',
@@ -105,5 +106,11 @@
         }
       }
     };
+    console.log('Nodemon dynamic configuration block is: ');
+    console.log(retVal);
+    console.log(retVal.serve.options.nodeArgs);
+    console.log(retVal.serve.options.env);
+    console.log(retVal.serve.options.watch);
+    return retVal;
   };
 }).call();

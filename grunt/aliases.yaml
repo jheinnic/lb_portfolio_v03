@@ -103,6 +103,11 @@ develop:
  - 'concurrent:watchServe'
 
 develop-fast:
+ - 'lint-for-build'
+ - 'build-dev-fast'
+ - 'concurrent:watchServe'
+
+develop-faster:
  - 'build-dev-fast'
  - 'concurrent:watchServe'
 
@@ -183,13 +188,13 @@ build-dev-slow:
  - 'make-dev-build'
 
 
-# NOTE: copy:build must precede jade:build to ensure index.html or index.jade remains optional.
+# NOTE: copy:build must precede pug:build to ensure index.html or index.jade remains optional.
 # NOTE: copy:build must precede autoprefixer:build to ensure less preprocessing is optional.
 make-dev-build:
  - 'less:build'
  - 'autoprefixer:build'
  - 'copy:dev'
- - 'jade:build'
+ - 'pug:build'
  - 'wiredep:build'
  - 'fixIndexHtml'
  - 'htmlbuild:dev'
@@ -197,7 +202,7 @@ make-dev-build:
  - 'newer:copy:vendor'   # Try using middleware config?
 
 # NOTE: This build target is only valid after having evaluated 'dev-build'.  For CSS, it reuses
-#       less and autoprefix preprocessor outputs.  For HTML, it reuses jade output for templates,
+#       less and autoprefix preprocessor outputs.  For HTML, it reuses pug output for templates,
 #       but rebuilds index.html from source.  It copies the Browserify bundle from the dev build,
 #       and all other files from source, then performs minification.
 cont-dist-build:

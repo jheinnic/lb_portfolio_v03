@@ -1,4 +1,4 @@
-(function () {
+(function (module) {
   'use strict';
 
   // TODO: Get the source directories from bower.json and package.json or leave them hard coded?
@@ -40,9 +40,9 @@
         packageJson: packageJson,
         nodeEnv: process.env.NODE_ENV || 'development',
         ports: {
-          liveReload: lrPort,
-          restApi: restApiPort,
-          assets: assetsPort
+          liveReload: Number(lrPort),
+          restApi: Number(restApiPort),
+          assets: Number(assetsPort)
         },
         app: bowerJson.appModule,
         cwd: process.cwd(),
@@ -105,4 +105,4 @@
       { fileMatch: undefined, baseName: undefined }
     );
   }
-}).call();
+}).call(this, module);

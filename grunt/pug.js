@@ -1,7 +1,7 @@
-(function () {
+(function (module) {
   'use strict';
 
-  module.exports = function jade(grunt, options) {
+  module.exports = function pug(grunt, options) {
     var appConfig = options.appConfig;
     var _ = require('lodash');
 
@@ -52,4 +52,4 @@
 
     return configObj;
   };
-}).call();
+}).call(this, module);
