@@ -10,11 +10,11 @@
   },
   "memdb": {
     "name": "memdb",
-    "connector": "Memory",
+    "connector": "memory",
     "file": "modelCache.json"
   },
   "transient": {
     "name": "transient",
-    "connector": "transient"
+    "connector": "memory"
   }
 }
