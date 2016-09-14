@@ -9,8 +9,8 @@
       return {
         scope: {},
         restrict: 'E',
-        templateUrl: 'jchptf/tools/navbar/jch_navbar.html',
-        link: function($scope) {
+        templateUrl: 'jchptf/tools/navbar/_jch_navbar.view.html',
+        link: function link($scope) {
           console.log('navbar directive');
 
           function updateModel(data) {
