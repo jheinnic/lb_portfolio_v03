@@ -1,4 +1,4 @@
-(function() {
+(function(module, console) {
   'use strict';
 
   module.exports = runNavigation;
@@ -23,5 +23,4 @@
       $state.go('loginForm', {reload: false});
     }
   }
-
-}).call(window);
+}).call(window, module, console);

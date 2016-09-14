@@ -10,5 +10,5 @@
   }
 
   angular.extend(ResultController.prototype, {});
-}).call(window, angular);
+}).call(window, window.angular);
 

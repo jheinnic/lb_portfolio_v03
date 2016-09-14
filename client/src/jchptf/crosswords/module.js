@@ -1,4 +1,4 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   module.exports = 'jchptf.crosswords';
@@ -33,4 +33,4 @@
     .controller('BonusPrizeModalController', require('./BonusPrizeModalController.controller'))
     .controller('BonusWordModalController', require('./BonusWordModalController.controller'))
   ;
-}).call(window, angular);
+}).call(window, window.angular);

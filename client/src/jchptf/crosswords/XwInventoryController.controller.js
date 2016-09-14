@@ -1,10 +1,16 @@
-(function () {
+(function (angular) {
   'use strict';
 
   module.exports = XwInventoryController;
   XwInventoryController.$inject = ['$scope', '$state', 'XwInventoryCanvas', 'Studio', 'eventAggregator'];
 
   function XwInventoryController($scope, $state, XwInventoryCanvas, Studio, eventAggregator) {
+    this.scope = $scope;
+    this.$state = $state;
+    this.XwInventoryCanvas = XwInventoryCanvas;
+    this.Studio = Studio;
+    this.eventAggregator = eventAggregator;
+
     $scope.treeOptions = {
       nodeChildren: 'contents',
       dirSelectable: false,
@@ -61,61 +67,61 @@
         'children': []
       }
     ];
+  }
 
-    angular.extend(
-      XwInventoryController.prototype, {
-        openSelected: function openSelected() {
-          var docId = XwInventoryCanvas.getSelectedDocumentId();
-          Studio.openDocument(docId).then(
-            function onPass() {
-              eventAggregator.trigger('org.jchptf.events.openDocumentPassed', {docId: docId});
-              $state.to('crosswords.tickets', {docId: docId});
-            }
-          ).catch(
-            function onErr(error) {
-              console.error('Failed to open and cache document', error);
-              eventAggregator.trigger('org.jchptf.events.failedToOpenDocument', {docId: docId});
-            }
-          ).done();
-        },
-
-        computeNodeLabelCss: function computeNodeLabelCss(node) {
-          var retVal;
-          switch (node.getDocumentKind()) {
-            case this.DocumentKind.FOLDER:
-              retVal = 'badge-info node-folder';
-              break;
-            case this.DocumentKind.XW_TICKET:
-              retVal = 'badge-ok node-ticket';
-              break;
-            case this.DocumentKind.XW_RESULT:
-              retVal = 'badge-warning node-result';
-              break;
-            default:
-              retVal = 'badge-danger node-unknown';
-              break;
+  angular.extend(
+    XwInventoryController.prototype, {
+      openSelected: function openSelected() {
+        var docId = this.XwInventoryCanvas.getSelectedDocumentId();
+        this.Studio.openDocument(docId).then(
+          function onPass() {
+            this.eventAggregator.trigger('org.jchptf.events.openDocumentPassed', {docId: docId});
+            this.$state.to('crosswords.tickets', {docId: docId});
           }
-
-          return retVal;
-        },
-
-        onSelectionChange: function onSelectionChanged(node, selected) {
-          if (selected) {
-            Studio.select(node);
-          } else {
-            Studio.deselect(node);
+        ).catch(
+          function onErr(error) {
+            console.error('Failed to open and cache document', error);
+            this.eventAggregator.trigger('org.jchptf.events.failedToOpenDocument', {docId: docId});
           }
-        },
+        ).done();
+      },
 
-        onExpansionChange: function onExpansionChanged(node, expanded) {
-          if (expanded) {
-            Studio.select(node);
-          } else {
-            Studio.deselect(node);
-          }
+      computeNodeLabelCss: function computeNodeLabelCss(node) {
+        var retVal;
+        switch (node.getDocumentKind()) {
+          case this.DocumentKind.FOLDER:
+            retVal = 'badge-info node-folder';
+            break;
+          case this.DocumentKind.XW_TICKET:
+            retVal = 'badge-ok node-ticket';
+            break;
+          case this.DocumentKind.XW_RESULT:
+            retVal = 'badge-warning node-result';
+            break;
+          default:
+            retVal = 'badge-danger node-unknown';
+            break;
+        }
+
+        return retVal;
+      },
+
+      onSelectionChange: function onSelectionChanged(node, selected) {
+        if (selected) {
+          this.Studio.select(node);
+        } else {
+          this.Studio.deselect(node);
+        }
+      },
+
+      onExpansionChange: function onExpansionChanged(node, expanded) {
+        if (expanded) {
+          this.Studio.select(node);
+        } else {
+          this.Studio.deselect(node);
         }
       }
-    );
-  }
-}).call(window);
+    }
+  );
+}).call(window, window.angular);
 

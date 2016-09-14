@@ -1,4 +1,4 @@
-(function() {
+(function(angular) {
   'use strict';
 
   module.exports = 'jchptf.tools.iconPanel';
@@ -9,4 +9,4 @@
   )
     .directive('jchXYPos', require('./jchXYPos.directive'))
   ;
-}).call(window);
+}).call(window, window.angular);

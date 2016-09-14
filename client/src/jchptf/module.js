@@ -34,4 +34,4 @@
     .config(require('./layout.config'))
     .run(require('./run'))
   ;
-}).call(window, angular);
+}).call(window, window.angular);
