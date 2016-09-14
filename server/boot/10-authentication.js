@@ -1,11 +1,8 @@
-(function () {
+(function (module) {
   'use strict';
 
   module.exports = function (app) {
     // enable authentication
-    // app.enableAuth();
-
-    // Just for jshint for now
-    return app;
+    app.enableAuth();
   };
-}).call();
+}).call(this, module);
