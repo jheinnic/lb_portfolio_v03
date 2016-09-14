@@ -16,5 +16,12 @@
   "transient": {
     "name": "transient",
     "connector": "memory"
+  },
+  "uploads": {
+    "name": "uploads",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./server/storage",
+    "wrongRoot": "/var/tmp/portfolio"
   }
 }

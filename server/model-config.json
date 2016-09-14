@@ -16,6 +16,9 @@
   "Todo": {
     "dataSource": "db"
   },
+  "ACL": {
+    "dataSource": "db"
+  },
   "User": {
     "dataSource": "db"
   },
@@ -66,5 +69,9 @@
   "GridBlocked": {
     "dataSource": "transient",
     "public": false
+  },
+  "Container": {
+    "dataSource": "uploads",
+    "public": true
   }
 }
