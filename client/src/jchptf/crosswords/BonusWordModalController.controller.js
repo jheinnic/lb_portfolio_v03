@@ -5,8 +5,11 @@
 
   BonusWordModalController.$inject = ['OpenTicketCanvas'];
 
-  function BonusWordModalController(OpenTicketCanvas) {
+  function BonusWordModalController($scope, OpenTicketCanvas) {
     this.activeTicketModel = OpenTicketCanvas;
+    if ($scope === this.activeTicketModel) {
+      return;
+    }
   }
 }).call(window);
 

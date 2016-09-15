@@ -8,8 +8,8 @@
 
   function BonusPrizeModalController($scope, OpenResultCanvas) {
     openResultCanvas = OpenResultCanvas;
-    if ($scope === $scope) {
-
+    if ($scope === openResultCanvas) {
+      return;
     }
   }
 

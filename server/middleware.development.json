@@ -1,12 +1,22 @@
 {
-  "routes": {
+  "routes:after": {
     "connect-livereload": {
-      "hostname": "${hostnane}",
-      "port": "${livereload}"
+      "enabled": true,
+      "params": {
+        "hostname": "${host}",
+        "port": "${livereload}"
+      }
+    }
+  },
+  "files": {
+    "loopback#static": {
+      "enabled": true,
+      "params": "$!../build/dev/client"
     }
   },
   "final:after": {
     "strong-error-handler": {
+      "enabled": true,
       "params": {
         "debug": true,
         "log": true

@@ -1,7 +1,7 @@
 {
   "name": "PlayResult",
   "base": "Model",
-  "idInjection": true,
+  "idInjection": false,
   "options": {
     "validateUpsert": true
   },

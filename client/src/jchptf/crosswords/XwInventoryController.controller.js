@@ -2,14 +2,11 @@
   'use strict';
 
   module.exports = XwInventoryController;
-  XwInventoryController.$inject = ['$scope', '$state', 'XwInventoryCanvas', 'Studio', 'eventAggregator'];
+  XwInventoryController.$inject = ['$scope', '$state']
 
-  function XwInventoryController($scope, $state, XwInventoryCanvas, Studio, eventAggregator) {
+  function XwInventoryController($scope, $state) {
     this.scope = $scope;
     this.$state = $state;
-    this.XwInventoryCanvas = XwInventoryCanvas;
-    this.Studio = Studio;
-    this.eventAggregator = eventAggregator;
 
     $scope.treeOptions = {
       nodeChildren: 'contents',

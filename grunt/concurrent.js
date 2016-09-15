@@ -7,14 +7,8 @@
       watchServe: {
         tasks: ['watch', 'nodemon:serve', 'node-inspector:serve']
       },
-      temp1: {
+      watchServeTest: {
         tasks: ['nodemon:serve', 'node-inspector:serve']
-      },
-      temp2: {
-        tasks: ['nodemon:serve', 'watch']
-      },
-      temp3: {
-        tasks: ['exec:watch', 'node-inspector:serve']
       },
 
       // Inherited targets:

@@ -1,12 +1,12 @@
-(function() {
+(function(console) {
   'use strict';
 
-  module.exports = TestUploadController
+  module.exports = TestUploadController;
   TestUploadController.$inject = ['$scope', 'FileUploader'];
 
   function TestUploadController($scope, FileUploader) {
     // create a uploader with options
-    var uploader = $scope.uploader =
+    var uploader =
       new FileUploader({
         scope: $scope,              // to automatically update the html. Default: $rootScope
         url: '/api/Containers/container1/upload',
@@ -14,61 +14,62 @@
           {key: 'value'}
         ]
       });
+    $scope.uploader = uploader;
 
     // ADDING FILTERS
     uploader.filters.push({
       name: 'filterName',
-      fn: function (item, options) {
-        console.info('filter2');
+      fn: function filter(item, options) {
+        console.info('filter2', item, options);
         return true;
       }
     });
 
     // REGISTER HANDLERS
     // --------------------
-    uploader.onAfterAddingFile = function (item) {
+    uploader.onAfterAddingFile = function onAfterAddingFile(item) {
       console.info('After adding a file', item);
     };
     // --------------------
-    uploader.onAfterAddingAll = function (items) {
+    uploader.onAfterAddingAll = function onAfterAddingAll(items) {
       console.info('After adding all files', items);
     };
     // --------------------
-    uploader.onWhenAddingFileFailed = function (item, filter, options) {
-      console.info('When adding a file failed', item);
+    uploader.onWhenAddingFileFailed = function onWhenAddingFileFailed(item, filter, options) {
+      console.info('When adding a file failed', item, filter, options);
     };
     // --------------------
-    uploader.onBeforeUploadItem = function (item) {
+    uploader.onBeforeUploadItem = function onBeforeUploadItem(item) {
       console.info('Before upload', item);
     };
     // --------------------
-    uploader.onProgressItem = function (item, progress) {
+    uploader.onProgressItem = function onProgressItem(item, progress) {
       console.info('Progress: ' + progress, item);
     };
     // --------------------
-    uploader.onProgressAll = function (progress) {
+    uploader.onProgressAll = function onProgressAll(progress) {
       console.info('Total progress: ' + progress);
     };
     // --------------------
-    uploader.onSuccessItem = function (item, response, status, headers) {
+    uploader.onSuccessItem = function onSuccessItem(item, response, status, headers) {
       console.info('Success', response, status, headers);
       $scope.$broadcast('uploadCompleted', item);
     };
     // --------------------
-    uploader.onErrorItem = function (item, response, status, headers) {
+    uploader.onErrorItem = function onErrorItem(item, response, status, headers) {
       console.info('Error', response, status, headers);
     };
     // --------------------
-    uploader.onCancelItem = function (item, response, status, headers) {
-      console.info('Cancel', response, status);
+    uploader.onCancelItem = function onCancelItem(item, response, status, headers) {
+      console.info('Cancel', response, status, headers);
     };
     // --------------------
-    uploader.onCompleteItem = function (item, response, status, headers) {
+    uploader.onCompleteItem = function onCompleteItem(item, response, status, headers) {
       console.info('Complete', response, status, headers);
     };
     // --------------------
-    uploader.onCompleteAll = function () {
+    uploader.onCompleteAll = function onCompleteAll() {
       console.info('Complete all');
     };
   }
-}).call(window);
+}).call(window, window.console);

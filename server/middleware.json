@@ -7,6 +7,7 @@
       "enabled": false
     },
     "cors": {
+      "enabled": true,
       "params": {
         "origin": true,
         "credentials": true,
@@ -18,16 +19,38 @@
   "auth": {},
   "parse": {},
   "routes": {
+    "loopback#status": {
+      "enabled": true,
+      "paths": [
+        "/status"
+      ]
+    },
     "loopback#rest": {
+      "enabled": true,
       "paths": [
         "${restApiRoot}"
       ]
-    },
-    "connect-livereload": {}
+    }
+  },
+  "routes:after": {
+    "connect-livereload": { }
   },
   "files": {
     "loopback#static": {
+      "enabled": true,
       "params": "$!../client"
+    }
+  },
+  "files:after": {
+    "./middleware/serve-index": {
+      "enabled": true,
+      "params": {
+        "indexFile": "${indexFile}"
+      },
+      "paths": [
+        "/\/[^./]*$/",
+        "/"
+      ]
     }
   },
   "final": {

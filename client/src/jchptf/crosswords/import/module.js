@@ -7,7 +7,7 @@
     module.exports,
     ['ng', 'angularFileUpload', 'jchptf.lbclient']
   )
-    .controller('TestUploadController', require('./TestUploadController.controller')
-    .controller('FileUploadController', require('./FileUploadController.controller')
+    .controller('TestUploadController', require('./TestUploadController.controller'))
+    .controller('TicketImportController', require('./TicketImportController.controller'))
   ;
 }).call(window, window.angular);

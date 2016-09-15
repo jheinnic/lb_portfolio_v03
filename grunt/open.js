@@ -5,6 +5,7 @@
 module.exports = function open(/*grunt, options*/) {
   return {
     dev: { path: 'http://localhost:8888' },
+    serve: { path: 'http://localhost:8080?port=5858' },
     coverage: { path: 'http://localhost:5555' }
   };
 };

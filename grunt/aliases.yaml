@@ -139,6 +139,7 @@ env-install:
  - 'shell:protractor-install'
  - 'shell:imagemin-jpg'
  - 'shell:imagemin-png'
+ - 'env-build'
 
 env-update:
  - 'lint-for-build'
@@ -147,6 +148,7 @@ env-update:
  - 'shell:protractor-update'
  - 'shell:imagemin-jpg'
  - 'shell:imagemin-png'
+ - 'env-build'
 
 env-build:
  - 'clean:build'
@@ -157,27 +159,23 @@ env-build:
 ##
 
 default:
- - 'build'
-
+ - 'build-slow'
 
 build:
- - 'env-update'
- - 'build-fast'
+ - 'build-dev'
+ - 'cont-dist-build'
 
 build-fast:
- - 'env-build'
- - 'make-dev-build'
+ - 'build-dev-fast'
  - 'cont-dist-build'
 
 build-slow:
- - 'env-install'
- - 'make-dev-build'
+ - 'build-dev-slow'
  - 'cont-dist-build'
-
 
 build-dev:
  - 'env-update'
- - 'build-dev-fast'
+ - 'make-dev-build'
 
 build-dev-fast:
  - 'env-build'

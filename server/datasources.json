@@ -1,17 +1,21 @@
 {
-  "db": {
+  "adb": {
+    "host": "127.0.0.1",
     "port": 27017,
     "database": "portfolio",
     "password": "abcd1234",
-    "name": "db",
+    "name": "adb",
     "connector": "mongodb",
-    "hostname": "localhost",
     "user": "jheinnic"
   },
   "memdb": {
     "name": "memdb",
     "connector": "memory",
     "file": "modelCache.json"
+  },
+  "db": {
+    "name": "db",
+    "connector": "memory"
   },
   "transient": {
     "name": "transient",

@@ -5,6 +5,6 @@
   var boot = require('loopback-boot');
 
   module.exports = loopback();
-  boot(module.exports);
-}).call(window);
+  boot(module.exports, {}, console.log);
+}).call(this || window);
 

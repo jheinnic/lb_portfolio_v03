@@ -6,7 +6,7 @@
     var _ = require('lodash');
     var fs = require('fs');
 
-    console.log(setTimeout);
+    // console.log(setTimeout);
 
     function onEventFn(event) {
       console.log(event.colour);
@@ -24,13 +24,15 @@
       setTimeout,
       _.partial(
         require('open'),
-        'http://localhost:' + appConfig.ports.restApi + '/',
+        'http://localhost:' + appConfig.ports.restApi + '/explorer',
         function(err) {
           if (err) {
             console.error('Failed to open http://localhost:' + appConfig.ports.restApi + '/', err);
+          } else {
+            require('open')('http://localhost:8080?port=5858');
           }
         }
-      ), 7500
+      ), 8000
     );
 
     // Signal .rebooted, but only if the reason for restart was because .reloadAssets was new, not
@@ -40,6 +42,7 @@
     var afterRestartFn = _.partial(
       setTimeout,
       function onServerRestart() {
+        console.log(reloadAssetsFile);
         fs.exists(
           reloadAssetsFile,
           function checkForAssetsReloadRequest(exists) {
@@ -48,7 +51,7 @@
                 reloadAssetsFile,
                 function signalIfAssetsReloadRequested(stat) {
                   if (_.isObject(stat)) {
-                    if (lastAssetReload !== stat.mtime) {
+                    if (_.isUndefined(lastAssetReload) || (lastAssetReload !== stat.mtime)) {
                       lastAssetReload = stat.mtime;
                       fs.writeFile(appConfig.temp.server + '/.rebooted', lastAssetReload);
                       console.log('Server signals it restarted for an asset reload');
@@ -59,7 +62,7 @@
                     }
                   } else {
                     console.log(
-                      'Server was restarted, asset reload request file exists but its last modification could not be determined'
+                      'Server was restarted, asset reload request file exists but its last modification could not be determined', stat
                     );
                   }
                 }
@@ -106,11 +109,11 @@
         }
       }
     };
-    console.log('Nodemon dynamic configuration block is: ');
-    console.log(retVal);
-    console.log(retVal.serve.options.nodeArgs);
-    console.log(retVal.serve.options.env);
-    console.log(retVal.serve.options.watch);
+    // console.log('Nodemon dynamic configuration block is: ');
+    // console.log(retVal);
+    // console.log(retVal.serve.options.nodeArgs);
+    // console.log(retVal.serve.options.env);
+    // console.log(retVal.serve.options.watch);
     return retVal;
   };
 }).call();
