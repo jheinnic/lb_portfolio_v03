@@ -1,0 +1,17 @@
+{
+  "name": "bonusWordDescription",
+  "base": "quadCorners",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "content": {
+      "type": []
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

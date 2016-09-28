@@ -3,6 +3,7 @@
   "browser": true,
   "browserify": true,
   "esnext": true,
+  "proto": true,
   "bitwise": true,
   "camelcase": true,
   "eqeqeq": true,

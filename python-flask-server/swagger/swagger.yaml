@@ -1,0 +1,259 @@
+---
+swagger: "2.0"
+info:
+  description: "Backend REST API provided to client-facing Loopback application for\
+    \ all computer vision functionality required for crossword ticket interpretation."
+  version: "1.0.0"
+  title: "Portfolio Project Crossword Analysis Backend API"
+  license:
+    name: "MIT"
+host: "portfolio.jchein.ngrok.info"
+basePath: "/xwcv"
+tags:
+- name: "ImportAnalysis"
+  description: "Operations on the resource path representing a uniquely upload image\
+    \ file with a crossword ticket featured in its view."
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /users/{userGuid}/ticketProjects/{xwProjGuid}:
+    put:
+      tags:
+      - "ImportAnalysis"
+      summary: "Locate ticket and grid coordinates in an uploaded candidate image\
+        \ file."
+      description: "Find quadrilateral context hulls surrounding both a ticket and\
+        \ the letter grid inside the ticket.  The ticket location can be computed\
+        \ by this operation or provided by caller."
+      operationId: "controllers.default_controller.users_user_guid_ticket_projects_xw_proj_guid_put"
+      parameters:
+      - name: "userGuid"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "xwProjGuid"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "contentOverride"
+        required: true
+        schema:
+          $ref: "#/definitions/importContent"
+      responses:
+        200:
+          description: "Payload returned if an import image was succeessfully processed\
+            \ Contents provide the four corners of a convex hull for the ticket in\
+            \ its host image file as well as each 'readable' element alongside the\
+            \ value inferred from each."
+          schema:
+            $ref: "#/definitions/importContent"
+        500:
+          description: "Payload returned if import was unsuccessful"
+          schema:
+            $ref: "#/definitions/incompleteResult"
+      x-tags:
+      - tag: "ImportAnalysis"
+  /users/{userGuid}/ticketProjects/{xwProjGuid}/ticketId:
+    get:
+      tags:
+      - "ImportAnalysis"
+      summary: "Locate ticket and grid coordinates in an uploaded candidate image\
+        \ file."
+      description: "Find quadrilateral context hulls surrounding both a ticket and\
+        \ the letter grid inside the ticket.  The ticket location can be computed\
+        \ by this operation or provided by caller."
+      operationId: "controllers.default_controller.users_user_guid_ticket_projects_xw_proj_guid_ticket_id_get"
+      parameters:
+      - name: "userGuid"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "xwProjGuid"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A request for the analysis has been accepted and the result\
+            \ will be returned as a payload posted to the URL given by the 'X-PortfolioReplyTo'\
+            \ input header"
+          schema:
+            $ref: "#/definitions/ticketIdDescription"
+      x-tags:
+      - tag: "ImportAnalysis"
+definitions:
+  playFamilyModel:
+    type: "string"
+    enum:
+    - "FiveXTicket"
+    - "TripOnlyTicket"
+    - "TripSpotTicket"
+  ticketId:
+    type: "string"
+  letterValue:
+    type: "string"
+    enum:
+    - "A"
+    - "B"
+    - "C"
+    - "D"
+    - "E"
+    - "F"
+    - "G"
+    - "H"
+    - "I"
+    - "J"
+    - "K"
+    - "L"
+    - "M"
+    - "N"
+    - "O"
+    - "P"
+    - "Q"
+    - "R"
+    - "S"
+    - "T"
+    - "U"
+    - "V"
+    - "W"
+    - "X"
+    - "Y"
+    - "Z"
+    - "_"
+  gridIndex:
+    type: "integer"
+    format: "int8"
+  quadCorners:
+    type: "object"
+    required:
+    - "bottomLeft"
+    - "bottomRight"
+    - "topLeft"
+    - "topRight"
+    properties:
+      topLeft:
+        type: "array"
+        description: "A pair of numbers giving (x,y) coordinates for top-left corner\n\
+          \  of associated rectangular region."
+      topRight:
+        type: "array"
+        description: "A pair of numbers giving (x,y) coordinates for top-rightt corner\
+          \ of associated rectangular region."
+      bottomLeft:
+        type: "array"
+        description: "A pair of numbers giving (x,y) coordinates for bottom-left corner\
+          \ of associated rectangular region."
+      bottomRight:
+        type: "array"
+        description: "A pair of numbers giving (x,y) coordinates for bottom-right\
+          \ corner of associated rectangular region."
+  ticketDescription:
+    allOf:
+    - $ref: "#/definitions/quadCorners"
+    - {}
+  ticketIdDescription:
+    allOf:
+    - $ref: "#/definitions/quadCorners"
+    - {}
+  xwGridDescription:
+    allOf:
+    - $ref: "#/definitions/quadCorners"
+    - {}
+  xwCellDescription:
+    allOf:
+    - $ref: "#/definitions/quadCorners"
+    - {}
+  bonusWordDescription:
+    allOf:
+    - $ref: "#/definitions/quadCorners"
+    - {}
+  bonusLetterDescription:
+    allOf:
+    - $ref: "#/definitions/quadCorners"
+    - {}
+  importContent:
+    type: "object"
+    properties:
+      playFamily:
+        $ref: "#/definitions/playFamilyModel"
+      ticketCorners:
+        $ref: "#/definitions/quadCorners"
+      ticketId:
+        $ref: "#/definitions/ticketIdDescription"
+      xwGrid:
+        $ref: "#/definitions/xwGridDescription"
+      bonusWord:
+        $ref: "#/definitions/bonusWordDescription"
+  incompleteResult:
+    type: "object"
+    required:
+    - "message"
+    - "partialContent"
+    properties:
+      code:
+        type: "string"
+        description: "Value from an application enumeration associated with a known\
+          \ error condition, if the nature of the error is well known."
+      message:
+        type: "string"
+        description: "A human readable message describing the error"
+        minLength: 3
+      partialContent:
+        type: "array"
+        description: "An export of partial content up until smething failed.  Null\
+          \ values should be read as ailured o fid, no"
+  errorResult:
+    type: "object"
+    required:
+    - "message"
+    properties:
+      code:
+        type: "string"
+        description: "Value from an application enumeration associated with a known\
+          \ error condition, if the nature of the error is well known."
+      message:
+        type: "string"
+        description: "A human readable message describing the error"
+        minLength: 3
+      trace:
+        type: "array"
+        description: "An optional stack trace, if available"
+parameters:
+  userGuid:
+    name: "userGuid"
+    in: "path"
+    required: true
+    type: "string"
+  xwProjGuid:
+    name: "xwProjGuid"
+    in: "path"
+    required: true
+    type: "string"
+  contentOverride:
+    in: "body"
+    name: "contentOverride"
+    required: true
+    schema:
+      $ref: "#/definitions/importContent"
+responses:
+  contentOk:
+    description: "Payload returned if an import image was succeessfully processed\
+      \ Contents provide the four corners of a convex hull for the ticket in its host\
+      \ image file as well as each 'readable' element alongside the value inferred\
+      \ from each."
+    schema:
+      $ref: "#/definitions/importContent"
+  incompleteResult:
+    description: "Payload returned if import was unsuccessful"
+    schema:
+      $ref: "#/definitions/incompleteResult"
+  unexpectedE:
+    description: "Payload returned if import failed for reasons unrelated to issues\
+      \ with the content of the import."
+    schema:
+      $ref: "#/definitions/errorResult"

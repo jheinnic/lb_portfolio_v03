@@ -1,0 +1,94 @@
+{
+  "name": "TicketImport",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {},
+  "properties": {
+    "guid": {
+      "type": "string",
+      "id": true,
+      "required": false,
+      "defaultFn": "guid"
+    },
+    "imageType": {
+      "type": "string",
+      "required": true,
+      "default": false,
+      "documentation": []
+    },
+    "matrix": {
+      "type": [
+        "number"
+      ],
+      "required": true,
+      "default": false,
+      "documentation": [
+        "A flattened version of the 3x3 perspective transform matrix from ",
+        "known example to import file"
+      ],
+      "length": 9
+    },
+    "inverseMatrix": {
+      "type": [
+        "number"
+      ],
+      "required": true,
+      "default": false,
+      "documentation": [
+        "A flattened version of the 3x3 perspective transform matrix from ",
+        "known example to import file"
+      ],
+      "length": 9
+    },
+    "ticketId": {
+      "type": "string",
+      "required": false,
+      "default": false,
+      "documentation": [],
+      "length": 11
+    },
+    "gridContents": {
+      "type": "string",
+      "required": true,
+      "default": false,
+      "documentation": [],
+      "length": 121
+    }
+  },
+  "validations": [],
+  "relations": {
+    "_ticketCorners": {
+      "type": "embedsOne",
+      "model": "QuadCorners",
+      "property": "ticketCorners"
+    },
+    "_ticketIdCorners": {
+      "type": "embedsOne",
+      "model": "QuadCorners",
+      "property": "gridCorners"
+    },
+    "_gridCorners": {
+      "type": "embedsOne",
+      "model": "QuadCorners",
+      "property": "gridCorners"
+    },
+    "_cellCorners": {
+      "type": "embedsMany",
+      "model": "QuadCorners",
+      "property": "cellCorners"
+    },
+    "_seriesPool": {
+      "type": "belongsTo",
+      "model": "SeriesPool",
+      "foreignKey": "id",
+      "property": "seriesPoolId",
+      "properties": [
+        "pathToExample",
+        "dateBegan",
+        "dateEnded"
+      ]
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

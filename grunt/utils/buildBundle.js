@@ -82,6 +82,11 @@
       { debug: true }
     );
 
+    var lbGenNgSdkName = appConfig.app + '.lbServices';
+    var lbGenNgSdkPath = path.relative(
+      appConfig.source.client, path.join(
+         appConfig.temp.client, appConfig.app,
+         'lbServices', 'lbServices.js'));
     // Construct file glob and normalized absolute path for use with grunt and browserify here.
     // Register source files using the moduleFQN/fileName convention described in function comment block.
     var sourceGlob = appConfig.source.client + '/' + appConfig.app + '/**/*.@(js|coffee|json)';
@@ -102,6 +107,7 @@
 
     // Configure browserify to load Loopback and Main Angular Application Module to bootstrap bundle activation on load.
     b.require('./lbclient.js', {expose: 'lbclient'});
+    b.require(lbGenNgSdkPath, {expose: lbGenNgSdkName});
     b.add(sprintf('./%s/module.js', appConfig.app), {expose: appConfig.app});
 
     var clientSrcDir = path.normalize(

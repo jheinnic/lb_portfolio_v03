@@ -196,6 +196,7 @@ make-dev-build:
  - 'wiredep:build'
  - 'fixIndexHtml'
  - 'htmlbuild:dev'
+ - 'loopback_sdk_angular:dev'
  - 'bundleClient:dev'
  - 'newer:copy:vendor'   # Try using middleware config?
 

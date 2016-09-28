@@ -1,4 +1,4 @@
 {
-  "name": "LocalXwTicket",
-  "base": "XwTicket"
+  "name": "LocalTicketPlayState",
+  "base": "TicketPlayState"
 }

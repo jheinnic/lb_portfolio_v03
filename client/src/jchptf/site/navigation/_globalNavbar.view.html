@@ -1,0 +1,14 @@
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <span>{{vm.navBarData.brandName}}</span>
+    <!-- fill up the space between left and right area -->
+    <span flex></span>
+    <md-button class="md-raised md-accent">REGISTER</md-button>
+    <md-button class="md-raised md-primary">LOGIN</md-button>
+  </div>
+</md-toolbar>
+<md-nav-bar md-selected-nav-item="vm.navData.activeTabId">
+  <md-nav-item ng-repeat="tabModel in ::vm.navBarData.tabModels track by ::tabModel.tabId" md-nav-sref="{{::tabModel.srefTarget}}" name="{{::tabModel.tabId}}">
+    {{::tabModel.displayName}}
+  </md-nav-item>
+</md-nav-bar>

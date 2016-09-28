@@ -14,6 +14,9 @@
     console.log('** Index file is at ' + indexFile);
 
     function sendIndexFile(req, res) {
+      // var request = req;
+      var url = req.url;
+      console.log(req, url);
       res.sendFile(indexFile);
     }
 

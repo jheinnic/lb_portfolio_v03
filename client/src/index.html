@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="jchptf">
+<html>
 
 <head>
   <meta charset="utf-8">
@@ -27,8 +27,14 @@
   <!-- endbuild -->
 </head>
 
-<body>
-  <div class="container" ui-view=""></div>
+<body ng-app="jchptf">
+  <div layout="column" ng-cloak>
+    <div ui-view="navbar"></div>
+    <md-content ui-view="appView" flex layout-fill layout-padding></md-content>
+    <footer>
+      <p>&copy; John C. Heinnickel, 2016</p>
+    </footer>
+  </div>
 
   <!--[if lt IE 9]>
   <script src="vendor/es5-shim/es5-shim.js" type="text/javascript"></script>

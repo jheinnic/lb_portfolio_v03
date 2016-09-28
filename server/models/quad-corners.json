@@ -1,0 +1,34 @@
+{
+  "name": "quadCorners",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "topLeft": {
+      "type": [],
+      "required": true,
+      "description": "A pair of numbers giving (x,y) coordinates for top-left corner\n  of associated rectangular region."
+    },
+    "topRight": {
+      "type": [],
+      "required": true,
+      "description": "A pair of numbers giving (x,y) coordinates for top-rightt corner of associated rectangular region."
+    },
+    "bottomLeft": {
+      "type": [],
+      "required": true,
+      "description": "A pair of numbers giving (x,y) coordinates for bottom-left corner of associated rectangular region."
+    },
+    "bottomRight": {
+      "type": [],
+      "required": true,
+      "description": "A pair of numbers giving (x,y) coordinates for bottom-right corner of associated rectangular region."
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

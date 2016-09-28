@@ -1,0 +1,64 @@
+{
+  "name": "QuadCorners",
+  "base": "Model",
+  "idInjection": false,
+  "options": {},
+  "documentation": [
+    "Identifies the four corners of a quadrilateral oriented in a coordinate system such that the origin (0,0) is ",
+    "both the highest and leftmost point in the system."
+  ],
+  "properties": {
+    "topLeftX": {
+      "type": "number",
+      "required": true,
+      "documentation": "X coordinate of a quadrilateral's upper-left corner.",
+      "default": false
+    },
+    "topLeftY": {
+      "type": "number",
+      "required": true,
+      "documentation": "Y coordinate of a quadrilateral's upper-left corner.",
+      "default": false
+    },
+    "topRightX": {
+      "type": "number",
+      "required": true,
+      "documentation": "X coordinate of a quadrilateral's upper-right corner.",
+      "default": false
+    },
+    "topRightY": {
+      "type": "number",
+      "required": true,
+      "documentation": "Y coordinate of a quadrilateral's upper-right corner.",
+      "default": false
+    },
+    "bottomLeftX": {
+      "type": "number",
+      "required": true,
+      "documentation": "X coordinate of a quadrilateral's lower-left corner.",
+      "default": false
+    },
+    "bottomLeftY": {
+      "type": "number",
+      "required": true,
+      "documentation": "Y coordinate of a quadrilateral's lower-left corner.",
+      "default": false
+    },
+    "bottomRightX": {
+      "type": "number",
+      "required": true,
+      "documentation": "X coordinate of a quadrilateral's lower-right corner.",
+      "default": false
+    },
+    "bottomRightY": {
+      "type": "number",
+      "required": true,
+      "documentation": "Y coordinate of a quadrilateral's lower-right corner.",
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

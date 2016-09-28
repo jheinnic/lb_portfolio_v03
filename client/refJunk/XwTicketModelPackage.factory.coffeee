@@ -160,7 +160,7 @@ module.exports = XwModelPackage =
       getGameVariantKind: () -> GameVariantKind.FIVE_X
 
   # Temporary stand-ins!!
-    class XwTicket extends AbstractDocument
+    class TicketPlayState extends AbstractDocument
       constructor: (params) ->
         docModel = params.docModel
         # (docModel? && docModel.getRootObject()?)
@@ -172,14 +172,14 @@ module.exports = XwModelPackage =
       constructor: (params) ->
         {@uuid, nodeUrl, createdAt, modifiedAt, importSources, exportRoles} = params
         super(params)
-    class XwTicketExportRoleKind extends ExportRoleKind
-    new XwTicketExportRoleKind('forResults', AbstractTicket)
-    XwTicketExportRoleKind.finalize()
+    class TicketPlayStateExportRoleKind extends ExportRoleKind
+    new TicketPlayStateExportRoleKind('forResults', AbstractTicket)
+    TicketPlayStateExportRoleKind.finalize()
 
     class NullExportRoleKind extends ExportRoleKind
     NullExportRoleKind.finalize()
 
-    new DocumentKind('XW_TICKET', 'xwt', AbstractTicket, XwTicketExportRoleKind)
+    new DocumentKind('XW_TICKET', 'xwt', AbstractTicket, TicketPlayStateExportRoleKind)
     new DocumentKind('XW_RESULT', 'xwr', AbstractResult, NullExportRoleKind)
 
     return {

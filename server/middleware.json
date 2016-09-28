@@ -7,50 +7,49 @@
       "enabled": false
     },
     "cors": {
-      "enabled": true,
       "params": {
         "origin": true,
         "credentials": true,
         "maxAge": 86400
-      }
+      },
+      "enabled": true
     }
   },
   "session": {},
   "auth": {},
   "parse": {},
+  "routes:before": {
+    "connect-livereload": {}
+  },
   "routes": {
     "loopback#status": {
-      "enabled": true,
       "paths": [
         "/status"
-      ]
+      ],
+      "enabled": true
     },
     "loopback#rest": {
-      "enabled": true,
       "paths": [
         "${restApiRoot}"
-      ]
+      ],
+      "enabled": true
     }
-  },
-  "routes:after": {
-    "connect-livereload": { }
   },
   "files": {
     "loopback#static": {
-      "enabled": true,
-      "params": "$!../client"
+      "params": "$!../client",
+      "enabled": true
     }
   },
   "files:after": {
     "./middleware/serve-index": {
-      "enabled": true,
+      "paths": [
+        "/.*/[^./]*$/"
+      ],
       "params": {
         "indexFile": "${indexFile}"
       },
-      "paths": [
-        "/\/[^./]*$/",
-        "/"
-      ]
+      "enabled": true
     }
   },
   "final": {

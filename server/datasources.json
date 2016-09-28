@@ -17,15 +17,26 @@
     "name": "db",
     "connector": "memory"
   },
+  "stormpath": {
+    "name": "stormpath",
+    "connector": "stormpath",
+    "apiKeyId": "6DK0B4LNDYFGEXPWWIRLC8U2B",
+    "apiKeySecret": "DKC3pz+rbG3XULATgtDhK19+6w9ypw99vvqXUNGHh+g",
+    "applicationHref": "https://api.stormpath.com/v1/applications/7mfFNBXqPTbNP3ZMlahygf"
+  },
+  "python": {
+    "url": "http://localhost:8888/",
+    "name": "python",
+    "connector": "loopback-connector-remote"
+  },
   "transient": {
     "name": "transient",
     "connector": "memory"
   },
-  "uploads": {
-    "name": "uploads",
+  "localFiles": {
+    "name": "localFiles",
     "connector": "loopback-component-storage",
     "provider": "filesystem",
-    "root": "./server/storage",
-    "wrongRoot": "/var/tmp/portfolio"
+    "root": "./server/storage"
   }
 }

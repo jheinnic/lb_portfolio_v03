@@ -1,0 +1,48 @@
+{
+  "name": "CrosswordProject",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {},
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "required": false,
+      "defaultFn": "guid"
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "index": "unique",
+      "default": false,
+      "minLength": 3
+    }
+  },
+  "validations": [],
+  "relations": {
+    "_owner": {
+      "type": "belongsTo",
+      "model": "StormpathUser",
+      "foreignKey": "id",
+      "property": "ownerId"
+    },
+    "_importModel": {
+      "type": "embedsOne",
+      "model": "TicketImport",
+      "property": "importModel"
+    },
+    "_revealModel": {
+      "type": "embedsOne",
+      "model": "TicketRevealState",
+      "property": "revealModel"
+    },
+    "_computeOutModel": {
+      "type": "embedsOne",
+      "model": "TicketPlayState",
+      "foreignKey": "colEditModelId",
+      "property": "verticalModel"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,67 @@
+{
+  "name": "SeriesPlayFamily",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {},
+  "properties": {
+    "modelName": {
+      "type": "string",
+      "id": true,
+      "required": true
+    },
+    "yourLettersCount": {
+      "type": "number",
+      "required": true,
+      "default": 18,
+      "documentation": [],
+      "minValue": 18,
+      "maxValue": 20
+    },
+    "hasBonusWord": {
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "documentation": []
+    },
+    "hasTripplers": {
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "documentation": []
+    },
+    "hasTwentySpot": {
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "documentation": []
+    },
+    "hasMultiSpot": {
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "documentation": []
+    },
+    "prizeArrays": {
+      "type": [
+        "number"
+      ],
+      "required": true,
+      "default": false,
+      "documentation": "Flattened prize arrays",
+      "minLength": 1
+    },
+    "requiredMixins": {
+      "type": [
+        "string"
+      ],
+      "required": true,
+      "default": false,
+      "documentation": [],
+      "minLength": 1
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

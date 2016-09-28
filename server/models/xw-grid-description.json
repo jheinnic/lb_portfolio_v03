@@ -1,0 +1,21 @@
+{
+  "name": "xwGridDescription",
+  "base": "quadCorners",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "content": {
+      "type": [
+        "xwCellDescription"
+      ],
+      "minItems": 121,
+      "maxItems": 121
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

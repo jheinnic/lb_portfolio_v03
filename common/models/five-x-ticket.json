@@ -1,6 +1,6 @@
 {
   "name": "FiveXTicket",
-  "base": "XwTicket",
+  "base": "TicketPlayState",
   "idInjection": false,
   "options": {
     "validateUpsert": true

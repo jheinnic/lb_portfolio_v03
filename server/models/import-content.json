@@ -1,0 +1,29 @@
+{
+  "name": "importContent",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "playFamily": {
+      "type": "string"
+    },
+    "ticketCorners": {
+      "type": "quadCorners"
+    },
+    "ticketId": {
+      "type": "ticketIdDescription"
+    },
+    "xwGrid": {
+      "type": "xwGridDescription"
+    },
+    "bonusWord": {
+      "type": "bonusWordDescription"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

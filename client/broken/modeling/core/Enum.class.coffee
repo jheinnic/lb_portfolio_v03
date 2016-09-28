@@ -34,14 +34,17 @@ class Enum extends ModelObject
     Object.defineProperty(
       Class,
       name,
-      { enumerable: true,
+      { __proto__: null,
+        enumerable: true,
         value: @ }
     )
     Object.defineProperties(
       @,
-      { name: { enumerable: true,
+      { name: { __proto__: null,
+        enumerable: true,
         value: name },
-        ordinal: { enumerable: true,
+        ordinal: { __proto__: null,
+          enumerable: true,
           value: Class._SIZE } }
     )
 

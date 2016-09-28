@@ -1,0 +1,58 @@
+{
+  "name": "SeriesPool",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {},
+  "properties": {
+    "id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "documentation": []
+    },
+    "pathToExample": {
+      "type": "string",
+      "required": true,
+      "default": false,
+      "documentation": []
+    },
+    "dateReleased": {
+      "type": "date",
+      "required": true,
+      "default": false,
+      "documentation": []
+    },
+    "dateEnded": {
+      "type": "date",
+      "required": true,
+      "default": false,
+      "documentation": []
+    },
+    "availableForImport": {
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "documentation": []
+    }
+  },
+  "validations": [],
+  "relations": {
+    "_playFamily": {
+      "type": "belongsTo",
+      "model": "SeriesPlayFamily",
+      "foreignKey": "modelName",
+      "property": "modelName",
+      "properties": [
+        "yourLettersCount",
+        "hasBonusWord",
+        "hasTripplers",
+        "hasTwentySpot",
+        "hasMultiSpot",
+        "prizeArrays",
+        "requiredMixins"
+      ]
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

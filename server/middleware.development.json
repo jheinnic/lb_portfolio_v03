@@ -1,9 +1,9 @@
 {
-  "routes:after": {
+  "routes:before": {
     "connect-livereload": {
       "enabled": true,
       "params": {
-        "hostname": "${host}",
+        "host": "${host}",
         "port": "${livereload}"
       }
     }

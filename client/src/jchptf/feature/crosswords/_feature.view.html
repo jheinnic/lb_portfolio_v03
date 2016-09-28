@@ -1,0 +1,30 @@
+<div layout="column">
+  <md-content>
+    <md-fab-toolbar md-direction="left"/>
+      <md-fab-trigger class="align-with-text">
+        <md-button aria-label="menu" class="md-fab md-primary">
+          <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
+        </md-button>
+      </md-fab-trigger>
+    </md-fab-toolbar>
+    <md-toolbar>
+      <h1>Crossword Scratchers</h1>
+      <md-fab-actions class="md-toolbar-tools">
+        <md-button aria-label="Upload New" class="md-icon-button">
+          <md-icon md-svg-src="img/icons/ic_file_upload_24px.svg"></md-icon>
+        </md-button>
+        <md-button aria-label="Open Existing" class="md-icon-button">
+          <md-icon md-svg-src="img/icons/ic_input_24px.svg"></md-icon>
+        </md-button>
+        <md-button aria-label="Browse/Observe" class="md-icon-button">
+          <md-icon md-svg-src="img/icons/ic_visibility_24px.svg"></md-icon>
+        </md-button>
+        <md-button aria-label="Review" class="md-icon-button">
+          <md-icon md-svg-src="img/icons/ic_find_in_page_24px.svg"></md-icon>
+        </md-button>
+      </md-fab-actions>
+    </md-toolbar>
+  </md-content>
+  <md-content layout="row" ui-view="xwContent">
+  </md-content>
+</div>

@@ -50,7 +50,7 @@ bower_components
 ngapp/config/bundle.js
 html5/build
 lib-cov
-local.config.js
+# local.config.js
 logs
 pids
 lbclient/browser.bundle.js
@@ -60,3 +60,6 @@ results
 # Typescript exploration
 tsd.json
 typings
+
+# Image processing (temporary)
+python

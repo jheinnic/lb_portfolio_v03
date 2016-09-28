@@ -9,7 +9,6 @@
    * @ngdoc overview
    * @name loopbackExampleFullStackApp
    * @description
-   * # loopbackExampleFullStackApp
    *
    * Main module of the application, primarily tasked with branching between
    * login page and the authenticated user's designated landing page.  Has no
@@ -22,20 +21,14 @@
   angular.module(
     module.exports,
     [
-      /* require('jchptf.context'),
-       'ng',
-       require('jchptf.authenticate'),*/
       'ui.router',
-      require('jchptf.site.notification'),
+      require('jchptf.lbclient'),
+      require('jchptf.site.authentication'),
       require('jchptf.site.navigation'),
-      require('jchptf.site.context'),
-      require('jchptf.crosswords'),
-      require('jchptf.lbclient')
-    ]
+      require('jchptf.feature.homepage'),
+      require('jchptf.feature.crosswords')
+    ], require('./router.config')
   )
-    .controller('RootController', require('./RootController.controller'))
-    .config(require('./router.config'))
-    .config(require('./layout.config'))
     .run(require('./run'))
   ;
 }).call(window, window.angular);

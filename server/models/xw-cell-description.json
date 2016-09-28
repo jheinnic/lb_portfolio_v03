@@ -1,0 +1,27 @@
+{
+  "name": "xwCellDescription",
+  "base": "quadCorners",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "rowIndex": {
+      "type": "number"
+    },
+    "columnIndex": {
+      "type": "number"
+    },
+    "content": {
+      "type": "string"
+    },
+    "isTrippling": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -15,13 +15,13 @@ define [
       controller: 'CrosswordCtrl'
   ]
 
-  xwModule.directive 'xwTicket', ['xwModelFactory', 'xwReportService', (xwModelFactory, xwReportService) ->
+  xwModule.directive 'TicketPlayState', ['xwModelFactory', 'xwReportService', (xwModelFactory, xwReportService) ->
     restrict: 'E'
     replace: true
     scope:
       ticketDocument: '='
       conditionModel: '='
-    templateUrl: '/app/xw-ticket/partials/xwTicket.html',
+    templateUrl: '/app/xw-ticket/partials/TicketPlayState.html',
     link: ($scope, $element, $attrs, canvasCtrl) ->
       # $scope.ticketModel  = xwModelFactory.createModelFromDocument $scope.ticketDocument
       $scope.conditionModel =
@@ -94,7 +94,7 @@ define [
 
         return
 
-      $scope.$watchCollection 'ticketDocument.yourLetters', (newValue) ->
+      $scope.$watch 'ticketDocument.yourLetters', (newValue) ->
         yourLettersArray = newValue.split('')
         # TODO: Update reportService with a Discovery update.
 
@@ -714,13 +714,13 @@ define [
   xwModule.directive 'xwBonusValueCell', () ->
     restrict: 'E'
     replace: true
-    require: '^xwTicket'
+    require: '^TicketPlayState'
     scope: false
     templateUrl: '/app/xw-ticket/partials/bonusValueCell.html'
   xwModule.directive 'xwBonusValue', () ->
     restrict: 'E'
     replace: true
-    require: '^xwTicket'
+    require: '^TicketPlayState'
     scope: false
     templateUrl: '/app/xw-ticket/partials/bonusValue.html'
 

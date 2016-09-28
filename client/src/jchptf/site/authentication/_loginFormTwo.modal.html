@@ -1,0 +1,24 @@
+<md-dialog flex="80">
+  <md-dialog-actions>
+    <md-button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</md-button>
+    <md-button type="button" ng-click="cancel()" class="md-danger md-raised">Cancel</md-button>
+    <md-button type="button" ng-click="register()" class="md-warn md-raised">Sign Up</md-button>
+    <md-button type="button" ng-click="close()" class="md-primary md-raised">Login</md-button>
+  </md-dialog-actions>
+  <md-dialog-content>
+    <h4 class="modal-title">Please login</h4>
+    <p>Basic login or register form</p>
+    <form class="form-horizontal" role="form" layout="column">
+      <md-input-container layout="row" layout-xs="column" md-no-float>
+        <label for="username" flex="15" flex-xs="25" class="control-label">Username</label>
+        <input type="text" class="form-control" id="username" flex="85" flex-xs="25" placeholder="Your Username" ng-model="creds.username">
+      </md-input-container>
+      Forgot your username?  <a ui-sref="public.forgot.username">Click Here</a>
+      <md-input-container layout="row" layout-xs="column" md-no-float>
+        <label for="password" flex="15" flex-xs="25" class="control-label">Password</label>
+        <input type="password" class="form-control" id="password" flex="85" flex-xs="25" placeholder="Your Password" ng-model="creds.password">
+      </md-input-container>
+      Forgot your password?  <a ui-sref="public.forgot.password">Click Here</a>
+    </form>
+  </md-dialog-content>
+</md-dialog>

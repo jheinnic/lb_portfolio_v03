@@ -3,24 +3,19 @@
 
   module.exports = 'jchptf.site.navigation';
 
-  console.log('jchptf.site.navigation module definition');
-
   /**
    * @ngdoc overview
    * @name jchptf.site.navigation
-   * @description TODO
+   * @description
+   * A reusable component for creating navigation bars with data-driven content that
+   * allows application to change navigation content over time.
    */
   angular.module(
     module.exports,
-    [
-      'ng', 'ui.router',
-      require('jchptf.site.branding'),
-      require('jchptf.site.notification'),
-      require('jchptf.tools.navbar')
-    ],
+    ['ui.router', 'ui.router.login', 'ngMaterial'],
     require('./config')
   )
-    .run(require('./run'))
-    .controller('HomeController', require('./HomeController.controller'))
+    .provider('NavbarData', require('./NavbarData.provider'))
+    .controller('GlobalNavController', require('./GlobalNav.controller'))
   ;
-}).call(window, angular);
+}).call(window, window.angular);

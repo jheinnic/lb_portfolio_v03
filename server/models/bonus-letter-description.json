@@ -1,0 +1,25 @@
+{
+  "name": "bonusLetterDescription",
+  "base": "quadCorners",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "index": {
+      "type": "number",
+      "format": "int8",
+      "minimum": 0,
+      "exclusiveMinimum": false,
+      "maximum": 4,
+      "exclusiveMaximum": false
+    },
+    "content": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,29 @@
+{
+  "name": "incompleteResult",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "Value from an application enumeration associated with a known error condition, if the nature of the error is well known."
+    },
+    "message": {
+      "type": "string",
+      "required": true,
+      "description": "A human readable message describing the error",
+      "minLength": 3
+    },
+    "partialContent": {
+      "type": [],
+      "required": true,
+      "description": "An export of partial content up until smething failed.  Null values should be read as ailured o fid, no"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -4,13 +4,15 @@
       "loopback/common/models",
       "loopback/server/models",
       "../common/models",
-      "./models"
+      "./models",
+      "../node_modules/loopback-stormpath/common/models"
     ],
     "mixins": [
       "loopback/common/mixins",
       "loopback/server/mixins",
       "../common/mixins",
-      "./mixins"
+      "./mixins",
+      "../node_modules/loopback-stormpath/common/mixins"
     ]
   },
   "Todo": {
@@ -19,10 +21,10 @@
   "ACL": {
     "dataSource": "db"
   },
-  "User": {
-    "dataSource": "db"
+  "StormpathUser": {
+    "dataSource": "stormpath"
   },
-  "XwTicket": {
+  "TicketPlayState": {
     "dataSource": "db",
     "public": true
   },
@@ -36,6 +38,26 @@
   },
   "TripOnlyTicket": {
     "dataSource": "db",
+    "public": true
+  },
+  "QuadCorners": {
+    "public": false,
+    "dataSources": "db"
+  },
+  "TicketImport": {
+    "dataSource": "transient",
+    "public": true
+  },
+  "CrosswordProject": {
+    "dataSource": "transient",
+    "public": true
+  },
+  "SeriesPool": {
+    "dataSource": "transient",
+    "public": true
+  },
+  "SeriesPlayFamily": {
+    "dataSource": "transient",
     "public": true
   },
   "PlayResult": {
@@ -71,7 +93,51 @@
     "public": false
   },
   "Container": {
-    "dataSource": "uploads",
+    "dataSource": "localFiles",
+    "public": true
+  },
+  "swagger_xwcv": {
+    "dataSource": null,
+    "public": true
+  },
+  "quadCorners": {
+    "dataSource": "python",
+    "public": true
+  },
+  "ticketDescription": {
+    "dataSource": "python",
+    "public": true
+  },
+  "ticketIdDescription": {
+    "dataSource": "python",
+    "public": true
+  },
+  "bonusWordDescription": {
+    "dataSource": "python",
+    "public": true
+  },
+  "bonusLetterDescription": {
+    "dataSource": "python",
+    "public": true
+  },
+  "importContent": {
+    "dataSource": "python",
+    "public": true
+  },
+  "incompleteResult": {
+    "dataSource": "python",
+    "public": true
+  },
+  "errorResult": {
+    "dataSource": "python",
+    "public": true
+  },
+  "xwGridDescription": {
+    "dataSource": "python",
+    "public": true
+  },
+  "xwCellDescription": {
+    "dataSource": "python",
     "public": true
   }
 }

@@ -1,0 +1,17 @@
+{
+  "name": "ticketIdDescription",
+  "base": "quadCorners",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "content": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

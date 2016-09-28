@@ -17,7 +17,7 @@ define [
 
   keyHandlerNoop = ($event) -> return
 
-  xwModule.directive 'xwTicket', [
+  xwModule.directive 'TicketPlayState', [
     'xwModelFactory', 'keypressHelper', 'valueImages', 'borderImages', 'fillImages', (xwModelFactory, keypressHelper, valueImages, borderImages, fillImages) ->
       restrict: 'E'
       replace: true
@@ -27,7 +27,7 @@ define [
 #        onDiscovery: '&'
 #        onComplete: '&'
 
-      templateUrl: '/app/xw-ticket/partials/xwTicket.html',
+      templateUrl: '/app/xw-ticket/partials/TicketPlayState.html',
       controller: ['$scope', '$element', ($scope, $element) ->
         #$scope.cursorKeyHandler = keyHandlerNoop;
 
@@ -219,7 +219,7 @@ define [
   xwModule.directive 'xwBonusValueCell', () ->
     restrict: 'E'
     replace: true
-    require: '^xwTicket'
+    require: '^TicketPlayState'
     scope: false
     templateUrl: '/app/xw-ticket/partials/bonusValueCell.html'
 
@@ -250,7 +250,7 @@ define [
   xwModule.directive 'xwBonusValue', () ->
     restrict: 'E'
     replace: true
-    require: '^xwTicket'
+    require: '^TicketPlayState'
     scope: false
     templateUrl: '/app/xw-ticket/partials/bonusValue.html'
 

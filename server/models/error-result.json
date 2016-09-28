@@ -1,0 +1,28 @@
+{
+  "name": "errorResult",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "Value from an application enumeration associated with a known error condition, if the nature of the error is well known."
+    },
+    "message": {
+      "type": "string",
+      "required": true,
+      "description": "A human readable message describing the error",
+      "minLength": 3
+    },
+    "trace": {
+      "type": [],
+      "description": "An optional stack trace, if available"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
