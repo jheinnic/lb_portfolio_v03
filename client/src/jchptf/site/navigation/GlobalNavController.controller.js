@@ -1,4 +1,7 @@
 (function(console) {
+  /**
+   * @module 'jchptf/site/navigation/GlobalNavController.controller'
+   */
 
   'use strict';
 
@@ -8,6 +11,9 @@
   var NO_USER_INFO = {userId: undefined, firstName: undefined, lastName: undefined};
   var _ = require('lodash');
 
+  /**
+   * @param $scope
+   */
   function GlobalNavController($scope, $state, $login, NavbarData, userInfo) {
     var vm = this;
     vm.$state = $state;
@@ -32,6 +38,8 @@
     };
 
     vm.logout = $login.logout;
+
+    vm.
 
     $scope.$on('jchptf.site.authentication.sessionChangeEvent', onSessionChangeEvent);
   }
